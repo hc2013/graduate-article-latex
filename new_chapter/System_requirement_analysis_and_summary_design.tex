@@ -7,12 +7,128 @@
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/general_structure.pdf}
-  \caption{GTDS的总体架构}\label{general_structureCH4}
+  \caption{GTDS的总体架构}\label{general_structureCH3}
 \end{figure}
-如图~\ref{general_structureCH4}所示，可视化服务直接接收用户的界面操作，将其转化为轨迹ID和瓦片数据范围，作为参数，分别传递给轨迹搜索服务和瓦片存储服务。再使用前端库汇总这两部分的数据
+如图~\ref{general_structureCH3}所示，可视化服务直接接收用户的界面操作，将其转化为轨迹ID和瓦片数据范围，作为参数，分别传递给轨迹搜索服务和瓦片存储服务。再使用前端库汇总这两部分的数据
 共同完成可视化功能。而瓦片存储服务本身不存储瓦片数据，只负责地图范围的解析，地理坐标的转换以及数据格式的转换，瓦片数据的存放位置是在具体的瓦片数据库中。
 
 \section{轨迹数据服务需求分析}
-\subsection{分析1}
+\subsection{轨迹数据服务的功能需求}
+整个地理轨迹数据服务的核心功能就是对相似路径的检索，因此轨迹数据服务的功能需求实际上就是一个Trajectory KNN功能。即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K条轨迹。
+
+\begin{table}[htb]\footnotesize
+\centering
+\caption{轨迹数据服务功能需求列表}
+\begin{tabular}{|c|c|c|} % 通过添加 | 来表示是否需要绘制竖线 
+\hline % 在表格最上方绘制横线 
+\textbf{需求ID}&\textbf{需求名称}&\textbf{需求描述}\\
+\hline %在第一行和第二行之间绘制横线 
+R1&相似轨迹knn检索&\tabincell{c}{服务调用方能够通过传递目标轨迹ID和检索量K，\\ 在规定时间内返回K个与目标轨迹最相似的K个轨迹}\\ 
+\hline % 在表格最下方绘制横线 
+\end{tabular}
+\label{table:trajectory_service_func_req}
+\end{table}
+
+\subsection{轨迹数据服务的非功能需求}
+Trajectory KNN问题是一个计算密集型问题，用户对响应时间一定会有要求。同时，并发量也是必须考虑的问题
+\begin{table}[htb]\footnotesize
+\centering
+\caption{轨迹数据服务非功能需求列表}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{时间特性}&\textbf{对于百万级别的轨迹数据量，服务应该在2s之内返回检索结果}\\
+\hline %在第一行和第二行之间绘制横线
+\textbf{负载特性}&\textbf{服务应该能应对10w以上的并发访问}\\
+\hline % 在表格最下方绘制横线
+\end{tabular}
+\label{table:trajectory_service_non_func_req}
+\end{table}
+
 \section{瓦片数据服务需求分析}
-\subsection{分析1}
+\subsection{瓦片数据服务的需求综述}
+在轨迹检索服务中，对于地图瓦片数据的要求有增加，删除，修改，查询，数据源配置。其中以查询和更新这两部分功能的细分功能最多。对于查询而言，可能被用户需要的有整张地图的全量查询，局部bounding-box渲染查询，单个瓦片数据的查询。对于更新而言，可能需要局部地图的更新，bounding-box更新。\textbf{注意：在GTDS的功能需求中，对于瓦片的增加和删除都是以整张地图为单位的，局部的增加和删除这种需求并不存在，所以此处不列为功能需求。}
+而对于非功能需求，瓦片数据服务涉及到的计算主要是坐标转换，请求解析，缓存处理。计算量不大，所以并不是计算密集型应用，而是IO密集型应用，高并发和快速响应是其必须满足的非功能特性。除此之外，由于瓦片服务本身不存储瓦片数据，用户的瓦片数据可能是存在各种不同的数据库中的，因此服务还应该独立于不同的数据库，做到高可用性，高扩展性。
+\subsection{瓦片数据服务功能需求}
+\begin{table}[htb]\footnotesize
+\centering
+\caption{瓦片数据服务功能需求列表}
+\begin{tabular}{|c|c|l|} % 通过添加 | 来表示是否需要绘制竖线
+\hline % 在表格最上方绘制横线
+\textbf{需求ID}&\textbf{需求名称}&\textbf{需求描述}\\
+\hline 
+R1&新增地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图名称和 \\ 图瓦片数据，增加一个地区的完整地图瓦片数据}\\
+\hline 
+R2&删除地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID，删 \\ 除一个地区的全部地图瓦片数据}\\
+\hline 
+R3&局部更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和 \\ 地图数据，更新一张大地图中某一个地区的地图瓦片数据}\\
+\hline
+R4&bounding-box更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为 \\ 地图ID，经纬度范围，地图数据，更新一张大地图中 \\ 某一个地区某一经纬度矩形范围内的地图瓦片数据}\\
+\hline 
+R5&局部更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和地 \\ 图数据，更新一张大地图中某一个地区的地图瓦片数据}\\
+\hline 
+R6&地图瓦片数据全量查询&\tabincell{c}{服务调用方能够通过瓦片服务，通过获取全量数据 \\ 的JSON文件，作为输入的数据源，获取整张地图的全量数据}\\
+\hline 
+R7&单个地图瓦片数据查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和栅 \\ 格坐标zxy，获取指定的瓦片}\\
+\hline 
+R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和 \\ 经纬度矩形范围，获取这一部分的地图渲染结果}\\
+\hline 
+\end{tabular}
+\label{table:tile_service_func_req}
+\end{table}
+
+\subsection{瓦片数据服务非功能需求}
+\begin{table}[htb]\footnotesize
+\centering
+\caption{瓦片数据服务非功能需求列表}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{时间特性}&\textbf{在正常负载情况下，服务的平均响应时间应在1s之内}\\
+\hline %在第一行和第二行之间绘制横线
+\textbf{负载特性}&\textbf{服务能稳定应对百万级别的并发访问，不会出现延迟超过10s或服务崩溃的情况}\\
+\hline % 在表格最下方绘制横线
+\textbf{高可用性}&\textbf{服务能通过设置中间件的方式，便捷地对接到各种不同的数据库，并保证运行正常}\\
+\hline % 在表格最下方绘制横线
+\end{tabular}
+\label{table:trajectory_service_non_func_req}
+\end{table}
+
+\subsection{瓦片数据服务用例图}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/tileserver_use_case.pdf}
+  \caption{瓦片数据服务的功能需求}\label{tileserver_use_caseCH3}
+\end{figure}
+\textbf{注意：以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。}
+\subsection{瓦片数据服务用例描述}
+瓦片数据服务的部分功能操作简单明确，无需使用用例描述。本文只对操作比较复杂的“bounding-box更新地图瓦片数据”进行了具体描述。
+
+\begin{table}[htb]\footnotesize
+\centering
+\caption{bounding-box更新地图瓦片数据用例描述表}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\textbf{UC1}\\
+\hline 
+\textbf{名称}&\textbf{bounding-box更新地图瓦片数据}\\
+\hline 
+\textbf{参与者}&\textbf{普通用户}\\
+\hline 
+\textbf{目的}&\textbf{更新某张地图中一个矩形范围内的瓦片数据，以改变轨迹展示背景}\\
+\hline 
+\textbf{描述}&\textbf{用户通过浏览器发送矩形参数和瓦片数据，以实现对瓦片数据库中数据的修改，进而改变业务展示的结果}\\
+\hline 
+\textbf{优先级}&\textbf{高}\\
+\hline 
+\textbf{触发条件}&\textbf{某一地图中某一部分数据发生变更，需要更改}\\
+\hline 
+\textbf{前置条件}&\textbf{服务正常运行，用户进入服务界面}\\
+\hline 
+\textbf{后置条件}&\textbf{地图瓦片数据完成更新，业务展示结果经过刷新可以看到地图变化}\\
+\hline 
+\textbf{正常流程}&\tabincell{l}{1.进入瓦片数据更新界面 \\ 2.设置north,south,west,east,4个经纬度值 \\ 3.设置zoom区间 \\ 4.设置是否进行精度模糊 \\ 5.点击浏览本地文件并上传文件数据 \\6. 点击更新瓦片数据}\\
+\hline 
+\textbf{异常流程}&\tabincell{l}{2a.经纬度大小值错误，前端应自动检测并警告 \\ 3a.指定矩形范围太小，在较小的zoom下无法更新瓦片,服务端应发现错误并返回告知用户 \\ 5a.用户选择的文件格式错误，则前端对用户发出警告 \\ 5b.用户选择的文件中并没有指定bounding-box中的数据，服务端应返回错误报告并挺行用户更改文件}\\
+\hline
+\end{tabular}
+\label{table:tileserver_use_case_description}
+\end{table}
