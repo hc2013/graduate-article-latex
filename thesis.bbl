@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{GaoQiang2017}
+Gao Q, Zhang FL, Wang RJ, and Zhou F.
+\newblock Trajectory big data:a review of key technologies in data processing.
+\newblock {\em Ruan Jian Xue Bao}, 28(4):28--34, 2016.
+
+\bibitem{BaiduYingyan}
+{BaiduYingyan System}.
+\newblock \url{http://lbsyun.baidu.com/trace}.
+
+\bibitem{TileServerGL}
+{tileserver System}.
+\newblock \url{http://tileserver.org}.
+
+\end{thebibliography}
