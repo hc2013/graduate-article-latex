@@ -19,4 +19,9 @@ Peter~N. Yianilos.
   metric spaces.
 \newblock pages 311--321, 1993.
 
+\bibitem{DBLP:journals/tc/FukunagaN75}
+Keinosuke Fukunaga and Patrenahalli~M. Narendra.
+\newblock A branch and bound algorithms for computing k-nearest neighbors.
+\newblock {\em {IEEE} Trans. Computers}, 24(7):750--753, 1975.
+
 \end{thebibliography}

@@ -11,7 +11,46 @@ Nearest Neighbour 问题，即最近邻居问题。指的是针对空间中的一个点集，定义一个距离
 \subsection{优先点树概述}
 vp-tree(vantage point tree),中文名称，优先点树，正是上述思路的一种实现。vp-tree从原理上说，是基于三角不等式进行递归分解的剪枝技术，其核心思想奠基了两种情况下的正确性。第一种，是在检索过程中，对于那些远远超出搜索范围的分支，就不需要进行搜索了。第二种，是当搜索目标点显然在某一个范围内的时候，外部的其他分支就都不必搜索了\cite{DBLP:journals/tc/FukunagaN75}。基于这两个原则，搜索点的数量和点的距离计算的次数都被大幅度地减少，从而显著提升了性能。
 
-\subsection{优先点树的基本思路}
-vp-tree的基本思路就是对点集合进行空间划分。第一步，要选择一个点作为vantage point，也就是优先点。第二步，集合中的所有点要计算自己与vp的距离。第三步，根据距离值的大小将点集合均分为两支，距离小于等于中值的为left/inside子集合，距离大于等于中值为right/outside子集合。第四步，以left/inside集合作为左子树的根节点，right/outside集合为右子树的根节点，再针对这两棵子树分别递归地进行上述划分，从而形成一颗平衡的二叉树。
+\subsection{优先点树的基本原理}
+vp-tree的基本思路就是对点集合进行空间划分。第一步，要选择一个点作为vantage point，也就是优先点。第二步，集合中的所有点要计算自己与vp的距离。第三步，根据距离值的大小将点集合均分为两支，距离小于等于中值的为left/inside子集合，距离大于等于中值为right/outside子集合。第四步，以left/inside集合作为左子树的根节点，right/outside集合为右子树的根节点，再针对这两棵子树分别递归地进行上述划分，从而形成一颗平衡的二叉树。综上可知，vp-tree最终实现了整个点集合内部的一个球状分割。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_left_right1.pdf}
+  \caption{vp-tree点集合分割示意图}\label{vp_left_rightCH2}
+\end{figure}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_tree_decomposition.pdf}
+  \caption{vp-tree空间分割示意图}\label{vp_tree_decompositionCH2}
+\end{figure}
 
-\subsection{这是小小节标题}
+\subsection{最简单优先点树的结构和搜索过程}
+如图2.3所示，即为一个最简单的vp-tree的内部结构，其包括一个用于只是优先点的VP-ID，一个中值mu和分别左右子树的两个指针。
+
+搜索算法的思路是这样的。对于一次检索的目标点q和当前vp-tree的节点node，我们会设置一个容忍阈值u。首先计算q与node的vp之间的距离d,如果距离d>=mu+u,就舍弃左子树，只搜索右子树。反之，如果d<=mu-u,就舍弃右子树，只搜索左子树。如果mu-u<d<mu+u,那么无法完成剪枝，左右子树都要搜索。
+
+这里显而易见的是，\textbf{容忍阈值u越小，剪枝的可能性越大，搜索性能越好}。因此u的选择应该是随着递归过程的推进而不断代之以距离q最小的距离，因为既然u是目前最小的距离，那么比u距离更大的点也就不必考虑了。因此，\textbf{如何实现算法使得容忍阈值以较快的速度收敛}，是代码实现的重点，我们将在第四章具体讨论。
+\begin{algorithm}[htbp]
+\caption{最简单vp-tree的搜索过程search}
+\label{alg:simplest_vp_tree_search}
+n $\leftarrow$ currentNode;\\
+\If {n!=null}{
+return
+}
+x $\leftarrow$ distance(q,n.vp);\\
+\If {x \textless \ u} {
+u $\leftarrow$ x;\\
+best $\leftarrow$ n.vp;    
+}
+\If {x  $\geq$ \ mu-u}{
+search(n.right);
+}
+\If{ x  $\leq$ \ mu+u}{
+search(n.left);
+}
+\end{algorithm}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=2.5in,height=3.5in]{new_FIGs/chapter2/vp-tree-simplest-structure.pdf}
+  \caption{最简单vp-tree的结构示意图}\label{vp_tree_simplest_structureCH2}
+\end{figure}
