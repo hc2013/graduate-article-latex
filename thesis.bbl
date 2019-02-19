@@ -13,4 +13,10 @@ Gao Q, Zhang FL, Wang RJ, and Zhou F.
 {tileserver System}.
 \newblock \url{http://tileserver.org}.
 
+\bibitem{DBLP:conf/soda/Yianilos93}
+Peter~N. Yianilos.
+\newblock Data structures and algorithms for nearest neighbor search in general
+  metric spaces.
+\newblock pages 311--321, 1993.
+
 \end{thebibliography}
