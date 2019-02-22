@@ -24,4 +24,13 @@ Keinosuke Fukunaga and Patrenahalli~M. Narendra.
 \newblock A branch and bound algorithms for computing k-nearest neighbors.
 \newblock {\em {IEEE} Trans. Computers}, 24(7):750--753, 1975.
 
+\bibitem{ES-Official}
+{Elasticsearch.org}.
+\newblock \url{http://www.elasticsearch.org/}.
+
+\bibitem{ES-Performance}
+{How to monitor Elasticsearch performance}.
+\newblock
+  \url{https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#what-is-elasticsearch}.
+
 \end{thebibliography}

@@ -13,24 +13,28 @@ vp-tree(vantage point tree),ÖÐÎÄÃû³Æ£¬ÓÅÏÈµãÊ÷£¬ÕýÊÇÉÏÊöË¼Â·µÄÒ»ÖÖÊµÏÖ¡£vp-tree´
 
 \subsection{ÓÅÏÈµãÊ÷µÄ»ù±¾Ô­Àí}
 vp-treeµÄ»ù±¾Ë¼Â·¾ÍÊÇ¶Ôµã¼¯ºÏ½øÐÐ¿Õ¼ä»®·Ö¡£µÚÒ»²½£¬ÒªÑ¡ÔñÒ»¸öµã×÷Îªvantage point£¬Ò²¾ÍÊÇÓÅÏÈµã¡£µÚ¶þ²½£¬¼¯ºÏÖÐµÄËùÓÐµãÒª¼ÆËã×Ô¼ºÓëvpµÄ¾àÀë¡£µÚÈý²½£¬¸ù¾Ý¾àÀëÖµµÄ´óÐ¡½«µã¼¯ºÏ¾ù·ÖÎªÁ½Ö§£¬¾àÀëÐ¡ÓÚµÈÓÚÖÐÖµµÄÎªleft/inside×Ó¼¯ºÏ£¬¾àÀë´óÓÚµÈÓÚÖÐÖµÎªright/outside×Ó¼¯ºÏ¡£µÚËÄ²½£¬ÒÔleft/inside¼¯ºÏ×÷Îª×ó×ÓÊ÷µÄ¸ù½Úµã£¬right/outside¼¯ºÏÎªÓÒ×ÓÊ÷µÄ¸ù½Úµã£¬ÔÙÕë¶ÔÕâÁ½¿Ã×ÓÊ÷·Ö±ðµÝ¹éµØ½øÐÐÉÏÊö»®·Ö£¬´Ó¶øÐÎ³ÉÒ»¿ÅÆ½ºâµÄ¶þ²æÊ÷¡£×ÛÉÏ¿ÉÖª£¬vp-tree×îÖÕÊµÏÖÁËÕû¸öµã¼¯ºÏÄÚ²¿µÄÒ»¸öÇò×´·Ö¸î¡£
-\begin{figure}[htb]
+\begin{figure}[htp]
   \centering
   \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_left_right1.pdf}
   \caption{vp-treeµã¼¯ºÏ·Ö¸îÊ¾ÒâÍ¼}\label{vp_left_rightCH2}
 \end{figure}
-\begin{figure}[htb]
+\begin{figure}[htp]
   \centering
   \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_tree_decomposition.pdf}
   \caption{vp-tree¿Õ¼ä·Ö¸îÊ¾ÒâÍ¼}\label{vp_tree_decompositionCH2}
 \end{figure}
-
 \subsection{×î¼òµ¥ÓÅÏÈµãÊ÷µÄ½á¹¹ºÍËÑË÷¹ý³Ì}
 ÈçÍ¼2.3ËùÊ¾£¬¼´ÎªÒ»¸ö×î¼òµ¥µÄvp-treeµÄÄÚ²¿½á¹¹£¬Æä°üÀ¨Ò»¸öÓÃÓÚÖ»ÊÇÓÅÏÈµãµÄVP-ID£¬Ò»¸öÖÐÖµmuºÍ·Ö±ð×óÓÒ×ÓÊ÷µÄÁ½¸öÖ¸Õë¡£
 
 ËÑË÷Ëã·¨µÄË¼Â·ÊÇÕâÑùµÄ¡£¶ÔÓÚÒ»´Î¼ìË÷µÄÄ¿±êµãqºÍµ±Ç°vp-treeµÄ½Úµãnode£¬ÎÒÃÇ»áÉèÖÃÒ»¸öÈÝÈÌãÐÖµu¡£Ê×ÏÈ¼ÆËãqÓënodeµÄvpÖ®¼äµÄ¾àÀëd,Èç¹û¾àÀëd>=mu+u,¾ÍÉáÆú×ó×ÓÊ÷£¬Ö»ËÑË÷ÓÒ×ÓÊ÷¡£·´Ö®£¬Èç¹ûd<=mu-u,¾ÍÉáÆúÓÒ×ÓÊ÷£¬Ö»ËÑË÷×ó×ÓÊ÷¡£Èç¹ûmu-u<d<mu+u,ÄÇÃ´ÎÞ·¨Íê³É¼ôÖ¦£¬×óÓÒ×ÓÊ÷¶¼ÒªËÑË÷¡£
 
 ÕâÀïÏÔ¶øÒ×¼ûµÄÊÇ£¬\textbf{ÈÝÈÌãÐÖµuÔ½Ð¡£¬¼ôÖ¦µÄ¿ÉÄÜÐÔÔ½´ó£¬ËÑË÷ÐÔÄÜÔ½ºÃ}¡£Òò´ËuµÄÑ¡ÔñÓ¦¸ÃÊÇËæ×ÅµÝ¹é¹ý³ÌµÄÍÆ½ø¶ø²»¶Ï´úÖ®ÒÔ¾àÀëq×îÐ¡µÄ¾àÀë£¬ÒòÎª¼ÈÈ»uÊÇÄ¿Ç°×îÐ¡µÄ¾àÀë£¬ÄÇÃ´±Èu¾àÀë¸ü´óµÄµãÒ²¾Í²»±Ø¿¼ÂÇÁË¡£Òò´Ë£¬\textbf{ÈçºÎÊµÏÖËã·¨Ê¹µÃÈÝÈÌãÐÖµÒÔ½Ï¿ìµÄËÙ¶ÈÊÕÁ²}£¬ÊÇ´úÂëÊµÏÖµÄÖØµã£¬ÎÒÃÇ½«ÔÚµÚËÄÕÂ¾ßÌåÌÖÂÛ¡£
-\begin{algorithm}[htbp]
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=2.5in,height=3.5in]{new_FIGs/chapter2/vp-tree-simplest-structure.pdf}
+  \caption{×î¼òµ¥vp-treeµÄ½á¹¹Ê¾ÒâÍ¼}\label{vp_tree_simplest_structureCH2}
+\end{figure}
+\begin{algorithm}[htp]
 \caption{×î¼òµ¥vp-treeµÄËÑË÷¹ý³Ìsearch}
 \label{alg:simplest_vp_tree_search}
 n $\leftarrow$ currentNode;\\
@@ -49,8 +53,23 @@ search(n.right);
 search(n.left);
 }
 \end{algorithm}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=2.5in,height=3.5in]{new_FIGs/chapter2/vp-tree-simplest-structure.pdf}
-  \caption{×î¼òµ¥vp-treeµÄ½á¹¹Ê¾ÒâÍ¼}\label{vp_tree_simplest_structureCH2}
-\end{figure}
+\section{LuceneÓëElasticSearch}
+\subsection{¸ÅÊö}
+LuceneÊÇÒ»Ì×ÓÃÓÚÈ«ÎÄ¼ìË÷ºÍËÑË÷µÄ¿ª·ÅÔ´´úÂë³ÌÐò¿â£¬ÓÉApacheÈí¼þ»ù½ð»áÖ§³ÖºÍÌá¹©¡£LuceneÌá¹©ÁËÒ»¸ö¼òµ¥È´Ç¿´óµÄÓ¦ÓÃ³ÌÐò½Ó¿Ú£¬ÄÜ¹»×öÈ«ÎÄË÷ÒýºÍËÑË÷£¬ÔÚJava¿ª·¢»·¾³ÀïLuceneÊÇÒ»¸ö³ÉÊìµÄÃâ·Ñ¿ª·ÅÔ´´úÂë¹¤¾ß£»¾ÍÆä±¾Éí¶øÂÛ£¬LuceneÊÇÏÖÔÚ²¢ÇÒÊÇÕâ¼¸Äê£¬×îÊÜ»¶Ó­µÄÃâ·ÑJavaÐÅÏ¢¼ìË÷³ÌÐò¿â¡£
+
+ElasticsearchÊÇÒ»¸ö»ùÓÚLucene¿âµÄËÑË÷ÒýÇæ¡£ËüÌá¹©ÁËÒ»¸ö·Ö²¼Ê½¡¢Ö§³Ö¶à×â»§µÄÈ«ÎÄËÑË÷ÒýÇæ£¬¾ßÓÐHTTP Web½Ó¿ÚºÍÎÞÄ£Ê½JSONÎÄµµ¡£Elasticsearch ¿ÉÒÔÓÃÓÚËÑË÷¸÷ÖÖÎÄµµ¡£ËüÌá¹©¿ÉÀ©Õ¹µÄËÑË÷£¬¾ßÓÐ½Ó½üÊµÊ±µÄËÑË÷£¬²¢Ö§³Ö¶à×â»§¡£ElasticsearchÊÇ·Ö²¼Ê½µÄ£¬ÕâÒâÎ¶×ÅË÷Òý¿ÉÒÔ±»·Ö³É·ÖÆ¬£¬Ã¿¸ö·ÖÆ¬¿ÉÒÔÓÐ0 ¸ö»ò¶à¸ö¸±±¾¡£Ã¿¸ö½ÚµãÍÐ¹ÜÒ»¸ö»ò¶à¸ö·ÖÆ¬£¬²¢³äµ±Ð­µ÷Æ÷½«²Ù×÷Î¯ÍÐ¸øÕýÈ·µÄ·ÖÆ¬¡£ÔÙÆ½ºâºÍÂ·ÓÉÊÇ×Ô¶¯Íê³ÉµÄ¡£\cite{ES-Official}Ïà¹ØÊý¾ÝÍ¨³£´æ´¢ÔÚÍ¬Ò»¸öË÷ÒýÖÐ£¬¸ÃË÷ÒýÓÉÒ»¸ö»ò¶à¸öÖ÷·ÖÆ¬ºÍÁã¸ö»ò¶à¸ö¸´ÖÆ·ÖÆ¬×é³É¡£Ò»µ©´´½¨ÁËË÷Òý£¬¾Í²»ÄÜ¸ü¸ÄÖ÷·ÖÆ¬µÄÊýÁ¿¡£\cite{ES-Performance}
+\subsection{ºËÐÄÊý¾Ý½á¹¹}
+ÕýÅÅË÷Òý£ºÕýÅÅ±íÊÇÒÔÎÄµµµÄIDÎª¹Ø¼ü×Ö£¬±íÖÐ¼ÇÂ¼ÎÄµµÖÐÃ¿¸ö×ÖµÄÎ»ÖÃÐÅÏ¢£¬²éÕÒÊ±É¨Ãè±íÖÐÃ¿¸öÎÄµµÖÐ×ÖµÄÐÅÏ¢Ö±µ½ÕÒ³öËùÓÐ°üº¬²éÑ¯¹Ø¼ü×ÖµÄÎÄµµ¡£
+ÕâÖÖ×éÖ¯·½·¨ÔÚ½¨Á¢Ë÷ÒýµÄÊ±ºò½á¹¹±È½Ï¼òµ¥£¬½¨Á¢±È½Ï·½±ãÇÒÒ×ÓÚÎ¬»¤;ÒòÎªË÷ÒýÊÇ»ùÓÚÎÄµµ½¨Á¢µÄ£¬ÈôÊÇÓÐÐÂµÄÎÄµµ¼ÓÈë£¬Ö±½ÓÎª¸ÃÎÄµµ½¨Á¢Ò»¸öÐÂµÄË÷Òý¿é£¬¹Ò½ÓÔÚÔ­À´Ë÷ÒýÎÄ¼þµÄºóÃæ¡£ÈôÊÇÓÐÎÄµµÉ¾³ý£¬ÔòÖ±½ÓÕÒµ½¸ÃÎÄµµºÅÎÄµµ¶ÔÓ¦µÄË÷ÒýÐÅÏ¢£¬½«ÆäÖ±½ÓÉ¾³ý¡£µ«ÊÇÔÚ²éÑ¯µÄÊ±ºòÐè¶ÔËùÓÐµÄÎÄµµ½øÐÐÉ¨ÃèÒÔÈ·±£Ã»ÓÐÒÅÂ©£¬ÕâÑù¾ÍÊ¹µÃ¼ìË÷Ê±¼ä´ó´óÑÓ³¤£¬¼ìË÷Ð§ÂÊµÍÏÂ¡£
+
+µ¹ÅÅË÷Òý£ºµ¹ÅÅË÷Òý£¨Ó¢Óï£ºInverted index£©£¬Ò²³£±»³ÆÎª·´ÏòË÷Òý¡¢ÖÃÈëµµ°¸»ò·´Ïòµµ°¸£¬ÊÇÒ»ÖÖË÷Òý·½·¨£¬±»ÓÃÀ´´æ´¢ÔÚÈ«ÎÄËÑË÷ÏÂÄ³¸öµ¥´ÊÔÚÒ»¸öÎÄµµ»òÕßÒ»×éÎÄµµÖÐµÄ´æ´¢Î»ÖÃµÄÓ³Éä¡£ËüÊÇÎÄµµ¼ìË÷ÏµÍ³ÖÐ×î³£ÓÃµÄÊý¾Ý½á¹¹¡£
+
+\subsection{Ñ¡ÔñµÄÔ­Òò}
+ÌìÈ»·Ö²¼Ê½ÊôÐÔºÍ×Ô³Æ·þÎñµÄÌåÏµ£¬½ÚÊ¡ÁËµ¥¶À¿ª·¢WebServiceµÄÊ±¼ä¡£ES-GeometryµÄÁ¼ºÃ¼æÈÝÐÔ¡£ÐÔÄÜÁ¼ºÃ£¬°²È«ÎÈ¶¨¡£
+\section{µØÀíÏà¹Ø¼¼Êõ¸ÅÄî½éÉÜ}
+\subsection{µØÍ¼ÍßÆ¬Êý¾Ý}
+ÍßÆ¬µØÍ¼½ð×ÖËþÄ£ÐÍÊÇÒ»ÖÖ¶à·Ö±æÂÊ²ã´ÎÄ£ÐÍ£¬´ÓÍßÆ¬½ð×ÖËþµÄµ×²ãµ½¶¥²ã£¬·Ö±æÂÊÔ½À´Ô½µÍ£¬µ«±íÊ¾µÄµØÀí·¶Î§²»±ä¡£Ê×ÏÈÈ·¶¨µØÍ¼·þÎñÆ½Ì¨ËùÒªÌá¹©µÄËõ·Å¼¶±ðµÄÊýÁ¿N£¬°ÑËõ·Å¼¶±ð×î¸ß¡¢µØÍ¼±ÈÀý³ß×î´óµÄµØÍ¼Í¼Æ¬×÷Îª½ð×ÖËþµÄµ×²ã£¬¼´µÚ0²ã£¬²¢¶ÔÆä½øÐÐ·Ö¿é£¬´ÓµØÍ¼Í¼Æ¬µÄ×óÉÏ½Ç¿ªÊ¼£¬´Ó×óÖÁÓÒ¡¢´ÓÉÏµ½ÏÂ½øÐÐÇÐ¸î£¬·Ö¸î³ÉÏàÍ¬´óÐ¡(±ÈÈç256x256ÏñËØ)µÄÕý·½ÐÎµØÍ¼ÍßÆ¬£¬ÐÎ³ÉµÚ0²ãÍßÆ¬¾ØÕó;ÔÚµÚ0²ãµØÍ¼Í¼Æ¬µÄ»ù´¡ÉÏ£¬°´Ã¿2x2ÏñËØºÏ³ÉÎªÒ»¸öÏñËØµÄ·½·¨Éú³ÉµÚ1²ãµØÍ¼Í¼Æ¬£¬²¢¶ÔÆä½øÐÐ·Ö¿é£¬·Ö¸î³ÉÓëÏÂÒ»²ãÏàÍ¬´óÐ¡µÄÕý·½ÐÎµØÍ¼ÍßÆ¬£¬ÐÎ³ÉµÚ1²ãÍßÆ¬¾ØÕó;²ÉÓÃÍ¬ÑùµÄ·½·¨Éú³ÉµÚ2²ãÍßÆ¬¾ØÕó;¡­;Èç´ËÏÂÈ¥£¬Ö±µ½µÚNÒ»1²ã£¬¹¹³ÉÕû¸öÍßÆ¬½ð×ÖËþ¡£
+\subsection{Ä«¿¨ÍÐ×ø±ê}
+Ä«¿¨ÍÐÍ¶Ó°·¨£¨Ó¢Óï£ºMercator projection£©£¬ÓÖ³ÆÂó¿¨ÍÐÍ¶Ó°·¨¡¢ÕýÖáµÈ½ÇÔ²ÖùÍ¶Ó°£¬ÊÇÒ»ÖÖµÈ½ÇµÄÔ²ÖùÐÎµØÍ¼Í¶Ó°·¨¡£±¾Í¶Ó°·¨µÃÃûÓÚ·¨À¼µÂË¹³öÉíµÄµØÀíÑ§¼Ò½ÜÀ­¶ÅË¹¡¤Ä«¿¨ÍÐ£¬ËûÓÚ1569Äê·¢±í³¤202¹«·Ö¡¢¿í124¹«·ÖÒÔ´Ë·½Ê½»æÖÆµÄÊÀ½çµØÍ¼¡£ÔÚÒÔ´ËÍ¶Ó°·¨»æÖÆµÄµØÍ¼ÉÏ£¬¾­Î³ÏßÓÚÈÎºÎÎ»ÖÃ½Ô´¹Ö±Ïà½»£¬Ê¹ÊÀ½çµØÍ¼¿ÉÒÔ»æÖÆÔÚÒ»¸ö³¤·½ÐÎÉÏ¡£ÓÉÓÚ¿ÉÏÔÊ¾ÈÎÁ½µã¼äµÄÕýÈ··½Î»£¬º½º£ÓÃÍ¾µÄº£Í¼¡¢º½Â·Í¼´ó¶¼ÒÔ´Ë·½Ê½»æÖÆ¡£ÔÚ¸ÃÍ¶Ó°ÖÐÏßÐÍ±ÈÀý³ßÔÚÍ¼ÖÐÈÎÒâÒ»µãÖÜÎ§¶¼±£³Ö²»±ä£¬´Ó¶ø¿ÉÒÔ±£³Ö´óÂ½ÂÖÀªÍ¶Ó°ºóµÄ½Ç¶ÈºÍÐÎ×´²»±ä£¨¼´µÈ½Ç£©£»µ«Ä«¿¨ÍÐÍ¶Ó°»áÊ¹Ãæ»ý²úÉú±äÐÎ£¬¼«µãµÄ±ÈÀýÉõÖÁ´ïµ½ÁËÎÞÇî´ó¡£
+\section{Nodejs Express¿ò¼Ü}
+Express ÊÇÒ»¸ö»ùÓÚ Node.js Æ½Ì¨µÄ¼«¼ò¡¢Áé»îµÄ web Ó¦ÓÃ¿ª·¢¿ò¼Ü£¬ËüÌá¹©Ò»ÏµÁÐÇ¿´óµÄÌØÐÔ£¬°ïÖúÄã´´½¨¸÷ÖÖ Web ºÍÒÆ¶¯Éè±¸Ó¦ÓÃ¡£

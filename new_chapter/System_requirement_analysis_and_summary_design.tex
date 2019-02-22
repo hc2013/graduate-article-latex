@@ -4,13 +4,7 @@
 
 \section{GTDS系统概述}
 地理轨迹数据服务总体上分为三个部分，轨迹数据服务，瓦片数据服务和业务展示服务。其中业务展示服务是用户直接操作的前端，完成轨迹数据和瓦片数据的可视化功能。\textbf{注意：由于业务展示服务只有前端库的调用，没有有价值的实现，因此本文不做介绍。}瓦片数据服务主要面向外部数据源，支持瓦片数据源的配置和瓦片的增，删，改，查等功能。轨迹数据服务主要面向数据库管理员，主要功能是负责轨迹存储和相似性检索。
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=5in]{new_FIGs/chapter3/general_structure.pdf}
-  \caption{GTDS的总体架构}\label{general_structureCH3}
-\end{figure}
-如图~\ref{general_structureCH3}所示，可视化服务直接接收用户的界面操作，将其转化为轨迹ID和瓦片数据范围，作为参数，分别传递给轨迹搜索服务和瓦片存储服务。再使用前端库汇总这两部分的数据
-共同完成可视化功能。而瓦片存储服务本身不存储瓦片数据，只负责地图范围的解析，地理坐标的转换以及数据格式的转换，瓦片数据的存放位置是在具体的瓦片数据库中。
+
 
 \section{轨迹数据服务需求分析}
 \subsection{轨迹数据服务的功能需求}
@@ -19,14 +13,14 @@
 \begin{table}[htb]\footnotesize
 \centering
 \caption{轨迹数据服务功能需求列表}
-\begin{tabular}{|c|c|c|} % 通过添加 | 来表示是否需要绘制竖线 
-\hline % 在表格最上方绘制横线 
+\begin{tabular}{|c|c|c|} % 通过添加 | 来表示是否需要绘制竖线
+\hline % 在表格最上方绘制横线
 \textbf{需求ID}&\textbf{需求名称}&\textbf{需求描述}\\
-\hline %在第一行和第二行之间绘制横线 
-R1&轨迹索引批量初始化&\tabincell{c}{服务调用方能够通过上传批量的轨迹数据，\\ 在规定时间内完成轨迹索引的建立，并返回结果}\\ 
+\hline %在第一行和第二行之间绘制横线
+R1&轨迹索引批量初始化&\tabincell{c}{服务调用方能够通过上传批量的轨迹数据，\\ 在规定时间内完成轨迹索引的建立，并返回结果}\\
 \hline
-R2&相似轨迹knn检索&\tabincell{c}{服务调用方能够通过传递目标轨迹ID和检索量K，\\ 在规定时间内返回K个与目标轨迹最相似的K个轨迹}\\ 
-\hline % 在表格最下方绘制横线 
+R2&相似轨迹knn检索&\tabincell{c}{服务调用方能够通过传递目标轨迹ID和检索量K，\\ 在规定时间内返回K个与目标轨迹最相似的K个轨迹}\\
+\hline % 在表格最下方绘制横线
 \end{tabular}
 \label{table:trajectory_service_func_req}
 \end{table}
@@ -57,23 +51,23 @@ Trajectory KNN问题是一个计算密集型问题，用户对响应时间一定会有要求。同时，并发量
 \begin{tabular}{|c|c|l|} % 通过添加 | 来表示是否需要绘制竖线
 \hline % 在表格最上方绘制横线
 \textbf{需求ID}&\textbf{需求名称}&\textbf{需求描述}\\
-\hline 
+\hline
 R1&新增地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图名称和 \\ 图瓦片数据，增加一个地区的完整地图瓦片数据}\\
-\hline 
+\hline
 R2&删除地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID，删 \\ 除一个地区的全部地图瓦片数据}\\
-\hline 
+\hline
 R3&局部更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和 \\ 地图数据，更新一张大地图中某一个地区的地图瓦片数据}\\
 \hline
 R4&bounding-box更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为 \\ 地图ID，经纬度范围，地图数据，更新一张大地图中 \\ 某一个地区某一经纬度矩形范围内的地图瓦片数据}\\
-\hline 
+\hline
 R5&局部更新地图瓦片数据&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和地 \\ 图数据，更新一张大地图中某一个地区的地图瓦片数据}\\
-\hline 
+\hline
 R6&地图瓦片数据全量查询&\tabincell{c}{服务调用方能够通过瓦片服务，通过获取全量数据 \\ 的JSON文件，作为输入的数据源，获取整张地图的全量数据}\\
-\hline 
+\hline
 R7&单个地图瓦片数据查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和栅 \\ 格坐标zxy，获取指定的瓦片}\\
-\hline 
+\hline
 R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地图ID和 \\ 经纬度矩形范围，获取这一部分的地图渲染结果}\\
-\hline 
+\hline
 \end{tabular}
 \label{table:tile_service_func_req}
 \end{table}
@@ -110,27 +104,37 @@ R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地
 \begin{tabular}{|l|l|}
 \hline
 \textbf{ID}&\textbf{UC1}\\
-\hline 
+\hline
 \textbf{名称}&\textbf{bounding-box更新地图瓦片数据}\\
-\hline 
+\hline
 \textbf{参与者}&\textbf{普通用户}\\
-\hline 
+\hline
 \textbf{目的}&\textbf{更新某张地图中一个矩形范围内的瓦片数据，以改变轨迹展示背景}\\
-\hline 
+\hline
 \textbf{描述}&\textbf{用户通过浏览器发送矩形参数和瓦片数据，以实现对瓦片数据库中数据的修改，进而改变业务展示的结果}\\
-\hline 
+\hline
 \textbf{优先级}&\textbf{高}\\
-\hline 
+\hline
 \textbf{触发条件}&\textbf{某一地图中某一部分数据发生变更，需要更改}\\
-\hline 
+\hline
 \textbf{前置条件}&\textbf{服务正常运行，用户进入服务界面}\\
-\hline 
+\hline
 \textbf{后置条件}&\textbf{地图瓦片数据完成更新，业务展示结果经过刷新可以看到地图变化}\\
-\hline 
+\hline
 \textbf{正常流程}&\tabincell{l}{1.进入瓦片数据更新界面 \\ 2.设置north,south,west,east,4个经纬度值 \\ 3.设置zoom区间 \\ 4.设置是否进行精度模糊 \\ 5.点击浏览本地文件并上传文件数据 \\6. 点击更新瓦片数据}\\
-\hline 
+\hline
 \textbf{异常流程}&\tabincell{l}{2a.经纬度大小值错误，前端应自动检测并警告 \\ 3a.指定矩形范围太小，在较小的zoom下无法更新瓦片,服务端应发现错误并返回告知用户 \\ 5a.用户选择的文件格式错误，则前端对用户发出警告 \\ 5b.用户选择的文件中并没有指定bounding-box中的数据，服务端应返回错误报告并挺行用户更改文件}\\
 \hline
 \end{tabular}
 \label{table:tileserver_use_case_description}
 \end{table}
+\section{GTDS系统概要设计}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/general_structure.pdf}
+  \caption{GTDS的总体架构}\label{general_structureCH3}
+\end{figure}
+如图~\ref{general_structureCH3}所示，可视化服务直接接收用户的界面操作，将其转化为轨迹ID和瓦片数据范围，作为参数，分别传递给轨迹搜索服务和瓦片存储服务。再使用前端库汇总这两部分的数据
+共同完成可视化功能。而瓦片存储服务本身不存储瓦片数据，只负责地图范围的解析，地理坐标的转换以及数据格式的转换，瓦片数据的存放位置是在具体的瓦片数据库中。
+\section{本章总结}
+本章先是通过概述说明了整个系统主要组件的职责和相互之间的关系。然后分别针对两个主要服务进行了需求分析。需求分析的过程中，使用了需求列表来展现主要的功能需求和非功能需求，还使用了用例图的形式对功能较多的地图瓦片服务进行了功能划分，并对其中操作较为复杂的功能使用用例描述进行了详细介绍。最后给出了整个系统的概要设计，明确了各个组件之间的依赖关系，为下一章按照模块进行详细设计和实现做准备。

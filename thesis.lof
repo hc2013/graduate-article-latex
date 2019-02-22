@@ -2,12 +2,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces vp-tree点集合分割示意图}}{6}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces vp-tree空间分割示意图}}{7}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces 最简单vp-tree的结构示意图}}{8}{figure.2.3}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces vp-tree空间分割示意图}}{6}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 最简单vp-tree的结构示意图}}{7}{figure.2.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces GTDS的总体架构}}{9}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 瓦片数据服务的功能需求}}{12}{figure.3.2}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 瓦片数据服务的功能需求}}{13}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces GTDS的总体架构}}{15}{figure.3.2}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 4路vp-tree的内部结构示意图}}{18}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 初始建树流程图}}{19}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树代码}}{20}{figure.4.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

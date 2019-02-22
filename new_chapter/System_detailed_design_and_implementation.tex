@@ -2,7 +2,34 @@
 
 
 
-\section{这是节标题}
-这是地理信息系统的系统详细设计与实现
-\subsection{这是小节标题}
-\subsection{这是小小节标题}
+\section{轨迹检索检索服务}
+\subsection{概述}
+轨迹检索服务是在全文检索引擎ElasticSearch的基础上，扩展实现了单独的优先点树索引结构来实现的。由于服务对外接口访问，分布式，故障检测等功能由ElasticSearch提供，因此本文只关注具体索引结构的设计和实现。
+轨迹检索服务的核心思想是，以JTS-Geometry作为路径的存储形式，也就是只考虑路径的几何展现，不去考虑路径的方向性。并以豪斯多夫距离衡量两个Geometry之间的距离。两个Geometry之间的豪斯多夫距离越短，就认为两个Geometry越相似，也就认为两个路径越相似。基于这样的前提，我们将Geometry作为度量空间中的数据点，实际上把相似路径检索问题转化为Geometry的KNN问题，然后通过建立vp-tree的数据结构，进行求解。\textbf{注意：由于算法实现流程的细节较多，本文采用流程+实现+设计要点的顺序进行阐述，其中设计要点是对主流程实现细节的单独阐述。}
+\subsection{优先点树索引类图}
+\subsection{优先点树节点结构}
+本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=5in,height=3in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
+  \caption{4路vp-tree的内部结构示意图}\label{vp-tree-structure1}
+\end{figure}
+\subsection{初始建树的流程}
+初始建树的输入数据是一系列的docId+Geometry，初始建树的输出是一颗完整的多路vp-tree。具体流程见~\ref{create-node-flow}。\textbf{注意：本文用DP来表示Data Point，即数据点，用VP来表示Vantage Point，即被选做优先点的数据点，用Node来表示vp-tree的节点。}
+
+如图所示初始建树实际上是一个递归的过程。但是为了避免出现内存溢出，本文选择了用循环+栈的模式。流程开始时，首先将根节点压栈，然后判断数据点的个数是不是小于叶节点的数据量标准。如果是，就意味着已经达到终止这一分支的条件，则直接为叶节点，然后通过空流程返回循环判断。如果数据量仍然大于叶节点的数据量，就使用选取函数选择优先点，计算其他各个数据点到优先点的距离，再根据距离进行升序排序。\textbf{注意：由于此时有一个点被选做优先点，所以数据点总量要减一}，然后判断剩余的数据量是否大于扇出数，如果数据量已经不能满足全部的扇出，那么就初始化为单个非叶节点入栈，从而进入下一次循环。如果数据量依然足够分割全部的扇出，就按照距离排序的结果进行多路切分，用新建的子节点代表新的子树，并入栈。将距离值，上下界值和子节点指针分别填入对应的数组中，再进入下一次循环。以此类推，循环往复，完成所有数据点的建树操作。
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter4/create-node-flow.pdf}
+  \caption{初始建树流程图}\label{create-node-flow}
+\end{figure}
+\subsection{初始建树算法实现}
+\textbf{注意，出于节省篇幅考虑，省略了部分简单实现}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/initVpTree-code.pdf}
+  \caption{初始建树代码}\label{create-node-flow}
+\end{figure}
+\subsection{设计要点1：使用长度栈和偏移量栈记录内存状态，避免冗余内存}
+\subsection{设计要点1：第二，优先点的选择算法}
