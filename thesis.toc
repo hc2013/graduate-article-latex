@@ -45,13 +45,14 @@
 \contentsline {subsection}{\numberline {4.1.7}设计要点1：第二，优先点的选择算法}{20}{subsection.4.1.7}
 \contentsline {subsection}{\numberline {4.1.8}KNN问题的定义和解决思路}{20}{subsection.4.1.8}
 \contentsline {subsection}{\numberline {4.1.9}设计焦点：容忍距离的收敛起点和收敛速度}{21}{subsection.4.1.9}
-\contentsline {subsection}{\numberline {4.1.10}本文的算法实现思路概述}{21}{subsection.4.1.10}
-\contentsline {subsection}{\numberline {4.1.11}本文的算法实现的流程图}{21}{subsection.4.1.11}
+\contentsline {subsection}{\numberline {4.1.10}检索算法实现思路概述}{21}{subsection.4.1.10}
+\contentsline {subsection}{\numberline {4.1.11}检索算法流程图}{21}{subsection.4.1.11}
 \contentsline {subsection}{\numberline {4.1.12}本文的算法实现的代码}{21}{subsection.4.1.12}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{25}{chapter.5}
-\contentsline {section}{\numberline {5.1}这是节标题}{25}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}这是小节标题}{25}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}这是小小节标题}{25}{subsection.5.1.2}
-\contentsline {chapter}{参考文献}{27}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{29}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{31}{chapter*.6}
+\contentsline {subsection}{\numberline {4.1.13}算法补充说明}{21}{subsection.4.1.13}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}这是节标题}{27}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}这是小节标题}{27}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}这是小小节标题}{27}{subsection.5.1.2}
+\contentsline {chapter}{参考文献}{29}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{31}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{33}{chapter*.6}

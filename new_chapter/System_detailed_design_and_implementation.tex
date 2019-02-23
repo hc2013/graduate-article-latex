@@ -54,8 +54,24 @@
 
 在上文所述的单纯用最小堆动态更新检索结果的算法中，其最大问题在于，容忍距离是从正无穷开始更新的。这使得检索从一开始完全不可能做到剪枝，容忍距离的收敛速度会非常慢，导致剪枝的效率很低，性能也比较差。
 
-\subsection{本文的算法实现思路概述}
+\subsection{检索算法实现思路概述}
 基于上面所提到的容忍距离收敛较慢问题，本文采用了结果堆预填+回溯的方式进行优化处理。即通过原生vp-tree搜索算法，先找到single nearest neighbour，并保存从root到single nearest neighbour的整条路径。然后再通过整条路径的回溯先预填结果堆，这样以结果堆中最大距离作为容忍距离，再回溯整条路径中的节点，完成检索。这样通过预先填结果堆，使得容忍距离以更低的起点收敛，收敛的速度更快，性能更好。
 
-\subsection{本文的算法实现的流程图}
+\subsection{检索算法流程图}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/search-flow.pdf}
+  \caption{检索算法流程图}\label{search-flow}
+\end{figure}
 \subsection{本文的算法实现的代码}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/findnn-code.pdf}
+  \caption{检索最近邻居代码}\label{findnn-code}
+\end{figure}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
+  \caption{预填结果集代码}\label{trytoFillQueue-code}
+\end{figure}
+\subsection{算法补充说明}
