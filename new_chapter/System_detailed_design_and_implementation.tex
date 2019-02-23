@@ -10,6 +10,24 @@
   \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
   \caption{优先点树索引类图}\label{vp-tree-general-structure}
 \end{figure}
+如\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口，之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree等等，本文所设计的VpTree只是其中一种，因此，预留接口。
+
+Node是VpTree的实现的核心，是VpTree存储数据点Id，距离信息，子树边界，除此之外，Node类还需要对自身是否为叶子节点进行控制。Vptree的搜索算法最终都是运行在Node上的。
+
+DistanceCahce是对距离的缓存结构，以减少数据点之间距离的计算次数。目前为止的实现中，DistanceCache并没有设计任何过期替换策略，所以在运行时可能会出现大量占用内存的状况，在未来的版本中，会优化这一点。
+
+BitSetContext用于记录VpTree一条检索路径中各个非叶节点的分支已搜索状态，用于避免重复检索。目前BitSetContext的实现中，依赖于外部的释放内存空间，BitSetContext本身没有设计垃圾回收机制。
+
+Configuration类用于保存VpTree的初始化信息，例如扇出数，节点尺寸，采样率等。
+
+BulkLoadContext是VpTree初始建树时输入参数，主要包括一个docIdList和一个Geometrylist。其主要功能是在初始建树的过程中提供数据。而GeomtrySorter是一个排序工具类，用于对BulkLoadContext中的几何体进行排序（多路切分），这个类是对快排的扩展实现。
+
+GeomtryDistanceFunction是VpTree数据点间距离计算的接口，本文实现的算法HausdorffDistance采用豪斯多夫距离，但这显然不是唯一一种距离衡量方式。因此预留接口，以备扩充。
+
+SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取方法。未来可能会有更合理的实现。\textbf{其实，随即取优先点也是一种可选方式。}Sampler是取样器的实现类，在最大标准差SampleSelectVpStrategy的实现中，使用了采用器进行采样，目前的采样器的实现只有一种ReservoirSampler。
+
+综上所述，整个VpTree结构的设计，是充分面对扩展的。对于未来可能出现的新的距离计算函数，采样方式，节点结构，数据点形式，有良好的适应性。只是在内存使用上，存在一定的瑕疵，这在未来版本的优化中会得到解决。
+
 \subsection{优先点树节点结构}
 本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
 \begin{figure}[htp]

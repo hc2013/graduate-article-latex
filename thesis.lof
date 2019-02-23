@@ -9,13 +9,13 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces GTDS的总体架构}}{15}{figure.3.2}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{18}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{19}{figure.4.2}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{20}{figure.4.4}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{23}{figure.4.3}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{24}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{25}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{26}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{27}{figure.4.8}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{20}{figure.4.2}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{21}{figure.4.4}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{24}{figure.4.3}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{25}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{26}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{27}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{28}{figure.4.8}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
