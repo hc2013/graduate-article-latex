@@ -1,12 +1,15 @@
 \chapter{系统详细设计与实现}
 
-
-
-\section{轨迹检索检索服务详细设计}
+\section{轨迹检索服务详细设计}
 \subsection{概述}
 轨迹检索服务是在全文检索引擎ElasticSearch的基础上，扩展实现了单独的优先点树索引结构来实现的。由于服务对外接口访问，分布式，故障检测等功能由ElasticSearch提供，因此本文只关注具体索引结构的设计和实现。
 轨迹检索服务的核心思想是，以JTS-Geometry作为路径的存储形式，也就是只考虑路径的几何展现，不去考虑路径的方向性。并以豪斯多夫距离衡量两个Geometry之间的距离。两个Geometry之间的豪斯多夫距离越短，就认为两个Geometry越相似，也就认为两个路径越相似。基于这样的前提，我们将Geometry作为度量空间中的数据点，实际上把相似路径检索问题转化为Geometry的KNN问题，然后通过建立vp-tree的数据结构，进行求解。\textbf{注意：由于算法实现流程的细节较多，本文采用流程+实现+设计要点的顺序进行阐述，其中设计要点是对主流程实现细节的单独阐述。}
 \subsection{优先点树索引类图}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
+  \caption{优先点树索引类图}\label{vp-tree-general-structure}
+\end{figure}
 \subsection{优先点树节点结构}
 本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
 \begin{figure}[htp]
@@ -74,4 +77,6 @@
   \includegraphics[width=6in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
   \caption{预填结果集代码}\label{trytoFillQueue-code}
 \end{figure}
-\subsection{算法补充说明}
+\subsection{设计焦点2：避免重复访问}
+在当前的索引实现中，由于经历了预填结果集的操作，因此，在回溯过程中，可能会重复遍历相同的分支，导致性能损失。关于这一点，本文使用了BitSet栈的方式来实现，在预填结果集的过程中，与节点栈同步保存一个Bitset栈，两者的顺序一致。每个bitset与vp-tree的扇出数一致，用于保存若干分支中，哪些已经被访问过了。这样，在回溯发生的时候，首先检查bitset，对于那些已经被置位的分支直接跳过，避免重复的距离计算。
+\section{地图瓦片服务详细设计}
