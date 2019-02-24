@@ -98,3 +98,24 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \subsection{设计焦点2：避免重复访问}
 在当前的索引实现中，由于经历了预填结果集的操作，因此，在回溯过程中，可能会重复遍历相同的分支，导致性能损失。关于这一点，本文使用了BitSet栈的方式来实现，在预填结果集的过程中，与节点栈同步保存一个Bitset栈，两者的顺序一致。每个bitset与vp-tree的扇出数一致，用于保存若干分支中，哪些已经被访问过了。这样，在回溯发生的时候，首先检查bitset，对于那些已经被置位的分支直接跳过，避免重复的距离计算。
 \section{地图瓦片服务详细设计}
+\subsection{概述}
+地图瓦片服务的功能是为整个系统提供可视化地图数据的服务。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。\textbf{MapBox是业内通用标准，符合Mapbox标准是为了确保通用性}
+所示，地图瓦片服务主要分为data\_service,style\_service,cache\_service,logic\_service和db\_service，以及对接db\_service的各种数据库驱动组成。其各部分功能如下。
+
+data\_service模块负责提供瓦片数据的读取，更新功能，是直接决定数据操作和数据状态的模块。style模块是提供风格数据的模块，负责向调用发提供指定的风格数据，用于页面渲染。logic\_service是支持与地理相关的运算逻辑模块，例如坐标转换，bounding-box换算等。cache\_service是与瓦片数据缓存相关的功能模块，可以为瓦片数据配置不同的缓存策略。db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与地理数据库交互的媒介。由于nodejs 支持的原型模式的多态，图中各部分的访问接口稳定不变，模块内部新增扩展实现或是更改实现就能无缝地交互和对接。\textbf{注意：style模块的数据是静态的json文件，是存在文件系统中的，不经过数据库，所以不依赖与db\_service模块}
+
+
+
+
+
+
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/tile-server-structure.pdf}
+  \caption{tile-server整体结构图}\label{tile-server-structure}
+\end{figure}
+如图~\ref{tile-server-structure}
+
+
+
+
