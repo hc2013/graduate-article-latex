@@ -64,6 +64,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}地图瓦片数据}{9}{subsection.2.3.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}墨卡托坐标}{9}{subsection.2.3.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Nodejs Express框架}{10}{section.2.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}本章总结}{10}{section.2.5}}
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {chapter}{\numberline {第三章\hspace  {0.3em}}系统需求分析与概要设计}{11}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -121,26 +122,37 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.13}设计焦点2：避免重复访问}{23}{subsection.4.1.13}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{24}{section.4.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}概述}{24}{subsection.4.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces tile-server整体结构图}}{24}{figure.4.9}}
+\newlabel{tile-server-structure}{{4.9}{24}{tile-server整体结构图\relax }{figure.4.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{25}{subsection.4.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{26}{subsection.4.2.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces 地图局部更新功能流程图}}{26}{figure.4.10}}
+\newlabel{update_tile_1}{{4.10}{26}{地图局部更新功能流程图\relax }{figure.4.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{27}{subsection.4.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 地图局部更新功能代码实现}}{27}{figure.4.11}}
+\newlabel{tile_degree_compute}{{4.11}{27}{地图局部更新功能代码实现\relax }{figure.4.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{27}{subsection.4.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{29}{subsection.4.2.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 更新一致性的代码实现}}{29}{figure.4.12}}
+\newlabel{consistancy-code}{{4.12}{29}{更新一致性的代码实现\relax }{figure.4.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}本章总结}{29}{section.4.3}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{25}{figure.4.3}}
-\newlabel{create-node-flow}{{4.3}{25}{初始建树流程图\relax }{figure.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{26}{figure.4.5}}
-\newlabel{select-vp-code}{{4.5}{26}{优先点选取代码\relax }{figure.4.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{27}{figure.4.6}}
-\newlabel{search-flow}{{4.6}{27}{检索算法流程图\relax }{figure.4.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{28}{figure.4.7}}
-\newlabel{findnn-code}{{4.7}{28}{检索最近邻居代码\relax }{figure.4.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{29}{figure.4.8}}
-\newlabel{trytoFillQueue-code}{{4.8}{29}{预填结果集代码\relax }{figure.4.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces tile-server整体结构图}}{30}{figure.4.9}}
-\newlabel{tile-server-structure}{{4.9}{30}{tile-server整体结构图\relax }{figure.4.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{30}{figure.4.3}}
+\newlabel{create-node-flow}{{4.3}{30}{初始建树流程图\relax }{figure.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{31}{figure.4.5}}
+\newlabel{select-vp-code}{{4.5}{31}{优先点选取代码\relax }{figure.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{32}{figure.4.6}}
+\newlabel{search-flow}{{4.6}{32}{检索算法流程图\relax }{figure.4.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{33}{figure.4.7}}
+\newlabel{findnn-code}{{4.7}{33}{检索最近邻居代码\relax }{figure.4.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{34}{figure.4.8}}
+\newlabel{trytoFillQueue-code}{{4.8}{34}{预填结果集代码\relax }{figure.4.8}{}}
 \bibdata{reference}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}总结和展望}{31}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}总结和展望}{35}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}这是节标题}{31}{section.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}这是小节标题}{31}{subsection.5.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}这是小小节标题}{31}{subsection.5.1.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}总结}{35}{section.5.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}进一步工作展望}{35}{section.5.2}}
 \@writefile{loa}{\addvspace {10\p@ }}
 \bibcite{GaoQiang2017}{{1}{}{{}}{{}}}
 \bibcite{BaiduYingyan}{{2}{}{{}}{{}}}
@@ -149,15 +161,15 @@
 \bibcite{DBLP:journals/tc/FukunagaN75}{{5}{}{{}}{{}}}
 \bibcite{ES-Official}{{6}{}{{}}{{}}}
 \bibcite{ES-Performance}{{7}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{参考文献}{33}{chapter*.4}}
+\@writefile{toc}{\contentsline {chapter}{参考文献}{37}{chapter*.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{35}{chapter*.5}}
+\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{39}{chapter*.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{37}{chapter*.6}}
+\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{41}{chapter*.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
