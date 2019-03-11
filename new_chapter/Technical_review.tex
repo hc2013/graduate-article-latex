@@ -53,19 +53,33 @@ search(n.right);
 search(n.left);
 }
 \end{algorithm}
-\section{Lucene与ElasticSearch}
-\subsection{概述}
-Lucene是一套用于全文检索和搜索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索，在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。
+\section{Lucene}
+\subsection{简介}
+Lucene是一套用于全文检索和搜索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索。\cite{DBLP:journals/aai/HirschB18}在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。
 
-Elasticsearch是一个基于Lucene库的搜索引擎。它提供了一个分布式、支持多租户的全文搜索引擎，具有HTTP Web接口和无模式JSON文档。Elasticsearch 可以用于搜索各种文档。它提供可扩展的搜索，具有接近实时的搜索，并支持多租户。Elasticsearch是分布式的，这意味着索引可以被分成分片，每个分片可以有0 个或多个副本。每个节点托管一个或多个分片，并充当协调器将操作委托给正确的分片。再平衡和路由是自动完成的。\cite{ES-Official}相关数据通常存储在同一个索引中，该索引由一个或多个主分片和零个或多个复制分片组成。一旦创建了索引，就不能更改主分片的数量。\cite{ES-Performance}
+Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜素内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。\cite{DBLP:journals/jdiq/YangFL18}
+\subsection{运行原理}
+Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
+\cite{LuceneInAction}
+\textbf{注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排索引。}
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/lucene-structure.pdf}
+  \caption{lucene检索组件图}\label{lucene_structureCH2}
+\end{figure}
 \subsection{核心数据结构}
-正排索引：正排表是以文档的ID为关键字，表中记录文档中每个字的位置信息，查找时扫描表中每个文档中字的信息直到找出所有包含查询关键字的文档。
-这种组织方法在建立索引的时候结构比较简单，建立比较方便且易于维护;因为索引是基于文档建立的，若是有新的文档加入，直接为该文档建立一个新的索引块，挂接在原来索引文件的后面。若是有文档删除，则直接找到该文档号文档对应的索引信息，将其直接删除。但是在查询的时候需对所有的文档进行扫描以确保没有遗漏，这样就使得检索时间大大延长，检索效率低下。
+Doc-Value:Doc-Value是Lucene针对文档内容建立的正排索引，可以将其理解为以Doc-Id为key-value对的值。这一结构与传统数据库中B-tree的索引结构是相似的。主要用于对一些特殊的结构化数据，比如图形，大数字，日志等不适合进行全文检索的数据进行顺序存储。本文实现中所使用的几何图形Geometry就是存储在Doc-Value中的。
 
-倒排索引：倒排索引（英语：Inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。
+倒排索引：倒排索引（英语：Inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。\cite{DBLP:journals/jcst/BoucennaNKK19}
 
-\subsection{选择的原因}
-天然分布式属性和自称服务的体系，节省了单独开发WebService的时间。ES-Geometry的良好兼容性。性能良好，安全稳定。
+如图~\ref{invert-indexCH2}所示，建立倒排索引，首先要根据停用词列表对文章内容进行分词，找出所有的实词，再建立词条到文档列表的一个映射。当检索时，直接根据用户输入的关键词，查询词典，就可以找到这些词语分别都出现在那些文档中。再根据相应的打分算法对命中的文档计算分数，排序，返回检索结果。
+\subsection{为什么选择lucene}
+lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。在Lucene扩展新的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
+\begin{figure}[htp]
+  \centering
+  \includegraphics[width=4.5in,height=2.5in]{new_FIGs/chapter2/invert-index.pdf}
+  \caption{倒排索引结构示意图}\label{invert-indexCH2}
+\end{figure}
 \section{地理相关技术概念介绍}
 \subsection{地图瓦片数据}
 瓦片地图金字塔模型是一种多分辨率层次模型，从瓦片金字塔的底层到顶层，分辨率越来越低，但表示的地理范围不变。首先确定地图服务平台所要提供的缩放级别的数量N，把缩放级别最高、地图比例尺最大的地图图片作为金字塔的底层，即第0层，并对其进行分块，从地图图片的左上角开始，从左至右、从上到下进行切割，分割成相同大小(比如256x256像素)的正方形地图瓦片，形成第0层瓦片矩阵;在第0层地图图片的基础上，按每2x2像素合成为一个像素的方法生成第1层地图图片，并对其进行分块，分割成与下一层相同大小的正方形地图瓦片，形成第1层瓦片矩阵;采用同样的方法生成第2层瓦片矩阵;…;如此下去，直到第N一1层，构成整个瓦片金字塔。

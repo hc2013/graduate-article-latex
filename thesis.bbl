@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{GaoQiang2017}
 Gao Q, Zhang FL, Wang RJ, and Zhou F.
@@ -24,13 +24,32 @@ Keinosuke Fukunaga and Patrenahalli~M. Narendra.
 \newblock A branch and bound algorithms for computing k-nearest neighbors.
 \newblock {\em {IEEE} Trans. Computers}, 24(7):750--753, 1975.
 
-\bibitem{ES-Official}
-{Elasticsearch.org}.
-\newblock \url{http://www.elasticsearch.org/}.
+\bibitem{DBLP:journals/aai/HirschB18}
+Laurence Hirsch and Teresa Brunsdon.
+\newblock A comparison of lucene search queries evolved as text classifiers.
+\newblock {\em Applied Artificial Intelligence}, 32(7-8):768--784, 2018.
 
-\bibitem{ES-Performance}
-{How to monitor Elasticsearch performance}.
-\newblock
-  \url{https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#what-is-elasticsearch}.
+\bibitem{DBLP:journals/jdiq/YangFL18}
+Peilin Yang, Hui Fang, and Jimmy Lin.
+\newblock Anserini: Reproducible ranking baselines using lucene.
+\newblock {\em J. Data and Information Quality}, 10(4):16:1--16:20, 2018.
+
+\bibitem{LuceneInAction}
+Michael McCandless, Erik Hatcher, and Otis Gospodnetic.
+\newblock {\em Lucene in Action, Second Edition: Covers Apache Lucene 3.0}.
+\newblock Manning Publications, 2010.
+
+\bibitem{DBLP:journals/jcst/BoucennaNKK19}
+Fateh Boucenna, Omar Nouali, Samir Kechid, and M.~Tahar Kechadi.
+\newblock Secure inverted index based search over encrypted cloud data with
+  user access rights management.
+\newblock {\em J. Comput. Sci. Technol.}, 34(1):133--154, 2019.
+
+\bibitem{DBLP:journals/vldb/FuCCM00}
+Ada~Wai{-}Chee Fu, Polly~Mei{-}shuen Chan, Yin{-}Ling Cheung, and Yiu~Sang
+  Moon.
+\newblock Dynamic vp-tree indexing for n-nearest neighbor search given
+  pair-wise distances.
+\newblock {\em {VLDB} J.}, 9(2):154--173, 2000.
 
 \end{thebibliography}
