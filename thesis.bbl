@@ -45,6 +45,26 @@ Fateh Boucenna, Omar Nouali, Samir Kechid, and M.~Tahar Kechadi.
   user access rights management.
 \newblock {\em J. Comput. Sci. Technol.}, 34(1):133--154, 2019.
 
+\bibitem{WGS84Intro}
+张晴晴, 王剑, and 刘瑞华.
+\newblock 基于椭球的航迹点坐标推算.
+\newblock {\em 国家重点研发计划}, 41(10):28--34, 2018.
+
+\bibitem{MercatoProjection}
+孙健~曹兴飞 邱亮.
+\newblock 墨卡托海图投影变形的应用分析.
+\newblock {\em 中国水运(下半月)}, 16(12):72--74, 2016.
+
+\bibitem{TileIntro}
+胡水平~岳淑英 张求喜.
+\newblock 谷歌地图卫星影像数据获取关键技术研究.
+\newblock {\em 测绘与空间地理信息}, 41(10):79--81, 2018.
+
+\bibitem{TilePyramid}
+霍亮 杨耀东 刘小勇~乔文昊 朱王璋.
+\newblock 瓦片金字塔模型技术的研究与实践.
+\newblock {\em 测绘科学}, 37(06):144--146, 2012.
+
 \bibitem{DBLP:journals/vldb/FuCCM00}
 Ada~Wai{-}Chee Fu, Polly~Mei{-}shuen Chan, Yin{-}Ling Cheung, and Yiu~Sang
   Moon.

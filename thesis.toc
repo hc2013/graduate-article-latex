@@ -17,11 +17,13 @@
 \contentsline {subsection}{\numberline {2.2.1}简介}{8}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}运行原理}{8}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}核心数据结构}{9}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}为什么选择lucene}{9}{subsection.2.2.4}
 \contentsline {section}{\numberline {2.3}地理相关技术概念介绍}{10}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}地图瓦片数据}{10}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}墨卡托坐标}{10}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.1}地理坐标与投影法}{10}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}地图瓦片}{10}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}瓦片地图金字塔}{11}{subsection.2.3.3}
 \contentsline {section}{\numberline {2.4}Nodejs Express框架}{11}{section.2.4}
-\contentsline {section}{\numberline {2.5}本章总结}{11}{section.2.5}
+\contentsline {section}{\numberline {2.5}本章总结}{12}{section.2.5}
 \contentsline {chapter}{\numberline {第三章\hspace {0.3em}}系统需求分析与概要设计}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}GTDS系统概述}{13}{section.3.1}
 \contentsline {section}{\numberline {3.2}轨迹数据服务需求分析}{13}{section.3.2}
@@ -43,7 +45,7 @@
 \contentsline {subsection}{\numberline {4.1.4}初始建树的流程}{21}{subsection.4.1.4}
 \contentsline {subsection}{\numberline {4.1.5}初始建树算法实现}{22}{subsection.4.1.5}
 \contentsline {subsection}{\numberline {4.1.6}设计要点1：使用长度栈和偏移量栈记录内存状态，避免冗余内存}{24}{subsection.4.1.6}
-\contentsline {subsection}{\numberline {4.1.7}设计要点1：第二，优先点的选择算法}{24}{subsection.4.1.7}
+\contentsline {subsection}{\numberline {4.1.7}设计要点2：优先点的选择算法}{24}{subsection.4.1.7}
 \contentsline {subsection}{\numberline {4.1.8}KNN问题的定义和解决思路}{24}{subsection.4.1.8}
 \contentsline {subsection}{\numberline {4.1.9}设计焦点：容忍距离的收敛起点和收敛速度}{25}{subsection.4.1.9}
 \contentsline {subsection}{\numberline {4.1.10}检索算法实现思路概述}{25}{subsection.4.1.10}
