@@ -54,17 +54,26 @@
 \BOOKMARK [2][-]{subsection.4.1.11}{4.1.11 检索算法流程图}{section.4.1}% 54
 \BOOKMARK [2][-]{subsection.4.1.12}{4.1.12 本文的算法实现的代码}{section.4.1}% 55
 \BOOKMARK [2][-]{subsection.4.1.13}{4.1.13 设计焦点2：避免重复访问}{section.4.1}% 56
-\BOOKMARK [1][-]{section.4.2}{4.2 地图瓦片服务详细设计}{chapter.4}% 57
-\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 概述}{section.4.2}% 58
-\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 地图局部更新功能概述}{section.4.2}% 59
-\BOOKMARK [2][-]{subsection.4.2.3}{4.2.3 地图局部更新功能流程图}{section.4.2}% 60
-\BOOKMARK [2][-]{subsection.4.2.4}{4.2.4 地图局部更新功能代码实现}{section.4.2}% 61
-\BOOKMARK [2][-]{subsection.4.2.5}{4.2.5 更新一致性的原理}{section.4.2}% 62
-\BOOKMARK [2][-]{subsection.4.2.6}{4.2.6 更新一致性的关键代码实现}{section.4.2}% 63
-\BOOKMARK [1][-]{section.4.3}{4.3 本章总结}{chapter.4}% 64
-\BOOKMARK [0][-]{chapter.5}{第五章 \040总结和展望}{}% 65
-\BOOKMARK [1][-]{section.5.1}{5.1 总结}{chapter.5}% 66
-\BOOKMARK [1][-]{section.5.2}{5.2 进一步工作展望}{chapter.5}% 67
-\BOOKMARK [0][-]{chapter*.4}{参考文献}{}% 68
-\BOOKMARK [0][-]{chapter*.5}{简历与科研成果}{}% 69
-\BOOKMARK [0][-]{chapter*.6}{致 \040谢}{}% 70
+\BOOKMARK [2][-]{subsection.4.1.14}{4.1.14 优先点树的插入}{section.4.1}% 57
+\BOOKMARK [2][-]{subsection.4.1.15}{4.1.15 Insert操作算法概述}{section.4.1}% 58
+\BOOKMARK [2][-]{subsection.4.1.16}{4.1.16 Insert操作算法细节1：根节点不分裂，树的高度不变}{section.4.1}% 59
+\BOOKMARK [2][-]{subsection.4.1.17}{4.1.17 Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{section.4.1}% 60
+\BOOKMARK [2][-]{subsection.4.1.18}{4.1.18 Insert操作算法细节3：分裂优先于数据重分布}{section.4.1}% 61
+\BOOKMARK [2][-]{subsection.4.1.19}{4.1.19 Insert操作算法细节4：缓存节点距离顺序}{section.4.1}% 62
+\BOOKMARK [2][-]{subsection.4.1.20}{4.1.20 Insert操作算法综述}{section.4.1}% 63
+\BOOKMARK [2][-]{subsection.4.1.21}{4.1.21 插入算法流程图}{section.4.1}% 64
+\BOOKMARK [2][-]{subsection.4.1.22}{4.1.22 插入算法实现}{section.4.1}% 65
+\BOOKMARK [1][-]{section.4.2}{4.2 地图瓦片服务详细设计}{chapter.4}% 66
+\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 概述}{section.4.2}% 67
+\BOOKMARK [2][-]{subsection.4.2.2}{4.2.2 地图局部更新功能概述}{section.4.2}% 68
+\BOOKMARK [2][-]{subsection.4.2.3}{4.2.3 地图局部更新功能流程图}{section.4.2}% 69
+\BOOKMARK [2][-]{subsection.4.2.4}{4.2.4 地图局部更新功能代码实现}{section.4.2}% 70
+\BOOKMARK [2][-]{subsection.4.2.5}{4.2.5 更新一致性的原理}{section.4.2}% 71
+\BOOKMARK [2][-]{subsection.4.2.6}{4.2.6 更新一致性的关键代码实现}{section.4.2}% 72
+\BOOKMARK [1][-]{section.4.3}{4.3 本章总结}{chapter.4}% 73
+\BOOKMARK [0][-]{chapter.5}{第五章 \040总结和展望}{}% 74
+\BOOKMARK [1][-]{section.5.1}{5.1 总结}{chapter.5}% 75
+\BOOKMARK [1][-]{section.5.2}{5.2 进一步工作展望}{chapter.5}% 76
+\BOOKMARK [0][-]{chapter*.4}{参考文献}{}% 77
+\BOOKMARK [0][-]{chapter*.5}{简历与科研成果}{}% 78
+\BOOKMARK [0][-]{chapter*.6}{致 \040谢}{}% 79

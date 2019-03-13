@@ -52,17 +52,26 @@
 \contentsline {subsection}{\numberline {4.1.11}检索算法流程图}{25}{subsection.4.1.11}
 \contentsline {subsection}{\numberline {4.1.12}本文的算法实现的代码}{25}{subsection.4.1.12}
 \contentsline {subsection}{\numberline {4.1.13}设计焦点2：避免重复访问}{25}{subsection.4.1.13}
-\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{26}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}概述}{26}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{27}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{28}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{29}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{29}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{31}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}本章总结}{31}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{37}{chapter.5}
-\contentsline {section}{\numberline {5.1}总结}{37}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{37}{section.5.2}
-\contentsline {chapter}{参考文献}{39}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{41}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{43}{chapter*.6}
+\contentsline {subsection}{\numberline {4.1.14}优先点树的插入}{26}{subsection.4.1.14}
+\contentsline {subsection}{\numberline {4.1.15}Insert操作算法概述}{26}{subsection.4.1.15}
+\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{26}{subsection.4.1.16}
+\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{26}{subsection.4.1.17}
+\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂优先于数据重分布}{27}{subsection.4.1.18}
+\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：缓存节点距离顺序}{27}{subsection.4.1.19}
+\contentsline {subsection}{\numberline {4.1.20}Insert操作算法综述}{27}{subsection.4.1.20}
+\contentsline {subsection}{\numberline {4.1.21}插入算法流程图}{27}{subsection.4.1.21}
+\contentsline {subsection}{\numberline {4.1.22}插入算法实现}{27}{subsection.4.1.22}
+\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{27}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}概述}{27}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{28}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{29}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{30}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{30}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{32}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}本章总结}{32}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{39}{chapter.5}
+\contentsline {section}{\numberline {5.1}总结}{39}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{39}{section.5.2}
+\contentsline {chapter}{参考文献}{41}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{43}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{45}{chapter*.6}
