@@ -138,48 +138,64 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.13}设计焦点2：避免重复访问}{24}{subsection.4.1.13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.14}优先点树的插入}{25}{subsection.4.1.14}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.15}Insert操作算法概述}{25}{subsection.4.1.15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{25}{subsection.4.1.16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{25}{subsection.4.1.17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂优先于数据重分布}{26}{subsection.4.1.18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：缓存节点距离顺序}{26}{subsection.4.1.19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.20}Insert操作算法综述}{26}{subsection.4.1.20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.21}插入算法流程图}{27}{subsection.4.1.21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Insert算法流程图}}{27}{figure.4.9}}
-\newlabel{vp-tree-insert-flow}{{4.9}{27}{Insert算法流程图\relax }{figure.4.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.22}插入算法实现}{28}{subsection.4.1.22}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{28}{section.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}概述}{28}{subsection.4.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces tile-server整体结构图}}{29}{figure.4.10}}
-\newlabel{tile-server-structure}{{4.10}{29}{tile-server整体结构图\relax }{figure.4.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{29}{subsection.4.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{30}{subsection.4.2.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 地图局部更新功能流程图}}{30}{figure.4.11}}
-\newlabel{update_tile_1}{{4.11}{30}{地图局部更新功能流程图\relax }{figure.4.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{31}{subsection.4.2.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 地图局部更新功能代码实现}}{31}{figure.4.12}}
-\newlabel{tile_degree_compute}{{4.12}{31}{地图局部更新功能代码实现\relax }{figure.4.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{31}{subsection.4.2.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{33}{subsection.4.2.6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{33}{figure.4.13}}
-\newlabel{consistancy-code}{{4.13}{33}{判断是否覆盖当前瓦片的代码\relax }{figure.4.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}本章总结}{33}{section.4.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces 叶节点分裂算法示意图}}{25}{figure.4.9}}
+\newlabel{insert-show1}{{4.9}{25}{叶节点分裂算法示意图\relax }{figure.4.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces 叶节点数据重分布算法示意图}}{26}{figure.4.10}}
+\newlabel{insert-show2}{{4.10}{26}{叶节点数据重分布算法示意图\relax }{figure.4.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 分支分裂算法示意图}}{26}{figure.4.11}}
+\newlabel{insert-show3}{{4.11}{26}{分支分裂算法示意图\relax }{figure.4.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 分支重分布算法示意图}}{27}{figure.4.12}}
+\newlabel{insert-show4}{{4.12}{27}{分支重分布算法示意图\relax }{figure.4.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{28}{subsection.4.1.16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{28}{subsection.4.1.17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂与数据重分布的优先级问题}{28}{subsection.4.1.18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：存储数据点距离顺序}{29}{subsection.4.1.19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.20}Insert操作算法综述}{29}{subsection.4.1.20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.21}插入算法流程图}{30}{subsection.4.1.21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Insert算法流程图}}{30}{figure.4.13}}
+\newlabel{vp-tree-insert-flow}{{4.13}{30}{Insert算法流程图\relax }{figure.4.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.22}Insert算法实现1：已满叶节点的分裂}{31}{subsection.4.1.22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces 已满叶节点的分裂代码实现}}{31}{figure.4.14}}
+\newlabel{fullleafnode-split}{{4.14}{31}{已满叶节点的分裂代码实现\relax }{figure.4.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.23}Insert算法实现2：叶节点数据重分布}{32}{subsection.4.1.23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces 叶节点数据重分布代码实现}}{32}{figure.4.15}}
+\newlabel{leafnode-redistribute}{{4.15}{32}{叶节点数据重分布代码实现\relax }{figure.4.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.24}Insert算法实现3：分支分裂}{33}{subsection.4.1.24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces 分支分裂代码实现}}{33}{figure.4.16}}
+\newlabel{branch-split}{{4.16}{33}{分支分裂代码实现\relax }{figure.4.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{34}{section.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}概述}{34}{subsection.4.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces tile-server整体结构图}}{34}{figure.4.17}}
+\newlabel{tile-server-structure}{{4.17}{34}{tile-server整体结构图\relax }{figure.4.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{35}{subsection.4.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{36}{subsection.4.2.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces 地图局部更新功能流程图}}{36}{figure.4.18}}
+\newlabel{update_tile_1}{{4.18}{36}{地图局部更新功能流程图\relax }{figure.4.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{37}{subsection.4.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces 地图局部更新功能代码实现}}{37}{figure.4.19}}
+\newlabel{tile_degree_compute}{{4.19}{37}{地图局部更新功能代码实现\relax }{figure.4.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{37}{subsection.4.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{39}{subsection.4.2.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.20}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{39}{figure.4.20}}
+\newlabel{consistancy-code}{{4.20}{39}{判断是否覆盖当前瓦片的代码\relax }{figure.4.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}本章总结}{39}{section.4.3}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{34}{figure.4.3}}
-\newlabel{create-node-flow}{{4.3}{34}{初始建树流程图\relax }{figure.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{35}{figure.4.5}}
-\newlabel{select-vp-code}{{4.5}{35}{优先点选取代码\relax }{figure.4.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{36}{figure.4.6}}
-\newlabel{search-flow}{{4.6}{36}{检索算法流程图\relax }{figure.4.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{37}{figure.4.7}}
-\newlabel{findnn-code}{{4.7}{37}{检索最近邻居代码\relax }{figure.4.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{38}{figure.4.8}}
-\newlabel{trytoFillQueue-code}{{4.8}{38}{预填结果集代码\relax }{figure.4.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{40}{figure.4.3}}
+\newlabel{create-node-flow}{{4.3}{40}{初始建树流程图\relax }{figure.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{41}{figure.4.5}}
+\newlabel{select-vp-code}{{4.5}{41}{优先点选取代码\relax }{figure.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{42}{figure.4.6}}
+\newlabel{search-flow}{{4.6}{42}{检索算法流程图\relax }{figure.4.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{43}{figure.4.7}}
+\newlabel{findnn-code}{{4.7}{43}{检索最近邻居代码\relax }{figure.4.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{44}{figure.4.8}}
+\newlabel{trytoFillQueue-code}{{4.8}{44}{预填结果集代码\relax }{figure.4.8}{}}
 \bibdata{reference}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}总结和展望}{39}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}总结和展望}{45}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}总结}{39}{section.5.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}进一步工作展望}{39}{section.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}总结}{45}{section.5.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}进一步工作展望}{45}{section.5.2}}
 \@writefile{loa}{\addvspace {10\p@ }}
 \bibcite{GaoQiang2017}{{1}{}{{}}{{}}}
 \bibcite{BaiduYingyan}{{2}{}{{}}{{}}}
@@ -194,16 +210,16 @@
 \bibcite{MercatoProjection}{{11}{}{{}}{{}}}
 \bibcite{TileIntro}{{12}{}{{}}{{}}}
 \bibcite{TilePyramid}{{13}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{参考文献}{40}{chapter*.4}}
+\@writefile{toc}{\contentsline {chapter}{参考文献}{46}{chapter*.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{DBLP:journals/vldb/FuCCM00}{{14}{}{{}}{{}}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{42}{chapter*.5}}
+\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{48}{chapter*.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{43}{chapter*.6}}
+\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{49}{chapter*.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers

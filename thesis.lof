@@ -15,16 +15,23 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{19}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{21}{figure.4.2}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{22}{figure.4.4}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Insert算法流程图}}{27}{figure.4.9}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces tile-server整体结构图}}{29}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces 地图局部更新功能流程图}}{30}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces 地图局部更新功能代码实现}}{31}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{33}{figure.4.13}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{34}{figure.4.3}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{35}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{36}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{37}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{38}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 叶节点分裂算法示意图}}{25}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 叶节点数据重分布算法示意图}}{26}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces 分支分裂算法示意图}}{26}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces 分支重分布算法示意图}}{27}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Insert算法流程图}}{30}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces 已满叶节点的分裂代码实现}}{31}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces 叶节点数据重分布代码实现}}{32}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces 分支分裂代码实现}}{33}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces tile-server整体结构图}}{34}{figure.4.17}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces 地图局部更新功能流程图}}{36}{figure.4.18}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces 地图局部更新功能代码实现}}{37}{figure.4.19}
+\contentsline {figure}{\numberline {4.20}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{39}{figure.4.20}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{40}{figure.4.3}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 优先点选取代码}}{41}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 检索算法流程图}}{42}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 检索最近邻居代码}}{43}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 预填结果集代码}}{44}{figure.4.8}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

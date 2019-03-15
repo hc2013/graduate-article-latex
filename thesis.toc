@@ -54,24 +54,26 @@
 \contentsline {subsection}{\numberline {4.1.13}设计焦点2：避免重复访问}{24}{subsection.4.1.13}
 \contentsline {subsection}{\numberline {4.1.14}优先点树的插入}{25}{subsection.4.1.14}
 \contentsline {subsection}{\numberline {4.1.15}Insert操作算法概述}{25}{subsection.4.1.15}
-\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{25}{subsection.4.1.16}
-\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{25}{subsection.4.1.17}
-\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂优先于数据重分布}{26}{subsection.4.1.18}
-\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：缓存节点距离顺序}{26}{subsection.4.1.19}
-\contentsline {subsection}{\numberline {4.1.20}Insert操作算法综述}{26}{subsection.4.1.20}
-\contentsline {subsection}{\numberline {4.1.21}插入算法流程图}{27}{subsection.4.1.21}
-\contentsline {subsection}{\numberline {4.1.22}插入算法实现}{28}{subsection.4.1.22}
-\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{28}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}概述}{28}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{29}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{30}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{31}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{31}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{33}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}本章总结}{33}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}总结}{39}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{39}{section.5.2}
-\contentsline {chapter}{参考文献}{40}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{42}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{43}{chapter*.6}
+\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{28}{subsection.4.1.16}
+\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{28}{subsection.4.1.17}
+\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂与数据重分布的优先级问题}{28}{subsection.4.1.18}
+\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：存储数据点距离顺序}{29}{subsection.4.1.19}
+\contentsline {subsection}{\numberline {4.1.20}Insert操作算法综述}{29}{subsection.4.1.20}
+\contentsline {subsection}{\numberline {4.1.21}插入算法流程图}{30}{subsection.4.1.21}
+\contentsline {subsection}{\numberline {4.1.22}Insert算法实现1：已满叶节点的分裂}{31}{subsection.4.1.22}
+\contentsline {subsection}{\numberline {4.1.23}Insert算法实现2：叶节点数据重分布}{32}{subsection.4.1.23}
+\contentsline {subsection}{\numberline {4.1.24}Insert算法实现3：分支分裂}{33}{subsection.4.1.24}
+\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{34}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}概述}{34}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{35}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{36}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{37}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{37}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{39}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}本章总结}{39}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{45}{chapter.5}
+\contentsline {section}{\numberline {5.1}总结}{45}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{45}{section.5.2}
+\contentsline {chapter}{参考文献}{46}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{48}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{49}{chapter*.6}
