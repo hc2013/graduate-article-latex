@@ -48,14 +48,114 @@ Trajectory KNN问题是一个计算密集型问题，用户对响应时间一定会有要求。同时，并发量
   \includegraphics[width=5in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
   \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
 \end{figure}
-\subsection{轨迹数据服务用例描述}
+\subsection{初始建立轨迹索引用例描述表}
+初始建立轨迹索引的使用场景中。最容易出现的问题是，对轨迹数据的元信息配置和对优先点树的元信息配置。由于轨迹数据量很大，不可能让用户手动选定或者上传文件来导入，否则会产生大量人工操作和文件传输的时间消耗。因此，必须采用元信息配置的方式进行。如表格
+\ref{table:initVpTree_use_case_description}所示，要充分考虑到用户设置的元信息本身错误或者严重影响索引性能的情况，对于这些情况，系统必须予以更正或警告。
+\begin{table}[H]\footnotesize
+\centering
+\caption{初始建立轨迹索引用例描述表}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\textbf{UC1}\\
+\hline
+\textbf{名称}&\textbf{初始建立轨迹索引}\\
+\hline
+\textbf{参与者}&\textbf{普通用户}\\
+\hline
+\textbf{目的}&\textbf{将用户指定的轨迹数据，建立成优先点树索引结构，并返回操作结果}\\
+\hline
+\textbf{描述}&\textbf{用户通过浏览器选定要建立索引的轨迹数据集合，筛选条件，和数据条目区间，由服务完成索引建立}\\
+\hline
+\textbf{优先级}&\textbf{高}\\
+\hline
+\textbf{触发条件}&\textbf{用户需要建立轨迹索引以备相似检索}\\
+\hline
+\textbf{前置条件}&\textbf{服务正常运行，用户进入操作界面}\\
+\hline
+\textbf{后置条件}&\textbf{优先点树索引正确建立，持久化到磁盘中，并返回结果给用户}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.进入轨迹数据服务界面 \\ 2.输入轨迹数据表格的ID,筛选条件，目标区间。 \\ 3. 设置优先点树的元数据，包括扇出度，节点数据量等信息。 \\ 4. 点击确认建立索引。}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.表格ID不存在，服务端发现错误并告知用户 \\2b.筛选条件存在逻辑错误，比如以字符串值筛选整形列。服务器发现错误，要求用户重新输入。 \\2c.目标区间的前后界大小颠倒，前端发现错误，告知用户重新输入。\\ 3a. 用户设置的元数据太大或太小，将会严重影响性能，服务器询问用户是否使用推荐的元信息配置。\\4.a 由于网络，磁盘等各种可能原因导致的初始化失败。服务器应明确告知用户。 }\\
+\hline
+\end{tabular}
+\label{table:initVpTree_use_case_description}
+\end{table}
+
+\subsection{插入新数据用例描述表}
+在用户的真实使用场景中，有少量的单个导入和批量导入两种可能。针对这两种情形，轨迹数据服务应该分别支持直接导入数据和先导入数据，再配置数据元信息这两种方式。详见表格\ref{table:insert_trajectory_use_case_description}。
+\begin{table}[H]\footnotesize
+\centering
+\caption{插入新数据用例描述表}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\textbf{UC2}\\
+\hline
+\textbf{名称}&\textbf{插入新数据用例描述}\\
+\hline
+\textbf{参与者}&\textbf{普通用户}\\
+\hline
+\textbf{目的}&\textbf{新的，单个数据的到来，用户试图将新数据加入到原有索引中}\\
+\hline
+\textbf{描述}&\textbf{用户通过浏览器提供要插入的新数据，由服务完成将新数据插入到原有索引中的操作}\\
+\hline
+\textbf{优先级}&\textbf{高}\\
+\hline
+\textbf{触发条件}&\textbf{用户需要向原有索引中插入新的轨迹数据，以备检索}\\
+\hline
+\textbf{前置条件}&\textbf{服务正常运行，用户进入操作界面}\\
+\hline
+\textbf{后置条件}&\textbf{新数据正确插入到原索引中，并持久化在磁盘中，返回结果给用户。}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.进入轨迹数据服务界面 \\ 2.用户提供新的轨迹数据，并选定要插入的目标轨迹数据集合 \\ 3. 点击确认，完成插入}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.用户要插入的数据量不大，用户可以通过直接上传数据文件的方式进行。 \\2b.用户要插入的数据量较大，则可以通过先导入到数据库中，再通过配置数据库表格元信息的方式 \\ 来指定要插入的数据。 \\2c. 目标轨迹数据集合不存在，服务器告知用户，重新选定。\\3a.由于网络，磁盘等各种可能原因导致的插入失败。服务器应明确告知用户，插入失败。}\\
+\hline
+\end{tabular}
+\label{table:insert_trajectory_use_case_description}
+\end{table}
+\subsection{相似轨迹检索用例描述表}
+相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作较为简单，变数较少。详见表格
+\ref{table:search_trajectory_use_case_description}
+\begin{table}[H]\footnotesize
+\centering
+\caption{相似轨迹检索用例描述表}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\textbf{UC3}\\
+\hline
+\textbf{名称}&\textbf{相似轨迹检索用例描述}\\
+\hline
+\textbf{参与者}&\textbf{普通用户}\\
+\hline
+\textbf{目的}&\textbf{用户想找出轨迹集合中与某一特定轨迹最相近的若干其他轨迹}\\
+\hline
+\textbf{描述}&\textbf{用户通过浏览器选定要做相似性检索的轨迹，服务进行检索，并返回检索结果}\\
+\hline
+\textbf{优先级}&\textbf{高}\\
+\hline
+\textbf{触发条件}&\textbf{用户要做轨迹相似检索}\\
+\hline
+\textbf{前置条件}&\textbf{服务正常运行，用户进入操作界面}\\
+\hline
+\textbf{后置条件}&\textbf{服务正确地根据索引进行检索，并将与目标轨迹最相似的若干条轨迹被返回给用户}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.进入轨迹数据服务界面 \\ 2.用户提供目标轨迹数据，设置检索匹配数目K，并选定要搜索的目标轨迹数据集合 \\ 3. 点击确认，进行检索
+\\ 4.返回检索结果 }\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.用户要检索的轨迹可以是目标集合中已有的轨迹，此时用户只需要提供目标轨迹的ID即可。 \\2b.用户检索的轨迹不在目标轨迹集合中，此时用户应该首先插入数据到目标集合中或者 \\ 上传轨迹数据文件，是否插入数据应该由用户决定。 \\3a. 目标轨迹数据集合不存在，服务器告知用户，重新选定。\\3b.用户设定的K值过大，检索结果集中数量不足，服务器应该明确告知用户。  \\4a. 由于网络，磁盘等各种可能原因导致的插入失败。服务器应明确告知用户，插入失败。}\\
+\hline
+\end{tabular}
+\label{table:search_trajectory_use_case_description}
+\end{table}
 
 \section{瓦片数据服务需求分析}
 \subsection{瓦片数据服务的需求综述}
-在轨迹检索服务中，对于地图瓦片数据的要求有增加，删除，修改，查询，数据源配置。其中以查询和更新这两部分功能的细分功能最多。对于查询而言，可能被用户需要的有整张地图的全量查询，局部bounding-box渲染查询，单个瓦片数据的查询。对于更新而言，可能需要局部地图的更新，bounding-box更新。\textbf{注意：在GTDS的功能需求中，对于瓦片的增加和删除都是以整张地图为单位的，局部的增加和删除这种需求并不存在，所以此处不列为功能需求。}
+在轨迹检索服务中，对于地图瓦片数据的要求有增加，删除，修改，查询，数据源配置。其中以查询和更新这两部分功能的细分功能最多。对于查询而言，可能被用户需要的有整张地图的全量查询，局部bounding-box渲染查询，单个瓦片数据的查询。对于更新而言，可能需要局部地图的更新，bounding-box更新。
+\textbf{注意：在GTDS的功能需求中，对于瓦片的增加和删除都是以整张地图为单位的，局部的增加和删除这种需求并不存在，所以此处不列为功能需求。}
 而对于非功能需求，瓦片数据服务涉及到的计算主要是坐标转换，请求解析，缓存处理。计算量不大，所以并不是计算密集型应用，而是IO密集型应用，高并发和快速响应是其必须满足的非功能特性。除此之外，由于瓦片服务本身不存储瓦片数据，用户的瓦片数据可能是存在各种不同的数据库中的，因此服务还应该独立于不同的数据库，做到高可用性，高扩展性。
 \subsection{瓦片数据服务功能需求}
-\begin{table}[htb]\footnotesize
+\begin{table}[H]\footnotesize
 \centering
 \caption{瓦片数据服务功能需求列表}
 \begin{tabular}{|c|c|l|} % 通过添加 | 来表示是否需要绘制竖线
@@ -83,7 +183,7 @@ R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地
 \end{table}
 
 \subsection{瓦片数据服务非功能需求}
-\begin{table}[htb]\footnotesize
+\begin{table}[H]\footnotesize
 \centering
 \caption{瓦片数据服务非功能需求列表}
 \begin{tabular}{|c|c|}
@@ -99,14 +199,14 @@ R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地
 \end{table}
 
 \subsection{瓦片数据服务用例图}
-\begin{figure}[htb]
+\begin{figure}[H]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/tileserver_use_case.pdf}
   \caption{瓦片数据服务用例图}\label{tileserver_use_caseCH3}
 \end{figure}
 \textbf{注意：以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。}
 \subsection{瓦片数据服务用例描述}
-瓦片数据服务的部分功能操作简单明确，无需使用用例描述。本文只对操作比较复杂的“b-box更新地图瓦片数据”和“b-box瓦片数据渲染”进行了具体描述。
+瓦片数据服务的部分功能操作简单明确，无需使用用例描述。本文只对操作比较复杂的“b-box更新地图瓦片数据”和“特定区域瓦片数据中心渲染”进行了具体描述。
 \subsection{b-box更新地图瓦片数据用例描述表}
 \begin{table}[htb]\footnotesize
 \centering
