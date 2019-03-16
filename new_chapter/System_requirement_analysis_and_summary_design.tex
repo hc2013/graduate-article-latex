@@ -21,6 +21,8 @@ R1&¹ì¼£Ë÷ÒýÅúÁ¿³õÊ¼»¯&\tabincell{c}{·þÎñµ÷ÓÃ·½ÄÜ¹»Í¨¹ýÉÏ´«ÅúÁ¿µÄ¹ì¼£Êý¾Ý£¬\\ ÔÚ¹
 \hline
 R2&ÏàËÆ¹ì¼£knn¼ìË÷&\tabincell{c}{·þÎñµ÷ÓÃ·½ÄÜ¹»Í¨¹ý´«µÝÄ¿±ê¹ì¼£IDºÍ¼ìË÷Á¿K£¬\\ ÔÚ¹æ¶¨Ê±¼äÄÚ·µ»ØK¸öÓëÄ¿±ê¹ì¼£×îÏàËÆµÄK¸ö¹ì¼£}\\
 \hline % ÔÚ±í¸ñ×îÏÂ·½»æÖÆºáÏß
+R3&ÐÂ¹ì¼£Êý¾ÝµÄ²åÈë&\tabincell{c}{·þÎñµ÷ÓÃ·½ÄÜ¹»Í¨¹ý´«µÝÐÂ¹ì¼£IDºÍ¹ì¼£Êý¾Ý\\ Íê³ÉË÷Òý¸üÐÂ²¢·µ»Ø¸üÐÂ½á¹û}\\
+\hline % ÔÚ±í¸ñ×îÏÂ·½»æÖÆºáÏß
 \end{tabular}
 \label{table:trajectory_service_func_req}
 \end{table}
@@ -96,8 +98,8 @@ R8&¾Ö²¿bounding-boxµÄäÖÈ¾²éÑ¯&\tabincell{c}{·þÎñµ÷ÓÃ·½ÄÜ¹»Í¨¹ýÍßÆ¬·þÎñ£¬²ÎÊýÎªµØ
 \end{figure}
 \textbf{×¢Òâ£ºÒÔÉÏÓÃÀýÖÐµÄ¹¦ÄÜ²¢²»ÊÇÂß¼­Íê±¸µÄ£¬Ä³Ð©Âß¼­¹¦ÄÜ£¬±ÈÈç¾Ö²¿µØÍ¼ÍßÆ¬·ÇäÖÈ¾²éÑ¯£¬ÕâÖÖÐèÇóÔÚÊµ¼ÊÓ¦ÓÃÖÐÃ»ÓÐÊ¹ÓÃ³¡¾°£¬ÕâÀï¾ÍÃ»ÓÐÁÐ¾Ù¡£}
 \subsection{ÍßÆ¬Êý¾Ý·þÎñÓÃÀýÃèÊö}
-ÍßÆ¬Êý¾Ý·þÎñµÄ²¿·Ö¹¦ÄÜ²Ù×÷¼òµ¥Ã÷È·£¬ÎÞÐèÊ¹ÓÃÓÃÀýÃèÊö¡£±¾ÎÄÖ»¶Ô²Ù×÷±È½Ï¸´ÔÓµÄ¡°bounding-box¸üÐÂµØÍ¼ÍßÆ¬Êý¾Ý¡±½øÐÐÁË¾ßÌåÃèÊö¡£
-
+ÍßÆ¬Êý¾Ý·þÎñµÄ²¿·Ö¹¦ÄÜ²Ù×÷¼òµ¥Ã÷È·£¬ÎÞÐèÊ¹ÓÃÓÃÀýÃèÊö¡£±¾ÎÄÖ»¶Ô²Ù×÷±È½Ï¸´ÔÓµÄ¡°b-box¸üÐÂµØÍ¼ÍßÆ¬Êý¾Ý¡±ºÍ¡°b-boxÍßÆ¬Êý¾ÝäÖÈ¾¡±½øÐÐÁË¾ßÌåÃèÊö¡£
+\subsection{b-box¸üÐÂµØÍ¼ÍßÆ¬Êý¾ÝÓÃÀýÃèÊö±í}
 \begin{table}[htb]\footnotesize
 \centering
 \caption{bounding-box¸üÐÂµØÍ¼ÍßÆ¬Êý¾ÝÓÃÀýÃèÊö±í}
@@ -126,15 +128,48 @@ R8&¾Ö²¿bounding-boxµÄäÖÈ¾²éÑ¯&\tabincell{c}{·þÎñµ÷ÓÃ·½ÄÜ¹»Í¨¹ýÍßÆ¬·þÎñ£¬²ÎÊýÎªµØ
 \textbf{Òì³£Á÷³Ì}&\tabincell{l}{2a.¾­Î³¶È´óÐ¡Öµ´íÎó£¬Ç°¶ËÓ¦×Ô¶¯¼ì²â²¢¾¯¸æ \\ 3a.Ö¸¶¨¾ØÐÎ·¶Î§Ì«Ð¡£¬ÔÚ½ÏÐ¡µÄzoomÏÂÎÞ·¨¸üÐÂÍßÆ¬,·þÎñ¶ËÓ¦·¢ÏÖ´íÎó²¢·µ»Ø¸æÖªÓÃ»§ \\ 5a.ÓÃ»§Ñ¡ÔñµÄÎÄ¼þ¸ñÊ½´íÎó£¬ÔòÇ°¶Ë¶ÔÓÃ»§·¢³ö¾¯¸æ \\ 5b.ÓÃ»§Ñ¡ÔñµÄÎÄ¼þÖÐ²¢Ã»ÓÐÖ¸¶¨bounding-boxÖÐµÄÊý¾Ý£¬·þÎñ¶ËÓ¦·µ»Ø´íÎó±¨¸æ²¢Í¦ÐÐÓÃ»§¸ü¸ÄÎÄ¼þ}\\
 \hline
 \end{tabular}
-\label{table:tileserver_use_case_description}
+\label{table:tileserver_use_case_description1}
 \end{table}
+
+\subsection{ÌØ¶¨ÇøÓòÍßÆ¬Êý¾ÝÖÐÐÄäÖÈ¾ÓÃÀýÃèÊö±í}
+\begin{table}[htb]\footnotesize
+\centering
+\caption{ÌØ¶¨ÇøÓòÍßÆ¬Êý¾ÝÖÐÐÄäÖÈ¾ÓÃÀýÃèÊö±í}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\textbf{UC2}\\
+\hline
+\textbf{Ãû³Æ}&\textbf{ÌØ¶¨ÇøÓòÍßÆ¬Êý¾ÝÖÐÐÄäÖÈ¾}\\
+\hline
+\textbf{²ÎÓëÕß}&\textbf{ÆÕÍ¨ÓÃ»§}\\
+\hline
+\textbf{Ä¿µÄ}&\textbf{»ñÈ¡Ä³Ò»ÇøÓòÄÚµÄÍßÆ¬Êý¾ÝµÄäÖÈ¾Ð§¹û}\\
+\hline
+\textbf{ÃèÊö}&\textbf{ÓÃ»§Í¨¹ýä¯ÀÀÆ÷·¢ËÍÑ¡¶¨µÄ¾­Î³¶È·¶Î§ºÍÏëÒªäÖÈ¾µÄ·ç¸ñ£¬»ñÈ¡µ½¶ÔÓ¦ÇøÓòµÄ¸Ã·ç¸ñäÖÈ¾Ð§¹û}\\
+\hline
+\textbf{ÓÅÏÈ¼¶}&\textbf{¸ß}\\
+\hline
+\textbf{´¥·¢Ìõ¼þ}&\textbf{ÓÃ»§Ö»Ïë¿´Ä³Ò»ÇøÓòµÄµØÍ¼}\\
+\hline
+\textbf{Ç°ÖÃÌõ¼þ}&\textbf{·þÎñÕý³£ÔËÐÐ£¬ÓÃ»§½øÈë·þÎñ½çÃæ}\\
+\hline
+\textbf{ºóÖÃÌõ¼þ}&\textbf{äÖÈ¾Ð§¹û·µ»Ø¸øÓÃ»§£¬Õ¹Ê¾ÔÚä¯ÀÀÆ÷ÉÏ}\\
+\hline
+\textbf{Õý³£Á÷³Ì}&\tabincell{l}{1.½øÈë¾Ö²¿äÖÈ¾½çÃæ \\2.Ñ¡¶¨Ä¿±êµØÍ¼ \\3.ÉèÖÃÖÐÐÄµã¾­Î³¶È×ø±êºÍÇøÓòµÄ³¤¶ÈºÍ¿í¶È£¬ÌØ¶¨µÄ·ç¸ñÒÔ¼°ÌØ¶¨µÄzoom\\ 4. µã»÷»ñÈ¡äÖÈ¾Ð§¹ûÍ¼}\\
+\hline
+\textbf{Òì³£Á÷³Ì}&\tabincell{l}{2a.Ä¿±êµØÍ¼²»´æÔÚ£¬·þÎñÆ÷¶Ë·µ»Ø´íÎó±¨¸æ¡£ \\3a.¾­Î³¶È´óÐ¡Öµ´íÎó£¬Ç°¶ËÓ¦×Ô¶¯¼ì²â²¢¾¯¸æ \\3b.ÓÃ»§Ñ¡ÔñµÄzoom ¹ý´ó£¬³¬¹ýÁËÄ¿±êµØÍ¼µÄ×î´ó·Ö±æÂÊ£¬·þÎñÆ÷¶Ë·µ»Ø´íÎó±¨¸æ¡£}\\
+\hline
+\end{tabular}
+\label{table:tileserver_use_case_description2}
+\end{table}
+
 \section{GTDSÏµÍ³¸ÅÒªÉè¼Æ}
 \begin{figure}[H]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/general_structure.pdf}
   \caption{GTDSµÄ×ÜÌå¼Ü¹¹}\label{general_structureCH3}
 \end{figure}
-ÈçÍ¼~\ref{general_structureCH3}ËùÊ¾£¬¿ÉÊÓ»¯·þÎñÖ±½Ó½ÓÊÕÓÃ»§µÄ½çÃæ²Ù×÷£¬½«Æä×ª»¯Îª¹ì¼£IDºÍÍßÆ¬Êý¾Ý·¶Î§£¬×÷Îª²ÎÊý£¬·Ö±ð´«µÝ¸ø¹ì¼£ËÑË÷·þÎñºÍÍßÆ¬´æ´¢·þÎñ¡£ÔÙÊ¹ÓÃÇ°¶Ë¿â»ã×ÜÕâÁ½²¿·ÖµÄÊý¾Ý
-¹²Í¬Íê³É¿ÉÊÓ»¯¹¦ÄÜ¡£¶øÍßÆ¬´æ´¢·þÎñ±¾Éí²»´æ´¢ÍßÆ¬Êý¾Ý£¬Ö»¸ºÔðµØÍ¼·¶Î§µÄ½âÎö£¬µØÀí×ø±êµÄ×ª»»ÒÔ¼°Êý¾Ý¸ñÊ½µÄ×ª»»£¬ÍßÆ¬Êý¾ÝµÄ´æ·ÅÎ»ÖÃÊÇÔÚ¾ßÌåµÄÍßÆ¬Êý¾Ý¿âÖÐ¡£
+ÈçÍ¼~\ref{general_structureCH3}ËùÊ¾£¬¿ÉÊÓ»¯·þÎñ½«ÓÃ»§½çÃæµÄ²Ù×÷ÐÐÎªºÍ¹ì¼£Êý¾Ý£¬·¢ËÍ¸ø¹ì¼£Êý¾Ý·þÎñ£¬ÓÖ´Ó¹ì¼£Êý¾Ý·þÎñ»ñµÃ¹ì¼£Ë÷ÒýµÄ¸üÐÂ½á¹ûºÍ¼ìË÷½á¹û¡£¶ÔÓÚÍßÆ¬´æ´¢·þÎñ£¬¿ÉÊÓ»¯·þÎñ¸ºÔðµØÀíÊý¾Ý·¶Î§µÈ²ÎÊýºÍÍßÆ¬Êý¾Ý·¢ËÍ£¬²¢½ÓÊÜ´ÓÍßÆ¬´æ´¢·þÎñ»Ø´«µÄ¼ìË÷½á¹ûÍßÆ¬Êý¾ÝºÍÊý¾Ý×´Ì¬¡£
+¿ÉÊÓ»¯·þÎñÒÀÀµÔÙÊ¹ÓÃÇ°¶Ë¿â»ã×ÜÕâÁ½²¿·ÖµÄÊý¾Ý¹²Í¬Íê³É¿ÉÊÓ»¯¹¦ÄÜ¡£\textbf{ÖµµÃ×¢ÒâµÄÊÇ£¬ÍßÆ¬´æ´¢·þÎñ±¾Éí²»´æ´¢ÍßÆ¬Êý¾Ý£¬Ö»¸ºÔðµØÍ¼·¶Î§µÄ½âÎö¡¢µØÀí×ø±êµÄ×ª»»ÒÔ¼°Êý¾Ý¸ñÊ½µÄ×ª»»£¬ÍßÆ¬Êý¾ÝµÄ´æ·ÅÎ»ÖÃÊÇÔÚ¾ßÌåµÄÍßÆ¬Êý¾Ý¿âÖÐ¡£}
 \section{±¾ÕÂ×Ü½á}
 ±¾ÕÂÏÈÊÇÍ¨¹ý¸ÅÊöËµÃ÷ÁËÕû¸öÏµÍ³Ö÷Òª×é¼þµÄÖ°ÔðºÍÏà»¥Ö®¼äµÄ¹ØÏµ¡£È»ºó·Ö±ðÕë¶ÔÁ½¸öÖ÷Òª·þÎñ½øÐÐÁËÐèÇó·ÖÎö¡£ÐèÇó·ÖÎöµÄ¹ý³ÌÖÐ£¬Ê¹ÓÃÁËÐèÇóÁÐ±íÀ´Õ¹ÏÖÖ÷ÒªµÄ¹¦ÄÜÐèÇóºÍ·Ç¹¦ÄÜÐèÇó£¬»¹Ê¹ÓÃÁËÓÃÀýÍ¼µÄÐÎÊ½¶Ô¹¦ÄÜ½Ï¶àµÄµØÍ¼ÍßÆ¬·þÎñ½øÐÐÁË¹¦ÄÜ»®·Ö£¬²¢¶ÔÆäÖÐ²Ù×÷½ÏÎª¸´ÔÓµÄ¹¦ÄÜÊ¹ÓÃÓÃÀýÃèÊö½øÐÐÁËÏêÏ¸½éÉÜ¡£×îºó¸ø³öÁËÕû¸öÏµÍ³µÄ¸ÅÒªÉè¼Æ£¬Ã÷È·ÁË¸÷¸ö×é¼þÖ®¼äµÄÒÀÀµ¹ØÏµ£¬ÎªÏÂÒ»ÕÂ°´ÕÕÄ£¿é½øÐÐÏêÏ¸Éè¼ÆºÍÊµÏÖ×ö×¼±¸¡£

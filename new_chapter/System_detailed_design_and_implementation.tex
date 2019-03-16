@@ -10,21 +10,22 @@
   \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
   \caption{ÓÅÏÈµãÊ÷Ë÷ÒýÀàÍ¼}\label{vp-tree-general-structure}
 \end{figure}
-Èç\ref{vp-tree-general-structure}ËùÊ¾£¬Õû¸öÓÅÏÈµãÊ÷½á¹¹ÒÔVpTreeÎªºËÐÄ¡£ÆäÖÐVPTreeÖ±½ÓÊµÏÖÁËGeometryNNIndexÕâ¸ö½Ó¿Ú£¬Ö®ËùÒÔÒªÕâÑùÉè¼Æ£¬ÊÇÒòÎª½â¾öNNÎÊÌâµÄË÷Òý½á¹¹²¢²»ÊÇÖ»ÓÐvpTree£¬ÁíÍâ»¹ÓÐKd-Tree£¬R-TreeµÈµÈ£¬±¾ÎÄËùÉè¼ÆµÄVpTreeÖ»ÊÇÆäÖÐÒ»ÖÖ¡£Òò´Ë£¬Ô¤Áô½Ó¿Ú¡£
+Èç\ref{vp-tree-general-structure}ËùÊ¾£¬Õû¸öÓÅÏÈµãÊ÷½á¹¹ÒÔVpTreeÎªºËÐÄ¡£ÆäÖÐVPTreeÖ±½ÓÊµÏÖÁËGeometryNNIndexÕâ¸ö½Ó¿Ú¡£Ö®ËùÒÔÒªÕâÑùÉè¼Æ£¬ÊÇÒòÎª½â¾öNNÎÊÌâµÄË÷Òý½á¹¹²¢²»ÊÇÖ»ÓÐvpTree£¬ÁíÍâ»¹ÓÐKd-Tree£¬R-TreeµÈµÈ£¬±¾ÎÄËùÉè¼ÆµÄVpTreeÖ»ÊÇÆäÖÐÒ»ÖÖ¡£Î´À´¿ÉÄÜ»áÓÐÆäËû½á¹¹µÄÊµÏÖ¶Ô½Óµ½lucene µÄË÷ÒýÂß¼­£¬Òò´Ë³öÓÚÀ©Õ¹ÐÔµÄ¿¼ÂÇ£¬±ØÐëÔ¤Áô½Ó¿Ú¡£
 
-NodeÊÇVpTreeµÄÊµÏÖµÄºËÐÄ£¬ÊÇVpTree´æ´¢Êý¾ÝµãId£¬¾àÀëÐÅÏ¢£¬×ÓÊ÷±ß½ç£¬³ý´ËÖ®Íâ£¬NodeÀà»¹ÐèÒª¶Ô×ÔÉíÊÇ·ñÎªÒ¶×Ó½Úµã½øÐÐ¿ØÖÆ¡£VptreeµÄËÑË÷Ëã·¨×îÖÕ¶¼ÊÇÔËÐÐÔÚNodeÉÏµÄ¡£
+NodeÊÇVpTreeµÄÊµÏÖµÄºËÐÄ£¬ÊÇVpTree´æ´¢Êý¾ÝµãId£¬¾àÀëÐÅÏ¢£¬×ÓÊ÷±ß½ç£¬¸¸½ÚµãÖ¸Õë£¬ÊÇ·ñÎªÒ¶½ÚµãµÈÔªÐÅÏ¢¡£Vptree µÄËÑË÷Ëã·¨ºÍ²åÈëËã·¨¶¼ÊÇ»ùÓÚNode µÄÉÏËÝ£¬±éÀú£¬·ÖÁÑºÍÔªÊý¾ÝÒÆ¶¯½øÐÐµÄ¡£
 
-DistanceCahceÊÇ¶Ô¾àÀëµÄ»º´æ½á¹¹£¬ÒÔ¼õÉÙÊý¾ÝµãÖ®¼ä¾àÀëµÄ¼ÆËã´ÎÊý¡£Ä¿Ç°ÎªÖ¹µÄÊµÏÖÖÐ£¬DistanceCache²¢Ã»ÓÐÉè¼ÆÈÎºÎ¹ýÆÚÌæ»»²ßÂÔ£¬ËùÒÔÔÚÔËÐÐÊ±¿ÉÄÜ»á³öÏÖ´óÁ¿Õ¼ÓÃÄÚ´æµÄ×´¿ö£¬ÔÚÎ´À´µÄ°æ±¾ÖÐ£¬»áÓÅ»¯ÕâÒ»µã¡£
+DistanceCahceÊÇ¶Ô¾àÀëµÄ»º´æ½á¹¹£¬ÒÔ¼õÉÙÊý¾ÝµãÖ®¼ä¾àÀëµÄ¼ÆËã´ÎÊý¡£ËüÆäÊµÊÇÒ»¸öÕë¶ÔÌØ¶¨¹ì¼£µÄ»º´æ½á¹¹£¬Ò»¸öDistanceCache±£´æÆäËûÈô¸É¹ì¼£Ïà¶ÔÓÚÄ¿±ê¹ì¼£µÄ¾àÀë¡£ËùÒÔÔÚ´úÂëÊµÏÖÖÐ£¬»áÓÐ¶à¸öDistanceCache±£´æÔÚÄÚ´æÀï¡£ÎªÁË±ÜÃâÔÚÊ¹ÓÃÊ±Ò»Ò»±éÀúÑ°ÕÒÌØ¶¨¹ì¼£µÄDistanceCache£¬±¾ÎÄÔÚ¼ìË÷¹ý³ÌÖÐ±£³ÖDistanceCache µÄÕ»Óë¹ì¼£Õ»Ò»Ò»¶ÔÓ¦£¬´Ó¶øË³Ðò¶ÁÈ¡¸÷¸ö¹ì¼£µÄcache,ÕâÔÚÔËÐÐÊ±ÏûºÄÁËÏàµ±ÊýÁ¿µÄÄÚ´æ¡£
 
-BitSetContextÓÃÓÚ¼ÇÂ¼VpTreeÒ»Ìõ¼ìË÷Â·¾¶ÖÐ¸÷¸ö·ÇÒ¶½ÚµãµÄ·ÖÖ§ÒÑËÑË÷×´Ì¬£¬ÓÃÓÚ±ÜÃâÖØ¸´¼ìË÷¡£Ä¿Ç°BitSetContextµÄÊµÏÖÖÐ£¬ÒÀÀµÓÚÍâ²¿µÄÊÍ·ÅÄÚ´æ¿Õ¼ä£¬BitSetContext±¾ÉíÃ»ÓÐÉè¼ÆÀ¬»ø»ØÊÕ»úÖÆ¡£
+BitSetContextÓÃÓÚ¼ÇÂ¼VpTreeÒ»Ìõ¼ìË÷Â·¾¶ÖÐ¸÷¸ö·ÇÒ¶½ÚµãµÄ·ÖÖ§ÒÑËÑË÷×´Ì¬£¬ÓÃÓÚ±ÜÃâÖØ¸´¼ìË÷¡£ÓëdistanceCacheÒ»Ñù£¬BitSetContextÒÔÍ¨¹ýË³ÐòÉÏµÄÒ»Ò»¶ÔÓ¦¹ØÏµÀ´Î¬»¤ºÍ½ÚµãÖ®¼äµÄ¶ÔÓ¦ÐÔ¡£¶øÇÒÄ¿Ç°BitSetContext µÄÊµÏÖÖÐ£¬ÒÀÀµÓÚÍâ²¿µÄÊÍ·ÅÄÚ´æ¿Õ¼ä£¬BitSetContext±¾ÉíÃ»ÓÐÉè¼ÆÀ¬»ø»ØÊÕ»úÖÆ¡£
 
-ConfigurationÀàÓÃÓÚ±£´æVpTreeµÄ³õÊ¼»¯ÐÅÏ¢£¬ÀýÈçÉÈ³öÊý£¬½Úµã³ß´ç£¬²ÉÑùÂÊµÈ¡£
+ConfigurationÀàÓÃÓÚ±£´æVpTreeµÄÔªÐÅÏ¢£¬ÀýÈçÉÈ³öÊý£¬×îÐ¡ÉÈ³öÊý£¬È¡Ñù·½·¨£¬½Úµã³ß´ç£¬²ÉÑùÂÊµÈ¡£Õâ¸ö²ÎÊýÊÇVpTreeµÄ¹ÌÓÐÊôÐÔ£¬ÔÚ¼ìË÷ºÍ²åÈë²Ù×÷ÖÐ£¬¶¼±»Ê¹ÓÃµ½¡£
 
-BulkLoadContextÊÇVpTree³õÊ¼½¨Ê÷Ê±ÊäÈë²ÎÊý£¬Ö÷Òª°üÀ¨Ò»¸ödocIdListºÍÒ»¸öGeometrylist¡£ÆäÖ÷Òª¹¦ÄÜÊÇÔÚ³õÊ¼½¨Ê÷µÄ¹ý³ÌÖÐÌá¹©Êý¾Ý¡£¶øGeomtrySorterÊÇÒ»¸öÅÅÐò¹¤¾ßÀà£¬ÓÃÓÚ¶ÔBulkLoadContextÖÐµÄ¼¸ºÎÌå½øÐÐÅÅÐò£¨¶àÂ·ÇÐ·Ö£©£¬Õâ¸öÀàÊÇ¶Ô¿ìÅÅµÄÀ©Õ¹ÊµÏÖ¡£
+BulkLoadContextÊÇVpTree³õÊ¼½¨Ê÷Ê±µÄÊäÈë²ÎÊý£¬Ö÷Òª°üÀ¨Ò»¸ödocIdListºÍÒ»¸öGeometrylist£¬ÆäÖ÷Òª¹¦ÄÜÊÇÔÚ³õÊ¼½¨Ê÷µÄ¹ý³ÌÖÐÌá¹©Êý¾Ý.
+GeomtrySorter ÊÇÒ»¸öÅÅÐò¹¤¾ßÀà£¬ÓÃÓÚ¶ÔBulkLoadContextÖÐµÄ¹ì¼£½øÐÐÅÅÐò£¬ÒÔÓ¦¶Ô³õÊ¼»¯½¨Ê÷Ê±µÄ¶àÂ·ÇÐ·Ö£¬Õâ¸öÀàÊÇ¶Ô¿ìÅÅµÄÀ©Õ¹ÊµÏÖ¡£
 
 GeomtryDistanceFunctionÊÇVpTreeÊý¾Ýµã¼ä¾àÀë¼ÆËãµÄ½Ó¿Ú£¬±¾ÎÄÊµÏÖµÄËã·¨HausdorffDistance²ÉÓÃºÀË¹¶à·ò¾àÀë£¬µ«ÕâÏÔÈ»²»ÊÇÎ¨Ò»Ò»ÖÖ¾àÀëºâÁ¿·½Ê½¡£Òò´ËÔ¤Áô½Ó¿Ú£¬ÒÔ±¸À©³ä¡£
 
-SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡·½·¨¡£Î´À´¿ÉÄÜ»áÓÐ¸üºÏÀíµÄÊµÏÖ¡£\textbf{ÆäÊµ£¬Ëæ¼´È¡ÓÅÏÈµãÒ²ÊÇÒ»ÖÖ¿ÉÑ¡·½Ê½¡£}SamplerÊÇÈ¡ÑùÆ÷µÄÊµÏÖÀà£¬ÔÚ×î´ó±ê×¼²îSampleSelectVpStrategyµÄÊµÏÖÖÐ£¬Ê¹ÓÃÁË²ÉÓÃÆ÷½øÐÐ²ÉÑù£¬Ä¿Ç°µÄ²ÉÑùÆ÷µÄÊµÏÖÖ»ÓÐÒ»ÖÖReservoirSampler¡£
+SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡·½·¨£¬Î´À´¿ÉÄÜ»áÓÐ¸üºÏÀíµÄÊµÏÖ¡£\textbf{ÆäÊµ£¬Ëæ»úÈ¡ÓÅÏÈµãÒ²ÊÇÒ»ÖÖ¿ÉÑ¡·½Ê½¡£}SamplerÊÇÈ¡ÑùÆ÷µÄÊµÏÖÀà£¬ÔÚ×î´ó±ê×¼²îSampleSelectVpStrategyµÄÊµÏÖÖÐ£¬Ê¹ÓÃÁË²ÉÓÃÆ÷½øÐÐ²ÉÑù£¬Ä¿Ç°µÄ²ÉÑùÆ÷µÄÊµÏÖÖ»ÓÐÒ»ÖÖReservoirSampler¡£
 
 ×ÛÉÏËùÊö£¬Õû¸öVpTree½á¹¹µÄÉè¼Æ£¬ÊÇ³ä·ÖÃæ¶ÔÀ©Õ¹µÄ¡£¶ÔÓÚÎ´À´¿ÉÄÜ³öÏÖµÄÐÂµÄ¾àÀë¼ÆËãº¯Êý£¬²ÉÑù·½Ê½£¬½Úµã½á¹¹£¬Êý¾ÝµãÐÎÊ½£¬ÓÐÁ¼ºÃµÄÊÊÓ¦ÐÔ¡£Ö»ÊÇÔÚÄÚ´æÊ¹ÓÃÉÏ£¬´æÔÚÒ»¶¨µÄè¦´Ã£¬ÕâÔÚÎ´À´°æ±¾µÄÓÅ»¯ÖÐ»áµÃµ½½â¾ö¡£
 
@@ -36,9 +37,9 @@ SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡
   \caption{4Â·vp-treeµÄÄÚ²¿½á¹¹Ê¾ÒâÍ¼}\label{vp-tree-structure1}
 \end{figure}
 \subsection{³õÊ¼½¨Ê÷µÄÁ÷³Ì}
-³õÊ¼½¨Ê÷µÄÊäÈëÊý¾ÝÊÇÒ»ÏµÁÐµÄdocId+Geometry£¬³õÊ¼½¨Ê÷µÄÊä³öÊÇÒ»¿ÅÍêÕûµÄ¶àÂ·vp-tree¡£¾ßÌåÁ÷³Ì¼û~\ref{create-node-flow}¡£\textbf{×¢Òâ£º±¾ÎÄÓÃDPÀ´±íÊ¾Data Point£¬¼´Êý¾Ýµã£¬ÓÃVPÀ´±íÊ¾Vantage Point£¬¼´±»Ñ¡×öÓÅÏÈµãµÄÊý¾Ýµã£¬ÓÃNodeÀ´±íÊ¾vp-treeµÄ½Úµã¡£}
+³õÊ¼½¨Ê÷µÄÊäÈëÊý¾ÝÊÇÒ»ÏµÁÐµÄdocId+Geometry£¬³õÊ¼½¨Ê÷µÄÊä³öÊÇÒ»¿ÃÍêÕûµÄ¶àÂ·vp-tree¡£¾ßÌåÁ÷³Ì¼û~\ref{create-node-flow}¡£\textbf{×¢Òâ£º±¾ÎÄÓÃDPÀ´±íÊ¾Data Point£¬¼´Êý¾Ýµã£¬ÓÃVPÀ´±íÊ¾Vantage Point£¬¼´±»Ñ¡×öÓÅÏÈµãµÄÊý¾Ýµã£¬ÓÃNodeÀ´±íÊ¾vp-treeµÄ½Úµã¡£}
 
-ÈçÍ¼ËùÊ¾³õÊ¼½¨Ê÷Êµ¼ÊÉÏÊÇÒ»¸öµÝ¹éµÄ¹ý³Ì¡£µ«ÊÇÎªÁË±ÜÃâ³öÏÖÄÚ´æÒç³ö£¬±¾ÎÄÑ¡ÔñÁËÓÃÑ­»·+Õ»µÄÄ£Ê½¡£Á÷³Ì¿ªÊ¼Ê±£¬Ê×ÏÈ½«¸ù½ÚµãÑ¹Õ»£¬È»ºóÅÐ¶ÏÊý¾ÝµãµÄ¸öÊýÊÇ²»ÊÇÐ¡ÓÚÒ¶½ÚµãµÄÊý¾ÝÁ¿±ê×¼¡£Èç¹ûÊÇ£¬¾ÍÒâÎ¶×ÅÒÑ¾­´ïµ½ÖÕÖ¹ÕâÒ»·ÖÖ§µÄÌõ¼þ£¬ÔòÖ±½ÓÎªÒ¶½Úµã£¬È»ºóÍ¨¹ý¿ÕÁ÷³Ì·µ»ØÑ­»·ÅÐ¶Ï¡£Èç¹ûÊý¾ÝÁ¿ÈÔÈ»´óÓÚÒ¶½ÚµãµÄÊý¾ÝÁ¿£¬¾ÍÊ¹ÓÃÑ¡È¡º¯ÊýÑ¡ÔñÓÅÏÈµã£¬¼ÆËãÆäËû¸÷¸öÊý¾Ýµãµ½ÓÅÏÈµãµÄ¾àÀë£¬ÔÙ¸ù¾Ý¾àÀë½øÐÐÉýÐòÅÅÐò¡£\textbf{×¢Òâ£ºÓÉÓÚ´ËÊ±ÓÐÒ»¸öµã±»Ñ¡×öÓÅÏÈµã£¬ËùÒÔÊý¾Ýµã×ÜÁ¿Òª¼õÒ»}£¬È»ºóÅÐ¶ÏÊ£ÓàµÄÊý¾ÝÁ¿ÊÇ·ñ´óÓÚÉÈ³öÊý£¬Èç¹ûÊý¾ÝÁ¿ÒÑ¾­²»ÄÜÂú×ãÈ«²¿µÄÉÈ³ö£¬ÄÇÃ´¾Í³õÊ¼»¯Îªµ¥¸ö·ÇÒ¶½ÚµãÈëÕ»£¬´Ó¶ø½øÈëÏÂÒ»´ÎÑ­»·¡£Èç¹ûÊý¾ÝÁ¿ÒÀÈ»×ã¹»·Ö¸îÈ«²¿µÄÉÈ³ö£¬¾Í°´ÕÕ¾àÀëÅÅÐòµÄ½á¹û½øÐÐ¶àÂ·ÇÐ·Ö£¬ÓÃÐÂ½¨µÄ×Ó½Úµã´ú±íÐÂµÄ×ÓÊ÷£¬²¢ÈëÕ»¡£½«¾àÀëÖµ£¬ÉÏÏÂ½çÖµºÍ×Ó½ÚµãÖ¸Õë·Ö±ðÌîÈë¶ÔÓ¦µÄÊý×éÖÐ£¬ÔÙ½øÈëÏÂÒ»´ÎÑ­»·¡£ÒÔ´ËÀàÍÆ£¬Ñ­»·Íù¸´£¬Íê³ÉËùÓÐÊý¾ÝµãµÄ½¨Ê÷²Ù×÷¡£
+ÈçÍ¼ËùÊ¾³õÊ¼½¨Ê÷Êµ¼ÊÉÏÊÇÒ»¸öµÝ¹éµÄ¹ý³Ì¡£µ«ÊÇÎªÁË±ÜÃâ³öÏÖÄÚ´æÒç³ö£¬±¾ÎÄÑ¡ÔñÁËÓÃÑ­»·+Õ»µÄÄ£Ê½¡£Á÷³Ì¿ªÊ¼Ê±£¬Ê×ÏÈ½«¸ù½ÚµãÑ¹Õ»£¬È»ºóÅÐ¶ÏÊý¾ÝµãµÄ¸öÊýÊÇ²»ÊÇÐ¡ÓÚÒ¶½ÚµãµÄÊý¾ÝÁ¿±ê×¼¡£Èç¹ûÊÇ£¬¾ÍÒâÎ¶×ÅÒÑ¾­´ïµ½ÖÕÖ¹ÕâÒ»·ÖÖ§µÄÌõ¼þ£¬ÔòÖ±½Ó³õÊ¼»¯ÎªÒ¶½Úµã£¬È»ºóÍ¨¹ý¿ÕÁ÷³Ì·µ»ØÑ­»·ÅÐ¶Ï¡£Èç¹ûÊý¾ÝÁ¿ÈÔÈ»´óÓÚÒ¶½ÚµãµÄÊý¾ÝÁ¿£¬¾ÍÊ¹ÓÃÑ¡È¡º¯ÊýÑ¡ÔñÓÅÏÈµã£¬¼ÆËãÆäËû¸÷¸öÊý¾Ýµãµ½ÓÅÏÈµãµÄ¾àÀë£¬ÔÙ¸ù¾Ý¾àÀë½øÐÐÉýÐòÅÅÐò¡£\textbf{×¢Òâ£ºÓÉÓÚ´ËÊ±ÓÐÒ»¸öµã±»Ñ¡×öÓÅÏÈµã£¬ËùÒÔÊý¾Ýµã×ÜÁ¿Òª¼õÒ»}£¬È»ºóÅÐ¶ÏÊ£ÓàµÄÊý¾ÝÁ¿ÊÇ·ñ´óÓÚÉÈ³öÊý£¬Èç¹ûÊý¾ÝÁ¿ÒÑ¾­²»ÄÜÂú×ãÈ«²¿µÄÉÈ³ö£¬ÄÇÃ´¾Í³õÊ¼»¯Îªµ¥¸ö·ÇÒ¶½ÚµãÈëÕ»£¬´Ó¶ø½øÈëÏÂÒ»´ÎÑ­»·¡£Èç¹ûÊý¾ÝÁ¿ÒÀÈ»×ã¹»·Ö¸îÈ«²¿µÄÉÈ³ö£¬¾Í°´ÕÕ¾àÀëÅÅÐòµÄ½á¹û½øÐÐ¶àÂ·ÇÐ·Ö£¬ÓÃÐÂ½¨µÄ×Ó½Úµã´ú±íÐÂµÄ×ÓÊ÷£¬²¢ÈëÕ»¡£½«¾àÀëÖµ£¬ÉÏÏÂ½çÖµºÍ×Ó½ÚµãÖ¸Õë·Ö±ðÌîÈë¶ÔÓ¦µÄÊý×éÖÐ£¬ÔÙ½øÈëÏÂÒ»´ÎÑ­»·¡£ÒÔ´ËÀàÍÆ£¬Ñ­»·Íù¸´£¬Íê³ÉËùÓÐÊý¾ÝµãµÄ½¨Ê÷²Ù×÷¡£
 
 \begin{figure}[htp]
   \centering
@@ -57,7 +58,7 @@ SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡
 \subsection{Éè¼ÆÒªµã2£ºÓÅÏÈµãµÄÑ¡ÔñËã·¨}
 ÔÚ³õÊ¼½¨Ê÷µÄ¹ý³ÌÖÐ£¬ÓÅÏÈµãÑ¡È¡ÊÇ·Ç³£¹Ø¼üµÄÒ»²½¡£Ñ¡È¡µÄºÃ»µÈ¡¾öÓÚÒ»¸öÓÅÏÈµãÄÜ·ñÈÃÇÐ·Ö³öÀ´µÄ¸÷Â·×ÓÊ÷µÄ±ß½çÖµÏà²î×ã¹»´ó£¬ÒòÎª¸÷Â·×ÓÊ÷µÄ±ß½çÖµÏà²îÔ½´ó£¬ÔÚ¼ìË÷µÄÊ±ºò£¬¾àÀëÖµÂäÈëÄ³Ò»×ÓÊ÷µÄ±ß½çÄÚµÄ¿ÉÄÜÐÔÔ½´ó£¬¼ôÖ¦³É¹¦µÄ¿ÉÄÜÐÔÔ½¸ß£¬ÐÔÄÜ¾ÍÔ½ºÃ¡£·´Ö®£¬Èç¹ûÓÅÏÈµãÑ¡ÔñºÜ²î£¬µ¼ÖÂ¶à¸ö×ÓÊ÷µÄÉÏÏÂ½ç·Ç³£½Ó½ü£¬¾ÍºÜÈÝÒ×³öÏÖÒ»¸ö¾àÀëÖµ¿ÉÄÜÔÚ¶à¸ö×ÓÊ÷ÖÐËÑË÷µÄÇé¿ö£¬Ôì³ÉÐÔÄÜÏÂ½µ¡£Òò´Ë£¬ÈçºÎÑ¡Ôñ¾¡¿ÉÄÜÓÅµÄÓÅÏÈµã£¬ÊÇËã·¨ÊµÏÖµÄÖØµã¡£
 
-±¾ÎÄÕë¶ÔÓÅÏÈµãÑ¡ÔñµÄÊµÏÖÊÇ»ùÓÚËæ¼ÇÈ¡ÑùºÍ±ê×¼²î½á¹ûµÄ¡£±¾ÎÄÈÏÎª£¬Ò»¸öµãÓëÆäËûµã¾àÀëµÄ±ê×¼²îÔ½´ó£¬×÷ÎªÓÅÏÈµãµÄÐÔÄÜÔ½ºÃ£¬¶øÓÉÓÚÊý¾ÝÈ«Á¿ºÜ´ó£¬²»¿ÉÄÜ¶¼¼ÆËã£¬¾Í²ÉÓÃËæ»ú³éÑùµÄ·½Ê½½øÐÐ¡£ÆäÉè¼ÆË¼Â·ÊÇ£¬ÔÚÊý¾ÝµãÈ«¼¯ÖÐËæ»úÈ¡ÑùK ¸öµã£¬×÷ÎªºòÑ¡µÄÓÅÏÈµã£¬Õë¶ÔÕâK ¸öºòÑ¡µÄÓÅÏÈµã½øÐÐÑ­»·±éÀú£¬Ã¿¸öºòÑ¡ÓÅÏÈµãÔÙËæ»úÈ¡K ¸öµã×÷Îª²ÎÕÕµã£¬È»ºó¼ÆËãÃ¿¸öºòÑ¡ÓÅÏÈµãºÍ²Î¿¼µãÖ®¼ä¾àÀëµÄ±ê×¼²î£¬×îºóÈ¡±ê×¼²î×î´óµÄÄÇ¸öºòÑ¡µã×÷ÎªÕæÕýµÄÓÅÏÈµã¡£¾ßÌåÊµÏÖÈçÍ¼~\ref{select-vp-code}ËùÊ¾¡£
+±¾ÎÄÕë¶ÔÓÅÏÈµãÑ¡ÔñµÄÊµÏÖÊÇ»ùÓÚËæ¼ÇÈ¡ÑùºÍ±ê×¼²î½á¹ûµÄ¡£±¾ÎÄÈÏÎª£¬Ò»¸öµãÓëÆäËûµã¾àÀëµÄ±ê×¼²îÔ½´ó£¬×÷ÎªÓÅÏÈµãµÄÐÔÄÜÔ½ºÃ¡£¶øÓÉÓÚÊý¾ÝÈ«Á¿ºÜ´ó£¬²»¿ÉÄÜ¶¼¼ÆËã£¬¾Í²ÉÓÃËæ»ú³éÑùµÄ·½Ê½½øÐÐ¡£ÆäÉè¼ÆË¼Â·ÊÇ£¬ÔÚÊý¾ÝµãÈ«¼¯ÖÐËæ»úÈ¡ÑùK ¸öµã£¬×÷ÎªºòÑ¡µÄÓÅÏÈµã¡£Õë¶ÔÕâK ¸öºòÑ¡µÄÓÅÏÈµã½øÐÐÑ­»·±éÀú£¬Ã¿¸öºòÑ¡ÓÅÏÈµãÔÙËæ»úÈ¡K ¸öµã×÷Îª²ÎÕÕµã£¬È»ºó¼ÆËãÃ¿¸öºòÑ¡ÓÅÏÈµãºÍ²Î¿¼µãÖ®¼ä¾àÀëµÄ±ê×¼²î£¬×îºóÈ¡±ê×¼²î×î´óµÄÄÇ¸öºòÑ¡µã×÷ÎªÕæÕýµÄÓÅÏÈµã¡£ÕâÑùµÄÑ¡¾Ù¹ý³ÌÉæ¼°µ½È¡Ñù£¬¾àÀëºÍ±ê×¼²îµÄ¼ÆËã£¬Ïàµ±ÓÚÓÃÒ»²¿·Ö³õÊ¼½¨Ê÷ÐÔÄÜµÄ½µµÍÀ´»»È¡ÁË¼ìË÷ÐÔÄÜµÄÌá¸ß¡£¾ßÌåÊµÏÖÈçÍ¼~\ref{select-vp-code}ËùÊ¾¡£
 \begin{figure}[htp]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/select-vp-code.pdf}
@@ -66,17 +67,17 @@ SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡
 \subsection{KNNÎÊÌâµÄ¶¨ÒåºÍ½â¾öË¼Â·}
 ÔÚÎÒÃÇµÄ¹ì¼£¼ìË÷·þÎñµÄ×÷ÓÃÓòÄÚ£¬K Nearest NeighbourµÄº¬ÒåÊÇ£¬ÕÒµ½ÓëÄ¿±êGeometry¾àÀë×î½üµÄK¸öGeometry¡£
 
-Ô­Éúvp-treeµÄËÑË÷Ëã·¨ÊÇÃæ¶ÔNNÎÊÌâ£¬Ò²¾ÍÊÇsingle nearest NeighbourÎÊÌâ£¬Ö»ÕÐÒ»¸ö¾àÀë×î½üµÄµã¡£ÄÇÃ´Ãæ¶ÔKNNÎÊÌâ£¬ÏÔÈ»²»ÄÜÍ¨¹ý¼òµ¥µØÔËÓÃK´ÎÔ­ÉúËÑË÷Ëã·¨À´½â¾ö£¬ÄÇÑùºÁÎÞÒÉÎÊ»áÔì³ÉÖØ´óµÄÐÔÄÜËðºÄ¡£
+Ô­Éúvp-treeµÄËÑË÷Ëã·¨ÊÇÃæ¶ÔNNÎÊÌâ£¬Ò²¾ÍÊÇsingle nearest NeighbourÎÊÌâ£¬Ö»ÕÒÒ»¸ö¾àÀë×î½üµÄµã¡£ÄÇÃ´Ãæ¶ÔKNNÎÊÌâ£¬ÏÔÈ»²»ÄÜÍ¨¹ý¼òµ¥µØÔËÓÃK´ÎÔ­ÉúËÑË÷Ëã·¨À´½â¾ö£¬ÄÇÑùºÁÎÞÒÉÎÊ»áÔì³ÉÖØ´óµÄÐÔÄÜËðºÄ¡£
 
-Ò»¸ö±È½ÏÖ±¹ÛµÄÏë·¨ÊÇ£¬Ê¹ÓÃÒ»¸ö´óÐ¡ÎªKµÄ×îÐ¡¶Ñ£¬ÔÚËÑË÷¹ý³ÌÖÐÊµÊ±¸üÐÂÕâ¸ö×îÐ¡¶ÑµÄ×´Ì¬£¬ÄÇÃ´ÔÚËÑË÷Ëã·¨×ßÍêµÄÊ±ºò£¬Õâ¸ö×îÐ¡¶ÑÖÐµÄ½á¹û¾ÍÊÇK¸ö¾àÀë×î½üµÄGeomtry¡£ÕâÊÇ\cite{DBLP:journals/vldb/FuCCM00}ÖÐËù²ûÊöµÄË¼Â·£¬±¾ÎÄÊµÏÖµÄËã·¨µÄ½è¼øÁËÕâÒ»Ë¼Â·£¬Í¬ÑùÊÇÓÃ¶ÑÀ´¶¯Ì¬Î¬»¤×´Ì¬£¬µ«²ÉÈ¡ÁËÒ»Ð©´ëÊ©Ó¦¶ÔÕâÒ»Ë¼Â·µÄÃ÷ÏÔ¶Ì°åÒÔ»ñÈ¡¸üºÃµÄ¼ìË÷ÐÔÄÜ¡£Ïê¼ûÏÂ½Ú¡£
+Ò»¸ö±È½ÏÖ±¹ÛµÄÏë·¨ÊÇ£¬Ê¹ÓÃÒ»¸ö´óÐ¡ÎªKµÄ×îÐ¡¶Ñ£¬ÔÚËÑË÷¹ý³ÌÖÐÊµÊ±¸üÐÂÕâ¸ö×îÐ¡¶ÑµÄ×´Ì¬£¬ÄÇÃ´ÔÚËÑË÷Ëã·¨×ßÍêµÄÊ±ºò£¬Õâ¸ö×îÐ¡¶ÑÖÐµÄ½á¹û¾ÍÊÇK¸ö¾àÀë×î½üµÄGeomtry¡£ÕâÊÇ\cite{DBLP:journals/vldb/FuCCM00}ÖÐËù²ûÊöµÄË¼Â·¡£±¾ÎÄÊµÏÖµÄËã·¨µÄ½è¼øÁËÕâÒ»Ë¼Â·£¬Í¬ÑùÊÇÓÃ¶ÑÀ´¶¯Ì¬Î¬»¤×´Ì¬£¬µ«²ÉÈ¡ÁËÒ»Ð©´ëÊ©Ó¦¶ÔÕâÒ»Ë¼Â·µÄÃ÷ÏÔ¶Ì°åÒÔ»ñÈ¡¸üºÃµÄ¼ìË÷ÐÔÄÜ¡£Ïê¼ûÏÂ½Ú¡£
 
 \subsection{Éè¼Æ½¹µã£ºÈÝÈÌ¾àÀëµÄÊÕÁ²ÆðµãºÍÊÕÁ²ËÙ¶È}
-ÔÚKNNÎÊÌâµÄËÑË÷¹ý³ÌÖÐ£¬¶ÔÓÚÃ¿Ò»¸ö¶àÂ·½Úµã£¬³ýÁË¿¼ÂÇÓëÓÅÏÈµãµÄ¾àÀëÖ®Íâ£¬»¹Òª¿¼ÂÇÒ»¸öÈÝÈÌ¾àÀëT,Ò²¾ÍÊÇ³¬³öÕâ¸öÈÝÈÌ¾àÀëTµÄÊý¾Ýµã²»ÔÙÓèÒÔ¿¼ÂÇ£¬ÕâÊÇ¾àÀë·¶Î§¼ôÖ¦µÄ»ù±¾ÒÀ¾Ý¡£ÏÔ¶øÒ×¼ûµÄÊÇ£¬Õâ¸öÈÝÈÌ¾àÀëÔ½Ð¡£¬³É¹¦¼ôÖ¦µÄ¸ÅÂÊÔ½¸ß£¬¼ìË÷ÐÔÄÜÔ½ºÃ¡£µ«ÊÇÈç¹ûÈÝÈÌ¾àÀëÌ«Ð¡£¬ÓÖ¿ÉÄÜ¹ý¶È¼ôÖ¦Ôì³É¼ìË÷²»µ½½á¹û¡£ËùÒÔÈÝÈÌ¾àÀëµÄÊÕÁ²ËÙ¶ÈÊÇÖ±½ÓÓ°Ïì¼ìË÷ÐÔÄÜµÄ¹Ø¼ü¡£
+ÔÚKNNÎÊÌâµÄËÑË÷¹ý³ÌÖÐ£¬¶ÔÓÚÃ¿Ò»¸ö¶àÂ·½Úµã£¬³ýÁË¿¼ÂÇÓëÓÅÏÈµãµÄ¾àÀëÖ®Íâ£¬»¹Òª¿¼ÂÇÒ»¸öÈÝÈÌ¾àÀëT,Ò²¾ÍÊÇ³¬³öÕâ¸öÈÝÈÌ¾àÀëTµÄÊý¾Ýµã²»ÔÙÓèÒÔ¿¼ÂÇ£¬ÕâÊÇ¾àÀë·¶Î§¼ôÖ¦µÄ»ù±¾ÒÀ¾Ý¡£ÏÔ¶øÒ×¼ûµÄÊÇ£¬Õâ¸öÈÝÈÌ¾àÀëÔ½Ð¡£¬³É¹¦¼ôÖ¦µÄ¸ÅÂÊÔ½¸ß£¬¼ìË÷ÐÔÄÜÔ½ºÃ¡£µ«ÊÇÈç¹ûÈÝÈÌ¾àÀëÌ«Ð¡£¬ÓÖ¿ÉÄÜ¹ý¶È¼ôÖ¦Ôì³É¼ìË÷²»µ½½á¹û¡£ËùÒÔÈÝÈÌ¾àÀëµÄ³õÊ¼ÖµºÍÊÕÁ²ËÙ¶ÈÊÇÖ±½ÓÓ°Ïì¼ìË÷ÐÔÄÜµÄ¹Ø¼ü¡£
 
-ÔÚÉÏÎÄËùÊöµÄµ¥´¿ÓÃ×îÐ¡¶Ñ¶¯Ì¬¸üÐÂ¼ìË÷½á¹ûµÄËã·¨ÖÐ£¬Æä×î´óÎÊÌâÔÚÓÚ£¬ÈÝÈÌ¾àÀëÊÇ´ÓÕýÎÞÇî¿ªÊ¼¸üÐÂµÄ¡£ÕâÊ¹µÃ¼ìË÷´ÓÒ»¿ªÊ¼ÍêÈ«²»¿ÉÄÜ×öµ½¼ôÖ¦£¬ÈÝÈÌ¾àÀëµÄÊÕÁ²ËÙ¶È»á·Ç³£Âý£¬µ¼ÖÂ¼ôÖ¦µÄÐ§ÂÊºÜµÍ£¬ÐÔÄÜÒ²±È½Ï²î¡£
+ÔÚÉÏÎÄËùÊöµÄµ¥´¿ÓÃ×îÐ¡¶Ñ¶¯Ì¬¸üÐÂ¼ìË÷½á¹ûµÄËã·¨ÖÐ£¬Æä×î´óÎÊÌâÔÚÓÚ£¬ÈÝÈÌ¾àÀëÊÇ´ÓÕýÎÞÇî¿ªÊ¼¸üÐÂµÄ¡£ÕâÊ¹µÃ¼ìË÷´ÓÒ»¿ªÊ¼ÍêÈ«²»¿ÉÄÜ×öµ½¼ôÖ¦£¬´óÁ¿µÄ·ÖÖ§¶¼±»ËÑË÷ÁË¡£ÈÝÈÌ¾àÀëµÄÊÕÁ²ËÙ¶È»á·Ç³£Âý£¬µ¼ÖÂ¼ôÖ¦µÄÐ§ÂÊºÜµÍ£¬ÐÔÄÜÒ²±È½Ï²î¡£
 
 \subsection{¼ìË÷Ëã·¨ÊµÏÖË¼Â·¸ÅÊö}
-»ùÓÚÉÏÃæËùÌáµ½µÄÈÝÈÌ¾àÀëÊÕÁ²½ÏÂýÎÊÌâ£¬±¾ÎÄ²ÉÓÃÁË½á¹û¶ÑÔ¤Ìî+»ØËÝµÄ·½Ê½½øÐÐÓÅ»¯´¦Àí¡£¼´Í¨¹ýÔ­Éúvp-treeËÑË÷Ëã·¨£¬ÏÈÕÒµ½single nearest neighbour£¬²¢±£´æ´Órootµ½single nearest neighbourµÄÕûÌõÂ·¾¶¡£È»ºóÔÙÍ¨¹ýÕûÌõÂ·¾¶µÄ»ØËÝÏÈÔ¤Ìî½á¹û¶Ñ£¬ÕâÑùÒÔ½á¹û¶ÑÖÐ×î´ó¾àÀë×÷ÎªÈÝÈÌ¾àÀë£¬ÔÙ»ØËÝÕûÌõÂ·¾¶ÖÐµÄ½Úµã£¬Íê³É¼ìË÷¡£ÕâÑùÍ¨¹ýÔ¤ÏÈÌî½á¹û¶Ñ£¬Ê¹µÃÈÝÈÌ¾àÀëÒÔ¸üµÍµÄÆðµãÊÕÁ²£¬ÊÕÁ²µÄËÙ¶È¸ü¿ì£¬ÐÔÄÜ¸üºÃ¡£
+»ùÓÚÉÏÃæËùÌáµ½µÄÈÝÈÌ¾àÀëÊÕÁ²½ÏÂýÎÊÌâ£¬±¾ÎÄ²ÉÓÃÁË½á¹û¶ÑÔ¤Ìî+»ØËÝµÄ·½Ê½½øÐÐÓÅ»¯´¦Àí¡£¼´Í¨¹ýÔ­Éúvp-treeËÑË÷Ëã·¨£¬ÏÈÕÒµ½single nearest neighbour£¬ÔÚÕâ¸ö¹ý³ÌÖÐÔ¤Ìî½á¹û¶Ñ£¬²¢±£´æ´Órootµ½single nearest neighbourµÄÕûÌõÂ·¾¶µÄËùÓÐ½Úµã¡£ÕâÑùÒÔ½á¹û¶ÑÖÐ×î´ó¾àÀë×÷ÎªÈÝÈÌ¾àÀë£¬ÔÙ»ØËÝÕûÌõÂ·¾¶ÖÐµÄ½Úµã£¬Íê³É¼ìË÷¡£ÕâÑùÍ¨¹ýÔ¤ÏÈÌî½á¹û¶Ñ£¬Ê¹µÃÈÝÈÌ¾àÀëÒÔ¸üµÍµÄÆðµãÊÕÁ²£¬ÊÕÁ²µÄËÙ¶È¸ü¿ì£¬ÐÔÄÜ¸üºÃ¡£
 
 \subsection{¼ìË÷Ëã·¨Á÷³ÌÍ¼}
 \begin{figure}[htp]
@@ -155,6 +156,15 @@ SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡
 \subsection{Insert²Ù×÷Ëã·¨Ï¸½Ú4£º´æ´¢Êý¾Ýµã¾àÀëË³Ðò}
 ÔÚ³õÊ¼½¨Ê÷µÄÍ¬Ê±£¬ÔÚ½ÚµãÖÐË³Ðò±£´æµ±Ç°½ÚµãÊý¾Ýµã¼¯ºÏÏà¶ÔÓÚÉÏÒ»¼¶ÓÅÏÈµãµÄ¾àÀëÅÅÐò¡£ÕâÑù×öÊÇÎªÁËÔÚÊý¾ÝÖØ·Ö²¼µÄÊ±ºò£¬±ÜÃâÖØÐÂµÄ¾àÀë¼ÆËãºÍÅÅÐò£¬¿ÉÒÔÍ¨¹ý¼òµ¥µÄÊý×éÔªËØÒÆ¶¯ºÍ½ç±ê¸üÐÂÀ´Íê³É£¬´Ó¶øÃ÷ÏÔ¼õÉÙ¼ÆËãÁ¿£¬ÌáÉýÐÔÄÜ¡£µ«ÊÇÕâÑù×öµÄ´ú¼ÛÊÇ£¬ÖØ¸´±£´æÁË´óÁ¿µÄidÁÐ±í£¬ÏûºÄÁË¶îÍâµÄÄÚ´æ£¬¶øÇÒÔÚÖØ·Ö²¼µÄ¹ý³ÌÖÐ£¬±ØÐë½«Ë³Ðò¼¯ºÏµÄÄÚÈÝ½øÐÐÍ¬²½¸ü¸Ä£¬Ò²´øÀ´Ê±¼äÏûºÄ¡£¶øÔÚÊý¾Ýµã½ÏÉÙ£¬¾àÀë¼ÆËãÁ¿ÉÙµÄÇé¿öÏÂ£¬Êý¾ÝµãË³ÐòÁÐ±íµÄ´æ´¢ÏûºÄºÍÎ¬»¤³É±¾£¬¿ÉÄÜ±ÈÖ±½Ó½øÐÐ¾àÀë¼ÆËã»¹ÒªÑÏÖØ¡£ÕâÆäÊµÒ²ÊÇÒ»¸ö¶¯Ì¬ºâÁ¿µÄ²ßÂÔ£¬³öÓÚÉè¼Æ¼òµ¥£¬±¾ÎÄ¶ÔËùÓÐ½Úµã¶¼Ä¬ÈÏ²ÉÓÃÁËÕâÖÖ·½Ê½¡£
 
+
+\subsection{Insert²Ù×÷Ëã·¨Ï¸½Ú4£º·Ç½ÚµãÊý¾ÝÎ´ÂúµÄÅÐ¶Ï}
+Óë·ÖÖ§ÊýÏà±È£¬Ò»¸ö·ÇÒ¶½ÚµãËùÄÜ°üº¬µÄ×î´óÊý¾ÝµãµÄÁ¿Óë½ÚµãÔÚÕû¸öÓÅÏÈµãÊ÷ÖÐÎ»ÖÃÓÐ¹Ø¡£Î»ÖÃÔ½¸ß£¬×ÓÊ÷²ãÊýÔ½¶àµÄ½Úµã£¬ÆäËù°üº¬µÄÊý¾ÝµãµÄÁ¿¾ÍÔ½´ó¡£ËùÒÔÒªÅÐ¶ÏÒ»¿Å·ÇÒ¶½ÚµãµÄÊý¾ÝµãÁ¿ÊÇ²»ÊÇÒÑ¾­ÂúÁË£¬ÒªÍ¨¹ý½Úµã×ÓÊ÷µÄ¸ß¶È£¬Ò¶½Úµã×î´óµÄÊý¾ÝÁ¿½øÐÐ¼ÆËã¡£
+
+±¾ÎÄÍ¨¹ýÔÚ½ÚµãÖÐ±£´æ¸¸½ÚµãµÄÖ¸Õë£¬À´·ÃÎÊ¸¸½ÚµãµÄ¸ß¶È£¬ÕâÑùÔÚ³õÊ¼½¨Ê÷µÄ¹ý³ÌÖÐ£¬Ê÷¸ß»á´Ó¸ù½ÚµãµÄ0Ò»¶¨´«µÝÏÂÈ¥£¬Ö±µ½Ò¶½Úµã¡£¶ø·ÇÒ¶½Úµã×î´óµÄÊý¾ÝÁ¿Í¨¹ýÈçÏÂ¹«Ê½½øÐÐ¼ÆËã¡£ÆäÖÐ$FANOUT$ÊÇVPTreeµÄÉÈ³ö¶È£¬$HEIGHT$ÊÇ×ÓÊ÷µÄ¸ß¶È£¬$ENTRYSIZE$ÊÇ½Úµã×î´óÊý¾ÝµãÁ¿¡£
+
+\begin{align}
+MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
+
 \subsection{Insert²Ù×÷Ëã·¨×ÛÊö}
 ÓÅÏÈµãÊ÷ÓÉÓÚÊÇ»ùÓÚ²»Í¬ÓÅÏÈµãµÄ¾àÀëË÷Òý£¬µ¼ÖÂÆä²åÈë²Ù×÷±¾ÉíÏûºÄºÜ´ó£¬ºÜÄÑÕÒµ½ÇáÁ¿¼¶µÄ°ì·¨À´ÊµÏÖ¡£Ò»·½Ãæ£¬ÆäÔÚ½Ï¸ßÎ»ÖÃµÄ½Úµã·ÖÁÑ£¬¼¸ºõ¿ÉÒÔµÈÍ¬ÓÚÖØÐÂ½¨Ê÷¡£ÁíÒ»·½Ãæ£¬ÎªÁË±£»¤¼ìË÷ÐÔÄÜ£¬±ØÐëÎ¬³ÖÓÅÏÈµãÊ÷µÄÌìÈ»Æ½ºâÊôÐÔ£¬²»ÄÜ¼òµ¥µØÔö³¤Ä³¿Ã×ÓÊ÷µÄ¸ß¶È¶øÆÆ»µÆ½ºâ£¬¶øÎ¬»¤Æ½ºâÐÔ×îÖÕ»¹ÊÇÒª´¥·¢¸ù½ÚµãµÄ·ÖÁÑ¡£±¾ÎÄËù²ÉÓÃµÄ·ÖÁÑÓÅÏÈÖØ·Ö²¼£¬´æ´¢¶îÍâÔªÊý¾Ý£¬ÑÓ³¤½¨Ê÷·ÖÖ§µÈ²ßÂÔ£¬¶¼ÊÇÒÔ¿Õ¼ä»»È¡Ê±¼äµÄ×ö·¨¡£¶øÕâÐ©¾²Ì¬²ßÂÔµÄÊµ¼ÊÔËÐÐÐ§¹ûºÍ¾ßÌåµÄÊý¾Ý¼¯ºÏµÄÇé¿öÓÐ¹Ø£¬ËùÒÔºÜ¿ÉÄÜ²¢²»ÊÇ×î¼ÑµÄÐÔÄÜ±íÏÖ¡£
 \subsection{²åÈëËã·¨Á÷³ÌÍ¼}
@@ -183,10 +193,19 @@ SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡
 \end{figure}
 \section{µØÍ¼ÍßÆ¬·þÎñÏêÏ¸Éè¼Æ}
 \subsection{¸ÅÊö}
-µØÍ¼ÍßÆ¬·þÎñµÄ¹¦ÄÜÊÇÎªÕû¸öÏµÍ³Ìá¹©¿ÉÊÓ»¯µØÍ¼Êý¾ÝµÄ·þÎñ¡£ËüÊÇ»ùÓÚNodejs Express¿ò¼ÜÊµÏÖµÄ£¬·ûºÏMapBoxÊý¾Ý±ê×¼µÄÊý¾ÝÎ¢·þÎñ¡£\textbf{MapBoxÊÇÒµÄÚÍ¨ÓÃ±ê×¼£¬·ûºÏMapbox±ê×¼ÊÇÎªÁËÈ·±£Í¨ÓÃÐÔ}
+µØÍ¼ÍßÆ¬·þÎñµÄ¹¦ÄÜÎªÕû¸öÏµÍ³Ìá¹©¿ÉÊÓ»¯µØÍ¼Êý¾ÝµÄ·þÎñ¡£ËüÊÇ»ùÓÚNodejs Express¿ò¼ÜÊµÏÖµÄ£¬·ûºÏMapBoxÊý¾Ý±ê×¼µÄÊý¾ÝÎ¢·þÎñ¡£\textbf{MapBoxÊÇÒµÄÚÍ¨ÓÃ±ê×¼£¬·ûºÏMapbox±ê×¼ÊÇÎªÁËÈ·±£Í¨ÓÃÐÔ¡£}ËüµÄËùÓÐÊý¾Ý·þÎñ¶¼Í¨¹ýrest½Ó¿Ú±©Â¶¸øµ÷ÓÃ·½¡£
 
-ÈçÍ¼~\ref{tile-server-structure} ËùÊ¾£¬µØÍ¼ÍßÆ¬·þÎñÖ÷Òª·ÖÎªdata¡¢style¡¢cache¡¢logicºÍdbÕâ5¸öÄ£¿é£¬ÒÔ¼°¶Ô½ÓdbµÄ¸÷ÖÖÊý¾Ý¿âÇý¶¯×é³É¡£Æä¸÷²¿·Ö¹¦ÄÜÈçÏÂ¡£
-data\_serviceÄ£¿é¸ºÔðÌá¹©ÍßÆ¬Êý¾ÝµÄ¶ÁÈ¡£¬¸üÐÂ¹¦ÄÜ£¬ÊÇÖ±½Ó¾ö¶¨Êý¾Ý²Ù×÷ºÍÊý¾Ý×´Ì¬µÄÄ£¿é¡£style\_serviceÄ£¿éÊÇÌá¹©·ç¸ñÊý¾ÝµÄÄ£¿é£¬¸ºÔðÏòµ÷ÓÃ·¢Ìá¹©Ö¸¶¨µÄ·ç¸ñÊý¾Ý£¬ÓÃÓÚÒ³ÃæäÖÈ¾¡£logic\_serviceÊÇÖ§³ÖÓëµØÀíÏà¹ØµÄÔËËãÂß¼­Ä£¿é£¬ÀýÈç×ø±ê×ª»»£¬bounding-box»»ËãµÈ¡£cache\_serviceÊÇÓëÍßÆ¬Êý¾Ý»º´æÏà¹ØµÄ¹¦ÄÜÄ£¿é£¬¿ÉÒÔÎªÍßÆ¬Êý¾ÝÅäÖÃ²»Í¬µÄ»º´æ²ßÂÔ¡£db\_serviceÊÇÃæÏò¸÷ÖÖ²»Í¬Êý¾Ý¿âµÄÍ¨ÓÃ·ÃÎÊ½Ó¿Ú²ã£¬ÆäÊÇdata\_serviceÓëµØÀíÊý¾Ý¿â½»»¥µÄÃ½½é¡£ÓÉÓÚnodejs Ö§³ÖµÄÔ­ÐÍÄ£Ê½µÄ¶àÌ¬£¬Í¼ÖÐ¸÷²¿·ÖµÄ·ÃÎÊ½Ó¿ÚÎÈ¶¨²»±ä£¬Ä£¿éÄÚ²¿ÐÂÔöÀ©Õ¹ÊµÏÖ»òÊÇ¸ü¸ÄÊµÏÖ¾ÍÄÜÎÞ·ìµØ½»»¥ºÍ¶Ô½Ó¡£\textbf{×¢Òâ£ºstyle Ä£¿éµÄÊý¾ÝÊÇ¾²Ì¬µÄjsonÎÄ¼þ£¬ÊÇ´æÔÚÎÄ¼þÏµÍ³ÖÐµÄ£¬²»¾­¹ýÊý¾Ý¿â£¬ËùÒÔ²»ÒÀÀµÓëdb\_serviceÄ£¿é}
+ÈçÍ¼~\ref{tile-server-structure} ËùÊ¾£¬µØÍ¼ÍßÆ¬·þÎñÖ÷Òª·ÖÎªdata¡¢style¡¢cache¡¢logicºÍdbÕâ5¸öÄ£¿é£¬ÒÔ¼°¶Ô½ÓdbµÄ¸÷ÖÖÊý¾Ý¿âÇý¶¯×é³É£¬Æä¸÷²¿·Ö¹¦ÄÜÈçÏÂ¡£
+
+data\_serviceÄ£¿éÊÇÖ±½Ó¾ö¶¨Êý¾Ý²Ù×÷ºÍÊý¾Ý×´Ì¬µÄÄ£¿é£¬Ö÷Òª¸ºÔðÌá¹©ÍßÆ¬Êý¾ÝµÄ¶ÁÈ¡£¬¸üÐÂ¹¦ÄÜ¡£ÕâÒ»Ä£¿éÊÇÕû¸ö·þÎñµÄºËÐÄÂß¼­£¬ËüÒÀÀµlogicÄ£¿é½øÐÐµØÀí¼ÆËã£¬ÒÀÀµdbÄ£¿é¶Ô½ÓÍßÆ¬Êý¾Ý¿â£¬ÒÀÀµcacheÄ£¿é½øÐÐ»º´æ¡£dataÄ£¿éÍ¨¹ýExpress Route½Ó¿Ú¶ÔÍâÌá¹©Rest·ÃÎÊ·þÎñ¡£
+
+style\_serviceÄ£¿éÊÇÌá¹©·ç¸ñÊý¾ÝµÄÄ£¿é£¬¸ºÔðÏòµ÷ÓÃ·¢Ìá¹©Ö¸¶¨µÄ·ç¸ñÊý¾Ý£¬ÓÃÓÚÒ³ÃæäÖÈ¾¡£styleÊÇµØÀíÍßÆ¬·þÎñµÄÌØÓÐ±ê×¼£¬Æä×÷ÓÃÀàËÆÓÚCSS£¬ÊÇ¾ö¶¨µØÍ¼Êý¾ÝÒÔºÎÖÖÑùÊ½äÖÈ¾ÔÚä¯ÀÀÆ÷ÉÏ¡£styleÄ£¿é×÷ÓÃÓÚMapBoxµÄstyleÎÄ¼þ£¬Ö±½ÓÓëÎÄ¼þÏµÍ³½»»¥£¬²¢²»Éæ¼°Êý¾Ý¿â²Ù×÷¡£
+
+logic\_serviceÊÇÖ§³ÖÓëµØÀíÏà¹ØµÄÔËËãÂß¼­Ä£¿é£¬ÀýÈç×ø±ê×ª»»£¬bounding-box»»ËãµÈ¡£ÕâÒ»²¿·ÖµÄÊµÏÖÊÇÎÞ×´Ì¬µÄ£¬ÓëdataÄ£¿éÍêÈ«½âñî£¬¿ÉÒÔÍ¨¹ý²å¼þµÄÐÎÊ½£¬ËæÊ±Ôö¼Ó»òÕß±ä»»Âß¼­¼ÆËãµÄ¹¦ÄÜ¡£
+
+cache\_serviceÊÇÓëÍßÆ¬Êý¾Ý»º´æÏà¹ØµÄ¹¦ÄÜÄ£¿é£¬¿ÉÒÔÎªÍßÆ¬Êý¾ÝÅäÖÃ²»Í¬µÄ»º´æ²ßÂÔ¡£ÓëÒ»°ãµÄ»º´æÏµÍ³²»Í¬µÄÊÇ£¬ÍßÆ¬Êý¾Ý·ÃÎÊµÄ¾Ö²¿ÐÔ³ýÁËÓÐË®Æ½¾Ö²¿Ö®Íâ£¬»¹´æÔÚ´¹Ö±¾Ö²¿£¬Ò²¾ÍÊÇÓÃ»§ÔÚÁ¬Ðø»¬¶¯Êó±ê¹öÂÖÊ±£¬Í¬Ò»¸öË®Æ½ÇøÓòµÄ²»Í¬zoom¼¶±ðµÄÍßÆ¬»á±»Á¬Ðø¼ÓÔØ¡£ÕýÊÇ»ùÓÚÕâÖÖ»º´æ²ßÂÔ¿É±äµÄÇé¿ö£¬cacheÄ£¿éÒ²±»ÉèÖÃÎªÎÞ×´Ì¬£¬¿ÉÌæ»»µÄÄ£¿é¡£²»¹ýÄ¿Ç°µÄÊµÏÖÈÔÈ»Ö»ÊÇ¶ÔË®Æ½¾Ö²¿ÍßÆ¬µÄ»º´æ£¬´¹Ö±»º´æ²¢Î´ÊµÏÖ¡£
+
+db\_serviceÊÇÃæÏò¸÷ÖÖ²»Í¬Êý¾Ý¿âµÄÍ¨ÓÃ·ÃÎÊ½Ó¿Ú²ã£¬ÆäÊÇdata\_serviceÓëµØÀíÊý¾Ý¿â½»»¥µÄÃ½½é¡£db\_serviceµÄ½Ó¿ÚÊÇ¹Ì¶¨µÄ£¬ËùÓÐÒª¶Ô½Óµ½ÍßÆ¬Êý¾Ý·þÎñÉÏµÄÊý¾Ý¿âÇý¶¯±ØÐëÊµÏÖdb\_serviceÒªÇóµÄ½Ó¿Ú£¬²ÅÄÜÕý³£ÔËÐÐ¡£Ä¿Ç°ÊµÏÖµÄÊý¾Ý¿âÇý¶¯ÓÐsqliteºÍhbaseÁ½ÖÖ¡£
 
 \begin{figure}[H]
   \centering
@@ -194,11 +213,11 @@ data\_serviceÄ£¿é¸ºÔðÌá¹©ÍßÆ¬Êý¾ÝµÄ¶ÁÈ¡£¬¸üÐÂ¹¦ÄÜ£¬ÊÇÖ±½Ó¾ö¶¨Êý¾Ý²Ù×÷ºÍÊý¾Ý×´Ì¬µ
   \caption{tile-serverÕûÌå½á¹¹Í¼}\label{tile-server-structure}
 \end{figure}
 
-ÓÉÓÚµØÍ¼ÍßÆ¬·þÎñ±¾Éí½Ó¿ÚÖÚ¶à£¬³öÓÚÆª·ù¿¼ÂÇ£¬±¾ÎÄÖ»ÌôÑ¡ÆäÖÐ±È½Ï¹Ø¼ü£¬´´ÐÂÐÔ½ÏÇ¿µÄ¹¦ÄÜµãµØÍ¼¾Ö²¿¸üÐÂ¹¦ÄÜ£¬½éÉÜ¾ßÌåÊµÏÖ£¬ÆäËû²»Óè×¸Êö¡£
+ÓÉÓÚµØÍ¼ÍßÆ¬·þÎñ±¾Éí½Ó¿ÚÖÚ¶à£¬³öÓÚÆª·ù¿¼ÂÇ£¬±¾ÎÄÖ»ÌôÑ¡ÆäÖÐ±È½Ï¹Ø¼ü£¬´´ÐÂÐÔ½ÏÇ¿µÄ¹¦ÄÜµãµØÍ¼¾Ö²¿¸üÐÂ¹¦ÄÜ£¬½éÉÜ¾ßÌåÊµÏÖ¡£
 \subsection{µØÍ¼¾Ö²¿¸üÐÂ¹¦ÄÜ¸ÅÊö}
-ËùÎ½µØÍ¼¾Ö²¿¸üÐÂ£¬Ö¸µÄÊÇÒ»ÕÅÍêÕûµØÍ¼£¬Ö»¸üÐÂÈ«²¿µØÍ¼µØÍ¼µÄÒ»Ð¡²¿·Ö¡£±ÈÈçÖÐ¹úµØÍ¼ÖÐ£¬Ö»¸üÐÂ±±¾©ÊÐµØÍ¼¡£ÕâÒ»¹¦ÄÜµÄ¼ÛÖµºÜÖ±¹Û£¬ÔÚGTDSÖÐºÜÊµÓÃ£¬¶øÀàËÆµÄÆäËûµØÍ¼ÍßÆ¬·þÎñ¾ùÎ´Ìá¹©´Ë¹¦ÄÜ¡£±¾ÎÄ¸ù¾ÝÄª¿¨ÍÐÍ¶Ó°·¨µÄ¼ÆËãÔ­Àí£¬ÊµÏÖÁËÕâÒ»¹¦ÄÜ¡£
+ËùÎ½µØÍ¼¾Ö²¿¸üÐÂ£¬Ö¸µÄÊÇÒ»ÕÅÍêÕûµØÍ¼£¬Ö»¸üÐÂÈ«²¿µØÍ¼µØÍ¼µÄÒ»Ð¡²¿·Ö¡£±ÈÈçÖÐ¹úµØÍ¼ÖÐ£¬Ö»¸üÐÂ±±¾©ÊÐµØÍ¼¡£ÕâÒ»¹¦ÄÜµÄ¼ÛÖµºÜÖ±¹Û£¬ÔÚGTDSÖÐºÜÊµÓÃ£¬¶øÀàËÆµÄ¿ªÔ´µØÍ¼ÍßÆ¬·þÎñ¾ùÎ´Ìá¹©´Ë¹¦ÄÜ¡£±¾ÎÄ¸ù¾ÝÄª¿¨ÍÐÍ¶Ó°·¨µÄ¼ÆËãÔ­Àí£¬ÊµÏÖÁËÕâÒ»¹¦ÄÜ¡£
 
-ÓÉÓÚÓÃ»§ÔÚä¯ÀÀÆ÷½çÃæÉÏ¿òÑ¡³öÀ´µÄ£¬Ò»¶¨ÊÇ¾­Î³¶È×ø±ê¡£Òò´Ë£¬¸Ã¹¦ÄÜµÄÊäÈë²ÎÊýÓ¦¸ÃÊÇÒ»¸önorth,south,west,eastËÄ¸öÊýÖµ×é³ÉµÄ¾ØÐÎ¿òºÍ¶ÔÓ¦µÄzoom£¬Ò²¾ÍÊÇbounding-box¡£ËùÒÔ£¬ÒªÏë¸üÐÂ¶ÔÓ¦µÄÍßÆ¬Êý¾Ý£¬¾Í±ØÐëÊ×ÏÈÒª¸ù¾ÝÏñËØ¾«¶È£¬½«¾­Î³¶È×ø±ê×ª»»ÎªÕ¤¸ñ×ø±ê£¬Ò²¾ÍÊÇ¶ÔÓ¦µÄx,y£¬ÔÙ½«¶ÔÓ¦µØÍ¼ÍßÆ¬Ìæ»»µô¡£ÕâÒ»¹ý³ÌÖÐ£¬ÎªÁË±ÜÃâÆðÒå£¬ÐèÒª×ö±ß½çºÍ¾«¶ÈµÄ¼ì²é¡£
+ÓÉÓÚÓÃ»§ÔÚä¯ÀÀÆ÷½çÃæÉÏ¿òÑ¡³öÀ´µÄ£¬Ò»¶¨ÊÇ¾­Î³¶È×ø±êµÄ·¶Î§¡£Òò´Ë£¬¸Ã¹¦ÄÜµÄÊäÈë²ÎÊýÓ¦¸ÃÊÇÒ»¸önorth,south,west,eastËÄ¸öÊýÖµ×é³ÉµÄ¾ØÐÎ¿òºÍ¶ÔÓ¦µÄzoom£¬Ò²¾ÍÊÇbounding-box¡£ËùÒÔ£¬ÒªÏë¸üÐÂ¶ÔÓ¦µÄÍßÆ¬Êý¾Ý£¬¾Í±ØÐëÊ×ÏÈÒª¸ù¾ÝÏñËØ¾«¶È£¬½«¾­Î³¶È×ø±ê×ª»»ÎªÍßÆ¬×ø±ê£¬Ò²¾ÍÊÇ¶ÔÓ¦µÄx,y£¬ÔÙ½«¶ÔÓ¦µØÍ¼ÍßÆ¬Ìæ»»µô¡£ÕâÒ»¹ý³ÌÖÐ£¬ÎªÁË±ÜÃâÆçÒå£¬ÐèÒª×ö±ß½çºÍ¾«¶ÈµÄ¼ì²éÒÔ¼°Ò»ÖÂÐÔµÄ¼ì²é¡£
 \subsection{µØÍ¼¾Ö²¿¸üÐÂ¹¦ÄÜÁ÷³ÌÍ¼}
 \begin{figure}[H]
   \centering
