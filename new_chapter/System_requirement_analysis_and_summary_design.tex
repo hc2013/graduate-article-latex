@@ -8,7 +8,7 @@
 
 \section{轨迹数据服务需求分析}
 \subsection{轨迹数据服务的功能需求}
-整个地理轨迹数据服务的核心功能就是对相似路径的检索，因此轨迹数据服务的功能需求有两个。一个是对批量轨迹数据导入建立索引的功能，另一个是Trajectory KNN功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。
+整个地理轨迹数据服务的核心功能有三个。第一个是对批量轨迹数据导入建立索引的功能。第二个是轨迹检索KNN功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。第三个功能是对已有索引新加入数据点，即插入功能。\textbf{注意，在本文所实现的轨迹数据服务中，只提供了增，查，初始化等功能，并没有提供删除功能。之所以放弃删除功能，是因为在大数据量的应用场景下，用户往往只需要动态地增加和查询轨迹数据，轨迹数据总体量一般都达到百万级，每次做KNN 检索的K值也能达到几百，用户并不在意索引中存在某一些冗余的轨迹，相关的删除操作优先级很低。所以本文放弃了删除功能的实现。}
 
 \begin{table}[htb]\footnotesize
 \centering
@@ -41,6 +41,14 @@ Trajectory KNN问题是一个计算密集型问题，用户对响应时间一定会有要求。同时，并发量
 \end{tabular}
 \label{table:trajectory_service_non_func_req}
 \end{table}
+
+\subsection{轨迹数据服务用例图}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
+  \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
+\end{figure}
+\subsection{轨迹数据服务用例描述}
 
 \section{瓦片数据服务需求分析}
 \subsection{瓦片数据服务的需求综述}
@@ -94,7 +102,7 @@ R8&局部bounding-box的渲染查询&\tabincell{c}{服务调用方能够通过瓦片服务，参数为地
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/tileserver_use_case.pdf}
-  \caption{瓦片数据服务的功能需求}\label{tileserver_use_caseCH3}
+  \caption{瓦片数据服务用例图}\label{tileserver_use_caseCH3}
 \end{figure}
 \textbf{注意：以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。}
 \subsection{瓦片数据服务用例描述}
