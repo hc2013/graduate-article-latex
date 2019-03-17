@@ -1,40 +1,41 @@
 \chapter{相关技术概念综述}
 
-
-
 \section{优先点树}
 \subsection{NN问题}
-Nearest Neighbour 问题，即最近邻居问题。指的是针对空间中的一个点集，定义一个距离函数d（这里的距离函数d包括但不仅限于欧几里得距离），那么对于一个给定的目标搜索点q，找到距离q 点的使距离d 最小一个点，这就是最近邻居问题。相对应的，要找到与q点距离最近的K个点，就是KNN问题。
+Nearest Neighbour 问题，即最近邻居问题。指的是针对空间中的一个点集，定义一个距离函数d（这里的距离函数d包括但不仅限于欧几里得距离），那么对于一个给定的目标搜索点q，找到距离q 点的距离最小一个点，这就是最近邻居问题。相对应的，要找到与q点距离最近的K个点，就是KNN问题。
 
 针对NN问题，如果采用线性遍历的方式考虑所有点，将会造成很大的性能损耗。而一个比较合理的思路是，将二分查找的逻辑应用于点集合的检索，从而能将时间损耗降低为log(N)级别。也就是说，如果能够实现以nlog(N)的时间消耗将点集合建立成某种有序的数据结构。那么在搜索时，就可以通过类似于二分查找的方式达到log(N)级别的速度\cite{DBLP:conf/soda/Yianilos93}。
 
 \subsection{优先点树概述}
-vp-tree(vantage point tree),中文名称，优先点树，正是上述思路的一种实现。vp-tree从原理上说，是基于三角不等式进行递归分解的剪枝技术，其核心思想奠基了两种情况下的正确性。第一种，是在检索过程中，对于那些远远超出搜索范围的分支，就不需要进行搜索了。第二种，是当搜索目标点显然在某一个范围内的时候，外部的其他分支就都不必搜索了\cite{DBLP:journals/tc/FukunagaN75}。基于这两个原则，搜索点的数量和点的距离计算的次数都被大幅度地减少，从而显著提升了性能。
+vp-tree(vantage point tree),中文名称，优先点树，正是上述思路的一种实现。vp-tree从原理上说，是基于三角不等式进行递归分解的剪枝技术，其核心思想奠基了两种情况下的正确性。第一种，是在检索过程中，对于那些远远超出搜索范围的分支，就不需要进行搜索了。第二种，是当搜索目标点显然在某一个范围内的时候，外部的其他分支就都不必搜索了\cite{DBLP:journals/tc/FukunagaN75}。基于这两个原则，搜索点的数量和点之间距离计算的次数都被大幅度地减少，从而显著提升了性能。
 
 \subsection{优先点树的基本原理}
-vp-tree的基本思路就是对点集合进行空间划分。第一步，要选择一个点作为vantage point，也就是优先点。第二步，集合中的所有点要计算自己与vp的距离。第三步，根据距离值的大小将点集合均分为两支，距离小于等于中值的为left/inside子集合，距离大于等于中值为right/outside子集合。第四步，以left/inside集合作为左子树的根节点，right/outside集合为右子树的根节点，再针对这两棵子树分别递归地进行上述划分，从而形成一颗平衡的二叉树。综上可知，vp-tree最终实现了整个点集合内部的一个球状分割。
-\begin{figure}[htp]
+vp-tree的基本思路就是对点集合进行空间划分。第一步，要选择一个点作为vantage point，也就是优先点。第二步，集合中的所有点要计算自己与vp的距离。第三步，根据距离值的大小将点集合均分为两支，距离小于等于中值的为left/inside子集合，距离大于等于中值为right/outside子集合。第四步，以left/inside集合作为左子树的根节点，right/outside集合为右子树的根节点，再针对这两棵子树分别递归地进行上述划分，从而形成一颗平衡的二叉树。如图\ref{vp_left_rightCH2}所示，vp-tree实现了整个点集合内部的一个球状分割。而在整个数据空间中，大量的数据点集合被以不同的优先点为中心划分成了大量的相互交错的球型子空间。如图\ref{vp_tree_decompositionCH2}所示。
+\begin{figure}[H]
   \centering
-  \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_left_right1.pdf}
+  \includegraphics[width=2.5in]{new_FIGs/chapter2/vp_left_right1.pdf}
   \caption{vp-tree点集合分割示意图}\label{vp_left_rightCH2}
 \end{figure}
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/vp_tree_decomposition.pdf}
+  \includegraphics[width=3in]{new_FIGs/chapter2/vp_tree_decomposition.pdf}
   \caption{vp-tree空间分割示意图}\label{vp_tree_decompositionCH2}
 \end{figure}
 \subsection{最简单优先点树的结构和搜索过程}
-如图2.3所示，即为一个最简单的vp-tree的内部结构，其包括一个用于只是优先点的VP-ID，一个中值mu和分别左右子树的两个指针。
+如图2.3所示，即为一个最简单的两路vp-tree的内部结构，其包括一个用于标识优先点的VP-ID，一个中值mu和分别指向左右子树的两个指针。
 
-搜索算法的思路是这样的。对于一次检索的目标点q和当前vp-tree的节点node，我们会设置一个容忍阈值u。首先计算q与node的vp之间的距离d,如果距离d>=mu+u,就舍弃左子树，只搜索右子树。反之，如果d<=mu-u,就舍弃右子树，只搜索左子树。如果mu-u<d<mu+u,那么无法完成剪枝，左右子树都要搜索。
+搜索算法的运行思路如算法\ref{alg:simplest_vp_tree_search}所示。对于一次检索的目标点q和当前vp-tree的节点node，我们会设置一个容忍阈值u。首先计算q 与node的vp之间的距离d,如果距离
+$ d \ge mu+u $,就舍弃左子树，只搜索右子树。反之，如果$ d \le mu-u $,就舍弃右子树，只搜索左子树。如果$ mu-u < d < mu+u $,那么无法完成剪枝，左右子树都要搜索。
 
 这里显而易见的是，\textbf{容忍阈值u越小，剪枝的可能性越大，搜索性能越好}。因此u的选择应该是随着递归过程的推进而不断代之以距离q最小的距离，因为既然u是目前最小的距离，那么比u距离更大的点也就不必考虑了。因此，\textbf{如何实现算法使得容忍阈值以较快的速度收敛}，是代码实现的重点，我们将在第四章具体讨论。
-\begin{figure}[htb]
+
+\begin{figure}[H]
   \centering
-  \includegraphics[width=2.5in,height=3.5in]{new_FIGs/chapter2/vp-tree-simplest-structure.pdf}
+  \includegraphics[width=1.5in]{new_FIGs/chapter2/vp-tree-simplest-structure.pdf}
   \caption{最简单vp-tree的结构示意图}\label{vp_tree_simplest_structureCH2}
 \end{figure}
-\begin{algorithm}[htp]
+
+\begin{algorithm}[H]
 \caption{最简单vp-tree的搜索过程search}
 \label{alg:simplest_vp_tree_search}
 n $\leftarrow$ currentNode;\\
@@ -55,31 +56,33 @@ search(n.left);
 \end{algorithm}
 \section{Lucene}
 \subsection{简介}
-Lucene是一套用于全文检索和搜索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索。\cite{DBLP:journals/aai/HirschB18}在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。
+Lucene是一套用于全文检索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索。\cite{DBLP:journals/aai/HirschB18}在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。
 
-Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜素内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。\cite{DBLP:journals/jdiq/YangFL18}
+Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜索内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene 的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。\cite{DBLP:journals/jdiq/YangFL18}
 \subsection{运行原理}
-Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
+Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，用户通过Search User Interface来与Lucene库进行交互，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
 \cite{LuceneInAction}
-\textbf{注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排索引。}
-\begin{figure}[htp]
+\textbf{注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排或正排索引。}
+\begin{figure}[H]
   \centering
   \includegraphics[width=3.5in,height=3.5in]{new_FIGs/chapter2/lucene-structure.pdf}
   \caption{lucene检索组件图}\label{lucene_structureCH2}
 \end{figure}
-\subsection{核心数据结构}
-Doc-Value:Doc-Value是Lucene针对文档内容建立的正排索引，可以将其理解为以Doc-Id为key-value对的值。这一结构与传统数据库中B-tree的索引结构是相似的。主要用于对一些特殊的结构化数据，比如图形，大数字，日志等不适合进行全文检索的数据进行顺序存储。本文实现中所使用的几何图形Geometry就是存储在Doc-Value中的。
+\subsection{Lucene核心数据结构}
+Doc-Value:Doc-Value是Lucene针对文档内容建立的正排索引，可以将其理解为以Doc-Id为key的键值对的正序组合结构。这一结构与传统数据库中B-tree的索引结构是相似的，主要用于对一些特殊的结构化数据，比如图形，大数字，日志等不适合进行全文检索的数据进行顺序存储。本文实现中所使用的几何图形JTSGeometry 就是存储在Doc-Value中的。
 
 倒排索引：倒排索引（英语：Inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。\cite{DBLP:journals/jcst/BoucennaNKK19}
 
 如图~\ref{invert-indexCH2}所示，建立倒排索引，首先要根据停用词列表对文章内容进行分词，找出所有的实词，再建立词条到文档列表的一个映射。当检索时，直接根据用户输入的关键词，查询词典，就可以找到这些词语分别都出现在那些文档中。再根据相应的打分算法对命中的文档计算分数，排序，返回检索结果。
-\subsection{为什么选择lucene}
-lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。在Lucene扩展新的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=4.5in,height=2.5in]{new_FIGs/chapter2/invert-index.pdf}
   \caption{倒排索引结构示意图}\label{invert-indexCH2}
 \end{figure}
+
+\subsection{为什么选择lucene}
+lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。扩展Lucene的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
+
 \section{地理相关技术概念介绍}
 \subsection{地理坐标与投影法}
 WGS-84坐标系（World Geodetic System一1984 Coordinate System），一种国际上采用的地心坐标系。坐标原点为地球质心，其地心空间直角坐标系的Z轴指向BIH （国际时间服务机构）1984.O定义的协议地球极（CTP)方向，X轴指向BIH 1984.0的零子午面和CTP赤道的交点，Y轴与Z轴、X轴垂直构成右手坐标系，称为1984年世界大地坐标系统。\cite{WGS84Intro}

@@ -12,16 +12,16 @@
 \contentsline {subsection}{\numberline {2.1.1}NN问题}{5}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}优先点树概述}{5}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}优先点树的基本原理}{5}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}最简单优先点树的结构和搜索过程}{7}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.4}最简单优先点树的结构和搜索过程}{6}{subsection.2.1.4}
 \contentsline {section}{\numberline {2.2}Lucene}{8}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}简介}{8}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}运行原理}{8}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}核心数据结构}{9}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.3}Lucene核心数据结构}{9}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}为什么选择lucene}{9}{subsection.2.2.4}
 \contentsline {section}{\numberline {2.3}地理相关技术概念介绍}{10}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}地理坐标与投影法}{10}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}地图瓦片}{10}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}瓦片地图金字塔}{11}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.3}瓦片地图金字塔}{10}{subsection.2.3.3}
 \contentsline {section}{\numberline {2.4}Nodejs Express框架}{11}{section.2.4}
 \contentsline {section}{\numberline {2.5}本章总结}{12}{section.2.5}
 \contentsline {chapter}{\numberline {第三章\hspace {0.3em}}系统需求分析与概要设计}{13}{chapter.3}
@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {3.2.1}轨迹数据服务的功能需求}{13}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{14}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{14}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}初始建立轨迹索引用例描述表}{14}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.4}初始建立轨迹索引用例描述表}{15}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}插入新数据用例描述表}{15}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}相似轨迹检索用例描述表}{16}{subsection.3.2.6}
 \contentsline {section}{\numberline {3.3}瓦片数据服务需求分析}{17}{section.3.3}
@@ -39,48 +39,48 @@
 \contentsline {subsection}{\numberline {3.3.3}瓦片数据服务非功能需求}{18}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}瓦片数据服务用例描述}{19}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}b-box更新地图瓦片数据用例描述表}{21}{subsection.3.3.6}
-\contentsline {subsection}{\numberline {3.3.7}特定区域瓦片数据中心渲染用例描述表}{21}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.6}b-box更新地图瓦片数据用例描述表}{20}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}特定区域瓦片数据中心渲染用例描述表}{20}{subsection.3.3.7}
 \contentsline {section}{\numberline {3.4}GTDS系统概要设计}{21}{section.3.4}
-\contentsline {section}{\numberline {3.5}本章总结}{22}{section.3.5}
+\contentsline {section}{\numberline {3.5}本章总结}{21}{section.3.5}
 \contentsline {chapter}{\numberline {第四章\hspace {0.3em}}系统详细设计与实现}{23}{chapter.4}
 \contentsline {section}{\numberline {4.1}轨迹检索服务详细设计}{23}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}概述}{23}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}优先点树索引类图}{23}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}优先点树节点结构}{25}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}初始建树的流程}{25}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}初始建树算法实现}{26}{subsection.4.1.5}
-\contentsline {subsection}{\numberline {4.1.6}设计要点1：使用长度栈和偏移量栈记录内存状态，避免冗余内存}{28}{subsection.4.1.6}
-\contentsline {subsection}{\numberline {4.1.7}设计要点2：优先点的选择算法}{28}{subsection.4.1.7}
-\contentsline {subsection}{\numberline {4.1.8}KNN问题的定义和解决思路}{28}{subsection.4.1.8}
-\contentsline {subsection}{\numberline {4.1.9}设计焦点：容忍距离的收敛起点和收敛速度}{29}{subsection.4.1.9}
-\contentsline {subsection}{\numberline {4.1.10}检索算法实现思路概述}{29}{subsection.4.1.10}
-\contentsline {subsection}{\numberline {4.1.11}检索算法流程图}{29}{subsection.4.1.11}
-\contentsline {subsection}{\numberline {4.1.12}本文的算法实现的代码}{29}{subsection.4.1.12}
-\contentsline {subsection}{\numberline {4.1.13}设计焦点2：避免重复访问}{29}{subsection.4.1.13}
-\contentsline {subsection}{\numberline {4.1.14}优先点树的插入}{30}{subsection.4.1.14}
-\contentsline {subsection}{\numberline {4.1.15}Insert操作算法概述}{30}{subsection.4.1.15}
-\contentsline {subsection}{\numberline {4.1.16}Insert操作算法细节1：根节点不分裂，树的高度不变}{33}{subsection.4.1.16}
-\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{33}{subsection.4.1.17}
-\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节3：分裂与数据重分布的优先级问题}{33}{subsection.4.1.18}
-\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节4：存储数据点距离顺序}{34}{subsection.4.1.19}
-\contentsline {subsection}{\numberline {4.1.20}Insert操作算法细节4：非节点数据未满的判断}{34}{subsection.4.1.20}
-\contentsline {subsection}{\numberline {4.1.21}Insert操作算法综述}{35}{subsection.4.1.21}
-\contentsline {subsection}{\numberline {4.1.22}插入算法流程图}{36}{subsection.4.1.22}
-\contentsline {subsection}{\numberline {4.1.23}Insert算法实现1：已满叶节点的分裂}{37}{subsection.4.1.23}
-\contentsline {subsection}{\numberline {4.1.24}Insert算法实现2：叶节点数据重分布}{38}{subsection.4.1.24}
-\contentsline {subsection}{\numberline {4.1.25}Insert算法实现3：分支分裂}{39}{subsection.4.1.25}
-\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{40}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}概述}{40}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{41}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{42}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{43}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{43}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{45}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}本章总结}{45}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{51}{chapter.5}
-\contentsline {section}{\numberline {5.1}总结}{51}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{51}{section.5.2}
-\contentsline {chapter}{参考文献}{52}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{54}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{55}{chapter*.6}
+\contentsline {subsection}{\numberline {4.1.4}初始建树的流程}{26}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}初始建树算法实现}{27}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}设计要点1：使用长度栈和偏移量栈记录内存状态，避免冗余内存}{29}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.7}设计要点2：优先点的选择算法}{29}{subsection.4.1.7}
+\contentsline {subsection}{\numberline {4.1.8}KNN问题的定义和解决思路}{30}{subsection.4.1.8}
+\contentsline {subsection}{\numberline {4.1.9}设计焦点：容忍距离的收敛起点和收敛速度}{31}{subsection.4.1.9}
+\contentsline {subsection}{\numberline {4.1.10}检索算法实现思路概述}{31}{subsection.4.1.10}
+\contentsline {subsection}{\numberline {4.1.11}检索算法流程图}{32}{subsection.4.1.11}
+\contentsline {subsection}{\numberline {4.1.12}检索最近邻居代码实现}{33}{subsection.4.1.12}
+\contentsline {subsection}{\numberline {4.1.13}预填结果集代码实现}{34}{subsection.4.1.13}
+\contentsline {subsection}{\numberline {4.1.14}设计焦点2：避免重复访问}{35}{subsection.4.1.14}
+\contentsline {subsection}{\numberline {4.1.15}优先点树的插入}{35}{subsection.4.1.15}
+\contentsline {subsection}{\numberline {4.1.16}Insert操作算法概述}{35}{subsection.4.1.16}
+\contentsline {subsection}{\numberline {4.1.17}Insert操作算法细节1：根节点不分裂，树的高度不变}{39}{subsection.4.1.17}
+\contentsline {subsection}{\numberline {4.1.18}Insert操作算法细节2：以最小扇出度作为初始建树的终止条件}{39}{subsection.4.1.18}
+\contentsline {subsection}{\numberline {4.1.19}Insert操作算法细节3：分裂与数据重分布的优先级问题}{39}{subsection.4.1.19}
+\contentsline {subsection}{\numberline {4.1.20}Insert操作算法细节4：存储数据点距离顺序}{40}{subsection.4.1.20}
+\contentsline {subsection}{\numberline {4.1.21}Insert操作算法细节4：非节点数据未满的判断}{40}{subsection.4.1.21}
+\contentsline {subsection}{\numberline {4.1.22}Insert操作算法综述}{40}{subsection.4.1.22}
+\contentsline {subsection}{\numberline {4.1.23}插入算法流程图}{42}{subsection.4.1.23}
+\contentsline {subsection}{\numberline {4.1.24}Insert算法实现1：已满叶节点的分裂}{43}{subsection.4.1.24}
+\contentsline {subsection}{\numberline {4.1.25}Insert算法实现2：叶节点数据重分布}{44}{subsection.4.1.25}
+\contentsline {subsection}{\numberline {4.1.26}Insert算法实现3：分支分裂}{45}{subsection.4.1.26}
+\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{46}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}概述}{46}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{47}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{48}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{49}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{49}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{52}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}本章总结}{52}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{53}{chapter.5}
+\contentsline {section}{\numberline {5.1}总结}{53}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{53}{section.5.2}
+\contentsline {chapter}{简历与科研成果}{54}{chapter*.4}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{55}{chapter*.5}

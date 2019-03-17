@@ -2,19 +2,20 @@
 
 \section{轨迹检索服务详细设计}
 \subsection{概述}
-轨迹检索服务是在全文检索引擎ElasticSearch的基础上，扩展实现了单独的优先点树索引结构来实现的。由于服务对外接口访问，分布式，故障检测等功能由ElasticSearch提供，因此本文只关注具体索引结构的设计和实现。
-轨迹检索服务的核心思想是，以JTS-Geometry作为路径的存储形式，也就是只考虑路径的几何展现，不去考虑路径的方向性。并以豪斯多夫距离衡量两个Geometry之间的距离。两个Geometry之间的豪斯多夫距离越短，就认为两个Geometry越相似，也就认为两个路径越相似。基于这样的前提，我们将Geometry作为度量空间中的数据点，实际上把相似路径检索问题转化为Geometry的KNN问题，然后通过建立vp-tree的数据结构，进行求解。\textbf{注意：由于算法实现流程的细节较多，本文采用流程+实现+设计要点的顺序进行阐述，其中设计要点是对主流程实现细节的单独阐述。}
+轨迹检索服务是在全文检索引擎Lucene的基础上，扩展实现了单独的优先点树索引结构来实现的。
+核心思路是，以JTS-Geometry作为路径的存储形式，也就是只考虑路径的几何展现，不去考虑路径的方向性。并以豪斯多夫距离衡量两个Geometry 之间的距离。两个Geometry之间的豪斯多夫距离越短，就认为两个Geometry越相似，也就认为两个路径越相似。基于这样的前提，我们将Geometry作为度量空间中的数据点，实际上把相似路径检索问题转化为Geometry的KNN问题，然后通过建立和检索优先点树，进行求解。由于算法实现流程的细节较多，本文采用流程+实现+ 设计要点的顺序进行阐述，其中设计要点是对主流程实现细节的单独阐述。
 \subsection{优先点树索引类图}
-\begin{figure}[htp]
-  \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
-  \caption{优先点树索引类图}\label{vp-tree-general-structure}
-\end{figure}
-如\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree等等，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
+如图\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree等等，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
 
 Node是VpTree的实现的核心，是VpTree存储数据点Id，距离信息，子树边界，父节点指针，是否为叶节点等元信息。Vptree 的搜索算法和插入算法都是基于Node 的上溯，遍历，分裂和元数据移动进行的。
 
 DistanceCahce是对距离的缓存结构，以减少数据点之间距离的计算次数。它其实是一个针对特定轨迹的缓存结构，一个DistanceCache保存其他若干轨迹相对于目标轨迹的距离。所以在代码实现中，会有多个DistanceCache保存在内存里。为了避免在使用时一一遍历寻找特定轨迹的DistanceCache，本文在检索过程中保持DistanceCache 的栈与轨迹栈一一对应，从而顺序读取各个轨迹的cache,这在运行时消耗了相当数量的内存。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
+  \caption{优先点树索引类图}\label{vp-tree-general-structure}
+\end{figure}
 
 BitSetContext用于记录VpTree一条检索路径中各个非叶节点的分支已搜索状态，用于避免重复检索。与distanceCache一样，BitSetContext以通过顺序上的一一对应关系来维护和节点之间的对应性。而且目前BitSetContext 的实现中，依赖于外部的释放内存空间，BitSetContext本身没有设计垃圾回收机制。
 
@@ -29,9 +30,10 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 综上所述，整个VpTree结构的设计，是充分面对扩展的。对于未来可能出现的新的距离计算函数，采样方式，节点结构，数据点形式，有良好的适应性。只是在内存使用上，存在一定的瑕疵，这在未来版本的优化中会得到解决。
 
+
 \subsection{优先点树节点结构}
 本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=5in,height=3in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
   \caption{4路vp-tree的内部结构示意图}\label{vp-tree-structure1}
@@ -41,7 +43,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 如图所示初始建树实际上是一个递归的过程。但是为了避免出现内存溢出，本文选择了用循环+栈的模式。流程开始时，首先将根节点压栈，然后判断数据点的个数是不是小于叶节点的数据量标准。如果是，就意味着已经达到终止这一分支的条件，则直接初始化为叶节点，然后通过空流程返回循环判断。如果数据量仍然大于叶节点的数据量，就使用选取函数选择优先点，计算其他各个数据点到优先点的距离，再根据距离进行升序排序。\textbf{注意：由于此时有一个点被选做优先点，所以数据点总量要减一}，然后判断剩余的数据量是否大于扇出数，如果数据量已经不能满足全部的扇出，那么就初始化为单个非叶节点入栈，从而进入下一次循环。如果数据量依然足够分割全部的扇出，就按照距离排序的结果进行多路切分，用新建的子节点代表新的子树，并入栈。将距离值，上下界值和子节点指针分别填入对应的数组中，再进入下一次循环。以此类推，循环往复，完成所有数据点的建树操作。
 
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter4/create-node-flow.pdf}
   \caption{初始建树流程图}\label{create-node-flow}
@@ -59,7 +61,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 在初始建树的过程中，优先点选取是非常关键的一步。选取的好坏取决于一个优先点能否让切分出来的各路子树的边界值相差足够大，因为各路子树的边界值相差越大，在检索的时候，距离值落入某一子树的边界内的可能性越大，剪枝成功的可能性越高，性能就越好。反之，如果优先点选择很差，导致多个子树的上下界非常接近，就很容易出现一个距离值可能在多个子树中搜索的情况，造成性能下降。因此，如何选择尽可能优的优先点，是算法实现的重点。
 
 本文针对优先点选择的实现是基于随记取样和标准差结果的。本文认为，一个点与其他点距离的标准差越大，作为优先点的性能越好。而由于数据全量很大，不可能都计算，就采用随机抽样的方式进行。其设计思路是，在数据点全集中随机取样K 个点，作为候选的优先点。针对这K 个候选的优先点进行循环遍历，每个候选优先点再随机取K 个点作为参照点，然后计算每个候选优先点和参考点之间距离的标准差，最后取标准差最大的那个候选点作为真正的优先点。这样的选举过程涉及到取样，距离和标准差的计算，相当于用一部分初始建树性能的降低来换取了检索性能的提高。具体实现如图~\ref{select-vp-code}所示。
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/select-vp-code.pdf}
   \caption{优先点选取代码}\label{select-vp-code}
@@ -80,20 +82,22 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 基于上面所提到的容忍距离收敛较慢问题，本文采用了结果堆预填+回溯的方式进行优化处理。即通过原生vp-tree搜索算法，先找到single nearest neighbour，在这个过程中预填结果堆，并保存从root到single nearest neighbour的整条路径的所有节点。这样以结果堆中最大距离作为容忍距离，再回溯整条路径中的节点，完成检索。这样通过预先填结果堆，使得容忍距离以更低的起点收敛，收敛的速度更快，性能更好。
 
 \subsection{检索算法流程图}
-\begin{figure}[htp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/search-flow.pdf}
   \caption{检索算法流程图}\label{search-flow}
 \end{figure}
-\subsection{本文的算法实现的代码}
-\begin{figure}[htp]
+
+\subsection{检索最近邻居代码实现}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/findnn-code.pdf}
+  \includegraphics[width=6in,height=7.8in]{new_FIGs/chapter4/findnn-code.pdf}
   \caption{检索最近邻居代码}\label{findnn-code}
 \end{figure}
-\begin{figure}[htp]
+\subsection{预填结果集代码实现}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
+  \includegraphics[width=6in,height=7.8in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
   \caption{预填结果集代码}\label{trytoFillQueue-code}
 \end{figure}
 \subsection{设计焦点2：避免重复访问}
@@ -232,11 +236,26 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与地理数据库交
   \caption{地图局部更新功能代码实现}\label{tile_degree_compute}
 \end{figure}
 \subsection{更新一致性的原理}
-所谓的更新的一致性，指的是整体更新和分部更新结果的不一致。这主要是因为单纯的栅格坐标模糊取整很可能遗漏部分栅格瓦片，导致出现更新间隙的问题。对于这个问题的解决办法，是以bouding-box对一个TIle的侵占面积是否大于1/4作为是否更新的标准，如果超过1/4，则更新，否则不更新,具体理由如下。
+所谓的更新的一致性，指的是整体更新和分部分更新结果的不一致。这主要是因为单纯的栅格坐标模糊取整很可能遗漏部分栅格瓦片，导致出现更新空隙的问题。对于这个问题的解决办法，基于以下原则进行处理。
 
-1.首先判断用户bbox更新中设置的经纬度的差值在其所设定的zoom下，是否大于等于一个Tile的边长。如果用户划定的范围太小，要求的精度太高，则直接告知用户，在当前zoom下不能更新这个bbox。
+1.首先判断用户bbox更新中设置的经纬度的差值在其所设定的zoom下，是否大于等于一个Tile的边长。如果用户划定的范围太小，要求的精度太高，则直接告知用户，在当前zoom下不能更新这个bbox。如图\ref{tile_consistency0}所示，用户选定的更新范围s1的宽度小于Tile1的边长，而更新范围s2的长和宽都小于Tile2的边长。这两种情况下，都不对Tile进行更新。
 
-2.如果bbox的长度和宽度都大于等于Tile的边长。那么在这种情况下，对于任意一个Tile的bbox划分，如果bbox的划分本身是严密的，没有缝隙的。那么，1个Tile能且只能被划分为4个bbox,1个Tile对划分的4个bbox中，至少有一个，其面积超过了1/4。以此作为是否更新的标准，能够保证每一个TIle至少被更新了一次，从而避免了局部更新漏掉某些Tile产生更新缝隙的问题。
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/tile_consistency0.pdf}
+  \caption{瓦片更新前提情况}\label{tile_consistency0}
+\end{figure}
+
+2.如果bbox的长度和宽度都大于等于Tile的边长。那么在这种情况下，对于一个Tile的bbox划分。如果划分本身是严密的，没有缝隙的。那么，1 个Tile 能且只能被划分为4个bbox.而1个Tile的4个bbox划分中，至少有一个，其面积超过了1/4。以此作为是否更新的标准，能够保证每一个TIle至少被更新了一次，从而避免了局部更新漏掉某些Tile产生更新缝隙的问题。如图\ref{tile_consistency2}所示，图①所示，s1-s4，4块划分中，s1的面积显然大于总面积的1/4, 此时触发瓦片更新。而图②所示，s1-s4四块划分的面积都不足1/4，造成这种局面的原因是用户选定的bbox范围本身就存在间隙，没有填满整个Tile，这种情况下空隙是用户逻辑不完备造成的，瓦片数据服务不予更新。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/tile_consistency2.pdf}
+  \caption{瓦片更新条件}\label{tile_consistency2}
+\end{figure}
+
+综上所述，本文实现的瓦片数据服务更新一致性的功能是瓦片级别的弱一致性，其依据的是用户操作本身对bbox的一致性划分。
+
 \subsection{更新一致性的关键代码实现}
 \begin{figure}[H]
   \centering
