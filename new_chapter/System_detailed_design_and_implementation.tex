@@ -105,11 +105,17 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \subsection{优先点树的插入}
 在系统运行过程中，经常出现新的路径被插入的情况，这种情况下。如果每次都是将整个数据点集合重新进行初始建树，消耗会非常大。因此，有必要实现优先点树插入节点的相关算法。
 \subsection{Insert操作算法概述}
-优先点插入有以下几种情况。
+对于新数据点插入操作，首先要进行深度搜素，找到正确的叶节点，然后对应以下几种情况。
 
-第一，新插入的数据点所匹配的叶节点未满，则直接插入到该叶节点中。
+第一，新插入的数据点所匹配的叶节点未满，则直接插入到正确的叶节点的空槽位中。如图\ref{insert-show0}所示,新数据点e被插入叶节点L的空槽位中。这种情况下，只有数据赋值操作，没有距离计算，性能最好，之后几种情况的处理原则都是使后续插入尽可能满足第一种情况。注意，必须保证叶节点中数据点的顺序性，所有相关元信息的对应位置都要向后移动。
 
-第二，新插入的数据点所匹配的叶节点已满，但是其父节点分支数未满。则分裂匹配的叶节点，为父节点新增子叶节点，并且进行数据重分布。注意，分裂之后的数据重分布应该秉持均分的原则，以使空槽位尽可能均匀，从而使得后续的插入操作尽可能多地符合第一种情况，从而减少叶节点分裂和数据重分布的次数，从而提高性能。如图\ref{insert-show1}所示，数据点e本应插入在节点L的f之前，但是因为节点L已经满了，而节点P的分支数未满，此时将节点L分裂成两个新节点L2和L3,将节点L中原本相距节点P的优先点距离最远的数据点h,i分配给L3。以此实现了数据点e的插入。
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter4/insert-show0.pdf}
+  \caption{直接插入对应叶节点算法示意图}\label{insert-show0}
+
+\end{figure}
+第二，新插入的数据点所匹配的叶节点已满，但是其父节点分支数未满。则分裂匹配的叶节点，为父节点新增子叶节点，并且进行数据移动。注意，分裂之后的数据重分布应该秉持均分的原则，让空槽位尽可能均匀地分配在两个叶节点中，从而使得后续的插入操作尽可能多地符合叶节点不满的情况，避免发生连续多次分裂的情况。如图\ref{insert-show1} 所示，数据点e本应插入在节点L的f之前，但是因为节点L已经满了，而节点P的分支数未满，此时将节点L分裂成两个新节点L2 和L3,将节点L中原本相距节点P的优先点距离最远的数据点h,i分配给L3。以此实现了数据点e的插入。同时保证L2,L3两个叶节点都有空槽位，以备后面的插入操作。
 
 \begin{figure}[H]
   \centering
@@ -117,11 +123,11 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
   \caption{叶节点分裂算法示意图}\label{insert-show1}
 \end{figure}
 
-第三，新插入的数据点所匹配的叶节点已经满了，而且父节点的分支数也已经满了，不能再分裂出新的叶节点。这种情况下，采用以中心扩散的方式，寻找最邻接未满的兄弟节点，进行数据重分布。注意，次数的优先级应该是最近优先，因为单次Insert只会插入一个新的数据点，所以只要某一兄弟节点有一个空槽位，就能实现数据重分布，而以最近邻为优先是因为，重分布涉及到兄弟叶节点和目标叶节点之间的所有其他叶节点。两者之间的距离越远，需要重新分布的节点数就越多，消耗越大，反之，消耗越小。因此，此处以距离最近者优先。
+第三，新插入的数据点所匹配的叶节点已经满了，而且父节点的分支数也已经满了，不能再分裂出新的叶节点。这种情况下，采用\textbf{中心扩散}的方式寻找最临近未满的兄弟节点，进行数据重分布。注意，这里要考虑距离和空槽位数量两种因素。空槽位数量越多的叶节点，重分布之后空槽位分布越均匀，越适合进行数据重分布。但是重分布不只是涉及目标叶节点和兄弟叶节点，而是涉及到两者之间的所有叶节点。两者之间的距离越远，需要重新分布的节点数就越多，消耗越大，反之，消耗越小。所以此处应该以距离最近为优先，以最小化指针移动和元数据更新的消耗。在距离相同的情况下，根据叶节点空槽位的数量决定，空槽位越多的兄弟节点，越优先。如图\ref{insert-show2}所示数据点以本应插入到节点L2中，L2已满，则以中心扩散的方式，同时发现了两侧距离相同的未满节点L1和L3,此时发现L3中的空位比L1中多，因此选择L3进行数据重分布，完成e的插入。
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/insert-show2.pdf}
+  \includegraphics[width=6in,height=1in]{new_FIGs/chapter4/insert-show2.pdf}
   \caption{叶节点数据重分布算法示意图}\label{insert-show2}
 \end{figure}
 
@@ -174,7 +180,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 \subsection{插入算法流程图}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in,height=7.5in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
+  \includegraphics[width=6in,height=6.5in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{Insert算法实现1：已满叶节点的分裂}
@@ -259,7 +265,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与地理数据库交
 \subsection{更新一致性的关键代码实现}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/consistancy-code.pdf}
+  \includegraphics[width=6in,height=6in]{new_FIGs/chapter4/consistancy-code.pdf}
   \caption{判断是否覆盖当前瓦片的代码}\label{consistancy-code}
 \end{figure}
 \section{本章总结}

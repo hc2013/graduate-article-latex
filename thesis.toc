@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {3.2.1}轨迹数据服务的功能需求}{13}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{14}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{14}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}初始建立轨迹索引用例描述表}{15}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.4}初始建立轨迹索引用例描述表}{14}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}插入新数据用例描述表}{15}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}相似轨迹检索用例描述表}{16}{subsection.3.2.6}
 \contentsline {section}{\numberline {3.3}瓦片数据服务需求分析}{17}{section.3.3}
@@ -39,8 +39,6 @@
 \contentsline {subsection}{\numberline {3.3.3}瓦片数据服务非功能需求}{18}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}瓦片数据服务用例描述}{19}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}b-box更新地图瓦片数据用例描述表}{20}{subsection.3.3.6}
-\contentsline {subsection}{\numberline {3.3.7}特定区域瓦片数据中心渲染用例描述表}{20}{subsection.3.3.7}
 \contentsline {section}{\numberline {3.4}GTDS系统概要设计}{21}{section.3.4}
 \contentsline {section}{\numberline {3.5}本章总结}{21}{section.3.5}
 \contentsline {chapter}{\numberline {第四章\hspace {0.3em}}系统详细设计与实现}{23}{chapter.4}
@@ -67,20 +65,20 @@
 \contentsline {subsection}{\numberline {4.1.20}Insert操作算法细节4：存储数据点距离顺序}{40}{subsection.4.1.20}
 \contentsline {subsection}{\numberline {4.1.21}Insert操作算法细节4：非节点数据未满的判断}{40}{subsection.4.1.21}
 \contentsline {subsection}{\numberline {4.1.22}Insert操作算法综述}{40}{subsection.4.1.22}
-\contentsline {subsection}{\numberline {4.1.23}插入算法流程图}{42}{subsection.4.1.23}
-\contentsline {subsection}{\numberline {4.1.24}Insert算法实现1：已满叶节点的分裂}{43}{subsection.4.1.24}
-\contentsline {subsection}{\numberline {4.1.25}Insert算法实现2：叶节点数据重分布}{44}{subsection.4.1.25}
-\contentsline {subsection}{\numberline {4.1.26}Insert算法实现3：分支分裂}{45}{subsection.4.1.26}
-\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{46}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}概述}{46}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{47}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{48}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{49}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{49}{subsection.4.2.5}
-\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{52}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}本章总结}{52}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{53}{chapter.5}
-\contentsline {section}{\numberline {5.1}总结}{53}{section.5.1}
-\contentsline {section}{\numberline {5.2}进一步工作展望}{53}{section.5.2}
-\contentsline {chapter}{简历与科研成果}{54}{chapter*.4}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{55}{chapter*.5}
+\contentsline {subsection}{\numberline {4.1.23}插入算法流程图}{41}{subsection.4.1.23}
+\contentsline {subsection}{\numberline {4.1.24}Insert算法实现1：已满叶节点的分裂}{42}{subsection.4.1.24}
+\contentsline {subsection}{\numberline {4.1.25}Insert算法实现2：叶节点数据重分布}{43}{subsection.4.1.25}
+\contentsline {subsection}{\numberline {4.1.26}Insert算法实现3：分支分裂}{44}{subsection.4.1.26}
+\contentsline {section}{\numberline {4.2}地图瓦片服务详细设计}{45}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}概述}{45}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}地图局部更新功能概述}{46}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}地图局部更新功能流程图}{47}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{48}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{48}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}更新一致性的关键代码实现}{51}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}本章总结}{51}{section.4.3}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}总结和展望}{52}{chapter.5}
+\contentsline {section}{\numberline {5.1}总结}{52}{section.5.1}
+\contentsline {section}{\numberline {5.2}进一步工作展望}{52}{section.5.2}
+\contentsline {chapter}{简历与科研成果}{53}{chapter*.4}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{54}{chapter*.5}
