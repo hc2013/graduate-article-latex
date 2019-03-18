@@ -7,17 +7,28 @@
 \end{figure}
 如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
 \section{服务性能测试报告}
+本文针对服务的初始建树功能和相似检索功能进行了性能测试。
 \subsection{测试环境}
 \begin{table}[H]\footnotesize
 \centering
 \caption{测试环境参数列表}
-\begin{tabular}{|l|l|}
+\begin{tabular}{|p{13.5mm}|p{86mm}|}
 \hline
-\textbf{数据来源}&\tabincell{l}{从12306网站爬取的8000条火车轨迹数据}\\
+\textbf{数据来源}&\tabincell{l}{从12306网站爬取的8000条真实火车轨迹数据}\\
 \hline
 \textbf{机器配置}&\tabincell{l}{32核，128G内存，3*1T sata}\\
 \hline
-\textbf{测试条件}&\tabincell{l}{单节点JVM,堆内存32G}
+\textbf{测试条件}&\tabincell{l}{单节点JVM,堆内存32G}\\
+\hline
 \end{tabular}
 \label{table:performance_test_table}
 \end{table}
+\subsection{写入测试结果}
+客户端以 bulk 方式写入，每 1000 个请求构成 1 个 bulk，4kw 的测试集，初始建树耗时 30min。
+\subsection{相似检索测试结果}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter5/search_time.pdf}
+  \caption{轨迹相似检索性能测试结果}\label{search_time}
+\end{figure}
+如图\ref{search_time}所示，横轴表示客户端的并发数，纵轴表示查询响应时间(单位为 ms)。不同的折线表示 size 取不同值的结果。能够看出检索时间随着size的增加而增加，最终都基本上稳定在1.5s以内。
