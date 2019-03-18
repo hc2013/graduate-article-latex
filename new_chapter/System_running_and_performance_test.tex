@@ -1,0 +1,23 @@
+\chapter{系统运行效果与性能测试}
+\section{轨迹检索运行效果展示}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6in]{new_FIGs/chapter5/running.pdf}
+  \caption{轨迹检索运行效果}\label{running}
+\end{figure}
+如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
+\section{服务性能测试报告}
+\subsection{测试环境}
+\begin{table}[H]\footnotesize
+\centering
+\caption{测试环境参数列表}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{数据来源}&\tabincell{l}{从12306网站爬取的8000条火车轨迹数据}\\
+\hline
+\textbf{机器配置}&\tabincell{l}{32核，128G内存，3*1T sata}\\
+\hline
+\textbf{测试条件}&\tabincell{l}{单节点JVM,堆内存32G}
+\end{tabular}
+\label{table:performance_test_table}
+\end{table}
