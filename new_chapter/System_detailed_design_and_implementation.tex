@@ -26,7 +26,7 @@ GeomtrySorter ÊÇÒ»¸öÅÅĞò¹¤¾ßÀà£¬ÓÃÓÚ¶ÔBulkLoadContextÖĞµÄ¹ì¼£½øĞĞÅÅĞò£¬ÒÔÓ¦¶Ô³õÊ
 
 GeomtryDistanceFunctionÊÇVpTreeÊı¾İµã¼ä¾àÀë¼ÆËãµÄ½Ó¿Ú£¬±¾ÎÄÊµÏÖµÄËã·¨HausdorffDistance²ÉÓÃºÀË¹¶à·ò¾àÀë£¬µ«ÕâÏÔÈ»²»ÊÇÎ¨Ò»Ò»ÖÖ¾àÀëºâÁ¿·½Ê½¡£Òò´ËÔ¤Áô½Ó¿Ú£¬ÒÔ±¸À©³ä¡£
 
-SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡·½·¨£¬Î´À´¿ÉÄÜ»áÓĞ¸üºÏÀíµÄÊµÏÖ¡£\textbf{ÆäÊµ£¬Ëæ»úÈ¡ÓÅÏÈµãÒ²ÊÇÒ»ÖÖ¿ÉÑ¡·½Ê½¡£}SamplerÊÇÈ¡ÑùÆ÷µÄÊµÏÖÀà£¬ÔÚ×î´ó±ê×¼²îSampleSelectVpStrategyµÄÊµÏÖÖĞ£¬Ê¹ÓÃÁË²ÉÓÃÆ÷½øĞĞ²ÉÑù£¬Ä¿Ç°µÄ²ÉÑùÆ÷µÄÊµÏÖÖ»ÓĞÒ»ÖÖReservoirSampler¡£
+SelectVpStrategyÊÇVpTreeÓÃÓÚÑ¡ÔñÓÅÏÈµãµÄ²ßÂÔ½Ó¿Ú£¬±¾ÎÄÄ¿Ç°Ö»Ö§³Ö×î´ó±ê×¼²îµÄÑ¡È¡·½·¨¡£ÆäÊµ£¬Ëæ»úÈ¡ÓÅÏÈµãÒ²ÊÇÒ»ÖÖ¿ÉÑ¡·½Ê½¡£SamplerÊÇÈ¡ÑùÆ÷µÄÊµÏÖÀà£¬ÔÚ×î´ó±ê×¼²îSampleSelectVpStrategyµÄÊµÏÖÖĞ£¬Ê¹ÓÃÁË²ÉÓÃÆ÷½øĞĞ²ÉÑù£¬Ä¿Ç°µÄ²ÉÑùÆ÷µÄÊµÏÖÖ»ÓĞÒ»ÖÖReservoirSampler¡£
 
 ×ÛÉÏËùÊö£¬Õû¸öVpTree½á¹¹µÄÉè¼Æ£¬ÊÇ³ä·ÖÃæ¶ÔÀ©Õ¹µÄ¡£¶ÔÓÚÎ´À´¿ÉÄÜ³öÏÖµÄĞÂµÄ¾àÀë¼ÆËãº¯Êı£¬²ÉÑù·½Ê½£¬½Úµã½á¹¹£¬Êı¾İµãĞÎÊ½£¬ÓĞÁ¼ºÃµÄÊÊÓ¦ĞÔ¡£Ö»ÊÇÔÚÄÚ´æÊ¹ÓÃÉÏ£¬´æÔÚÒ»¶¨µÄè¦´Ã£¬ÕâÔÚÎ´À´°æ±¾µÄÓÅ»¯ÖĞ»áµÃµ½½â¾ö¡£
 
@@ -202,6 +202,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
   \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/insert-code3.pdf}
   \caption{·ÖÖ§·ÖÁÑ´úÂëÊµÏÖ}\label{branch-split}
 \end{figure}
+·ÖÖ§·ÖÁÑÓëÒ¶½Úµã·ÖÁÑ×î´óµÄ²»Í¬£¬¾ÍÊÇ±ØĞë¶Ô·ÖÖ§ËùÓµÓĞµÄÊı¾İµã¼¯ºÏ½øĞĞÖØĞÂ½¨Ê÷¡£ÈçÍ¼\ref{branch-split}ËùÊ¾µÄ£¬makeVpTree·½·¨ÆäÊµÊÇcreateNode·½·¨µÄ·â×°ÊµÏÖ£¬ÆäÄ¿µÄ¶¼ÊÇÒÔÄ³Ò»½ÚµãÎª¸ù½Úµã½¨Á¢×ÓÊ÷¡£¶ø·ÖÖ§ÅäÖÃĞÅÏ¢µÄÒÆ¶¯º¯ÊıshiftBranchInfoµÄÊµÏÖÓëÇ°ÎÄËùÏÖÒ»ÖÂ£¬´Ë´¦Ê¡ÂÔ£¬²»ÔÙÕ¹Ê¾¡£
 \section{µØÍ¼ÍßÆ¬·şÎñÏêÏ¸Éè¼Æ}
 \subsection{¸ÅÊö}
 µØÍ¼ÍßÆ¬·şÎñµÄ¹¦ÄÜÎªÕû¸öÏµÍ³Ìá¹©¿ÉÊÓ»¯µØÍ¼Êı¾İµÄ·şÎñ¡£ËüÊÇ»ùÓÚNodejs Express¿ò¼ÜÊµÏÖµÄ£¬·ûºÏMapBoxÊı¾İ±ê×¼µÄÊı¾İÎ¢·şÎñ¡£\textbf{MapBoxÊÇÒµÄÚÍ¨ÓÃ±ê×¼£¬·ûºÏMapbox±ê×¼ÊÇÎªÁËÈ·±£Í¨ÓÃĞÔ¡£}ËüµÄËùÓĞÊı¾İ·şÎñ¶¼Í¨¹ırest½Ó¿Ú±©Â¶¸øµ÷ÓÃ·½¡£
@@ -249,7 +250,7 @@ db\_serviceÊÇÃæÏò¸÷ÖÖ²»Í¬Êı¾İ¿âµÄÍ¨ÓÃ·ÃÎÊ½Ó¿Ú²ã£¬ÆäÊÇdata\_serviceÓëµØÀíÊı¾İ¿â½»
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/tile_consistency0.pdf}
+  \includegraphics[width=6in,height=2.3in]{new_FIGs/chapter4/tile_consistency0.pdf}
   \caption{ÍßÆ¬¸üĞÂÇ°ÌáÇé¿ö}\label{tile_consistency0}
 \end{figure}
 
@@ -257,16 +258,15 @@ db\_serviceÊÇÃæÏò¸÷ÖÖ²»Í¬Êı¾İ¿âµÄÍ¨ÓÃ·ÃÎÊ½Ó¿Ú²ã£¬ÆäÊÇdata\_serviceÓëµØÀíÊı¾İ¿â½»
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/tile_consistency2.pdf}
+  \includegraphics[width=6in,height=2.7in]{new_FIGs/chapter4/tile_consistency2.pdf}
   \caption{ÍßÆ¬¸üĞÂÌõ¼ş}\label{tile_consistency2}
 \end{figure}
 
 ×ÛÉÏËùÊö£¬±¾ÎÄÊµÏÖµÄÍßÆ¬Êı¾İ·şÎñ¸üĞÂÒ»ÖÂĞÔµÄ¹¦ÄÜÊÇÍßÆ¬¼¶±ğµÄÈõÒ»ÖÂĞÔ£¬ÆäÒÀ¾İµÄÊÇÓÃ»§²Ù×÷±¾Éí¶ÔbboxµÄÒ»ÖÂĞÔ»®·Ö¡£
 
-\subsection{¸üĞÂÒ»ÖÂĞÔµÄ¹Ø¼ü´úÂëÊµÏÖ}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in,height=6in]{new_FIGs/chapter4/consistancy-code.pdf}
+  \includegraphics[width=6in,height=4.0in]{new_FIGs/chapter4/consistancy-code.pdf}
   \caption{ÅĞ¶ÏÊÇ·ñ¸²¸Çµ±Ç°ÍßÆ¬µÄ´úÂë}\label{consistancy-code}
 \end{figure}
 \section{±¾ÕÂ×Ü½á}
