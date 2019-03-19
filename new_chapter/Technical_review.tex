@@ -2,7 +2,7 @@
 
 \section{ÓÅÏÈµãÊ÷}
 \subsection{NNÎÊÌâ}
-Nearest Neighbour ÎÊÌâ£¬¼´×î½üÁÚ¾ÓÎÊÌâ¡£Ö¸µÄÊÇÕë¶Ô¿Õ¼äÖÐµÄÒ»¸öµã¼¯£¬¶¨ÒåÒ»¸ö¾àÀëº¯Êýd£¨ÕâÀïµÄ¾àÀëº¯Êýd°üÀ¨µ«²»½öÏÞÓÚÅ·¼¸ÀïµÃ¾àÀë£©£¬ÄÇÃ´¶ÔÓÚÒ»¸ö¸ø¶¨µÄÄ¿±êËÑË÷µãq£¬ÕÒµ½¾àÀëq µãµÄ¾àÀë×îÐ¡Ò»¸öµã£¬Õâ¾ÍÊÇ×î½üÁÚ¾ÓÎÊÌâ¡£Ïà¶ÔÓ¦µÄ£¬ÒªÕÒµ½Óëqµã¾àÀë×î½üµÄK¸öµã£¬¾ÍÊÇKNNÎÊÌâ¡£
+Nearest Neighbour ÎÊÌâ£¬¼´×î½üÁÚ¾ÓÎÊÌâ¡£Ö¸µÄÊÇÕë¶Ô¿Õ¼äÖÐµÄÒ»¸öµã¼¯£¬¶¨ÒåÒ»¸ö¾àÀëº¯Êýd£¨ÕâÀïµÄ¾àÀëº¯Êýd°üÀ¨µ«²»½öÏÞÓÚÅ·¼¸ÀïµÃ¾àÀë£©£¬ÄÇÃ´¶ÔÓÚÒ»¸ö¸ø¶¨µÄÄ¿±êËÑË÷µãq£¬ÕÒµ½¾àÀëq µãµÄ¾àÀë×îÐ¡Ò»¸öµã£¬Õâ¾ÍÊÇ×î½üÁÚ¾ÓÎÊÌâ\cite{DBLP:journals/ijon/Mateos-GarciaGS19}¡£Ïà¶ÔÓ¦µÄ£¬ÒªÕÒµ½Óëqµã¾àÀë×î½üµÄK¸öµã£¬¾ÍÊÇKNNÎÊÌâ¡£
 
 Õë¶ÔNNÎÊÌâ£¬Èç¹û²ÉÓÃÏßÐÔ±éÀúµÄ·½Ê½¿¼ÂÇËùÓÐµã£¬½«»áÔì³ÉºÜ´óµÄÐÔÄÜËðºÄ¡£¶øÒ»¸ö±È½ÏºÏÀíµÄË¼Â·ÊÇ£¬½«¶þ·Ö²éÕÒµÄÂß¼­Ó¦ÓÃÓÚµã¼¯ºÏµÄ¼ìË÷£¬´Ó¶øÄÜ½«Ê±¼äËðºÄ½µµÍÎªlog(N)¼¶±ð¡£Ò²¾ÍÊÇËµ£¬Èç¹ûÄÜ¹»ÊµÏÖÒÔnlog(N)µÄÊ±¼äÏûºÄ½«µã¼¯ºÏ½¨Á¢³ÉÄ³ÖÖÓÐÐòµÄÊý¾Ý½á¹¹¡£ÄÇÃ´ÔÚËÑË÷Ê±£¬¾Í¿ÉÒÔÍ¨¹ýÀàËÆÓÚ¶þ·Ö²éÕÒµÄ·½Ê½´ïµ½log(N)¼¶±ðµÄËÙ¶È\cite{DBLP:conf/soda/Yianilos93}¡£
 
@@ -10,7 +10,8 @@ Nearest Neighbour ÎÊÌâ£¬¼´×î½üÁÚ¾ÓÎÊÌâ¡£Ö¸µÄÊÇÕë¶Ô¿Õ¼äÖÐµÄÒ»¸öµã¼¯£¬¶¨ÒåÒ»¸ö¾àÀë
 vp-tree(vantage point tree),ÖÐÎÄÃû³Æ£¬ÓÅÏÈµãÊ÷£¬ÕýÊÇÉÏÊöË¼Â·µÄÒ»ÖÖÊµÏÖ¡£vp-tree´ÓÔ­ÀíÉÏËµ£¬ÊÇ»ùÓÚÈý½Ç²»µÈÊ½½øÐÐµÝ¹é·Ö½âµÄ¼ôÖ¦¼¼Êõ£¬ÆäºËÐÄË¼Ïëµì»ùÁËÁ½ÖÖÇé¿öÏÂµÄÕýÈ·ÐÔ¡£µÚÒ»ÖÖ£¬ÊÇÔÚ¼ìË÷¹ý³ÌÖÐ£¬¶ÔÓÚÄÇÐ©Ô¶Ô¶³¬³öËÑË÷·¶Î§µÄ·ÖÖ§£¬¾Í²»ÐèÒª½øÐÐËÑË÷ÁË¡£µÚ¶þÖÖ£¬ÊÇµ±ËÑË÷Ä¿±êµãÏÔÈ»ÔÚÄ³Ò»¸ö·¶Î§ÄÚµÄÊ±ºò£¬Íâ²¿µÄÆäËû·ÖÖ§¾Í¶¼²»±ØËÑË÷ÁË\cite{DBLP:journals/tc/FukunagaN75}¡£»ùÓÚÕâÁ½¸öÔ­Ôò£¬ËÑË÷µãµÄÊýÁ¿ºÍµãÖ®¼ä¾àÀë¼ÆËãµÄ´ÎÊý¶¼±»´ó·ù¶ÈµØ¼õÉÙ£¬´Ó¶øÏÔÖøÌáÉýÁËÐÔÄÜ¡£
 
 \subsection{ÓÅÏÈµãÊ÷µÄ»ù±¾Ô­Àí}
-vp-treeµÄ»ù±¾Ë¼Â·¾ÍÊÇ¶Ôµã¼¯ºÏ½øÐÐ¿Õ¼ä»®·Ö¡£µÚÒ»²½£¬ÒªÑ¡ÔñÒ»¸öµã×÷Îªvantage point£¬Ò²¾ÍÊÇÓÅÏÈµã¡£µÚ¶þ²½£¬¼¯ºÏÖÐµÄËùÓÐµãÒª¼ÆËã×Ô¼ºÓëvpµÄ¾àÀë¡£µÚÈý²½£¬¸ù¾Ý¾àÀëÖµµÄ´óÐ¡½«µã¼¯ºÏ¾ù·ÖÎªÁ½Ö§£¬¾àÀëÐ¡ÓÚµÈÓÚÖÐÖµµÄÎªleft/inside×Ó¼¯ºÏ£¬¾àÀë´óÓÚµÈÓÚÖÐÖµÎªright/outside×Ó¼¯ºÏ¡£µÚËÄ²½£¬ÒÔleft/inside¼¯ºÏ×÷Îª×ó×ÓÊ÷µÄ¸ù½Úµã£¬right/outside¼¯ºÏÎªÓÒ×ÓÊ÷µÄ¸ù½Úµã£¬ÔÙÕë¶ÔÕâÁ½¿Ã×ÓÊ÷·Ö±ðµÝ¹éµØ½øÐÐÉÏÊö»®·Ö£¬´Ó¶øÐÎ³ÉÒ»¿ÅÆ½ºâµÄ¶þ²æÊ÷¡£ÈçÍ¼\ref{vp_left_rightCH2}ËùÊ¾£¬vp-treeÊµÏÖÁËÕû¸öµã¼¯ºÏÄÚ²¿µÄÒ»¸öÇò×´·Ö¸î¡£¶øÔÚÕû¸öÊý¾Ý¿Õ¼äÖÐ£¬´óÁ¿µÄÊý¾Ýµã¼¯ºÏ±»ÒÔ²»Í¬µÄÓÅÏÈµãÎªÖÐÐÄ»®·Ö³ÉÁË´óÁ¿µÄÏà»¥½»´íµÄÇòÐÍ×Ó¿Õ¼ä¡£ÈçÍ¼\ref{vp_tree_decompositionCH2}ËùÊ¾¡£
+vp-treeµÄ»ù±¾Ë¼Â·¾ÍÊÇ¶Ôµã¼¯ºÏ½øÐÐ¿Õ¼ä»®·Ö¡£µÚÒ»²½£¬ÒªÑ¡ÔñÒ»¸öµã×÷Îªvantage point£¬Ò²¾ÍÊÇÓÅÏÈµã¡£µÚ¶þ²½£¬¼¯ºÏÖÐµÄËùÓÐµãÒª¼ÆËã×Ô¼ºÓëvpµÄ¾àÀë¡£µÚÈý²½£¬¸ù¾Ý¾àÀëÖµµÄ´óÐ¡½«µã¼¯ºÏ¾ù·ÖÎªÁ½Ö§£¬¾àÀëÐ¡ÓÚµÈÓÚÖÐÖµµÄÎªleft/inside×Ó¼¯ºÏ£¬¾àÀë´óÓÚµÈÓÚÖÐÖµÎªright/outside×Ó¼¯ºÏ¡£
+\cite{DBLP:conf/eccv/2008-2}µÚËÄ²½£¬ÒÔleft/inside¼¯ºÏ×÷Îª×ó×ÓÊ÷µÄ¸ù½Úµã£¬right/outside¼¯ºÏÎªÓÒ×ÓÊ÷µÄ¸ù½Úµã£¬ÔÙÕë¶ÔÕâÁ½¿Ã×ÓÊ÷·Ö±ðµÝ¹éµØ½øÐÐÉÏÊö»®·Ö£¬´Ó¶øÐÎ³ÉÒ»¿ÅÆ½ºâµÄ¶þ²æÊ÷¡£ÈçÍ¼\ref{vp_left_rightCH2}ËùÊ¾£¬vp-treeÊµÏÖÁËÕû¸öµã¼¯ºÏÄÚ²¿µÄÒ»¸öÇò×´·Ö¸î¡£¶øÔÚÕû¸öÊý¾Ý¿Õ¼äÖÐ£¬´óÁ¿µÄÊý¾Ýµã¼¯ºÏ±»ÒÔ²»Í¬µÄÓÅÏÈµãÎªÖÐÐÄ»®·Ö³ÉÁË´óÁ¿µÄÏà»¥½»´íµÄÇòÐÍ×Ó¿Õ¼ä¡£ÈçÍ¼\ref{vp_tree_decompositionCH2}ËùÊ¾¡£
 \begin{figure}[H]
   \centering
   \includegraphics[width=2.5in]{new_FIGs/chapter2/vp_left_right1.pdf}
@@ -73,7 +74,7 @@ Doc-Value:Doc-ValueÊÇLuceneÕë¶ÔÎÄµµÄÚÈÝ½¨Á¢µÄÕýÅÅË÷Òý£¬¿ÉÒÔ½«ÆäÀí½âÎªÒÔDoc-IdÎªk
 
 µ¹ÅÅË÷Òý£ºµ¹ÅÅË÷Òý£¨Ó¢Óï£ºInverted index£©£¬Ò²³£±»³ÆÎª·´ÏòË÷Òý¡¢ÖÃÈëµµ°¸»ò·´Ïòµµ°¸£¬ÊÇÒ»ÖÖË÷Òý·½·¨£¬±»ÓÃÀ´´æ´¢ÔÚÈ«ÎÄËÑË÷ÏÂÄ³¸öµ¥´ÊÔÚÒ»¸öÎÄµµ»òÕßÒ»×éÎÄµµÖÐµÄ´æ´¢Î»ÖÃµÄÓ³Éä¡£ËüÊÇÎÄµµ¼ìË÷ÏµÍ³ÖÐ×î³£ÓÃµÄÊý¾Ý½á¹¹¡£\cite{DBLP:journals/jcst/BoucennaNKK19}
 
-ÈçÍ¼~\ref{invert-indexCH2}ËùÊ¾£¬½¨Á¢µ¹ÅÅË÷Òý£¬Ê×ÏÈÒª¸ù¾ÝÍ£ÓÃ´ÊÁÐ±í¶ÔÎÄÕÂÄÚÈÝ½øÐÐ·Ö´Ê£¬ÕÒ³öËùÓÐµÄÊµ´Ê£¬ÔÙ½¨Á¢´ÊÌõµ½ÎÄµµÁÐ±íµÄÒ»¸öÓ³Éä¡£µ±¼ìË÷Ê±£¬Ö±½Ó¸ù¾ÝÓÃ»§ÊäÈëµÄ¹Ø¼ü´Ê£¬²éÑ¯´Êµä£¬¾Í¿ÉÒÔÕÒµ½ÕâÐ©´ÊÓï·Ö±ð¶¼³öÏÖÔÚÄÇÐ©ÎÄµµÖÐ¡£ÔÙ¸ù¾ÝÏàÓ¦µÄ´ò·ÖËã·¨¶ÔÃüÖÐµÄÎÄµµ¼ÆËã·ÖÊý£¬ÅÅÐò£¬·µ»Ø¼ìË÷½á¹û¡£
+ÈçÍ¼~\ref{invert-indexCH2}ËùÊ¾\cite{inverted-index}£¬½¨Á¢µ¹ÅÅË÷Òý£¬Ê×ÏÈÒª¸ù¾ÝÍ£ÓÃ´ÊÁÐ±í¶ÔÎÄÕÂÄÚÈÝ½øÐÐ·Ö´Ê£¬ÕÒ³öËùÓÐµÄÊµ´Ê£¬ÔÙ½¨Á¢´ÊÌõµ½ÎÄµµÁÐ±íµÄÒ»¸öÓ³Éä¡£µ±¼ìË÷Ê±£¬Ö±½Ó¸ù¾ÝÓÃ»§ÊäÈëµÄ¹Ø¼ü´Ê£¬²éÑ¯´Êµä£¬¾Í¿ÉÒÔÕÒµ½ÕâÐ©´ÊÓï·Ö±ð¶¼³öÏÖÔÚÄÇÐ©ÎÄµµÖÐ¡£ÔÙ¸ù¾ÝÏàÓ¦µÄ´ò·ÖËã·¨¶ÔÃüÖÐµÄÎÄµµ¼ÆËã·ÖÊý£¬ÅÅÐò£¬·µ»Ø¼ìË÷½á¹û¡£
 \begin{figure}[H]
   \centering
   \includegraphics[width=4.5in,height=2.5in]{new_FIGs/chapter2/invert-index.pdf}
@@ -93,7 +94,7 @@ WGS-84×ø±êÏµ£¨World Geodetic SystemÒ»1984 Coordinate System£©£¬Ò»ÖÖ¹ú¼ÊÉÏ²ÉÓÃµÄµ
 
 \subsection{µØÍ¼ÍßÆ¬}
 µØÍ¼ÍßÆ¬Ö¸µÄÊÇÍ¨¹ý¾­¹ýÄ«¿¨ÍÐÍ¶Ó°ÎªÆ½ÃæµÄÊÀ½çµØÍ¼£¬ÔÚ²»Í¬µÄµØÍ¼·Ö±æÂÊ(Õû¸öÊÀ½çµØÍ¼µÄÏñËØ´óÐ¡)ÏÂ£¬Í¨¹ýÇÐ¸îµÄ·½Ê½½«ÊÀ½çµØÍ¼»®·ÖÎªÏñËØÎª$256\times256$µÄµØÍ¼µ¥Ôª£¬»®·Ö³ÉµÄÃ¿Ò»¿éµØÍ¼µ¥Ôª³ÆÎªµØÍ¼ÍßÆ¬¡£\cite{TileIntro}Ã¿Ò»¸öÍßÆ¬ÔÚµØÍ¼Æ½ÃæÄÚ¶ÔÓ¦µÄºáÖá£¬×ÝÖá×ø±ê¾ÍÊÇÍßÆ¬×ø±ê¡£ÈçÍ¼
-\ref{tilePyramid2CH2}ËùÊ¾¡£ÍßÆ¬µÈ¼¶levelºÍÍßÆ¬×ø±ê£¨tileX,tileY)Ò»Í¬Î¨Ò»È·¶¨ÁËÒ»¸ö¶þ½øÖÆÊý¾Ý¾ÍÊÇÍßÆ¬Êý¾Ý¡£ÍßÆ¬Êý¾Ý°üÀ¨Õ¤¸ñÍßÆ¬Êý¾ÝºÍÊ¸Á¿ÍßÆ¬Êý¾Ý¡£ÔÚÍ¨ÓÃµÄÊý¾Ý´æ´¢¸ñÊ½ÖÐ£¬Ò»°ã¶¼ÊÇ°Ñlevel,x,y ×÷ÎªÒ»ÕÅÊý¾Ý¿â±í¸ñµÄÎ¨Ò»Ö÷¼ü£¬ÍßÆ¬Êý¾Ý×÷ÎªÁÐÖµ½øÐÐ´æ´¢¡£
+\ref{tilePyramid2CH2}ËùÊ¾¡£ÍßÆ¬µÈ¼¶levelºÍÍßÆ¬×ø±ê£¨tileX,tileY)Ò»Í¬Î¨Ò»È·¶¨ÁËÒ»¸ö¶þ½øÖÆÊý¾Ý¾ÍÊÇÍßÆ¬Êý¾Ý¡£ÍßÆ¬Êý¾Ý°üÀ¨Õ¤¸ñÍßÆ¬Êý¾ÝºÍÊ¸Á¿ÍßÆ¬Êý¾Ý¡£\cite{DBLP:conf/w2gis/AntoniouMH09}ÔÚÍ¨ÓÃµÄÊý¾Ý´æ´¢¸ñÊ½ÖÐ£¬Ò»°ã¶¼ÊÇ°Ñlevel,x,y ×÷ÎªÒ»ÕÅÊý¾Ý¿â±í¸ñµÄÎ¨Ò»Ö÷¼ü£¬ÍßÆ¬Êý¾Ý×÷ÎªÁÐÖµ½øÐÐ´æ´¢¡£
 \begin{figure}[htp]
   \centering
   \includegraphics[width=4.5in,height=2.5in]{new_FIGs/chapter2/tilePyramid2.pdf}

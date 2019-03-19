@@ -13,6 +13,13 @@ Gao Q, Zhang FL, Wang RJ, and Zhou F.
 {tileserver System}.
 \newblock \url{http://tileserver.org}.
 
+\bibitem{DBLP:journals/ijon/Mateos-GarciaGS19}
+Daniel Mateos{-}Garc{\'{\i}}a, Jorge Garc{\'{\i}}a{-}Guti{\'{e}}rrez, and
+  Jos{\'{e}} Crist{\'{o}}bal~Riquelme Santos.
+\newblock On the evolutionary weighting of neighbours and features in the
+  k-nearest neighbour rule.
+\newblock {\em Neurocomputing}, 326-327:54--60, 2019.
+
 \bibitem{DBLP:conf/soda/Yianilos93}
 Peter~N. Yianilos.
 \newblock Data structures and algorithms for nearest neighbor search in general
@@ -23,6 +30,13 @@ Peter~N. Yianilos.
 Keinosuke Fukunaga and Patrenahalli~M. Narendra.
 \newblock A branch and bound algorithms for computing k-nearest neighbors.
 \newblock {\em {IEEE} Trans. Computers}, 24(7):750--753, 1975.
+
+\bibitem{DBLP:conf/eccv/2008-2}
+David~A. Forsyth, Philip H.~S. Torr, and Andrew Zisserman, editors.
+\newblock {\em Computer Vision - {ECCV} 2008, 10th European Conference on
+  Computer Vision, Marseille, France, October 12-18, 2008, Proceedings, Part
+  {II}}, volume 5303 of {\em Lecture Notes in Computer Science}. Springer,
+  2008.
 
 \bibitem{DBLP:journals/aai/HirschB18}
 Laurence Hirsch and Teresa Brunsdon.
@@ -60,10 +74,26 @@ Fateh Boucenna, Omar Nouali, Samir Kechid, and M.~Tahar Kechadi.
 \newblock 谷歌地图卫星影像数据获取关键技术研究.
 \newblock {\em 测绘与空间地理信息}, 41(10):79--81, 2018.
 
+\bibitem{DBLP:conf/w2gis/AntoniouMH09}
+Vyron Antoniou, Jeremy Morley, and Mordechai~(Muki) Haklay.
+\newblock Tiled vectors: {A} method for vector transmission over the web.
+\newblock In {\em Web and Wireless Geographical Information Systems, 9th
+  International Symposium, {W2GIS} 2009, Maynooth, Ireland, December 7-8, 2009.
+  Proceedings}, pages 56--71, 2009.
+
 \bibitem{TilePyramid}
 霍亮 杨耀东 刘小勇~乔文昊 朱王璋.
 \newblock 瓦片金字塔模型技术的研究与实践.
 \newblock {\em 测绘科学}, 37(06):144--146, 2012.
+
+\bibitem{DBLP:conf/nbis/Osborn17}
+Wendy Osborn.
+\newblock A \emph{k}-nearest neighbour query processing strategy using the
+  mqr-tree.
+\newblock In {\em Advances in Network-Based Information Systems, The 20th
+  International Conference on Network-Based Information Systems, NBiS 2017,
+  Ryerson University, Toronto, ON, Canada, August 24-26, 2017.}, pages
+  566--577, 2017.
 
 \bibitem{DBLP:journals/vldb/FuCCM00}
 Ada~Wai{-}Chee Fu, Polly~Mei{-}shuen Chan, Yin{-}Ling Cheung, and Yiu~Sang
@@ -71,5 +101,18 @@ Ada~Wai{-}Chee Fu, Polly~Mei{-}shuen Chan, Yin{-}Ling Cheung, and Yiu~Sang
 \newblock Dynamic vp-tree indexing for n-nearest neighbor search given
   pair-wise distances.
 \newblock {\em {VLDB} J.}, 9(2):154--173, 2000.
+
+\bibitem{DBLP:journals/classification/ProencaN17}
+Hugo Proen{\c{c}}a and Jo{\~{a}}o~C. Neves.
+\newblock Fusing vantage point trees and linear discriminants for fast feature
+  classification.
+\newblock {\em J. Classification}, 34(1):85--107, 2017.
+
+\bibitem{DBLP:conf/hucc/ZengLJLCM14}
+Guohang Zeng, Qiaozhi Li, Huiming Jia, Xingliang Li, Yadi Cai, and Rui Mao.
+\newblock An inclusion rule for vantage point tree range query processing.
+\newblock In {\em Human Centered Computing - First International Conference,
+  {HCC} 2014, Phnom Penh, Cambodia, November 27-29, 2014, Revised Selected
+  Papers}, pages 777--783, 2014.
 
 \end{thebibliography}

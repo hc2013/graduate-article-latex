@@ -5,7 +5,7 @@
 轨迹检索服务是在全文检索引擎Lucene的基础上，扩展实现了单独的优先点树索引结构来实现的。
 核心思路是，以JTS-Geometry作为路径的存储形式，也就是只考虑路径的几何展现，不去考虑路径的方向性。并以豪斯多夫距离衡量两个Geometry 之间的距离。两个Geometry之间的豪斯多夫距离越短，就认为两个Geometry越相似，也就认为两个路径越相似。基于这样的前提，我们将Geometry作为度量空间中的数据点，实际上把相似路径检索问题转化为Geometry的KNN问题，然后通过建立和检索优先点树，进行求解。由于算法实现流程的细节较多，本文采用流程+实现+ 设计要点的顺序进行阐述，其中设计要点是对主流程实现细节的单独阐述。
 \subsection{优先点树索引类图}
-如图\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree等等，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
+如图\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree,mqr-tree等等\cite{DBLP:conf/nbis/Osborn17}，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
 
 Node是VpTree的实现的核心，是VpTree存储数据点Id，距离信息，子树边界，父节点指针，是否为叶节点等元信息。Vptree 的搜索算法和插入算法都是基于Node 的上溯，遍历，分裂和元数据移动进行的。
 
@@ -74,7 +74,8 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 比较直观的想法是，使用一个大小为K的最小堆，在搜索过程中实时更新这个最小堆的状态，那么在搜索算法走完的时候，这个最小堆中的结果就是K个距离最近的Geomtry。这是\cite{DBLP:journals/vldb/FuCCM00}中所阐述的思路。本文实现的算法的借鉴了这一思路，同样是用堆来动态维护状态，但采取了一些措施应对这一思路的明显短板以获取更好的检索性能。详见下节。
 
 \subsection{设计焦点：容忍距离的收敛起点和收敛速度}
-在KNN问题的搜索过程中，对于每一个多路节点，除了考虑与优先点的距离之外，还要考虑一个容忍距离T,也就是超出这个容忍距离T的数据点不再予以考虑。这是距离范围剪枝的基本依据。显而易见的是，这个容忍距离越小，成功剪枝的概率越高，检索性能越好。但是如果容忍距离太小，又可能过度剪枝造成检索不到结果。所以容忍距离的初始值和收敛速度是直接影响检索性能的关键。
+在KNN问题的搜索过程中，对于每一个多路节点，除了考虑与优先点的距离之外，还要考虑一个容忍距离T,也就是超出这个容忍距离T的数据点不再予以考虑。
+\cite{DBLP:journals/classification/ProencaN17}这是距离范围剪枝的基本依据。显而易见的是，这个容忍距离越小，成功剪枝的概率越高，检索性能越好。但是如果容忍距离太小，又可能过度剪枝造成检索不到结果。所以容忍距离的初始值和收敛速度是直接影响检索性能的关键。\cite{DBLP:conf/hucc/ZengLJLCM14}
 
 在上文所述的单纯用最小堆动态更新检索结果的算法中，其最大问题在于，容忍距离是从正无穷开始更新的。这使得检索从一开始完全不可能做到剪枝，大量的分支都被搜索了。容忍距离的收敛速度会非常慢，导致剪枝的效率很低，性能也比较差。
 
@@ -181,7 +182,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 \subsection{插入算法流程图}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=6in,height=6.5in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
+  \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{Insert算法实现1：已满叶节点的分裂}

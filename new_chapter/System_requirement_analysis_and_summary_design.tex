@@ -40,7 +40,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \subsection{轨迹数据服务用例图}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=5in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
+  \includegraphics[width=5in,height=3.4in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
   \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
 \end{figure}
 \subsection{初始建立轨迹索引用例描述表}
@@ -49,7 +49,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \begin{table}[H]\footnotesize
 \centering
 \caption{初始建立轨迹索引用例描述表}
-\resizebox{146mm}{65mm}{
+\resizebox{146mm}{70mm}{
 \begin{tabular}{|l|l|}
 \hline
 \textbf{ID}&\tabincell{l}{UC1}\\
@@ -79,11 +79,11 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \end{table}
 
 \subsection{插入新数据用例描述表}
-在用户的真实使用场景中，有少量的单个导入和批量导入两种可能。针对这两种情形，轨迹数据服务应该分别支持直接导入数据和先导入数据，再配置数据元信息这两种方式。详见表格\ref{table:insert_trajectory_use_case_description}。
+在用户的真实使用场景中，有少量的单个导入和批量导入两种可能。针对这两种情形，轨迹数据服务应该分别支持直接导入数据进行插入和先导入数据，再配置数据元信息进行批量这两种方式。如表格\ref{table:insert_trajectory_use_case_description}所示。这一过程中，我们不考虑轨迹重复的问题，即任何新插入的轨迹都被赋予一个独一无二的ID，被插入到优先点树索引中。而地理上相同轨迹数据的插入位置可能在同一个叶节点，也由于叶节点分裂和数据重分布而在不同叶节点，这一点重复并不影响最终的检索结果。
 \begin{table}[H]\footnotesize
 \centering
 \caption{插入新数据用例描述表}
-\resizebox{146mm}{52mm}{
+\resizebox{146mm}{55mm}{
 \begin{tabular}{|l|l|}
 \hline
 \textbf{ID}&\tabincell{l}{UC2}\\
@@ -106,13 +106,13 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \hline
 \textbf{正常流程}&\tabincell{l}{1.进入轨迹数据服务界面 \\ 2.用户提供新的轨迹数据，并选定要插入的目标轨迹数据集合 \\ 3. 点击确认，完成插入}\\
 \hline
-\textbf{异常流程}&\tabincell{l}{2a.用户要插入的数据量不大，用户可以通过直接上传数据文件的方式进行。 \\2b.用户要插入的数据量较大，则可以通过先导入到数据库中，再通过配置数据库表格元信息的方式 \\ 来指定要插入的数据。 \\2c. 目标轨迹数据集合不存在，服务器告知用户，重新选定。\\3a.由于网络，磁盘等各种可能原因导致的插入失败。服务器应明确告知用户，插入失败。}\\
+\textbf{异常流程}&\tabincell{l}{2a.用户要插入的数据量不大，用户可以通过直接上传数据文件的方式进行。 \\2b.用户要插入的数据量较大，则可以通过先导入到数据库中，再通过配置数据库表格元信息的方式 \\ 来指定要插入的数据。 \\2c. 目标轨迹数据集合不存在，服务器告知用户，重新选定。\\2d.要插入的轨迹数据已经存在于目标轨迹集合中，服务器赋予该轨迹唯一ID，直接插入。 \\3a. 由于网络，磁盘等各种可能原因导致的插入失败。服务器应明确告知用户，插入失败。}\\
 \hline
 \end{tabular}}
 \label{table:insert_trajectory_use_case_description}
 \end{table}
 \subsection{相似轨迹检索用例描述表}
-相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作较为简单，变数较少。详见表格.
+相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作的变数主要在要检索轨迹的输入，目标集合的选定和K值的设定。详见表格
 \ref{table:search_trajectory_use_case_description}
 \begin{table}[H]\footnotesize
 \centering

@@ -1,5 +1,14 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: reference.bib
+A bad cross reference---entry "DBLP:conf/w2gis/AntoniouMH09"
+refers to entry "DBLP:conf/w2gis/2009", which doesn't exist
+A bad cross reference---entry "DBLP:conf/nbis/Osborn17"
+refers to entry "DBLP:conf/nbis/2017", which doesn't exist
+A bad cross reference---entry "DBLP:conf/hucc/ZengLJLCM14"
+refers to entry "DBLP:conf/hucc/2014", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/hucc/2014"
+Warning--I didn't find a database entry for "DBLP:conf/w2gis/2009"
+Warning--I didn't find a database entry for "DBLP:conf/nbis/2017"
 Warning--empty journal in DBLP:conf/soda/Yianilos93
-(There was 1 warning)
+(There were 3 error messages)
