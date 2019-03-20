@@ -60,11 +60,17 @@ search(n.left);
 \begin{align}
 d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \inf _{x \in X}d(x,y) \right\}\label{hausdoff-formula1}
 \end{align}
-豪斯多夫距离衡量的是两个集合最小导向距离的最大值。所谓导向距离，就是一个集合中一个点到另一个集合中所有点的最小距离。而导向距离取最大值，意味着豪斯多夫距离在很多情况下都不是对称的。即对于豪斯多夫距离，更简洁的公式表达如下。
-%\begin{align}
-%H_(X,Y)=\max \left\{h_(X,Y),h_(Y,X)\right\}\label{hausdoff-formula2}
-%\end{align}
-%H (A, B) = max { h (A, B), h (B, A) }
+这里要介绍导向距离的概念，所谓导向距离，就是一个集合中的某个点到另一个集合中所有点的所有距离的最小值中的最大值。这意味着两个集合之间的导向距离在很多情况下都不是对称的,即$H(X,Y) \ne H(Y,X)$。如图\ref{oriented-distance-show}中①所示，集合A到集合B的导向距离是d(a1,b1)，而集合B到集合A的导向距离d(b2,a2)。
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3.5in,height=2in]{new_FIGs/chapter2/hausdoff-show.pdf}
+  \caption{导向距离示例}\label{oriented-distance-show}
+\end{figure}
+对于豪斯多夫距离，更通俗的定义是两个集合最小\textbf{导向距离}的最大值。因此对于豪斯多夫距离，更通用的公式表达如下。
+\begin{align}
+H_(X,Y)=\max \left\{h_(X,Y),h_(Y,X)\right\}\label{hausdoff-formula2}
+\end{align}
+在公式\ref{hausdoff-formula2}中，$h(X,Y)$是集合X到集合Y的导向距离，也成为前向距离，反之，$h(Y,X)$为后向距离。对于几何图形和线条而言，前后向距离的计算应该包括线条上的所有点，而不只是线条的顶点，如图\ref{oriented-distance-show}中②所示。而对于所有点的距离计算显然是不现实的，在后文的详细设计中，本文将会介绍具体的折中实现办法。
 
 \section{Lucene}
 \subsection{简介}
