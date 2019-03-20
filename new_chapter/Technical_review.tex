@@ -55,6 +55,17 @@ search(n.right);
 search(n.left);
 }
 \end{algorithm}
+\section{豪斯多夫距离}
+豪斯多夫距离是在度量空间中任意两个集合之间定义的一种距离。设X和Y是度量空间M的两个真子集，那么豪斯多夫距离dH(X,Y)是最小的数r使得X的闭r—邻域包含Y，Y的闭r—邻域也包含X，其通用计算公式如下。
+\begin{align}
+d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \inf _{x \in X}d(x,y) \right\}\label{hausdoff-formula1}
+\end{align}
+豪斯多夫距离衡量的是两个集合最小导向距离的最大值。所谓导向距离，就是一个集合中一个点到另一个集合中所有点的最小距离。而导向距离取最大值，意味着豪斯多夫距离在很多情况下都不是对称的。即对于豪斯多夫距离，更简洁的公式表达如下。
+%\begin{align}
+%H_(X,Y)=\max \left\{h_(X,Y),h_(Y,X)\right\}\label{hausdoff-formula2}
+%\end{align}
+%H (A, B) = max { h (A, B), h (B, A) }
+
 \section{Lucene}
 \subsection{简介}
 Lucene是一套用于全文检索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索。\cite{DBLP:journals/aai/HirschB18}在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。

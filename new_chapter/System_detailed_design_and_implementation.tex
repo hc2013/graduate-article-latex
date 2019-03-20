@@ -204,6 +204,14 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
   \caption{分支分裂代码实现}\label{branch-split}
 \end{figure}
 分支分裂与叶节点分裂最大的不同，就是必须对分支所拥有的数据点集合进行重新建树。如图\ref{branch-split}所示的，makeVpTree方法其实是createNode方法的封装实现，其目的都是以某一节点为根节点建立子树。而分支配置信息的移动函数shiftBranchInfo的实现与前文所现一致，此处省略，不再展示。
+\subsection{轨迹距离计算设计概述}
+在轨迹数据服务设计的最后，我们介绍一下距离计算的设计和实现。这一节相对于本大节的其他内容比较独立。所以用单独的类图予以诠释。
+
+本文用于计算轨迹数据点之间的距离的
+
+\subsection{轨迹距离计算设计概述}
+
+
 \section{地图瓦片服务详细设计}
 \subsection{概述}
 地图瓦片服务的功能为整个系统提供可视化地图数据的服务。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。\textbf{MapBox是业内通用标准，符合Mapbox标准是为了确保通用性。}它的所有数据服务都通过rest接口暴露给调用方。
