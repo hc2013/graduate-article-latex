@@ -38,6 +38,11 @@ David~A. Forsyth, Philip H.~S. Torr, and Andrew Zisserman, editors.
   {II}}, volume 5303 of {\em Lecture Notes in Computer Science}. Springer,
   2008.
 
+\bibitem{DBLP:journals/cys/VargasB18}
+Andr{\'{e}}s Vargas and Johan Bogoya.
+\newblock A generalization of the averaged hausdorff distance.
+\newblock {\em Computaci{\'{o}}n y Sistemas}, 22(2), 2018.
+
 \bibitem{DBLP:journals/aai/HirschB18}
 Laurence Hirsch and Teresa Brunsdon.
 \newblock A comparison of lucene search queries evolved as text classifiers.
@@ -58,6 +63,10 @@ Fateh Boucenna, Omar Nouali, Samir Kechid, and M.~Tahar Kechadi.
 \newblock Secure inverted index based search over encrypted cloud data with
   user access rights management.
 \newblock {\em J. Comput. Sci. Technol.}, 34(1):133--154, 2019.
+
+\bibitem{inverted-index}
+{Introduction of Inverted Index}.
+\newblock \url{http://www.51cto.com/}.
 
 \bibitem{WGS84Intro}
 ÕÅÇçÇç, Íõ½£, and ÁõÈð»ª.
