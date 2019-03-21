@@ -79,15 +79,11 @@
 \contentsline {subsection}{\numberline {4.2.4}地图局部更新功能代码实现}{50}{subsection.4.2.4}
 \contentsline {subsection}{\numberline {4.2.5}更新一致性的原理}{51}{subsection.4.2.5}
 \contentsline {section}{\numberline {4.3}本章总结}{53}{section.4.3}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}系统运行效果与性能测试}{54}{chapter.5}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}系统运行效果展示}{54}{chapter.5}
 \contentsline {section}{\numberline {5.1}轨迹检索运行效果展示}{54}{section.5.1}
-\contentsline {section}{\numberline {5.2}服务性能测试报告}{54}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}测试环境}{55}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}写入测试结果}{55}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}相似检索测试结果}{55}{subsection.5.2.3}
-\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}总结和展望}{56}{chapter.6}
-\contentsline {section}{\numberline {6.1}总结}{56}{section.6.1}
-\contentsline {section}{\numberline {6.2}进一步工作展望}{56}{section.6.2}
-\contentsline {chapter}{参考文献}{57}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{59}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{60}{chapter*.6}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}总结和展望}{55}{chapter.6}
+\contentsline {section}{\numberline {6.1}总结}{55}{section.6.1}
+\contentsline {section}{\numberline {6.2}进一步工作展望}{55}{section.6.2}
+\contentsline {chapter}{参考文献}{56}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{58}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{59}{chapter*.6}
