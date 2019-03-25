@@ -35,13 +35,14 @@
 \contentsline {figure}{\numberline {4.19}{\ignorespaces 轨迹距离计算设计类图}}{46}{figure.4.19}
 \contentsline {figure}{\numberline {4.20}{\ignorespaces 线条分段致密计算代码实现}}{47}{figure.4.20}
 \contentsline {figure}{\numberline {4.21}{\ignorespaces 线条分段致密原理失意}}{48}{figure.4.21}
-\contentsline {figure}{\numberline {4.22}{\ignorespaces tile-server整体结构图}}{49}{figure.4.22}
-\contentsline {figure}{\numberline {4.23}{\ignorespaces 地图局部更新功能流程图}}{50}{figure.4.23}
-\contentsline {figure}{\numberline {4.24}{\ignorespaces 地图局部更新功能代码实现}}{51}{figure.4.24}
-\contentsline {figure}{\numberline {4.25}{\ignorespaces 瓦片更新前提情况}}{52}{figure.4.25}
-\contentsline {figure}{\numberline {4.26}{\ignorespaces 瓦片更新条件}}{53}{figure.4.26}
-\contentsline {figure}{\numberline {4.27}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{53}{figure.4.27}
-\contentsline {figure}{\numberline {4.28}{\ignorespaces 轨迹检索运行效果}}{54}{figure.4.28}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{50}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{51}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能代码实现}}{52}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{53}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{54}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{54}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 轨迹检索运行效果}}{55}{figure.5.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

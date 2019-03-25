@@ -43,7 +43,9 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
   \includegraphics[width=5in,height=3.4in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
   \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
 \end{figure}
-\subsection{初始建立轨迹索引用例描述表}
+\subsection{轨迹数据服务用例描述}
+\textbf{初始建立轨迹索引用例描述：}
+
 初始建立轨迹索引的使用场景中。最容易出现的问题是，对轨迹数据的元信息配置和对优先点树的元信息配置。由于轨迹数据量很大，不可能让用户手动选定或者上传文件来导入，否则会产生大量人工操作和文件传输的时间消耗。因此，必须采用元信息配置的方式进行。如表格
 \ref{table:initVpTree_use_case_description}所示，要充分考虑到用户设置的元信息本身错误可能严重影响索引性能的情况，对于这些情况，系统必须予以更正或警告。
 \begin{table}[H]\footnotesize
@@ -78,11 +80,12 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \label{table:initVpTree_use_case_description}
 \end{table}
 
-\subsection{插入新数据用例描述表}
+\textbf{插入新轨迹数据用例描述表：}
+
 在用户的真实使用场景中，有少量的单个导入和批量导入两种可能。针对这两种情形，轨迹数据服务应该分别支持直接导入数据进行插入和先导入数据，再配置数据元信息进行批量这两种方式。如表格\ref{table:insert_trajectory_use_case_description}所示。这一过程中，我们不考虑轨迹重复的问题，即任何新插入的轨迹都被赋予一个独一无二的ID，被插入到优先点树索引中。而地理上相同轨迹数据的插入位置可能在同一个叶节点，也由于叶节点分裂和数据重分布而在不同叶节点，这一点重复并不影响最终的检索结果。
 \begin{table}[H]\footnotesize
 \centering
-\caption{插入新数据用例描述表}
+\caption{插入新数据用例描述}
 \resizebox{146mm}{55mm}{
 \begin{tabular}{|l|l|}
 \hline
@@ -111,7 +114,9 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \end{tabular}}
 \label{table:insert_trajectory_use_case_description}
 \end{table}
-\subsection{相似轨迹检索用例描述表}
+
+\textbf{相似轨迹检索用例描述：}
+
 相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作的变数主要在要检索轨迹的输入，目标集合的选定和K值的设定。详见表格
 \ref{table:search_trajectory_use_case_description}
 \begin{table}[H]\footnotesize
