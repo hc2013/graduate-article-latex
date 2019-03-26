@@ -65,9 +65,9 @@
 \contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据服务详细设计}{49}{chapter.5}
 \contentsline {section}{\numberline {5.1}概述}{49}{section.5.1}
 \contentsline {section}{\numberline {5.2}地图局部更新功能概述}{50}{section.5.2}
-\contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{50}{section.5.3}
+\contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{51}{section.5.3}
 \contentsline {section}{\numberline {5.4}更新一致性的原理}{52}{section.5.4}
-\contentsline {section}{\numberline {5.5}服务运行效果展示}{55}{section.5.5}
+\contentsline {section}{\numberline {5.5}服务运行效果展示}{54}{section.5.5}
 \contentsline {section}{\numberline {5.6}本章总结}{55}{section.5.6}
 \contentsline {chapter}{\numberline {第六章\hspace {0.3em}}总结和展望}{56}{chapter.6}
 \contentsline {section}{\numberline {6.1}总结}{56}{section.6.1}
