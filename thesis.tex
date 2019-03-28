@@ -1,10 +1,9 @@
 %%]dvipdfm
-%%\documentclass[]{ctexart}
-\documentclass[oneside, master,openany]{NJUthesis}
-% \documentclass[pdftex]{NJUthesis}
+\documentclass[twoside, master, review,openany]{NJUthesis}
+%\documentclass[twoside, master]{NJUthesis}
 
 % 可选参数：
-%   nobackinfo 取消封二页导师签名信息
+%   review 审阅模式，激活后个人、导师与学校信息均被隐去
 %   oneside/twoside 单面/双面打印
 %   phd/master 博士/硕士论文
 % 下面三个选一个：
@@ -45,28 +44,14 @@
 \usepackage[linesnumbered,boxed,ruled,vlined]{algorithm2e}
 \usepackage{array}
 \usepackage{multirow}
-\usepackage{ccmap}
-
-\usepackage{listings}
-\usepackage{xcolor}
-\lstset{
-    %backgroundcolor=\color{red!50!green!50!blue!50},%代码块背景色为浅灰色
-    rulesepcolor= \color{gray}, %代码块边框颜色
-    breaklines=true,  %代码过长则换行
-    numbers=left, %行号在左侧显示
-    numberstyle= \small,%行号字体
-    %keywordstyle= \color{red},%关键字颜色
-    commentstyle=\color{gray}, %注释颜色
-    frame=shadowbox%用方框框住代码块
-    }
 
 %%	added by Jiang
 \usepackage{extarrows}	%使用长箭头
 \usepackage{nomencl}	%与术语表有关的包
 \usepackage{booktabs}
 \usepackage{ccmap}
-\usepackage{float}
-\usepackage{supertabular}
+
+\usepackage[section]{placeins}
 
 \makenomenclature
 
@@ -91,6 +76,26 @@
 
 \begin{document}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 国家图书馆封面内容字符串
+% 仅博士需要填写并保证模板参数选择了 phd
+\classification{}
+\confidential{}
+\UDC{}
+\titlelinea{南京大学学位论文}
+\titlelineb{~\LaTeX{}~模板}
+\titlelinec{}
+\advisorinfo{南京大学~软件学院}
+\chairman{XXX 教授}
+\reviewera{某某某某　副研究员}
+\reviewerb{XXX 教授}
+\reviewerc{XXX 教授}
+\reviewerd{XXX 教授}
+\nlcfootdate{~年~~月~~日}
+
 % 南大中文封面内容字符串
 \title{基于优先点树和地图瓦片的地理轨迹数据服务的设计和实现}
 \author{\kaishu 韩淳}
@@ -103,6 +108,7 @@
 \footdate{\kaishu2019~年~3~月}
 \submitdate{\kaishu~年~~月~~日}
 \defenddate{\kaishu~年~~月~~日}
+
 
 
 
@@ -132,7 +138,6 @@
 
 \begin{abstract}
 
-%% \textbf{注意：本模板使用的是PDFLaTeX编译的，这一编译的好处在于速度快，并能直接引用pdf格式的图形。}
 地理数据，是直接或间接关联着相对于地球的某个地点的数据，是表示地理位置、分布特点的自然现象和社会现象的诸要素数据。地理数据包括轨迹数据和瓦片数据。其中轨迹数据指的是一个物体的运动轨迹在空间中经过的点的集合。瓦片数据指的是用于展示的地图数据。
 在地理数据用户的业务中，有价值的场景包括犯罪同伙分析，通过框选选定目标嫌疑人轨迹，再通过检索与目标嫌疑人活动轨迹相似的其他人员的轨迹，从而找到目标嫌疑人的潜在同伙。针对类似以上这样的使用场景，本文构建了一个能够提供地图轨迹展示，相似轨迹检索和新轨迹插入功能的综合数据服务。
 本文主要关注两部分，第一部分是如何建立高效的轨迹索引结构，以提供良好的相似性检索的性能和高效的索引更新性能。第二部分是如何构建一个通用的瓦片数据服务，用来高效地提供地图数据，为整体服务提供可视化基础。
@@ -144,14 +149,6 @@
 	
 地理轨迹数据服务，（Geographic trajectory data service, 以下简称GTDS)，通过构建独立的索引结构和通用的瓦片数据服务，实现了相似轨迹的检索和展示功能，解决了用户应用中一些难题，提高了系统的可用性。文章的最后部分，通过总结和展望，对该技术以及应用前景进行了一些分析。
 
-
-%% \begin{enumerate}
-%%   \item 贡献1。
-%%   \item 贡献2。
-%%   \item 贡献3。
-%% \end{enumerate}
-%%%
-%这是注释，不影响正文
 
 \keywords{地理数据，轨迹数据，瓦片数据，优先点树,矢量瓦片，轨迹索引结构，轨迹相似检索，可视化}
 
@@ -169,11 +166,6 @@ The main work of the article is to introduce the design and implementation of th
 In the process, some performance and model problems appearing in the system are also discussed and analyzed, providing a better solution. Finally, the effect of the whole service on the retrieval of geographic trajectory data is analyzed in detail.
 
 Geographic trajectory data service (GTDS), by constructing an independent index structure and a common tile data service, realizes the retrieval and display function of similar trajectories, solves some problems in user applications, and improves the problem. System availability. In the last part of the article, through the summary and outlook, some analysis of the technology and application prospects.
-%%\begin{itemize}
-%%  \item First Contribution.
-%%  \item Second Contribution.
-%%  \item Third Contribution.
-%%\end{itemize}
 
 \englishkeywords{English,Geographic data, trajectory data, tile data, vantage point tree, vector tile, trajectory index structure, trajectory similarity retrieval, visualization}
 \end{englishabstract}
@@ -209,9 +201,12 @@ Geographic trajectory data service (GTDS), by constructing an independent index 
 %\input{new_chapter/System_running_and_performance_test.tex}
 
 \input{new_chapter/Summary_and_outlook.tex}
-
 % 参考文献
+
+\bibliographystyle{plainnat}
 \bibliography{reference}
+
+
 
 %个人简介
 \Nchapter{简历与科研成果}

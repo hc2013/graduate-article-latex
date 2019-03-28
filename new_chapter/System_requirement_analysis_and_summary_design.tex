@@ -10,7 +10,7 @@
 \subsection{轨迹数据服务的功能需求}
 整个地理轨迹数据服务的核心功能有三个。第一个是对批量轨迹数据导入建立索引的功能。第二个是相似轨迹KNN检索功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。第三个功能是对已有索引新加入数据点，即插入功能。\textbf{注意，在本文所实现的轨迹数据服务中，只提供了增，查，初始化等功能，并没有提供删除功能。之所以放弃删除功能，是因为在大数据量的应用场景下，用户往往只需要动态地增加和查询轨迹数据，轨迹数据总体量一般都达到百万级，每次做KNN 检索的K值也能达到几百，用户并不在意索引中存在某一些冗余的轨迹，相关的删除操作优先级很低。所以本文放弃了删除轨迹功能的实现。}
 
-\begin{table}[H]
+\begin{table}[htb]
 \caption{轨迹数据服务功能需求列表}
 \resizebox{146mm}{18mm}{
 \begin{tabular}{|c|l|l|}
@@ -25,7 +25,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 
 \subsection{轨迹数据服务的非功能需求}
 轨迹数据服务的三个主要功能都涉及到与用户的直接操作。由于索引本身的只是距离对比关系的存储，而并不直接存储轨迹数据，所以磁盘空间的消耗不是主要问题。而索引的建立，更新和检索，都需要大量的距离计算和区间比对，因此这显然是一个计算密集型的应用。因此用户的非功能需求主要体现在时间和准确率上。如表格\ref{table:trajectory_service_non_func_req}所示，时间特性和负载特性都是运行时保证的属性，而精度特性其实是在测试阶段保证的。因为在用户实际使用中，无法比对结果是否准确，只能在测试阶段通过比对结果集合和答案集合来确认准确率。
-\begin{table}[H]
+\begin{table}[htb]
 \caption{轨迹数据服务非功能需求列表}
 \resizebox{146mm}{11mm}{
 \begin{tabular}{|l|l|}
@@ -38,7 +38,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \end{table}
 
 \subsection{轨迹数据服务用例图}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=5in,height=3.4in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
   \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
@@ -48,7 +48,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 
 初始建立轨迹索引的使用场景中。最容易出现问题的细节是，对轨迹数据的元信息配置和对优先点树的元信息配置。由于轨迹数据量很大，不可能让用户手动选定或者上传文件来导入，否则会产生大量人工操作和文件传输的时间消耗。因此，必须采用元信息配置的方式进行。如表格
 \ref{table:initVpTree_use_case_description}所示，要充分考虑到用户设置的元信息本身错误可能严重影响索引性能的情况，对于这些情况，系统必须予以更正或警告。
-\begin{table}[H]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
 \caption{初始建立轨迹索引用例描述表}
 \resizebox{146mm}{70mm}{
@@ -83,7 +83,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \textbf{插入新轨迹数据用例描述表：}
 
 在用户的真实使用场景中，对于新数据插入操作，有少量的单个插入和批量插入这两种可能场景。针对这两种情形，轨迹数据服务应该分别支持直接导入数据进行插入和先导入数据，再配置数据元信息进行批量插入这两种方式。如表格\ref{table:insert_trajectory_use_case_description}所示。这一过程中，我们不考虑轨迹重复的问题，即任何新插入的轨迹都被赋予一个独一无二的ID，被插入到优先点树索引中。而地理上相同轨迹数据的插入位置可能在同一个叶节点，也由于叶节点分裂和数据重分布而在不同叶节点，这一点重复并不影响最终的检索结果，因此予以忽略。
-\begin{table}[H]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
 \caption{插入新数据用例描述}
 \resizebox{146mm}{55mm}{
@@ -119,7 +119,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 
 相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作的变数主要在要检索轨迹的输入，目标集合的选定和K值的设定。详见表格
 \ref{table:search_trajectory_use_case_description}
-\begin{table}[H]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
 \caption{相似轨迹检索用例描述表}
 \resizebox{146mm}{58mm}{
@@ -159,7 +159,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 而对于非功能需求，瓦片数据服务涉及到的计算主要是坐标转换，请求解析，缓存处理。这些操作的计算量不大，所以并不是计算密集型应用，而是IO密集型应用，高并发和快速响应是其必须满足的非功能特性。除此之外，用户的瓦片数据可能是存在于各种不同的数据库中的。因此服务还应该独立于不同的数据库，做到高可用性，高扩展性。
 \subsection{瓦片数据服务功能需求}
 
-\begin{table}[H]
+\begin{table}[htb]
 \resizebox{146mm}{40mm}{
 \begin{tabular}{|c|l|l|}
 \hline
@@ -176,7 +176,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \end{table}
 
 \subsection{瓦片数据服务非功能需求}
-\begin{table}[H]
+\begin{table}[htb]
 \caption{瓦片数据服务非功能需求列表}
 \resizebox{146mm}{10mm}{
 \begin{tabular}{|l|l|}
@@ -190,7 +190,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 如表格\ref{table:tile_service_non_func_req}所示，瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Oracle和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地理数据服务对接起来运行。
 
 \subsection{瓦片数据服务用例图}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/tileserver_use_case.pdf}
   \caption{瓦片数据服务用例图}\label{tileserver_use_caseCH3}
@@ -198,7 +198,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。而上图中的部分功能，例如地图瓦片的全量更新，删除整张地图，都只是简单的瓦片数据库的操作，并没有什么创新性。所以本文后续章节对这些内容都予以忽略，不加介绍。
 \subsection{瓦片数据服务用例描述}
 瓦片数据服务的部分功能操作简单明确，无需使用用例描述。本文只对操作比较复杂的“b-box更新地图瓦片数据”和“特定区域瓦片数据中心渲染”进行了具体描述。这两个用例分别是写功能和读功能。
-\begin{table}[H]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
 \caption{bounding-box更新地图瓦片数据用例描述表}
 \resizebox{146mm}{52mm}{
@@ -230,7 +230,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \label{table:tileserver_use_case_description1}
 \end{table}
 
-\begin{table}[H]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
 \caption{特定区域瓦片数据中心渲染用例描述表}
 \resizebox{146mm}{50mm}{
@@ -265,7 +265,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 
 
 \section{GTDS系统概要设计}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/general_structure.pdf}
   \caption{GTDS的总体架构}\label{general_structureCH3}

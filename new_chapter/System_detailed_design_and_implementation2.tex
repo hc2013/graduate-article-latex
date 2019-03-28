@@ -14,7 +14,7 @@ cache\_service是与瓦片数据缓存相关的功能模块，可以为瓦片数据配置不同的缓存策略。
 
 db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图瓦片数据库交互的媒介。db\_service的接口是固定的，所有要对接到瓦片数据服务上的数据库驱动必须实现db\_service要求的接口，才能正常运行。目前实现的数据库驱动有sqlite和hbase两种。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=4in]{new_FIGs/chapter4/tile-server-structure.pdf}
   \caption{tile-server整体结构图}\label{tile-server-structure}
@@ -28,7 +28,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 \section{地图局部更新功能流程图与代码实现}
 \textbf{地图局部更新功能流程图}
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=4in,height=5.3in]{new_FIGs/chapter4/update_tile_1.pdf}
   \caption{地图局部更新功能流程图}\label{update_tile_1}
@@ -37,7 +37,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 \textbf{地图局部更新功能代码实现}
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/tile_degree_compute.pdf}
   \caption{地图局部更新功能代码实现}\label{tile_degree_compute}
@@ -47,7 +47,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 1.首先判断用户bbox更新中设置的经纬度的差值在其所设定的zoom下，是否大于等于一个Tile的边长。如果用户划定的范围太小，要求的精度太高，则直接告知用户，在当前zoom下不能更新这个bbox。如图\ref{tile_consistency0}所示，用户选定的更新范围s1的宽度小于Tile1的边长，而更新范围s2的长和宽都小于Tile2的边长。这两种情况下，都不对Tile进行更新。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=2.7in]{new_FIGs/chapter4/tile_consistency0.pdf}
   \caption{瓦片更新前提情况}\label{tile_consistency0}
@@ -57,7 +57,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 2.如果bbox的长度和宽度都大于等于Tile的边长。那么在这种情况下，对于一个Tile的bbox划分。如果划分本身是严密的，没有缝隙的。那么，1 个Tile 能且只能被划分为4个bbox.而1 个Tile的4个bbox划分中，至少有一个，其面积超过了1/4。以此作为是否更新的标准，能够保证每一个TIle至少被更新了一次，从而避免了局部更新漏掉某些Tile产生更新缝隙的问题。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=2.3in]{new_FIGs/chapter4/tile_consistency2.pdf}
   \caption{瓦片更新条件}\label{tile_consistency2}
@@ -69,7 +69,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 综上所述，本文实现的瓦片数据服务更新一致性的功能是瓦片级别的弱一致性，其依据的是用户操作本身对bbox的一致性划分。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=4.3in]{new_FIGs/chapter4/consistancy-code.pdf}
   \caption{判断是否覆盖当前瓦片的代码}\label{consistancy-code}
@@ -77,7 +77,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 \section{服务运行效果展示}
 如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter5/running.pdf}
   \caption{轨迹检索运行效果}\label{running}

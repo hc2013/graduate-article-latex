@@ -10,17 +10,22 @@
 
 \section{初始建树功能模块详细设计}
 \subsection{优先点树索引类图}
+
+
+
 如图\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VPTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree,mqr-tree等等\cite{DBLP:conf/nbis/Osborn17}，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
 
 Node是VpTree的实现的核心，是VpTree存储数据点Id，距离信息，子树边界，父节点指针，是否为叶节点等元信息的主要数据结构。Vptree 的搜索算法和插入算法都是基于Node 的上溯，遍历，分裂和元数据移动进行的。
 
-\begin{figure}[H]
+DistanceCahce是对距离的缓存结构，以减少数据点之间距离的计算次数。它其实是一个针对特定轨迹的缓存结构，一个DistanceCache保存其他若干轨迹
+
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
+  \includegraphics[width=4.7in,height=5.2in]{new_FIGs/chapter4/vp-tree-general-structure.pdf}
   \caption{优先点树索引类图}\label{vp-tree-general-structure}
 \end{figure}
 
-DistanceCahce是对距离的缓存结构，以减少数据点之间距离的计算次数。它其实是一个针对特定轨迹的缓存结构，一个DistanceCache保存其他若干轨迹相对于目标轨迹的距离。所以在代码实现中，会有多个DistanceCache保存在内存里。为了避免在使用时一一遍历寻找特定轨迹的DistanceCache，本文在检索过程中保持DistanceCache 的栈与轨迹栈一一对应，从而顺序读取各个轨迹的cache,这在运行时消耗了相当数量的内存。
+相对于目标轨迹的距离。所以在代码实现中，会有多个DistanceCache保存在内存里。为了避免在使用时一一遍历寻找特定轨迹的DistanceCache，本文在检索过程中保持DistanceCache 的栈与轨迹栈一一对应，从而顺序读取各个轨迹的cache,这在运行时消耗了相当数量的内存。
 
 BitSetContext用于记录VpTree一条检索路径中各个非叶节点的分支已搜索状态，用于避免重复检索。与distanceCache一样，BitSetContext以通过顺序上的一一对应关系来维护和节点之间的对应性。而且目前BitSetContext 的实现中，依赖于外部的释放内存空间，BitSetContext本身没有设计垃圾回收机制。
 
@@ -38,24 +43,26 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 \subsection{优先点树节点结构}
 本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=5in,height=3in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
+  \includegraphics[width=3.7in,height=2.3in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
   \caption{4路vp-tree的内部结构示意图}\label{vp-tree-structure1}
 \end{figure}
 \subsection{初始建树的流程}
 初始建树的输入数据是一系列的docId+Geometry，初始建树的输出是一棵完整的多路vp-tree。具体流程见~\ref{create-node-flow}。\textbf{注意：本文用DP来表示Data Point，即数据点，用VP来表示Vantage Point，即被选做优先点的数据点，用Node来表示vp-tree的节点。}
 
-如图所示初始建树实际上是一个递归的过程。但是为了避免出现内存溢出，本文选择了用循环+栈的模式。流程开始时，首先将根节点压栈，然后判断数据点的个数是不是小于叶节点的数据量标准。如果是，就意味着已经达到终止这一分支的条件，则直接初始化为叶节点，然后通过空流程返回循环判断。如果数据量仍然大于叶节点的数据量，就使用选取函数选择优先点，计算其他各个数据点到优先点的距离，再根据距离进行升序排序。\textbf{注意：由于此时有一个点被选做优先点，所以数据点总量要减一}，然后判断剩余的数据量是否大于扇出数，如果数据量已经不能满足全部的扇出，那么就初始化为单个非叶节点入栈，从而进入下一次循环。如果数据量依然足够分割全部的扇出，就按照距离排序的结果进行多路切分，用新建的子节点代表新的子树，并入栈。将距离值，上下界值和子节点指针分别填入对应的数组中，再进入下一次循环。以此类推，循环往复，完成所有数据点的建树操作。
-
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=5in,height=7.6in]{new_FIGs/chapter4/create-node-flow.pdf}
+  \includegraphics[width=4in,height=5.6in]{new_FIGs/chapter4/create-node-flow.pdf}
   \caption{初始建树流程图}\label{create-node-flow}
 \end{figure}
+
+如图\ref{create-node-flow}所示初始建树实际上是一个递归的过程。但是为了避免出现内存溢出，本文选择了用循环+栈的模式。流程开始时，首先将根节点压栈，然后判断数据点的个数是不是小于叶节点的数据量标准。如果是，就意味着已经达到终止这一分支的条件，则直接初始化为叶节点，然后通过空流程返回循环判断。如果数据量仍然大于叶节点的数据量，就使用选取函数选择优先点，计算其他各个数据点到优先点的距离，再根据距离进行升序排序。\textbf{注意：由于此时有一个点被选做优先点，所以数据点总量要减一}，然后判断剩余的数据量是否大于扇出数，如果数据量已经不能满足全部的扇出，那么就初始化为单个非叶节点入栈，从而进入下一次循环。如果数据量依然足够分割全部的扇出，就按照距离排序的结果进行多路切分，用新建的子节点代表新的子树，并入栈。将距离值，上下界值和子节点指针分别填入对应的数组中，再进入下一次循环。以此类推，循环往复，完成所有数据点的建树操作。
+
+
 \subsection{初始建树算法实现}
 \textbf{注意，出于节省篇幅考虑，省略了部分简单实现}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=7.6in]{new_FIGs/chapter4/initVpTree-code.pdf}
   \caption{初始建树代码}\label{create-node-code}
@@ -64,7 +71,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \textbf{设计要点1：优先点的选择算法:}
 
 在初始建树的过程中，优先点选取是非常关键的一步。选取的好坏取决于一个优先点能否让切分出来的各路子树的边界值相差足够大，因为各路子树的边界值相差越大，在检索的时候，距离值落入某一子树的边界内的可能性越大，剪枝成功的可能性越高，性能就越好。反之，如果优先点选择很差，导致多个子树的上下界非常接近，就很容易出现一个距离值横跨多个子树的情况，这种情况下无法进行有效剪枝，造成性能下降。因此，如何选择尽可能优的优先点，是算法实现的重点。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=5.5in]{new_FIGs/chapter4/select-vp-code.pdf}
   \caption{优先点选取代码}\label{select-vp-code}
@@ -86,7 +93,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \subsection{设计焦点与思路概述}
 在KNN问题的搜索过程中，对于每一个多路节点，除了考虑与优先点的距离之外，还要考虑一个容忍距离T,也就是超出这个容忍距离T的数据点不再予以考虑。
 \cite{DBLP:journals/classification/ProencaN17}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/thredhold.pdf}
   \caption{容忍距离对剪枝的作用示意图}\label{thredhold}
@@ -98,7 +105,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 基于上面所提到的容忍距离收敛较慢问题，本文采用了结果堆预填+回溯的方式进行优化处理。即通过原生vp-tree搜索算法，先找到single nearest neighbour，也就是单个最相似数据点，并且在这个过程中预填结果堆，并保存从root到single nearest neighbour的整条路径的所有节点。以结果堆中最大距离作为容忍距离的收敛起点，再回溯整条路径中的节点，完成检索。这样通过预先填结果堆，使得容忍距离以更低的起点收敛，很多分支在检索开始阶段就被剪掉，容忍距离收敛的速度更快，性能更好。
 \subsection{检索算法流程图}
 如图\ref{search-flow}所示为检索算法的运行流程图。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
   \caption{检索算法流程图}\label{search-flow}
@@ -108,14 +115,14 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 本节将会依次展示\ref{search-flow}中所示的各个子流程的代码实现。
 
 \textbf{检索单个最相似轨迹代码实现：}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=5.8in,height=5.5in]{new_FIGs/chapter4/findnn-code.pdf}
   \caption{检索单个最相似轨迹代码实现}\label{findnn-code}
 \end{figure}
 
 \textbf{预填结果集代码实现：}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=5.8in,height=7.8in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
   \caption{预填结果集代码}\label{trytoFillQueue-code}
@@ -131,7 +138,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 第一，新插入的数据点所匹配的叶节点未满，则直接插入到正确的叶节点的空槽位中。如图\ref{insert-show0}所示,新数据点e被插入叶节点L的空槽位中。这种情况下，只有数据赋值操作，没有距离计算，性能最好，之后几种情况的处理原则都是使后续插入尽可能满足第一种情况。注意，必须保证叶节点中数据点的顺序性，所有相关元信息的对应位置都要向后移动。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/insert-show0.pdf}
   \caption{直接插入对应叶节点算法示意图}\label{insert-show0}
@@ -139,7 +146,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \end{figure}
 第二，新插入的数据点所匹配的叶节点已满，但是其父节点分支数未满。则分裂匹配的叶节点，为父节点新增子叶节点，并且进行数据移动。注意，分裂之后的数据重分布应该秉持均分的原则，让空槽位尽可能均匀地分配在两个叶节点中，从而使得后续的插入操作尽可能多地符合叶节点不满的情况，避免发生连续多次分裂的情况。如图\ref{insert-show1} 所示，数据点e本应插入在节点L的f之前，但是因为节点L已经满了，而节点P的分支数未满，此时将节点L分裂成两个新节点L2 和L3,将节点L中原本相距节点P的优先点距离最远的数据点h,i分配给L3。以此实现了数据点e的插入。同时保证L2,L3两个叶节点都有空槽位，以备后面的插入操作。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/insert-show1.pdf}
   \caption{叶节点分裂算法示意图}\label{insert-show1}
@@ -147,21 +154,21 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 第三，新插入的数据点所匹配的叶节点已经满了，而且父节点的分支数也已经满了，不能再分裂出新的叶节点。这种情况下，采用\textbf{中心扩散}的方式寻找最临近未满的兄弟节点，进行数据重分布。注意，这里要考虑距离和空槽位数量两种因素。空槽位数量越多的叶节点，重分布之后空槽位分布越均匀，越适合进行数据重分布。但是重分布不只是涉及目标叶节点和兄弟叶节点，而是涉及到两者之间的所有叶节点。两者之间的距离越远，需要重新分布的节点数就越多，消耗越大，反之，消耗越小。所以此处应该以距离最近为优先，以最小化指针移动和元数据更新的消耗。在距离相同的情况下，根据叶节点空槽位的数量决定，空槽位越多的兄弟节点，越优先。如图\ref{insert-show2}所示数据点以本应插入到节点L2 中，但L2已满，则以中心扩散的方式，同时发现了两侧距离相同的未满节点L1和L3。此时发现L3中的空槽位比L1中多，因此选择L3进行数据重分布，移动数据h,i,j到L3中，然后完成e在L2中的插入。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=1in]{new_FIGs/chapter4/insert-show2.pdf}
   \caption{叶节点数据重分布算法示意图}\label{insert-show2}
 \end{figure}
 
 第四，新插入的数据点所匹配的叶节点，父节点以及所有的兄弟节点都已经满了，则向上回溯，找到第一个未满的祖先节点，如祖先节点的分支数未满，则优先进行目标分支的分裂,形成新的分支。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=4in]{new_FIGs/chapter4/insert-show3.pdf}
   \caption{分支分裂算法示意图}\label{insert-show3}
 \end{figure}
 \textbf{注意，在这种情况下，不能像叶节点数据进行简单的移动就解决问题，由于产生新分支意味着必须重新建立子树，才能将原分支的数据点和新数据均匀分开，以降低接下来插入操作的负载。}如图\ref{insert-show3}所示,当插入数据点u的时候，分裂节点lowerAncestor,产生节点newBranch，并将均分的数据集合分别建立新的叶节点。而新子树的建立过程中必然需要选取新的VP点并且进行相应的距离计算。这种情况下的性能消耗，只比相同数据子空间的初始建树操作少了一轮VP点选取和距离计算而已。
 
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=4.6in]{new_FIGs/chapter4/insert-show4.pdf}
   \caption{分支重分布算法示意图}\label{insert-show4}
@@ -205,28 +212,28 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 
 基于以上几点，本文所采用的分裂优先重分布，存储额外元数据，延长建树分支等策略，都是以空间换取时间的做法。而这些静态策略的实际运行效果和具体的数据集合的情况有关，所以在某些情况下可能并不是最佳的性能策略。
 \subsection{插入算法流程图}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{插入算法实现}
 \textbf{已满叶节点的分裂代码实现}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=7.5in]{new_FIGs/chapter4/insert-code1.pdf}
   \caption{已满叶节点的分裂代码实现}\label{fullleafnode-split}
 \end{figure}
 
 \textbf{叶节点数据重分布代码实现}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=7.8in]{new_FIGs/chapter4/insert-code2.pdf}
   \caption{叶节点数据重分布代码实现}\label{leafnode-redistribute}
 \end{figure}
 
 \textbf{分支分裂代码实现}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/insert-code3.pdf}
   \caption{分支分裂代码实现}\label{branch-split}
@@ -234,21 +241,21 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 分支分裂与叶节点分裂最大的不同，就是必须对分支所拥有的数据点集合进行重新建树。如图\ref{branch-split}所示的，makeVpTree方法其实是createNode方法的封装实现，其目的都是以某一节点为根节点建立子树。而分支配置信息的移动函数shiftBranchInfo的实现与前文所现一致，此处省略，不再展示。
 \section{豪斯多夫距离计算设计}
 在轨迹数据服务设计的最后，我们介绍豪斯多夫距离计算的设计和实现。这一节相对于本大节的其他内容比较独立，所以用单独的类图予以诠释。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=6.5in]{new_FIGs/chapter4/hausdoff-dis-class.pdf}
   \caption{轨迹距离计算设计类图}\label{trajectory-distance-compute-class}
 \end{figure}
 本文主要针对Geometry类中LineString（线条）和Polygon（几何体）两种类型进行设计，因为轨迹数据基本上都属于这两种类型。如图\ref{trajectory-distance-compute-class}所示，HausdoffDistance是对GemotryDistanceFunction接口的实现，它依赖于DiscreteHau \\ sdorffDistance进行离散点豪斯多夫距离的计算。DiscreteHausdorffDistance聚合了两个MaxPointFilter和MaxDensifiedFractionDistanceFilter，这两个是原生JTS.G\\eometry的保留接口，本文对其进行了重写，以实现对最大距离点的过滤作用。DistanceToPoint是数据点距离的计算类，其所依赖的是Coordinate类的坐标距离计算实现。LineSegment是本文对原生JTS.LineSegment的重写，覆盖了closestPoint方法。PointPairDistance是保留两个坐标点之间距离的类。\textbf{在豪斯多夫距离计算的过程中，坐标点之前的距离是二维欧几里得距离。因为本文暂时只考虑平面轨迹。}
 \subsection{豪斯多夫距离计算实现}
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=4.5in]{new_FIGs/chapter4/hausdoff-code-fraction.pdf}
   \caption{线条分段致密计算代码实现}\label{hausdoff-code-fraction}
 \end{figure}
 对于前文所提到的点集合全集与目标的距离计算无法实现的问题，本文采用了致密分段这个方式进行这种，代码如图\ref{hausdoff-code-fraction}。原理如图
 \ref{hausdoff-fraction-show}所示，致密分段的核心思想是将一根线条按照致密比例切分成数段，将每一段的两端点坐标纳入距离计算，从而尽可能地保留了整根线条的距离属性。很显然的是，致密度越小，致密段数越多，对原线条的距离属性保留越完善，距离也就越精确。但是相应地，运行代价越高，性能越差。
-\begin{figure}[H]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/hausdoff-fraction-show.pdf}
   \caption{线条分段致密原理失意}\label{hausdoff-fraction-show}

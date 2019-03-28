@@ -7,6 +7,8 @@
 %% NJUthesis.dtx  (with options: `cls')
 %%
 %% This is a generated file.
+%% 
+%% Updated by Hongyu Kuang <khy@nju.edu.cn> in 2019/3.
 %%
 %% Copyright (C) 2010 by Wenbo Yang <http://solrex.org> and
 %% any individual authors listed elsewhere in this file.
@@ -44,6 +46,10 @@
    document class]
 \newif\ifNJUT@backinfo \NJUT@backinfotrue
 \DeclareOption{nobackinfo}{\NJUT@backinfofalse}
+
+\newif\ifNJUT@review \NJUT@reviewfalse
+\DeclareOption{review}{\NJUT@reviewtrue}
+
 \newif\ifNJUT@phd \NJUT@phdfalse
 \newif\ifNJUT@master \NJUT@masterfalse
 \DeclareOption{phd}{\NJUT@phdtrue}
@@ -78,7 +84,7 @@
   \DeclareGraphicsExtensions{.pdf,.eps,.ps}
 \fi
 %% sort and compress citations
-\RequirePackage[sort&compress,numbers]{natbib}
+\RequirePackage[square]{natbib} 
 %% Define link colors
 \RequirePackage{color}
 \definecolor{darkblue}{rgb}{0,0,0.55}
@@ -100,13 +106,13 @@
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \renewcommand{\floatpagefraction}{0.80}
 %% Bib styles and DIYed \cite commands.
-%%\bibliographystyle{NJUthesis}
-\bibliographystyle{unsrt}
+\bibliographystyle{NJUthesis}
+%%\bibliographystyle{unsrt}
 %% Author-year mode label with numerical mode indexes.
 %% Jack (2000)
 \newcommand\citenju[1]{\protect\citeauthor{#1} (\protect\citeyear{#1})}
-%% (Jack, 2000)
-\newcommand\citenjup[1]{(\protect\citeauthor{#1}, \protect\citeyear{#1})}
+%% [Jack, 2000]
+\newcommand\citenjup[1]{[\protect\citeauthor{#1}, \protect\citeyear{#1}]}
 %% Jack, 2000
 \newcommand\citenjupr[1]{\protect\citeauthor{#1}, \protect\citeyear{#1}}
 %% Jack (2000)
@@ -123,8 +129,8 @@
 \fi
 \expandafter\NJUT@getfileinfo\reserved@a\relax? ? \relax\relax
 \def\NJUT@underline[#1]#2{%
-  \CTEXunderline{\hbox to #1{\hfill#2\hfill}}}
-\def\NJUTunderline{\@ifnextchar[\NJUT@underline\CTEXunderline}
+  \underline{\hbox to #1{\hfill#2\hfill}}}
+\def\NJUTunderline{\@ifnextchar[\NJUT@underline\underline}
 %%
 %% command to file string values only in the National library cover page
 %%
@@ -158,6 +164,11 @@
 \newcommand\footdate[1]{\def\NJUT@value@footdate{#1}}
 \newcommand\submitdate[1]{\def\NJUT@value@submitdate{#1}}
 \newcommand\defenddate[1]{\def\NJUT@value@defenddate{#1}}
+
+\ifNJUT@review
+  \renewcommand\author[1]{}
+  \renewcommand\advisor[1]{}
+\fi
 %%
 %% command to fill string values in the english title page
 %%
@@ -170,6 +181,13 @@
 \newcommand\englishaddress[1]{\def\NJUT@value@englishaddress{#1}}
 \newcommand\englishdegree[1]{\def\NJUT@value@englishdegree{#1}}
 \newcommand\englishmajor[1]{\def\NJUT@value@englishmajor{#1}}
+
+\ifNJUT@review
+  \renewcommand\englishauthor[1]{}
+  \renewcommand\englishadvisor[1]{}
+  \renewcommand\englishadvisorname[1]{}
+\fi
+
 %%
 %% Make Chinese title page with/without National library cover page
 %%
@@ -239,10 +257,22 @@
   \pdfbookmark[0]{NJU Cover}{cover}
   \begin{center}
     \vskip 10mm
-    \includegraphics[width=1.96cm]{njulogo} \\
+    \ifNJUT@review
+      \includegraphics[width=1.96cm]{reviewPlaceholder} \\
+    \else
+      \includegraphics[width=1.96cm]{njulogo} \\
+    \fi
+    
     \vskip 10mm
-    \includegraphics[height=2cm]{njuname} \\
-    \vskip 10mm
+    
+     \ifNJUT@review
+      \includegraphics[width=1.96cm]{reviewPlaceholder} \\
+    \else
+      \includegraphics[height=2cm]{njuname} \\
+    \fi
+    
+    \vskip 10mm        
+    
       {\bf\songti\zihao{1}  \NJUT@label@thesis}\\
     \vskip 10mm
       {\kaishu\zihao{1} \NJUT@label@apply}\\
@@ -318,7 +348,13 @@
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-    \includegraphics[width=1.96cm]{njulogo}\\
+    
+    \ifNJUT@review
+      \includegraphics[width=1.96cm]{reviewPlaceholder} \\
+    \else
+      \includegraphics[width=1.96cm]{njulogo} \\
+    \fi
+    
       \bf\zihao{2} \NJUT@value@englishtitle
     \vskip \stretch{2}
       \normalfont\zihao{4} By
@@ -330,12 +366,23 @@
       \normalfont\zihao{4} \NJUT@value@englishadvisor
       \bf\zihao{4} \NJUT@value@englishadvisorname
     \vskip \stretch{2}
-	  \normalfont\zihao{4} \NJUT@label@englishstatement
+    
+    \ifNJUT@review
+	    \normalfont\zihao{4} \NJUT@label@englishstatementReview
+	  \else  
+	    \normalfont\zihao{4} \NJUT@label@englishstatement
+	  \fi
+	  
 	%\vskip \stretch{1}
 	  \bf\zihao{4} \NJUT@value@englishdegree
 
     \vskip \stretch{2}
-      \normalfont\zihao{4} \NJUT@value@englishinstitute
+      \ifNJUT@review
+	      %%DO NOTHING
+	    \else  
+	      \normalfont\zihao{4} \NJUT@value@englishinstitute
+	    \fi
+      
     \vskip \stretch{0}
       \normalfont\zihao{4} \NJUT@value@englishdate
   \end{center}
@@ -355,17 +402,23 @@
 \newenvironment{abstract}{
   \pdfbookmark[0]{\NJUT@abs@label@abstract}{abstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@bar}}
+  
+    \ifNJUT@review
+	    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@barReview}}
+	  \else  
+	    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@bar}}
+	  \fi
+        
   \end{center}
 
   {\kaishu\zihao{4}%
     \noindent \NJUT@abs@label@title \NJUTunderline[316pt]{\NJUT@value@title}
 
     \noindent \NJUTunderline[178pt]{\NJUT@value@major} \NJUT@abs@label@major%
-    \NJUTunderline[50pt]{\NJUT@value@grade} \NJUT@abs@label@author%
+    \NJUTunderline[44pt]{\NJUT@value@grade} \NJUT@abs@label@author%
     \NJUTunderline[60pt]{\NJUT@value@author}
 
-    \noindent \NJUT@abs@label@advisor \NJUTunderline[252pt]{\NJUT@value@advisor}
+    \noindent \NJUT@abs@label@advisor \NJUTunderline[254pt]{\NJUT@value@advisor}
   }
   \begin{center}
     {\heiti\zihao{-3} \NJUT@abs@label@abstract}
@@ -376,7 +429,13 @@
   \if@twoside\cleardoublepage\else\clearpage\fi
   \pdfbookmark[0]{\NJUT@abs@label@englishabstract}{englishabstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@englishbar}}
+    
+    \ifNJUT@review
+	    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@englishbarReview}}
+	  \else  
+	    {\bf\kaishu\zihao{-2} \uuline{\NJUT@abs@label@englishbar}}
+	  \fi
+    
   \end{center}
 
   {\zihao{4}%

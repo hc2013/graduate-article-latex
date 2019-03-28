@@ -1,127 +1,176 @@
-\begin{thebibliography}{10}
-
-\bibitem{GaoQiang2017}
-Gao Q, Zhang FL, Wang RJ, and Zhou F.
-\newblock Trajectory big data:a review of key technologies in data processing.
-\newblock {\em Ruan Jian Xue Bao}, 28(4):28--34, 2016.
-
-\bibitem{BaiduYingyan}
-{BaiduYingyan System}.
-\newblock \url{http://lbsyun.baidu.com/trace}.
-
-\bibitem{TileServerGL}
-{tileserver System}.
-\newblock \url{http://tileserver.org}.
-
-\bibitem{DBLP:journals/ijon/Mateos-GarciaGS19}
-Daniel Mateos{-}Garc{\'{\i}}a, Jorge Garc{\'{\i}}a{-}Guti{\'{e}}rrez, and
-  Jos{\'{e}} Crist{\'{o}}bal~Riquelme Santos.
-\newblock On the evolutionary weighting of neighbours and features in the
-  k-nearest neighbour rule.
-\newblock {\em Neurocomputing}, 326-327:54--60, 2019.
-
-\bibitem{DBLP:conf/soda/Yianilos93}
-Peter~N. Yianilos.
-\newblock Data structures and algorithms for nearest neighbor search in general
-  metric spaces.
-\newblock pages 311--321, 1993.
-
-\bibitem{DBLP:journals/tc/FukunagaN75}
-Keinosuke Fukunaga and Patrenahalli~M. Narendra.
-\newblock A branch and bound algorithms for computing k-nearest neighbors.
-\newblock {\em {IEEE} Trans. Computers}, 24(7):750--753, 1975.
-
-\bibitem{DBLP:conf/eccv/2008-2}
-David~A. Forsyth, Philip H.~S. Torr, and Andrew Zisserman, editors.
-\newblock {\em Computer Vision - {ECCV} 2008, 10th European Conference on
-  Computer Vision, Marseille, France, October 12-18, 2008, Proceedings, Part
-  {II}}, volume 5303 of {\em Lecture Notes in Computer Science}. Springer,
-  2008.
-
-\bibitem{DBLP:journals/cys/VargasB18}
-Andr{\'{e}}s Vargas and Johan Bogoya.
-\newblock A generalization of the averaged hausdorff distance.
-\newblock {\em Computaci{\'{o}}n y Sistemas}, 22(2), 2018.
-
-\bibitem{DBLP:journals/aai/HirschB18}
-Laurence Hirsch and Teresa Brunsdon.
-\newblock A comparison of lucene search queries evolved as text classifiers.
-\newblock {\em Applied Artificial Intelligence}, 32(7-8):768--784, 2018.
-
-\bibitem{DBLP:journals/jdiq/YangFL18}
-Peilin Yang, Hui Fang, and Jimmy Lin.
-\newblock Anserini: Reproducible ranking baselines using lucene.
-\newblock {\em J. Data and Information Quality}, 10(4):16:1--16:20, 2018.
-
-\bibitem{LuceneInAction}
-Michael McCandless, Erik Hatcher, and Otis Gospodnetic.
-\newblock {\em Lucene in Action, Second Edition: Covers Apache Lucene 3.0}.
-\newblock Manning Publications, 2010.
-
-\bibitem{DBLP:journals/jcst/BoucennaNKK19}
-Fateh Boucenna, Omar Nouali, Samir Kechid, and M.~Tahar Kechadi.
-\newblock Secure inverted index based search over encrypted cloud data with
-  user access rights management.
-\newblock {\em J. Comput. Sci. Technol.}, 34(1):133--154, 2019.
-
-\bibitem{inverted-index}
-{Introduction of Inverted Index}.
-\newblock \url{http://www.51cto.com/}.
-
-\bibitem{WGS84Intro}
-张晴晴, 王剑, and 刘瑞华.
-\newblock 基于椭球的航迹点坐标推算.
-\newblock {\em 国家重点研发计划}, 41(10):28--34, 2018.
-
-\bibitem{MercatoProjection}
-孙健~曹兴飞 邱亮.
-\newblock 墨卡托海图投影变形的应用分析.
-\newblock {\em 中国水运(下半月)}, 16(12):72--74, 2016.
-
-\bibitem{TileIntro}
-胡水平~岳淑英 张求喜.
-\newblock 谷歌地图卫星影像数据获取关键技术研究.
-\newblock {\em 测绘与空间地理信息}, 41(10):79--81, 2018.
-
-\bibitem{DBLP:conf/w2gis/AntoniouMH09}
-Vyron Antoniou, Jeremy Morley, and Mordechai~(Muki) Haklay.
-\newblock Tiled vectors: {A} method for vector transmission over the web.
-\newblock In {\em Web and Wireless Geographical Information Systems, 9th
-  International Symposium, {W2GIS} 2009, Maynooth, Ireland, December 7-8, 2009.
-  Proceedings}, pages 56--71, 2009.
-
-\bibitem{TilePyramid}
-霍亮 杨耀东 刘小勇~乔文昊 朱王璋.
-\newblock 瓦片金字塔模型技术的研究与实践.
-\newblock {\em 测绘科学}, 37(06):144--146, 2012.
-
-\bibitem{DBLP:conf/nbis/Osborn17}
-Wendy Osborn.
-\newblock A \emph{k}-nearest neighbour query processing strategy using the
-  mqr-tree.
-\newblock In {\em Advances in Network-Based Information Systems, The 20th
-  International Conference on Network-Based Information Systems, NBiS 2017,
-  Ryerson University, Toronto, ON, Canada, August 24-26, 2017.}, pages
-  566--577, 2017.
-
-\bibitem{DBLP:journals/vldb/FuCCM00}
-Ada~Wai{-}Chee Fu, Polly~Mei{-}shuen Chan, Yin{-}Ling Cheung, and Yiu~Sang
-  Moon.
-\newblock Dynamic vp-tree indexing for n-nearest neighbor search given
-  pair-wise distances.
-\newblock {\em {VLDB} J.}, 9(2):154--173, 2000.
-
-\bibitem{DBLP:journals/classification/ProencaN17}
-Hugo Proen{\c{c}}a and Jo{\~{a}}o~C. Neves.
-\newblock Fusing vantage point trees and linear discriminants for fast feature
-  classification.
-\newblock {\em J. Classification}, 34(1):85--107, 2017.
-
-\bibitem{DBLP:conf/hucc/ZengLJLCM14}
-Guohang Zeng, Qiaozhi Li, Huiming Jia, Xingliang Li, Yadi Cai, and Rui Mao.
-\newblock An inclusion rule for vantage point tree range query processing.
-\newblock In {\em Human Centered Computing - First International Conference,
-  {HCC} 2014, Phnom Penh, Cambodia, November 27-29, 2014, Revised Selected
-  Papers}, pages 777--783, 2014.
+\begin{thebibliography}{22}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{张晴晴 等(2018)张晴晴, 王剑 和~ 刘瑞华}]{WGS84Intro}
+\bibinfo{author}{张晴晴}, \bibinfo{author}{王剑}, \bibinfo{author}{刘瑞华},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{基于椭球的航迹点坐标推算}.
+\newblock \bibinfo{journal}{国家重点研发计划} \bibinfo{volume}{41},
+  \bibinfo{pages}{28--34}.
+%Type = Article
+\bibitem[{朱王璋(2012)}]{TilePyramid}
+\bibinfo{author}{朱王璋, ....}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{瓦片金字塔模型技术的研究与实践}.
+\newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
+  \bibinfo{pages}{144--146}.
+%Type = Misc
+\bibitem[{Bai()}]{BaiduYingyan}
+, .
+\newblock \bibinfo{title}{{BaiduYingyan System}}.
+\newblock \bibinfo{howpublished}{\url{http://lbsyun.baidu.com/trace}}.
+%Type = Misc
+\bibitem[{inv()}]{inverted-index}
+, .
+\newblock \bibinfo{title}{{Introduction of Inverted Index}}.
+\newblock \bibinfo{howpublished}{\url{http://www.51cto.com/}}.
+%Type = Misc
+\bibitem[{Til()}]{TileServerGL}
+, .
+\newblock \bibinfo{title}{{tileserver System}}.
+\newblock \bibinfo{howpublished}{\url{http://tileserver.org}}.
+%Type = Article
+\bibitem[{邱亮(2016)}]{MercatoProjection}
+\bibinfo{author}{邱亮, ..}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{墨卡托海图投影变形的应用分析}.
+\newblock \bibinfo{journal}{中国水运(下半月)} \bibinfo{volume}{16},
+  \bibinfo{pages}{72--74}.
+%Type = Article
+\bibitem[{张求喜(2018)}]{TileIntro}
+\bibinfo{author}{张求喜, ..}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{谷歌地图卫星影像数据获取关键技术研究}.
+\newblock \bibinfo{journal}{测绘与空间地理信息} \bibinfo{volume}{41},
+  \bibinfo{pages}{79--81}.
+%Type = Inproceedings
+\bibitem[{Antoniou 等(2009)Antoniou, Morley 和~
+  Haklay}]{DBLP:conf/w2gis/AntoniouMH09}
+\bibinfo{author}{Antoniou, V.}, \bibinfo{author}{Morley, J.},
+  \bibinfo{author}{Haklay, M.M.}, \bibinfo{year}{2009}.
+\newblock \bibinfo{title}{Tiled vectors: {A} method for vector transmission
+  over the web}, in: \bibinfo{booktitle}{Web and Wireless Geographical
+  Information Systems, 9th International Symposium, {W2GIS} 2009, Maynooth,
+  Ireland, December 7-8, 2009. Proceedings}, pp. \bibinfo{pages}{56--71}.
+%Type = Article
+\bibitem[{Boucenna 等(2019)Boucenna, Nouali, Kechid 和~
+  Kechadi}]{DBLP:journals/jcst/BoucennaNKK19}
+\bibinfo{author}{Boucenna, F.}, \bibinfo{author}{Nouali, O.},
+  \bibinfo{author}{Kechid, S.}, \bibinfo{author}{Kechadi, M.T.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Secure inverted index based search over encrypted
+  cloud data with user access rights management}.
+\newblock \bibinfo{journal}{J. Comput. Sci. Technol.} \bibinfo{volume}{34},
+  \bibinfo{pages}{133--154}.
+%Type = Proceedings
+\bibitem[{Forsyth 等(2008)Forsyth, Torr 和~ Zisserman}]{DBLP:conf/eccv/2008-2}
+\bibinfo{editor}{Forsyth, D.A.}, \bibinfo{editor}{Torr, P.H.S.},
+  \bibinfo{editor}{Zisserman, A.} (Eds.), \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Computer Vision - {ECCV} 2008, 10th European
+  Conference on Computer Vision, Marseille, France, October 12-18, 2008,
+  Proceedings, Part {II}}. volume \bibinfo{volume}{5303} of
+  \textit{\bibinfo{series}{Lecture Notes in Computer Science}},
+  \bibinfo{publisher}{Springer}.
+%Type = Article
+\bibitem[{Fu 等(2000)Fu, Chan, Cheung 和~ Moon}]{DBLP:journals/vldb/FuCCM00}
+\bibinfo{author}{Fu, A.W.}, \bibinfo{author}{Chan, P.M.},
+  \bibinfo{author}{Cheung, Y.}, \bibinfo{author}{Moon, Y.S.},
+  \bibinfo{year}{2000}.
+\newblock \bibinfo{title}{Dynamic vp-tree indexing for n-nearest neighbor
+  search given pair-wise distances}.
+\newblock \bibinfo{journal}{{VLDB} J.} \bibinfo{volume}{9},
+  \bibinfo{pages}{154--173}.
+%Type = Article
+\bibitem[{Fukunaga 和~ Narendra(1975)}]{DBLP:journals/tc/FukunagaN75}
+\bibinfo{author}{Fukunaga, K.}, \bibinfo{author}{Narendra, P.M.},
+  \bibinfo{year}{1975}.
+\newblock \bibinfo{title}{A branch and bound algorithms for computing k-nearest
+  neighbors}.
+\newblock \bibinfo{journal}{{IEEE} Trans. Computers} \bibinfo{volume}{24},
+  \bibinfo{pages}{750--753}.
+%Type = Article
+\bibitem[{Hirsch 和~ Brunsdon(2018)}]{DBLP:journals/aai/HirschB18}
+\bibinfo{author}{Hirsch, L.}, \bibinfo{author}{Brunsdon, T.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{A comparison of lucene search queries evolved as text
+  classifiers}.
+\newblock \bibinfo{journal}{Applied Artificial Intelligence}
+  \bibinfo{volume}{32}, \bibinfo{pages}{768--784}.
+%Type = Article
+\bibitem[{Mateos{-}Garc{\'{\i}}a 等(2019)Mateos{-}Garc{\'{\i}}a,
+  Garc{\'{\i}}a{-}Guti{\'{e}}rrez 和~
+  Santos}]{DBLP:journals/ijon/Mateos-GarciaGS19}
+\bibinfo{author}{Mateos{-}Garc{\'{\i}}a, D.},
+  \bibinfo{author}{Garc{\'{\i}}a{-}Guti{\'{e}}rrez, J.},
+  \bibinfo{author}{Santos, J.C.R.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{On the evolutionary weighting of neighbours and
+  features in the k-nearest neighbour rule}.
+\newblock \bibinfo{journal}{Neurocomputing} \bibinfo{volume}{326-327},
+  \bibinfo{pages}{54--60}.
+%Type = Book
+\bibitem[{McCandless 等(2010)McCandless, Hatcher 和~
+  Gospodnetic}]{LuceneInAction}
+\bibinfo{author}{McCandless, M.}, \bibinfo{author}{Hatcher, E.},
+  \bibinfo{author}{Gospodnetic, O.}, \bibinfo{year}{2010}.
+\newblock \bibinfo{title}{Lucene in Action, Second Edition: Covers Apache
+  Lucene 3.0}.
+\newblock \bibinfo{publisher}{Manning Publications}.
+%Type = Inproceedings
+\bibitem[{Osborn(2017)}]{DBLP:conf/nbis/Osborn17}
+\bibinfo{author}{Osborn, W.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{A \emph{k}-nearest neighbour query processing
+  strategy using the mqr-tree}, in: \bibinfo{booktitle}{Advances in
+  Network-Based Information Systems, The 20th International Conference on
+  Network-Based Information Systems, NBiS 2017, Ryerson University, Toronto,
+  ON, Canada, August 24-26, 2017.}, pp. \bibinfo{pages}{566--577}.
+%Type = Article
+\bibitem[{Proen{\c{c}}a 和~
+  Neves(2017)}]{DBLP:journals/classification/ProencaN17}
+\bibinfo{author}{Proen{\c{c}}a, H.}, \bibinfo{author}{Neves, J.C.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Fusing vantage point trees and linear discriminants
+  for fast feature classification}.
+\newblock \bibinfo{journal}{J. Classification} \bibinfo{volume}{34},
+  \bibinfo{pages}{85--107}.
+%Type = Article
+\bibitem[{Q 等(2016)Q, FL, RJ 和~ F}]{GaoQiang2017}
+\bibinfo{author}{Q, G.}, \bibinfo{author}{FL, Z.}, \bibinfo{author}{RJ, W.},
+  \bibinfo{author}{F, Z.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Trajectory big data:a review of key technologies in
+  data processing}.
+\newblock \bibinfo{journal}{Ruan Jian Xue Bao} \bibinfo{volume}{28},
+  \bibinfo{pages}{28--34}.
+%Type = Article
+\bibitem[{Vargas 和~ Bogoya(2018)}]{DBLP:journals/cys/VargasB18}
+\bibinfo{author}{Vargas, A.}, \bibinfo{author}{Bogoya, J.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{A generalization of the averaged hausdorff distance}.
+\newblock \bibinfo{journal}{Computaci{\'{o}}n y Sistemas} \bibinfo{volume}{22}.
+%Type = Article
+\bibitem[{Yang 等(2018)Yang, Fang 和~ Lin}]{DBLP:journals/jdiq/YangFL18}
+\bibinfo{author}{Yang, P.}, \bibinfo{author}{Fang, H.}, \bibinfo{author}{Lin,
+  J.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Anserini: Reproducible ranking baselines using
+  lucene}.
+\newblock \bibinfo{journal}{J. Data and Information Quality}
+  \bibinfo{volume}{10}, \bibinfo{pages}{16:1--16:20}.
+%Type = Article
+\bibitem[{Yianilos(1993)}]{DBLP:conf/soda/Yianilos93}
+\bibinfo{author}{Yianilos, P.N.}, \bibinfo{year}{1993}.
+\newblock \bibinfo{title}{Data structures and algorithms for nearest neighbor
+  search in general metric spaces} , \bibinfo{pages}{311--321}.
+%Type = Inproceedings
+\bibitem[{Zeng 等(2014)Zeng, Li, Jia, Li, Cai 和~
+  Mao}]{DBLP:conf/hucc/ZengLJLCM14}
+\bibinfo{author}{Zeng, G.}, \bibinfo{author}{Li, Q.}, \bibinfo{author}{Jia,
+  H.}, \bibinfo{author}{Li, X.}, \bibinfo{author}{Cai, Y.},
+  \bibinfo{author}{Mao, R.}, \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{An inclusion rule for vantage point tree range query
+  processing}, in: \bibinfo{booktitle}{Human Centered Computing - First
+  International Conference, {HCC} 2014, Phnom Penh, Cambodia, November 27-29,
+  2014, Revised Selected Papers}, pp. \bibinfo{pages}{777--783}.
 
 \end{thebibliography}
