@@ -229,8 +229,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{插入算法实现}
-②③④⑤①⑥
-\textbf{已满叶节点的分裂代码实现}:如代码\ref{fullleafnode-split}所示，已满叶节点分裂在获取正确的叶节点之后，首先在①处更新了distances数组。随后将新轨迹数据id插入到childIds列表中，此时childIds列表的长度比用户配置的叶节点尺寸多一个数据点。
+\textbf{已满叶节点的分裂代码实现}:如代码\ref{fullleafnode-split}所示，已满叶节点分裂在获取正确的叶节点之后，首先在①处更新了distances数组。随后将新轨迹数据id插入到childIds列表中，此时childIds列表的长度比用户配置的叶节点尺寸多一个数据点，紧接着在②处计算新的左右子节点的数据数目，即数据点总数除以2上取整，这样使得数据点数左多右少。然后在③处初始化新的右侧叶子节点，并将childIds中超出左叶子节点新尺寸的数据点id移除，然后将这些数据点赋值到右叶子节点的childIds中。完成数据点转移之后，在④处对parent节点的分支信息进行更新，并且移动后续所有分支的槽位。 parent节点的各种配置信息列表也要进行更新，包括分支距离上下界列表branchbounds，分支最大距离列表branchDistance,子节点列表childNodes等，最后在⑥处将新的右侧叶子节点加入到节点池中。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code1.pdf}
