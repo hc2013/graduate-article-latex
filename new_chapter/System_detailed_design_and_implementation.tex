@@ -133,9 +133,10 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \end{figure}
 
 \textbf{预填结果集代码实现：}
+如代码\ref{trytoFillQueue-code}所示，①处首先要判断结果堆是否已经满了，然后在②处，从之前搜索的最相似单个数据点过程中保留的路径节点栈中，取出最后一个节点last及其父节点parent。如果last是叶子节点，③处就尝试用该叶子节点的所有数据点填满结果堆。如果该叶子节点填不满，则⑥处尝试用该叶子节点的兄弟节点填结果堆，直到填满为止。如果节点last 不是叶子节点，则使用fillQueueIfNonLeaf方法填满结果堆。此处要使用tmpNodeStack和tmpBitSetStack两个栈记录深度搜索路径上经过的节点以及每个非叶节点的分支访问情况。当fillQueueIfNonLeaf方法返回之后，要将tmpNodeStack中的节点和tmpBitSetStack中BitSet对应压进节点栈和访问记录栈。这里要注意的是⑥处，节点栈要把最后一个节点先弹出，因为最后一个节点一定是叶节点，它没有对应的bitset。如果不将其弹出，之前的节点与对应bitset将会错1位。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=5.8in,height=7.8in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
   \caption{预填结果集代码}\label{trytoFillQueue-code}
 \end{figure}
 
@@ -224,7 +225,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 \subsection{插入算法流程图}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
+  \includegraphics[width=4.5in,height=5.9in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{插入算法实现}

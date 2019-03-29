@@ -54,11 +54,11 @@
 \contentsline {subsection}{\numberline {4.3.3}相似检索功能实现要点：避免重复访问}{32}{subsection.4.3.3}
 \contentsline {subsection}{\numberline {4.3.4}检索算法流程图}{32}{subsection.4.3.4}
 \contentsline {subsection}{\numberline {4.3.5}相似检索功能各子流程代码实现}{33}{subsection.4.3.5}
-\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计}{36}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Insert操作算法概述}{36}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Insert操作算法设计细节}{39}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计}{35}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Insert操作算法概述}{35}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Insert操作算法设计细节}{38}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}插入算法流程图}{41}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}插入算法实现}{41}{subsection.4.4.4}
+\contentsline {subsection}{\numberline {4.4.4}插入算法实现}{42}{subsection.4.4.4}
 \contentsline {section}{\numberline {4.5}豪斯多夫距离计算设计}{46}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}豪斯多夫距离计算实现}{47}{subsection.4.5.1}
 \contentsline {section}{\numberline {4.6}本章总结}{48}{section.4.6}
