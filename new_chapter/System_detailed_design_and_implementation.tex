@@ -229,10 +229,11 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{插入算法实现}
-\textbf{已满叶节点的分裂代码实现}
+②③④⑤①⑥
+\textbf{已满叶节点的分裂代码实现}:如代码\ref{fullleafnode-split}所示，已满叶节点分裂在获取正确的叶节点之后，首先在①处更新了distances数组。随后将新轨迹数据id插入到childIds列表中，此时childIds列表的长度比用户配置的叶节点尺寸多一个数据点。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=7.5in]{new_FIGs/chapter4/insert-code1.pdf}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code1.pdf}
   \caption{已满叶节点的分裂代码实现}\label{fullleafnode-split}
 \end{figure}
 
