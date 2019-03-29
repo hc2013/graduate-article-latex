@@ -35,13 +35,13 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 \end{figure}
 如图\ref{update_tile_1}所示，这里值得注意的是，在流程中第二次检查，是对栅格坐标结果的检查。因为对于不同zoom，zoom值越大，地图的精度越高，更新设计的完整瓦片越多，反之则越少。那么对于那些zoom值较低的更新，其所计算出来的栅格坐标值可能不是完整的的瓦片，而只是某一瓦片中一个位置，由于本文对瓦片更新的粒度不涉及到单个瓦片内部的结构，而只是单个瓦片的整体更新。因此对于这种情况，要根据用户对精度的要求进行取舍，而取舍的前提要保证更新行为的一致性。具体可见后文。
 
-\textbf{地图局部更新功能代码实现}
-
+\textbf{地图局部更新功能代码实现}：
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/tile_degree_compute.pdf}
-  \caption{地图局部更新功能代码实现}\label{tile_degree_compute}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/tile_degree_compute.pdf}
+  \caption{地图局部更新功能核心代码实现}\label{tile_degree_compute}
 \end{figure}
+如代码\ref{tile_degree_compute}中所示的degree2xy方法，是局部更新功能的核心逻辑，其作用是在一个由north,south,west,east四个经纬度值划定的矩形框内，计算某一个经纬度点的瓦片坐标。如代码中注释可知，该degree2xy方法的主要逻辑是对莫卡托坐标转换原理的实现。另外，mercator2y方法是将纬度值转换为莫卡托纬度，convert2redians是将经纬度角度值转为弧度值，这些是地理坐标转换的数学必备部分。
 \section{更新一致性的原理}
 所谓的更新的一致性，指的是整体更新和分部分更新结果的不一致。这主要是因为单纯的栅格坐标模糊取整很可能遗漏部分栅格瓦片，导致出现更新空隙的问题。对于这个问题的解决办法，基于以下原则进行处理。
 
@@ -67,13 +67,15 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 
 
-综上所述，本文实现的瓦片数据服务更新一致性的功能是瓦片级别的弱一致性，其依据的是用户操作本身对bbox的一致性划分。
+综上所述，本文实现的瓦片数据服务更新一致性的功能是瓦片级别的弱一致性，其依据的是用户操作本身bbox划分的逻辑一致性。
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=6in,height=4.3in]{new_FIGs/chapter4/consistancy-code.pdf}
   \caption{判断是否覆盖当前瓦片的代码}\label{consistancy-code}
 \end{figure}
+
+如代码\ref{consistancy-code}所示，计算重合部分面积，首先要确定实际精确坐标点与部分重合瓦片中心坐标点的相对位置关系。根据左上，右下，左下，右上四个不同方向结果，对精确坐标采用相同方向的取整操作。然后根据精确坐标与模糊坐标的横纵差值计算重合部分的面积。最后比较重合坐标面积是否超过了65536像素平方的四分之一，也就是一整个瓦片面积的四分之一，来判定是否要覆盖该瓦片。
 
 \section{服务运行效果展示}
 如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。

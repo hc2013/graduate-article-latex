@@ -236,36 +236,38 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
   \caption{已满叶节点的分裂代码实现}\label{fullleafnode-split}
 \end{figure}
 
-\textbf{叶节点数据重分布代码实现}
+\textbf{叶节点数据重分布代码实现}：如代码\ref{leafnode-redistribute}所示，①处为记录最佳分支位置和拥有最大未满值的叶节点，我们寻找重分布分支的依据以距离最近优先，在距离相同的情况下，以空槽位较多的分支为优，这里的largestDis记录的就是最大的未满值，也就是最多的空槽位值。②处left和right两个变量分别是分支搜索的位置坐标，由于是中心扩散搜索，因此是从当前分支的左右两侧的第一个位置开始，向两边扩散进行分支遍历。③处两个变量leftDPCount和rightDPCount分别记录了向左数据重分布涉及的数据点数量和向右涉及的数据点数量。④ 处为中心扩散的循环中，持续跟踪更新leftDPCount和rightDPCount,当找到bestBranch的时候，基于距离优先原则，尽快跳出循环。⑤处是计算重分布后，所有涉及到的分支，应该持有的平均数据点量，注意，此处展示了向左数据重分布的伪代码，实际还有向右的对称情况，并且平均数量要有取整操作。基于⑤处计算出来数据点量，在⑥处依次挪动所有涉及分支中包含的多于dpCount 的数据点，实现数据重分布。在⑦处，更新parent节点对应的分支元信息，包括界标数组和距离数组。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=7.8in]{new_FIGs/chapter4/insert-code2.pdf}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code2.pdf}
   \caption{叶节点数据重分布代码实现}\label{leafnode-redistribute}
 \end{figure}
 
-\textbf{分支分裂代码实现}
+\textbf{分支分裂代码实现}：
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=6.8in]{new_FIGs/chapter4/insert-code3.pdf}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code3.pdf}
   \caption{分支分裂代码实现}\label{branch-split}
 \end{figure}
-分支分裂与叶节点分裂最大的不同，就是必须对分支所拥有的数据点集合进行重新建树。如图\ref{branch-split}所示的，makeVpTree方法其实是createNode方法的封装实现，其目的都是以某一节点为根节点建立子树。而分支配置信息的移动函数shiftBranchInfo的实现与前文所现一致，此处省略，不再展示。
+如代码\ref{branch-split}所示，在①处计算左右分支的数据点量，与前文类似。②处是将左右分支的数据点重新分配，也就是把左分支，也就是把旧分支多出来的数据点挪给右分支，也就是新分支。③处为设置左节点，并以左节点为根节点进行子树创建的过程，这里也是分支分裂与叶节点分裂最大的不同，就是必须对分支所拥有的数据点子集合进行重新建树，也就是说，针对子集合的选举优先点和基于优先点的距离计算要重新进行，因此③ 处的makeVpTree方法其实是createNode方法的封装实现，其目的都是以某一节点为根节点建立子树。④处为设置右节点的代码，与设置左节点代码类似。⑤ 处为确定当前分支节点与祖先分支节点的相对位置关系，因为在新建一个新的分支之后，必须要把原来分支后面的所有分支的配置信息向后移动，如⑥ 处shiftBranchInfo 方法。而对应的祖先分支节点的其他元数据，包括分支上下界数组和距离数组都要对应更新和移动。
 \section{豪斯多夫距离计算设计}
 在轨迹数据服务设计的最后，我们介绍豪斯多夫距离计算的设计和实现。这一节相对于本大节的其他内容比较独立，所以用单独的类图予以诠释。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=6.5in]{new_FIGs/chapter4/hausdoff-dis-class.pdf}
+  \includegraphics[width=5in,height=6.5in]{new_FIGs/chapter4/hausdoff-dis-class.pdf}
   \caption{轨迹距离计算设计类图}\label{trajectory-distance-compute-class}
 \end{figure}
 本文主要针对Geometry类中LineString（线条）和Polygon（几何体）两种类型进行设计，因为轨迹数据基本上都属于这两种类型。如图\ref{trajectory-distance-compute-class}所示，HausdoffDistance是对GemotryDistanceFunction接口的实现，它依赖于DiscreteHau \\ sdorffDistance进行离散点豪斯多夫距离的计算。DiscreteHausdorffDistance聚合了两个MaxPointFilter和MaxDensifiedFractionDistanceFilter，这两个是原生JTS.G\\eometry的保留接口，本文对其进行了重写，以实现对最大距离点的过滤作用。DistanceToPoint是数据点距离的计算类，其所依赖的是Coordinate类的坐标距离计算实现。LineSegment是本文对原生JTS.LineSegment的重写，覆盖了closestPoint方法。PointPairDistance是保留两个坐标点之间距离的类。\textbf{在豪斯多夫距离计算的过程中，坐标点之前的距离是二维欧几里得距离。因为本文暂时只考虑平面轨迹。}
 \subsection{豪斯多夫距离计算实现}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=4.5in]{new_FIGs/chapter4/hausdoff-code-fraction.pdf}
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/hausdoff-code-fraction.pdf}
   \caption{线条分段致密计算代码实现}\label{hausdoff-code-fraction}
 \end{figure}
-对于前文所提到的点集合全集与目标的距离计算无法实现的问题，本文采用了致密分段这个方式进行这种，代码如图\ref{hausdoff-code-fraction}。原理如图
-\ref{hausdoff-fraction-show}所示，致密分段的核心思想是将一根线条按照致密比例切分成数段，将每一段的两端点坐标纳入距离计算，从而尽可能地保留了整根线条的距离属性。很显然的是，致密度越小，致密段数越多，对原线条的距离属性保留越完善，距离也就越精确。但是相应地，运行代价越高，性能越差。
+
+对于前文所提到的几何体点集合全集与目标的距离计算无法实现的问题，本文采用了致密分段这个方式进行近似计算。如代码\ref{hausdoff-code-fraction}所示，①处的maxPtDist是用于保留最大距离值的变量。②处是基于fraction致密率计算致密段数。③处是从Geometry的坐标序列表中取出临近的两个点的坐标用于致密计算，④处是计算相邻点横纵坐标的delta值，delx、dely 在⑤处分别作为分段在横轴和纵轴的间隔值，依次纳入辅助坐标的计算。然后再基于生成的辅助坐标点进行距离计算，并更新maxPtDist中的最大值。最后，maxPtDist中保留的，就是根Geometry与目标Geomtry之间的豪斯多夫距离。
+
+以上代码的原理如图\ref{hausdoff-fraction-show}所示，致密分段的核心思想是将一根线条按照致密比例切分成数段，将每一段的两端点坐标纳入距离计算，从而尽可能多地保留了整根线条的距离属性。很显然的是，致密度越小，致密段数越多，对原线条的距离属性保留越完善，距离也就越精确。但是相应地，运行代价越高，性能越差。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=6in]{new_FIGs/chapter4/hausdoff-fraction-show.pdf}
