@@ -1,5 +1,5 @@
 %%]dvipdfm
-\documentclass[oneside, master, review,openany]{NJUthesis}
+\documentclass[twoside, master, review,openany]{NJUthesis}
 %\documentclass[twoside, master]{NJUthesis}
 
 % 可选参数：
@@ -148,8 +148,6 @@
 
 地理轨迹数据服务，（Geographic trajectory data service, 以下简称GTDS)，通过构建独立的索引结构和通用的瓦片数据服务，实现了相似轨迹的检索和展示功能，解决了用户应用中一些难题，提高了系统的可用性。文章的最后部分，通过总结和展望，对该技术以及应用前景进行了一些分析。
 
-
-
 \keywords{地理数据，轨迹数据，瓦片数据，优先点树,矢量瓦片，轨迹索引结构，轨迹相似检索，可视化}
 
 \end{abstract}
@@ -159,9 +157,9 @@
 
 Geographic data is data that is directly or indirectly related to a certain location on the earth. It is the data of natural phenomena and social phenomena that represent geographic location and distribution characteristics. In the user business using geographic data, a novel and very practical problem scenario is based on the similarity analysis of motion trajectories. For example, criminal accomplices analysis, general criminal accomplices, have the same or similar trajectories. Through the retrieval of similar trajectories and the ranking of similarities, the suspects who are most likely to cooperate with crimes can be quickly identified, thus greatly improving the efficiency of reconnaissance. Similar problem scenarios include ship, train freight routing adjustments, travel route corrections, etc. These are high-value commercial functions based on the similarity of physical motion trajectories. At present, the relevant systems in the industry are basically concerned with the storage, display and tracking of trajectories. There is no good and stable solution for trajectory similarity retrieval.
 
-In response to the above problems, this thesis designs and implements a high-performance geographic trajectory data service. The main idea is to construct the trajectory data storage index service and the map data service respectively, and then extract relevant data from the trajectory data service and the map data service respectively, and then use the front-end library to integrate two pieces of data and display them on the browser, thereby making the user convenient and quick. See the track search results.
+In response to the above problems, this thesis designs and implements a high-performance geographic trajectory data service. The main idea is to construct the trajectory data storage index service and the map data service respectively, and then extract relevant data from the trajectory data service and the map data service respectively, and then use the front-end library to integrate two pieces of data and display them on the browser, thereby making the user convenient and quick to see the track search results.
 
-The technical concepts related to the design and implementation of this thesis include vantage point tree structure, principle, Lucene structure and retrieval principle, and technical standards related to map tiles. The reason why the vantage point tree is selected as the structure of the track index is that it provides good search performance and stability based on the track space distance, and the related technology of the map tile is an inevitable choice for the visualization of geographic information.
+The technical concepts related to the design and implementation of this thesis include vantage point tree structure and principle, Lucene structure and retrieval principle, and technical standards related to map tiles. The reason why the vantage point tree is selected as the structure of the track index is that it provides good search performance and stability based on the track space distance, and the related technology of the map tile is an inevitable choice for the visualization of geographic information.
 
 The main work of the thesis is to introduce the design and implementation of the above two data services. First, this thesis describes the technologies that are currently popular in geographic data services. In the following sections, the roles of the two structures in the system are described in detail through the requirements of the entire system and the running logic flow. Then it introduces the design structure of the whole service, the division of duties of each module and the detailed design and implementation of each module. In the process, some performance and model problems appearing in the system are also discussed and analyzed, providing a better solution. Finally, the effect of the whole service on the retrieval of geographic trajectory data is analyzed in detail.
 

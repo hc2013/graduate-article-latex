@@ -1,4 +1,4 @@
-\chapter{地图瓦片数据服务详细设计}
+\chapter{地理轨迹数据服务地图瓦片数据子服务详细设计}
 \section{概述}
 地图瓦片服务的功能是为整个系统提供可视化地图数据的服务。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。\textbf{MapBox是业内通用标准，符合Mapbox 标准是为了确保通用性。}它的所有数据服务都通过Rest接口暴露给调用方。
 
@@ -84,5 +84,5 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
   \includegraphics[width=6in]{new_FIGs/chapter5/running.pdf}
   \caption{轨迹检索运行效果}\label{running}
 \end{figure}
-\section{本章总结}
+\section{本章小结}
 本章描述了地图瓦片数据服务的详细设计和实现，主要介绍了地图瓦片数据服务的整体结构，并针对创新性较强的地图局部更新功能进行了详细设计说明。通过流程图和代码实现来说明设计和实现的思路，然后对局部更新可能出现的不一致问题给出了解决办法和原理，最后展示了系统整体运行的效果图。

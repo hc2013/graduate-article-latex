@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{30}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -6,6 +6,42 @@
 \providecommand{\eprint}[2][]{\url{#2}}
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{朱孔强 等(2018)朱孔强, 丁林花, 朱立顺, 聂国豪 和~
+  席永科}]{BaiduYingyanApp}
+\bibinfo{author}{朱孔强}, \bibinfo{author}{丁林花}, \bibinfo{author}{朱立顺},
+  \bibinfo{author}{聂国豪}, \bibinfo{author}{席永科}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{基于百度鹰眼的校园巴士app}.
+\newblock \bibinfo{journal}{数字技术与应用} \bibinfo{volume}{v.36；No.334},
+  \bibinfo{pages}{52--53+55}.
+%Type = Article
+\bibitem[{龚俊 等(2015)龚俊, 柯胜男, 朱庆 和~ 张叶廷}]{GongJun2015}
+\bibinfo{author}{龚俊}, \bibinfo{author}{柯胜男}, \bibinfo{author}{朱庆},
+  \bibinfo{author}{张叶廷}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{一种集成r树、哈希表和b?树的高效轨迹数据索引方法}.
+\newblock \bibinfo{journal}{测绘学报} \bibinfo{volume}{44},
+  \bibinfo{pages}{570--577}.
+%Type = Article
+\bibitem[{高强 等(2017)高强, 张凤荔, 王瑞锦 和~ 周帆}]{GaoQiang2017}
+\bibinfo{author}{高强}, \bibinfo{author}{张凤荔}, \bibinfo{author}{王瑞锦},
+  \bibinfo{author}{周帆}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{轨迹大数据:数据处理关键技术研究综述}.
+\newblock \bibinfo{journal}{软件学报} \bibinfo{volume}{28},
+  \bibinfo{pages}{959--992}.
+%Type = Article
+\bibitem[{陈建军 等(2001)陈建军, 于志强 和~ 朱昀}]{ChenJianjun2001}
+\bibinfo{author}{陈建军}, \bibinfo{author}{于志强}, \bibinfo{author}{朱昀},
+  \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{数据可视化技术及其应用}.
+\newblock \bibinfo{journal}{红外与激光工程} \bibinfo{volume}{30},
+  \bibinfo{pages}{339--342}.
+%Type = Article
+\bibitem[{王凯 等(2017)王凯, 陈能成 和~ 陈泽强}]{WangKai2017}
+\bibinfo{author}{王凯}, \bibinfo{author}{陈能成}, \bibinfo{author}{陈泽强},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{基于mongodb的轨迹大数据时空索引构建方法}.
+\newblock \bibinfo{journal}{计算机系统应用} \bibinfo{volume}{26},
+  \bibinfo{pages}{227--231}.
 %Type = Article
 \bibitem[{张晴晴 等(2018)张晴晴, 王剑 和~ 刘瑞华}]{WGS84Intro}
 \bibinfo{author}{张晴晴}, \bibinfo{author}{王剑}, \bibinfo{author}{刘瑞华},
@@ -20,20 +56,22 @@
 \newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
   \bibinfo{pages}{144--146}.
 %Type = Misc
-\bibitem[{Bai()}]{BaiduYingyan}
-, .
-\newblock \bibinfo{title}{{BaiduYingyan System}}.
-\newblock \bibinfo{howpublished}{\url{http://lbsyun.baidu.com/trace}}.
-%Type = Misc
 \bibitem[{inv()}]{inverted-index}
 , .
 \newblock \bibinfo{title}{{Introduction of Inverted Index}}.
 \newblock \bibinfo{howpublished}{\url{http://www.51cto.com/}}.
-%Type = Misc
-\bibitem[{Til()}]{TileServerGL}
-, .
-\newblock \bibinfo{title}{{tileserver System}}.
-\newblock \bibinfo{howpublished}{\url{http://tileserver.org}}.
+%Type = Article
+\bibitem[{吉根林 和~ 赵斌(2015)}]{JiGenLin2015}
+\bibinfo{author}{吉根林}, \bibinfo{author}{赵斌}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{时空轨迹大数据模式挖掘研究进展}.
+\newblock \bibinfo{journal}{数据采集与处理} \bibinfo{volume}{30},
+  \bibinfo{pages}{47--58}.
+%Type = Article
+\bibitem[{杨伟 和~ 艾廷华(2016)}]{YangWei2016}
+\bibinfo{author}{杨伟}, \bibinfo{author}{艾廷华}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{基于车辆轨迹大数据的道路网更新方法研究}.
+\newblock \bibinfo{journal}{计算机研究与发展} \bibinfo{volume}{53},
+  \bibinfo{pages}{2681--2693}.
 %Type = Article
 \bibitem[{邱亮(2016)}]{MercatoProjection}
 \bibinfo{author}{邱亮, ..}, \bibinfo{year}{2016}.
@@ -46,6 +84,16 @@
 \newblock \bibinfo{title}{谷歌地图卫星影像数据获取关键技术研究}.
 \newblock \bibinfo{journal}{测绘与空间地理信息} \bibinfo{volume}{41},
   \bibinfo{pages}{79--81}.
+%Type = Phdthesis
+\bibitem[{吴秀君(2008)}]{WuXiujun2008}
+\bibinfo{author}{吴秀君}, \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{网络环境下地图数据可视化方法的研究及其应用}.
+\newblock Ph.D. thesis. 苏州大学.
+%Type = Phdthesis
+\bibitem[{袁冠(2012)}]{YuanGuan2012}
+\bibinfo{author}{袁冠}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{移动对象轨迹数据挖掘方法研究}.
+\newblock Ph.D. thesis. 中国矿业大学.
 %Type = Inproceedings
 \bibitem[{Antoniou 等(2009)Antoniou, Morley 和~
   Haklay}]{DBLP:conf/w2gis/AntoniouMH09}
@@ -55,6 +103,10 @@
   over the web}, in: \bibinfo{booktitle}{Web and Wireless Geographical
   Information Systems, 9th International Symposium, {W2GIS} 2009, Maynooth,
   Ireland, December 7-8, 2009. Proceedings}, pp. \bibinfo{pages}{56--71}.
+%Type = Misc
+\bibitem[{BaiduYingyan(2018)}]{BaiduYingyan}
+\bibinfo{author}{BaiduYingyan}, \bibinfo{year}{2018}.
+\newblock \bibinfo{howpublished}{\url{http://lbsyun.baidu.com/trace}}.
 %Type = Article
 \bibitem[{Boucenna 等(2019)Boucenna, Nouali, Kechid 和~
   Kechadi}]{DBLP:journals/jcst/BoucennaNKK19}
@@ -135,14 +187,11 @@
   for fast feature classification}.
 \newblock \bibinfo{journal}{J. Classification} \bibinfo{volume}{34},
   \bibinfo{pages}{85--107}.
-%Type = Article
-\bibitem[{Q 等(2016)Q, FL, RJ 和~ F}]{GaoQiang2017}
-\bibinfo{author}{Q, G.}, \bibinfo{author}{FL, Z.}, \bibinfo{author}{RJ, W.},
-  \bibinfo{author}{F, Z.}, \bibinfo{year}{2016}.
-\newblock \bibinfo{title}{Trajectory big data:a review of key technologies in
-  data processing}.
-\newblock \bibinfo{journal}{Ruan Jian Xue Bao} \bibinfo{volume}{28},
-  \bibinfo{pages}{28--34}.
+%Type = Misc
+\bibitem[{TileServerGL()}]{TileServerGL}
+\bibinfo{author}{TileServerGL}, .
+\newblock \bibinfo{title}{{tileserver System}}.
+\newblock \bibinfo{howpublished}{\url{http://tileserver.org}}.
 %Type = Article
 \bibitem[{Vargas 和~ Bogoya(2018)}]{DBLP:journals/cys/VargasB18}
 \bibinfo{author}{Vargas, A.}, \bibinfo{author}{Bogoya, J.},
