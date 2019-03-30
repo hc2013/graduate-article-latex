@@ -69,7 +69,7 @@ d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \i
 \end{figure}
 对于豪斯多夫距离，更通俗的定义是两个集合最小\textbf{导向距离}的最大值。因此对于豪斯多夫距离，更通用的公式表达如下。
 \begin{align}
-H_(X,Y)=\max \left\{h_(X,Y),h_(Y,X)\right\}\label{hausdoff-formula2}
+H_{}(X,Y)=\max \left\{h_{}(X,Y),h_{}(Y,X)\right\}\label{hausdoff-formula2}
 \end{align}
 在公式\ref{hausdoff-formula2}中，$h(X,Y)$是集合X到集合Y的导向距离，也称为前向距离。反之，$h(Y,X)$为后向距离。对于几何图形和线条而言，前后向距离的计算应该包括线条上的所有点，而不只是线条的顶点，如图\ref{oriented-distance-show}中②所示。而对于线条上所有点的距离计算显然是不现实的，在后文的详细设计中，本文将会介绍具体的折中实现办法。
 
