@@ -2,48 +2,48 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces vp-tree点集合分割示意图}}{7}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces vp-tree空间分割示意图}}{7}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces 最简单vp-tree的结构示意图}}{8}{figure.2.3}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces 球状空间分割}}{7}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 优先点距离分布折线图}}{7}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces 导向距离示例}}{9}{figure.2.4}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces lucene检索组件图}}{10}{figure.2.5}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces 倒排索引结构示意图}}{11}{figure.2.6}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces 瓦片等级与瓦片坐标}}{12}{figure.2.7}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces 瓦片金字塔}}{13}{figure.2.8}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces 轨迹数据服务用例图}}{16}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 瓦片数据服务用例图}}{21}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces GTDS的总体架构}}{23}{figure.3.3}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 轨迹数据服务用例图}}{15}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 瓦片数据服务用例图}}{20}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces GTDS的总体架构}}{22}{figure.3.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{26}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{27}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{28}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{29}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 节点分裂配置栈示意图}}{30}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 优先点选取代码}}{31}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces 容忍距离对剪枝的作用示意图}}{32}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 检索算法流程图}}{34}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces 检索单个最相似轨迹代码实现}}{35}{figure.4.9}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces 预填结果集代码}}{36}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces 直接插入对应叶节点算法示意图}}{37}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces 叶节点分裂算法示意图}}{37}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces 叶节点数据重分布算法示意图}}{38}{figure.4.13}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces 分支分裂算法示意图}}{39}{figure.4.14}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces 分支重分布算法示意图}}{40}{figure.4.15}
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Insert算法流程图}}{42}{figure.4.16}
-\contentsline {figure}{\numberline {4.17}{\ignorespaces 已满叶节点的分裂代码实现}}{43}{figure.4.17}
-\contentsline {figure}{\numberline {4.18}{\ignorespaces 叶节点数据重分布代码实现}}{44}{figure.4.18}
-\contentsline {figure}{\numberline {4.19}{\ignorespaces 分支分裂代码实现}}{45}{figure.4.19}
-\contentsline {figure}{\numberline {4.20}{\ignorespaces 轨迹距离计算设计类图}}{46}{figure.4.20}
-\contentsline {figure}{\numberline {4.21}{\ignorespaces 线条分段致密计算代码实现}}{47}{figure.4.21}
-\contentsline {figure}{\numberline {4.22}{\ignorespaces 线条分段致密原理失意}}{48}{figure.4.22}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{25}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{26}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{27}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{28}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 节点分裂配置栈示意图}}{29}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 优先点选取代码}}{30}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 容忍距离对剪枝的作用示意图}}{31}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 检索算法流程图}}{33}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 检索单个最相似轨迹代码实现}}{34}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 预填结果集代码}}{35}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces 直接插入对应叶节点算法示意图}}{36}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces 叶节点分裂算法示意图}}{36}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces 叶节点数据重分布算法示意图}}{37}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces 分支分裂算法示意图}}{38}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces 分支重分布算法示意图}}{39}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Insert算法流程图}}{41}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces 已满叶节点的分裂代码实现}}{42}{figure.4.17}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces 叶节点数据重分布代码实现}}{43}{figure.4.18}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces 分支分裂代码实现}}{44}{figure.4.19}
+\contentsline {figure}{\numberline {4.20}{\ignorespaces 轨迹距离计算设计类图}}{45}{figure.4.20}
+\contentsline {figure}{\numberline {4.21}{\ignorespaces 线条分段致密计算代码实现}}{46}{figure.4.21}
+\contentsline {figure}{\numberline {4.22}{\ignorespaces 线条分段致密原理失意}}{47}{figure.4.22}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{50}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{51}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{52}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{53}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{53}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{54}{figure.5.6}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces 轨迹检索运行效果}}{55}{figure.5.7}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{49}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{50}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{51}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{52}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{52}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{53}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 轨迹检索运行效果}}{54}{figure.5.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
