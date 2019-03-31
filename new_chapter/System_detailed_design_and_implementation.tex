@@ -78,6 +78,8 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \subsection{设计要点：优先点的选择算法}
 在初始建树的过程中，优先点选取是非常关键的一步。选取的好坏取决于一个优先点能否让切分出来的各路子树的边界值相差足够大，因为各路子树的边界值相差越大，在检索的时候，距离值落入某一子树的边界内的可能性越大，剪枝成功的可能性越高，性能就越好。反之，如果优先点选择很差，导致多个子树的上下界非常接近，就很容易出现一个距离值横跨多个子树的情况，这种情况下无法进行有效剪枝，造成性能下降。因此，如何选择尽可能优的优先点，是算法实现的重点。
 \begin{figure}[htb]
+\setlength{\abovecaptionskip}{0.cm}
+\setlength{\belowcaptionskip}{0.cm}
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/select-vp-code.pdf}
   \caption{优先点选取代码}\label{select-vp-code}

@@ -7,6 +7,13 @@
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
 %Type = Article
+\bibitem[{霍亮 等(2012)霍亮, 杨耀东, 刘小勇, 乔文昊 和~ 朱王璋}]{TilePyramid}
+\bibinfo{author}{霍亮}, \bibinfo{author}{杨耀东}, \bibinfo{author}{刘小勇},
+  \bibinfo{author}{乔文昊}, \bibinfo{author}{朱王璋}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{瓦片金字塔模型技术的研究与实践}.
+\newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
+  \bibinfo{pages}{146--148}.
+%Type = Article
 \bibitem[{朱孔强 等(2018)朱孔强, 丁林花, 朱立顺, 聂国豪 和~
   席永科}]{BaiduYingyanApp}
 \bibinfo{author}{朱孔强}, \bibinfo{author}{丁林花}, \bibinfo{author}{朱立顺},
@@ -50,11 +57,12 @@
 \newblock \bibinfo{journal}{计算机系统应用} \bibinfo{volume}{26},
   \bibinfo{pages}{227--231}.
 %Type = Article
-\bibitem[{朱王璋(2012)}]{TilePyramid}
-\bibinfo{author}{朱王璋, ....}, \bibinfo{year}{2012}.
-\newblock \bibinfo{title}{瓦片金字塔模型技术的研究与实践}.
-\newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
-  \bibinfo{pages}{144--146}.
+\bibitem[{胡水平 等(2018)胡水平, 岳淑英 和~ 张求喜}]{TileIntro}
+\bibinfo{author}{胡水平}, \bibinfo{author}{岳淑英}, \bibinfo{author}{张求喜},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{谷歌地图卫星影像数据获取关键技术研究}.
+\newblock \bibinfo{journal}{测绘与空间地理信息} \bibinfo{volume}{41},
+  \bibinfo{pages}{79--81}.
 %Type = Article
 \bibitem[{吉根林 和~ 赵斌(2015)}]{JiGenLin2015}
 \bibinfo{author}{吉根林}, \bibinfo{author}{赵斌}, \bibinfo{year}{2015}.
@@ -67,12 +75,6 @@
 \newblock \bibinfo{title}{基于车辆轨迹大数据的道路网更新方法研究}.
 \newblock \bibinfo{journal}{计算机研究与发展} \bibinfo{volume}{53},
   \bibinfo{pages}{2681--2693}.
-%Type = Article
-\bibitem[{张求喜(2018)}]{TileIntro}
-\bibinfo{author}{张求喜, ..}, \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{谷歌地图卫星影像数据获取关键技术研究}.
-\newblock \bibinfo{journal}{测绘与空间地理信息} \bibinfo{volume}{41},
-  \bibinfo{pages}{79--81}.
 %Type = Phdthesis
 \bibitem[{吴秀君(2008)}]{WuXiujun2008}
 \bibinfo{author}{吴秀君}, \bibinfo{year}{2008}.
