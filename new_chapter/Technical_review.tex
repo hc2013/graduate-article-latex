@@ -35,8 +35,7 @@ vp-tree的基本思路就是对点集合进行空间划分。第一步，要选择一个点作为vantage point
 \subsection{两路优先点树的搜索过程}
 优先点树的搜索算法的运行思路如算法\ref{alg:simplest_vp_tree_search}所示。对于一次检索的目标点target和当前优先点树的节点node，我们会设置一个容忍距离u。首先计算target 与当前节点的优先点之间的距离distance。如果距离$ distance \ge mu+u $,那么基于三角不等式，左子树中不可能存在距离target点距离小于容忍距离u的点，从而舍弃左子树，只搜索右子树。反之，如果$ distance \le mu-u $, 就舍弃右子树，只搜索左子树。如果$ mu-u < distance < mu+u $, 那么无法完成剪枝，左右子树都要搜索。
 
-如优先点距离分布折线图\ref{vp_distance_line}所示，假设任意点集合的距离分布都符合正态分布。图中正中虚线为中值mu的位置,左右两条虚线分别代表mu-u和mu+u的位置，那么显而易见的是，容忍阈值u 越小，区间(mu-u,mu+u)越短，目标点落入这一区间的可能性越小，剪枝成功的可能性越大，搜索性能也就越好。因此容忍距离u的选择至关重要，在实际的算法实现中，一般的做法都是随着递归搜索的过程推进而不断以当前距离target 最小的距离取代容忍距离u，因为既然u 是目前最小的距离，那么比u距离更大的点也就不必考虑了。因此，如何实现算法使得容忍阈值以较快的速度收敛，是算法实现的重点。
-\begin{algorithm}[H]
+\begin{algorithm}[htb]
 \caption{最简单vp-tree的搜索过程search}
 \label{alg:simplest_vp_tree_search}
 node $\leftarrow$ currentNode;\\
@@ -56,46 +55,35 @@ search(node.left);
 }
 \end{algorithm}
 
-\section{豪斯多夫距离}
-“豪斯多夫距离是在度量空间中任意两个集合之间定义的一种距离。设X和Y是度量空间M的两个真子集，那么豪斯多夫距离$d_{H}(X,Y)$是最小的数r使得X的闭r—邻域包含Y，Y的闭r—邻域也包含X，其通用计算公式如下。”\citenjup{DBLP:journals/cys/VargasB18}
-\begin{align}
-d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \inf _{x \in X}d(x,y) \right\}\label{hausdoff-formula1}
-\end{align}
-这里要介绍导向距离的概念，所谓导向距离，就是一个集合中的某个点到另一个集合中所有点的所有距离的最小值中的最大值。这意味着两个集合之间的导向距离在很多情况下都不是对称的,即$H(X,Y) \ne H(Y,X)$。如图\ref{oriented-distance-show}中①所示，集合A到集合B的导向距离是d(a1,b1)，而集合B到集合A的导向距离d(b2,a2)。
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=3.5in,height=2in]{new_FIGs/chapter2/hausdoff-show.pdf}
-  \caption{导向距离示例}\label{oriented-distance-show}
-\end{figure}
-对于豪斯多夫距离，更通俗的定义是两个集合最小\textbf{导向距离}的最大值。因此对于豪斯多夫距离，更通用的公式表达如下。
-\begin{align}
-H_{}(X,Y)=\max \left\{h_{}(X,Y),h_{}(Y,X)\right\}\label{hausdoff-formula2}
-\end{align}
-在公式\ref{hausdoff-formula2}中，$h(X,Y)$是集合X到集合Y的导向距离，也称为前向距离。反之，$h(Y,X)$为后向距离。对于几何图形和线条而言，前后向距离的计算应该包括线条上的所有点，而不只是线条的顶点，如图\ref{oriented-distance-show}中②所示。但是对于线条上所有点的距离计算显然是不现实的，只能采用某种折中的近似方法，尽可能地保留几何体的空间距离属性，在后文的详细设计中，本文将会介绍具体的折中实现办法。
+如优先点距离分布折线图\ref{vp_distance_line}所示，假设任意点集合的距离分布都符合正态分布。图中正中虚线为中值mu的位置,左右两条虚线分别代表mu-u和mu+u的位置，那么显而易见的是，容忍阈值u 越小，区间(mu-u,mu+u)越短，目标点落入这一区间的可能性越小，剪枝成功的可能性越大，搜索性能也就越好。因此容忍距离u的选择至关重要，在实际的算法实现中，一般的做法都是随着递归搜索的过程推进而不断以当前距离target 最小的距离取代容忍距离u，因为既然u 是目前最小的距离，那么比u距离更大的点也就不必考虑了。因此，如何实现算法使得容忍阈值以较快的速度收敛，是算法实现的重点。
 
 \section{Lucene}
+
 \subsection{简介}
 Lucene是一套用于全文检索的开放源代码Java程序库，由Apache软件基金会支持和提供。所谓全文检索，指的是针对无结构的，纯字符串内容的检索，而不只是针对类似于日期，地点这样的结构化内容。Lucene 提供了一个简洁强大的应用程序接口，能够做全文索引和搜索。“在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene 是现在并且是这几年，最受欢迎的免费Java 信息检索程序库。”\citenjup{DBLP:journals/aai/HirschB18}
 
 这里要明确的是，“Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜索内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene 的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。”\citenjup{DBLP:journals/jdiq/YangFL18}
-\subsection{运行原理}
-Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，用户通过Search User Interface来与Lucene库进行交互，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
-\citenjup{LuceneInAction}注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排或正排索引。在本文的设计与实现中，轨迹相似检索功能就是封装成LuceneQuery来供用户使用的。
+
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=3.5in,height=3in]{new_FIGs/chapter2/lucene-structure.pdf}
+  \includegraphics[width=4in,height=3.5in]{new_FIGs/chapter2/lucene-structure.pdf}
   \caption{lucene检索组件图}\label{lucene_structureCH2}
 \end{figure}
+
+\subsection{Lucene运行原理}
+Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，用户通过Search User Interface来与Lucene库进行交互，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
+\citenjup{LuceneInAction}注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排或正排索引。在本文的设计与实现中，轨迹相似检索功能就是封装成LuceneQuery来供用户使用的。
+
 \subsection{Lucene核心数据结构}
 Doc-Value:Doc-Value是Lucene针对文档内容建立的正排索引，可以将其理解为以Doc-Id为key的键值对的正序组合结构。这一结构与传统数据库中B-tree的索引结构是相似的。主要用于对一些特殊的结构化数据，比如图形，大数字，日志等不适合进行全文检索的数据进行顺序存储。本文实现中所使用的几何图形JTSGeometry 就是存储在Doc-Value中的。
 
 \subsection{为什么选择lucene}
 lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。扩展Lucene的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与本文所使用的几何体类库JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
-
 \section{地理相关技术概念介绍}
-\subsection{地理坐标与投影法}
+\subsection{地理坐标系}
 WGS-84坐标系（World Geodetic System一1984 Coordinate System），是一种通用的世界地心坐标系。该坐标系颁布于1984年，它充分利用了当时所有的技术和工艺，全面考虑了地球重力场，地理几何和地理测量等多方面的因素，制定了一个某一时刻的，按照某一恒定速率旋转的标准地球坐标体系。WGS-84坐标系的坐标原点为地球质心，Z轴方向与BIH （国际时间服务机构）1984.O 定义的协议地球极（CTP) 方向相同，X 轴是协议地球子午面与WGS基准子午面的交线，Y轴与Z轴，X轴构成右手正交坐标系。WGS84坐标系也被称为1984 年世界大地坐标系统，是目前最新的地球模型。\citenjup{WGS84Intro}在本文的地图坐标应用场景下，所有的初始经纬度坐标都是WGS-84坐标值。
 
+\subsection{地图投影法}
 地图投影法，是遵循一定的数学规则，把不规则的地球表面的复杂地理信息映射到平面地图的理论方法。地图投影出于表达和理解上的正确性，必须遵循三个主要的不变原则，即角度不变，面积不变，距离不变。
 
 墨卡托投影法（英语：Mercator projection），又称麦卡托投影法，是一种保证角度不变的圆柱形地图投影方式，因此也被称为等角正切圆柱投影。它以本初子午线与赤道交点为投影坐标原点，将赤道投影为X轴，将本初子午线投影为Y轴，从而构成墨卡托平面直角坐标系。此投影法之所以被称为墨卡托投影，是因为其作者为法兰德斯地理学家杰拉杜斯·墨卡托。1569年，他以此投影法为坐标基础绘制了一幅长202 公分、宽124 公分的世界地图。由于角度不变形的保证，该地图经纬线于任何位置皆垂直相交。从而大大降低了地图信息的复杂性。
