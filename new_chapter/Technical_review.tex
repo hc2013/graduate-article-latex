@@ -57,7 +57,7 @@ search(node.left);
 \end{algorithm}
 
 \section{豪斯多夫距离}
-豪斯多夫距离是在度量空间中任意两个集合之间定义的一种距离。设X和Y是度量空间M的两个真子集，那么豪斯多夫距离$d_{H}(X,Y)$是最小的数r使得X的闭r—邻域包含Y，Y的闭r—邻域也包含X，其通用计算公式如下。\citenjup{DBLP:journals/cys/VargasB18}
+“豪斯多夫距离是在度量空间中任意两个集合之间定义的一种距离。设X和Y是度量空间M的两个真子集，那么豪斯多夫距离$d_{H}(X,Y)$是最小的数r使得X的闭r—邻域包含Y，Y的闭r—邻域也包含X，其通用计算公式如下。”\citenjup{DBLP:journals/cys/VargasB18}
 \begin{align}
 d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \inf _{x \in X}d(x,y) \right\}\label{hausdoff-formula1}
 \end{align}
@@ -71,17 +71,16 @@ d_{H}(X,Y)=\max \left\{ \sup _{x \in X} \inf _{y \in Y}d(x,y),\sup _{y \in Y} \i
 \begin{align}
 H_{}(X,Y)=\max \left\{h_{}(X,Y),h_{}(Y,X)\right\}\label{hausdoff-formula2}
 \end{align}
-在公式\ref{hausdoff-formula2}中，$h(X,Y)$是集合X到集合Y的导向距离，也称为前向距离。反之，$h(Y,X)$为后向距离。对于几何图形和线条而言，前后向距离的计算应该包括线条上的所有点，而不只是线条的顶点，如图\ref{oriented-distance-show}中②所示。而对于线条上所有点的距离计算显然是不现实的，在后文的详细设计中，本文将会介绍具体的折中实现办法。
+在公式\ref{hausdoff-formula2}中，$h(X,Y)$是集合X到集合Y的导向距离，也称为前向距离。反之，$h(Y,X)$为后向距离。对于几何图形和线条而言，前后向距离的计算应该包括线条上的所有点，而不只是线条的顶点，如图\ref{oriented-distance-show}中②所示。但是对于线条上所有点的距离计算显然是不现实的，只能采用某种折中的近似方法，尽可能地保留几何体的空间距离属性，在后文的详细设计中，本文将会介绍具体的折中实现办法。
 
 \section{Lucene}
 \subsection{简介}
-Lucene是一套用于全文检索的开放源代码程序库，由Apache软件基金会支持和提供。Lucene提供了一个简单却强大的应用程序接口，能够做全文索引和搜索。\citenjup{DBLP:journals/aai/HirschB18}在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene是现在并且是这几年，最受欢迎的免费Java信息检索程序库。
+Lucene是一套用于全文检索的开放源代码Java程序库，由Apache软件基金会支持和提供。所谓全文检索，指的是针对无结构的，纯字符串内容的检索，而不只是针对类似于日期，地点这样的结构化内容。Lucene 提供了一个简洁强大的应用程序接口，能够做全文索引和搜索。“在Java开发环境里Lucene是一个成熟的免费开放源代码工具；就其本身而论，Lucene 是现在并且是这几年，最受欢迎的免费Java 信息检索程序库。”\citenjup{DBLP:journals/aai/HirschB18}
 
-Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜索内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene 的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。\citenjup{DBLP:journals/jdiq/YangFL18}
+这里要明确的是，“Lucene并不是一个完整有形的搜索引擎，而只是一个Java类库，对于不同的索引和搜索内容它是通用的，从而赋予了应用程序极大的灵活性和实现空间，而且Lucene 的设计紧凑而简单，能够很容易地嵌入到各种应用环境中。”\citenjup{DBLP:journals/jdiq/YangFL18}
 \subsection{运行原理}
 Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，用户通过Search User Interface来与Lucene库进行交互，Lucene是基于索引Index进行检索的，其创建索引的过程是针对文档内容进行抽取，分词，索引的过程，而检索行为封装为Lucene Query,不同语义的Query作用于Lucene Index，再经由Render Result返回检索结果给用户。
-\citenjup{LuceneInAction}
-\textbf{注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排或正排索引。}
+\citenjup{LuceneInAction}注意：图中Index 的含义是Lucene各种检索数据结构的概称，并不单指倒排或正排索引。在本文的设计与实现中，轨迹相似检索功能就是封装成LuceneQuery来供用户使用的。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=3.5in,height=3in]{new_FIGs/chapter2/lucene-structure.pdf}
@@ -90,27 +89,18 @@ Lucene是基于索引进行检索的。其核心流程如图~\ref{lucene_structureCH2}所示，用户通
 \subsection{Lucene核心数据结构}
 Doc-Value:Doc-Value是Lucene针对文档内容建立的正排索引，可以将其理解为以Doc-Id为key的键值对的正序组合结构。这一结构与传统数据库中B-tree的索引结构是相似的。主要用于对一些特殊的结构化数据，比如图形，大数字，日志等不适合进行全文检索的数据进行顺序存储。本文实现中所使用的几何图形JTSGeometry 就是存储在Doc-Value中的。
 
-倒排索引：倒排索引（英语：Inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。它是文档检索系统中最常用的数据结构。\citenjup{DBLP:journals/jcst/BoucennaNKK19}
-
-如图~\ref{invert-indexCH2}所示，建立倒排索引，首先要根据停用词列表对文章内容进行分词，找出所有的实词，再建立词条到文档列表的一个映射。当检索时，直接根据用户输入的关键词，查询词典，就可以找到这些词语分别都出现在那些文档中。再根据相应的打分算法对命中的文档计算分数，排序，返回检索结果。
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=4.5in,height=2.5in]{new_FIGs/chapter2/invert-index.pdf}
-  \caption{倒排索引结构示意图}\label{invert-indexCH2}
-\end{figure}
-
 \subsection{为什么选择lucene}
-lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。扩展Lucene的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
+lucene本身是一个全文检索的代码库，其代码简洁，优雅，扩展性良好，而且运行稳定。扩展Lucene的索引结构，再应用于Lucene的Query语义是非常可控的设计行为。而且Lucene与本文所使用的几何体类库JTS.Geomtry是兼容的，这就使得可以直接使用JTS的几何类库，降低了编码的难度。
 
 \section{地理相关技术概念介绍}
 \subsection{地理坐标与投影法}
-WGS-84坐标系（World Geodetic System一1984 Coordinate System），一种国际上采用的地心坐标系。坐标原点为地球质心，其地心空间直角坐标系的Z轴指向BIH （国际时间服务机构）1984.O定义的协议地球极（CTP)方向，X轴指向BIH 1984.0的零子午面和CTP赤道的交点，Y轴与Z轴、X轴垂直构成右手坐标系，称为1984年世界大地坐标系统。
-\citenjup{WGS84Intro}
+WGS-84坐标系（World Geodetic System一1984 Coordinate System），是一种通用的世界地心坐标系。该坐标系颁布于1984年，它充分利用了当时所有的技术和工艺，全面考虑了地球重力场，地理几何和地理测量等多方面的因素，制定了一个某一时刻的，按照某一恒定速率旋转的标准地球坐标体系。WGS-84坐标系的坐标原点为地球质心，Z轴方向与BIH （国际时间服务机构）1984.O 定义的协议地球极（CTP) 方向相同，X 轴是协议地球子午面与WGS基准子午面的交线，Y轴与Z轴，X轴构成右手正交坐标系。WGS84坐标系也被称为1984 年世界大地坐标系统，是目前最新的地球模型。\citenjup{WGS84Intro}在本文的地图坐标应用场景下，所有的初始经纬度坐标都是WGS-84坐标值。
 
-墨卡托投影法（英语：Mercator projection），又称麦卡托投影法、正轴等角圆柱投影，是一种等角的圆柱形地图投影法。本投影法得名于法兰德斯出身的地理学家杰拉杜斯·墨卡托，他于1569年发表长202公分、宽124公分以此方式绘制的世界地图。在以此投影法绘制的地图上，经纬线于任何位置皆垂直相交，使世界地图可以绘制在一个长方形上。
-\citenjup{MercatoProjection}
+地图投影法，是遵循一定的数学规则，把不规则的地球表面的复杂地理信息映射到平面地图的理论方法。地图投影出于表达和理解上的正确性，必须遵循三个主要的不变原则，即角度不变，面积不变，距离不变。
 
-本文介绍的地图瓦片服务是对WGS-84坐标系的经纬度坐标首先进行莫卡托投影转换，得出投影坐标后，进行下一步计算的。
+墨卡托投影法（英语：Mercator projection），又称麦卡托投影法，是一种保证角度不变的圆柱形地图投影方式，因此也被称为等角正切圆柱投影。它以本初子午线与赤道交点为投影坐标原点，将赤道投影为X轴，将本初子午线投影为Y轴，从而构成墨卡托平面直角坐标系。\citenjup{MercatoProjection}此投影法之所以被称为墨卡托投影，是因为其作者为法兰德斯地理学家杰拉杜斯·墨卡托。1569年，他以此投影法为坐标基础绘制了一幅长202 公分、宽124 公分的世界地图。由于角度不变形的保证，该地图经纬线于任何位置皆垂直相交。从而大大降低了地图信息的复杂性。
+
+Web墨卡托投影法是方便地图数据在网络上计算传输的，对原生墨卡托投影的一种简化变形的坐标投影法。它与原生墨卡托投影的一个重要区别是：Web墨卡托投影忽略了地球作为一个椭球体的客观事实，出于计算简单，直接将地球视作一个标准球体，这就造成了Web墨卡托投影法与原生墨卡托投影法存在0.33\%的精度差别。它的计算公式较之于墨卡托投影也简化了很多，在本文的详细设计章节的局部地图更新功能设计中，就是对公式的等价变换实现，完成了WGS-84坐标到Web墨卡托坐标的变换，从而将经纬度转换为瓦片坐标，作为局部更新的位置依据的。
 
 \subsection{地图瓦片}
 地图瓦片指的是通过经过墨卡托投影为平面的世界地图，在不同的地图分辨率(整个世界地图的像素大小)下，通过切割的方式将世界地图划分为像素为$256\times256$的地图单元，划分成的每一块地图单元称为地图瓦片。\citenjup{TileIntro}每一个瓦片在地图平面内对应的横轴、纵轴坐标就是瓦片坐标。

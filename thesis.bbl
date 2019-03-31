@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{28}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -14,6 +14,13 @@
 \newblock \bibinfo{title}{基于百度鹰眼的校园巴士app}.
 \newblock \bibinfo{journal}{数字技术与应用} \bibinfo{volume}{v.36；No.334},
   \bibinfo{pages}{52--53+55}.
+%Type = Article
+\bibitem[{李长春 等(2012)李长春, 蔡伯根, 上官伟 和~ 王剑}]{MercatoProjection}
+\bibinfo{author}{李长春}, \bibinfo{author}{蔡伯根}, \bibinfo{author}{上官伟},
+  \bibinfo{author}{王剑}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{基于web墨卡托投影的地图算法研究与实现}.
+\newblock \bibinfo{journal}{计算机应用研究} \bibinfo{volume}{29},
+  \bibinfo{pages}{4793--4796}.
 %Type = Article
 \bibitem[{龚俊 等(2015)龚俊, 柯胜男, 朱庆 和~ 张叶廷}]{GongJun2015}
 \bibinfo{author}{龚俊}, \bibinfo{author}{柯胜男}, \bibinfo{author}{朱庆},
@@ -43,23 +50,11 @@
 \newblock \bibinfo{journal}{计算机系统应用} \bibinfo{volume}{26},
   \bibinfo{pages}{227--231}.
 %Type = Article
-\bibitem[{张晴晴 等(2018)张晴晴, 王剑 和~ 刘瑞华}]{WGS84Intro}
-\bibinfo{author}{张晴晴}, \bibinfo{author}{王剑}, \bibinfo{author}{刘瑞华},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{基于椭球的航迹点坐标推算}.
-\newblock \bibinfo{journal}{国家重点研发计划} \bibinfo{volume}{41},
-  \bibinfo{pages}{28--34}.
-%Type = Article
 \bibitem[{朱王璋(2012)}]{TilePyramid}
 \bibinfo{author}{朱王璋, ....}, \bibinfo{year}{2012}.
 \newblock \bibinfo{title}{瓦片金字塔模型技术的研究与实践}.
 \newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
   \bibinfo{pages}{144--146}.
-%Type = Misc
-\bibitem[{inv()}]{inverted-index}
-, .
-\newblock \bibinfo{title}{{Introduction of Inverted Index}}.
-\newblock \bibinfo{howpublished}{\url{http://www.51cto.com/}}.
 %Type = Article
 \bibitem[{吉根林 和~ 赵斌(2015)}]{JiGenLin2015}
 \bibinfo{author}{吉根林}, \bibinfo{author}{赵斌}, \bibinfo{year}{2015}.
@@ -72,12 +67,6 @@
 \newblock \bibinfo{title}{基于车辆轨迹大数据的道路网更新方法研究}.
 \newblock \bibinfo{journal}{计算机研究与发展} \bibinfo{volume}{53},
   \bibinfo{pages}{2681--2693}.
-%Type = Article
-\bibitem[{邱亮(2016)}]{MercatoProjection}
-\bibinfo{author}{邱亮, ..}, \bibinfo{year}{2016}.
-\newblock \bibinfo{title}{墨卡托海图投影变形的应用分析}.
-\newblock \bibinfo{journal}{中国水运(下半月)} \bibinfo{volume}{16},
-  \bibinfo{pages}{72--74}.
 %Type = Article
 \bibitem[{张求喜(2018)}]{TileIntro}
 \bibinfo{author}{张求喜, ..}, \bibinfo{year}{2018}.
@@ -107,16 +96,6 @@
 \bibitem[{BaiduYingyan(2018)}]{BaiduYingyan}
 \bibinfo{author}{BaiduYingyan}, \bibinfo{year}{2018}.
 \newblock \bibinfo{howpublished}{\url{http://lbsyun.baidu.com/trace}}.
-%Type = Article
-\bibitem[{Boucenna 等(2019)Boucenna, Nouali, Kechid 和~
-  Kechadi}]{DBLP:journals/jcst/BoucennaNKK19}
-\bibinfo{author}{Boucenna, F.}, \bibinfo{author}{Nouali, O.},
-  \bibinfo{author}{Kechid, S.}, \bibinfo{author}{Kechadi, M.T.},
-  \bibinfo{year}{2019}.
-\newblock \bibinfo{title}{Secure inverted index based search over encrypted
-  cloud data with user access rights management}.
-\newblock \bibinfo{journal}{J. Comput. Sci. Technol.} \bibinfo{volume}{34},
-  \bibinfo{pages}{133--154}.
 %Type = Proceedings
 \bibitem[{Forsyth 等(2008)Forsyth, Torr 和~ Zisserman}]{DBLP:conf/eccv/2008-2}
 \bibinfo{editor}{Forsyth, D.A.}, \bibinfo{editor}{Torr, P.H.S.},
@@ -170,6 +149,11 @@
 \newblock \bibinfo{title}{Lucene in Action, Second Edition: Covers Apache
   Lucene 3.0}.
 \newblock \bibinfo{publisher}{Manning Publications}.
+%Type = Article
+\bibitem[{M·Kumar 和~ 朱慧(1994)}]{WGS84Intro}
+\bibinfo{author}{M·Kumar}, \bibinfo{author}{朱慧}, \bibinfo{year}{1994}.
+\newblock \bibinfo{title}{1984世界大地测量系统(wgs84)}.
+\newblock \bibinfo{journal}{测绘技术装备} , \bibinfo{pages}{40--42}.
 %Type = Inproceedings
 \bibitem[{Osborn(2017)}]{DBLP:conf/nbis/Osborn17}
 \bibinfo{author}{Osborn, W.}, \bibinfo{year}{2017}.
