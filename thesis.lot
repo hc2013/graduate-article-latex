@@ -2,14 +2,14 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces 轨迹数据服务功能需求列表}}{14}{table.3.1}
-\contentsline {table}{\numberline {3.2}{\ignorespaces 轨迹数据服务非功能需求列表}}{15}{table.3.2}
-\contentsline {table}{\numberline {3.3}{\ignorespaces 初始建立轨迹索引用例描述表}}{16}{table.3.3}
-\contentsline {table}{\numberline {3.4}{\ignorespaces 插入新数据用例描述}}{17}{table.3.4}
-\contentsline {table}{\numberline {3.5}{\ignorespaces 相似轨迹检索用例描述表}}{18}{table.3.5}
-\contentsline {table}{\numberline {3.6}{\ignorespaces 瓦片数据服务非功能需求列表}}{19}{table.3.6}
-\contentsline {table}{\numberline {3.7}{\ignorespaces bounding-box更新地图瓦片数据用例描述表}}{21}{table.3.7}
-\contentsline {table}{\numberline {3.8}{\ignorespaces 特定区域瓦片数据中心渲染用例描述表}}{21}{table.3.8}
+\contentsline {table}{\numberline {3.1}{\ignorespaces 轨迹数据服务功能需求列表}}{15}{table.3.1}
+\contentsline {table}{\numberline {3.2}{\ignorespaces 轨迹数据服务非功能需求列表}}{16}{table.3.2}
+\contentsline {table}{\numberline {3.3}{\ignorespaces 初始建立轨迹索引用例描述表}}{17}{table.3.3}
+\contentsline {table}{\numberline {3.4}{\ignorespaces 插入新数据用例描述}}{18}{table.3.4}
+\contentsline {table}{\numberline {3.5}{\ignorespaces 相似轨迹检索用例描述表}}{19}{table.3.5}
+\contentsline {table}{\numberline {3.6}{\ignorespaces 瓦片数据服务非功能需求列表}}{20}{table.3.6}
+\contentsline {table}{\numberline {3.7}{\ignorespaces bounding-box更新地图瓦片数据用例描述表}}{22}{table.3.7}
+\contentsline {table}{\numberline {3.8}{\ignorespaces 特定区域瓦片数据中心渲染用例描述表}}{22}{table.3.8}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
