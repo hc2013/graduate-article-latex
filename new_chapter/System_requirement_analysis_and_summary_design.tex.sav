@@ -1,0 +1,296 @@
+\chapter{系统需求分析与概要设计}
+
+
+
+\section{GTDS系统概述}
+地理轨迹数据服务总体上分为三个部分，轨迹数据服务，地图瓦片数据服务和业务展示服务。其中业务展示服务是用户直接操作的前端，完成轨迹数据和瓦片数据的可视化功能。\textbf{注意：由于业务展示服务只有前端库的调用，没有有价值的实现，因此本文不做介绍。}瓦片数据服务主要面向外部数据源，支持瓦片数据源的配置和瓦片的增，删，改，查等功能。轨迹数据服务的主要功能是轨迹数据索引的建立，更新和轨迹数据相似性检索。
+
+
+\section{轨迹数据服务需求分析}
+\subsection{轨迹数据服务的功能需求}
+整个地理轨迹数据服务的核心功能有三个。第一个是对批量轨迹数据导入建立索引的功能。第二个是相似轨迹KNN检索功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。第三个功能是对已有索引新加入数据点，即插入功能。\textbf{注意，在本文所实现的轨迹数据服务中，只提供了增，查，初始化等功能，并没有提供删除功能。之所以放弃删除功能，是因为在大数据量的应用场景下，用户往往只需要动态地增加和查询轨迹数据，轨迹数据总体量一般都达到百万级，每次做KNN 检索的K值也能达到几百，用户并不在意索引中存在某一些冗余的轨迹，相关的删除操作优先级很低。所以本文放弃了删除轨迹功能的实现。}
+
+\begin{table}[htb]
+\caption{轨迹数据服务功能需求列表}
+\vspace{2mm}
+\resizebox{146mm}{18mm}{
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{需求ID} & \multicolumn{1}{c|}{\textbf{需求名称}} & \multicolumn{1}{c|}{\textbf{需求描述}}                                                                \\ \hline
+R1   & 轨迹索引批量初始化                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过批量上传轨迹数据，在规定时间内完成轨迹索引的\\ 建立，并返回结果。\end{tabular}      \\ \hline
+R2   & 相似轨迹knn检索                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过传递目标轨迹ID和检索量K，在规定时间内返回K个\\ 与目标轨迹最相似的轨迹。\end{tabular} \\ \hline
+R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过传递新轨迹ID和轨迹数据，将新轨迹插入到原索引\\ 中并返回插入结果。\end{tabular}     \\ \hline
+\end{tabular}}
+\label{table:trajectory_service_func_req}
+\end{table}
+
+\subsection{轨迹数据服务的非功能需求}
+轨迹数据服务的三个主要功能都涉及到与用户的直接操作。由于索引本身的只是距离对比关系的存储，而并不直接存储轨迹数据，所以磁盘空间的消耗不是主要问题。而索引的建立，更新和检索，都需要大量的距离计算和区间比对，因此这显然是一个计算密集型的应用。因此用户的非功能需求主要体现在时间和准确率上。如表格\ref{table:trajectory_service_non_func_req}所示，时间特性和负载特性都是运行时保证的属性，而精度特性其实是在测试阶段保证的。因为在用户实际使用中，无法比对结果是否准确，只能在测试阶段通过比对结果集合和答案集合来确认准确率。
+\begin{table}[htb]
+\caption{轨迹数据服务非功能需求列表}
+\vspace{2mm}
+\resizebox{146mm}{11mm}{
+\begin{tabular}{|l|l|}
+\hline
+时间特性 & 对于十万级别的轨迹数据量，服务应该在5s之内返回检索结果 \\ \hline
+负载特性 & 服务应该能应对10w以上的并发访问            \\ \hline
+精度特性 & 轨迹检索的结果准确度应该达到90\% 以上          \\ \hline
+\end{tabular}
+\label{table:trajectory_service_non_func_req}}
+\end{table}
+
+\subsection{轨迹数据服务用例图}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in,height=3.4in]{new_FIGs/chapter3/trajectory_system_use_case.pdf}
+  \caption{轨迹数据服务用例图}\label{trajectory_system_use_caseCH3}
+\end{figure}
+\subsection{轨迹数据服务用例描述}
+\textbf{初始建立轨迹索引用例描述：}
+
+初始建立轨迹索引是轨迹数据库管理员的使用案例，也是整个轨迹数据服务必备的功能。在本文构建的地理轨迹数据服务的使用场景下，该功能主要是对百万级别的轨迹数据建立索引的过程，没有太多操作细节，只是配置项目很多，在加上数据库管理员具有较强的专业素养，所以本文选择在命令行环境下运行此功能。使用该功能最容易出现的问题是，对轨迹数据的元信息配置和对优先点树的元信息配置出现矛盾和错误。例如区间设定错误，文件格式错误，数据库表格配置错误等。具体如表格\ref{table:initVpTree_use_case_description}所示，要充分考虑到用户设置的元信息本身错误可能严重影响索引性能的情况，对于这些情况，系统必须予以更正或警告。除此之外，还要为关键参数设置默认值，以保证在数据库管理员遗漏配置项目时进行补充运行。
+\begin{table}[htb]\footnotesize
+\centering
+\caption{初始建立轨迹索引用例描述表}
+\vspace{2mm}
+\resizebox{146mm}{70mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC1}\\
+\hline
+\textbf{名称}&\tabincell{l}{初始建立轨迹索引}\\
+\hline
+\textbf{参与者}&\tabincell{l}{轨迹数据库管理员}\\
+\hline
+\textbf{目的}&\tabincell{l}{将目标的轨迹数据集建立成优先点树索引结构，并返回操作结果。}\\
+\hline
+\textbf{描述}&\tabincell{l}{数据库管理员通过命令行参数设定要建立索引的轨迹数据表，筛选条件，和数据条目区间，由 \\ 服务完成索引建立。}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{数据库管理员需要建立轨迹索引以备普通用户使用轨迹相似检索功能}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行，数据库管理员打开服务命令行工具。}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{优先点树索引正确建立，持久化到磁盘中，并返回结果给数据库管理员。}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.打开命令行工具。 \\ 2.在命令行中输入目标轨迹数据表格的ID，筛选条件，目标区间，以及优先点树的元数据，包 \\ 括扇出度，节点数据量等信息。 \\ 3. 回车确认建立索引。}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.表格ID不存在，服务端发现错误并告知用户。 \\2b.筛选条件存在逻辑错误，比如以字符串值筛选整形列。服务器发现错误，要求数据库管理员 \\ 重新输入。 \\2c.目标区间的前后界大小矛盾，前端发现错误，告知数据库管理员重新输入。\\ 3a. 用户设置的元数据太大或太小，将会严重影响性能，服务器询问数据库管理员是否使用推 \\ 荐的元信息配置。\\4a. 由于网络，磁盘等各种可能原因导致的初始化失败,服务器应明确告知数据库管理员。 }\\
+\hline
+\end{tabular}}
+\label{table:initVpTree_use_case_description}
+\end{table}
+
+\textbf{插入新轨迹数据用例描述表：}
+
+插入新轨迹数据功能是轨迹数据库管理员的使用案例。在真实得使用场景中，对于新数据插入操作，有少量的单个插入和批量插入这两种可能场景。针对这两种情形，轨迹数据服务的命令行工具应该分别支持直接导入数据进行插入和先导入数据，再配置数据元信息进行批量插入这两种方式。如表格\ref{table:insert_trajectory_use_case_description}所示。这一过程中，我们不考虑轨迹重复的问题，即任何新插入的轨迹都被赋予一个独一无二的ID，被插入到优先点树索引中。而地理上相同的轨迹数据的插入位置可能在同一个叶节点，也由于叶节点分裂和数据重分布而在不同叶节点，这一点重复并不影响最终的检索结果，因此予以忽略。
+\begin{table}[htb]\footnotesize
+\centering
+\caption{插入新数据用例描述}
+\vspace{2mm}
+\resizebox{146mm}{55mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC2}\\
+\hline
+\textbf{名称}&\tabincell{l}{插入新轨迹数据功能用例描述}\\
+\hline
+\textbf{参与者}&\tabincell{l}{轨迹数据库管理员}\\
+\hline
+\textbf{目的}&\tabincell{l}{新的，单个数据的到来，数据库管理员试图将新数据加入到原有索引中}\\
+\hline
+\textbf{描述}&\tabincell{l}{数据库管理员通过命令行工具提供要插入的新数据，由服务完成将新数据插入到原有索引中的操作}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{数据库管理员需要向原有索引中插入新的轨迹数据，以备普通用户使用轨迹相似检索功能。}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行，数据库管理员打开服务命令行工具。}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{新轨迹数据正确插入到原索引中，并持久化在磁盘中，返回结果给数据库管理员。}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.打开命令行工具。 \\ 2.数据库管理员提供新的轨迹数据，并选定要插入的目标轨迹数据集合 \\ 3. 回车确认，完成新轨迹插入}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a..数据库管理员要插入的数据量不大，可以通过直接导入数据文件的方式进行。 \\2b.用户要插入的数据量较大，则可以通过先导入到数据库中，再通过配置数据库表格元信息的方式 \\ 来指定要插入的数据。 \\2c. 目标轨迹数据表不存在，服务器告知用户，重新输入参数。\\2d.要插入的轨迹数据已经存在于目标轨迹集合中，服务器赋予该轨迹新的唯一ID，直接插入。 \\3a. 由于网络，磁盘等各种可能原因导致的插入失败。服务器应明确告知用户，插入失败。}\\
+\hline
+\end{tabular}}
+\label{table:insert_trajectory_use_case_description}
+\end{table}
+
+\textbf{相似轨迹检索用例描述：}
+
+相对于初始建立索引和插入新的数据，轨迹相似检索功能不涉及到索引状态的改变。用户操作的变数主要在要检索轨迹的输入，目标集合的选定和K值的设定。详见表格
+\ref{table:search_trajectory_use_case_description}
+\begin{table}[htb]\footnotesize
+\centering
+\caption{相似轨迹检索用例描述表}
+\vspace{2mm}
+\resizebox{146mm}{58mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC3}\\
+\hline
+\textbf{名称}&\tabincell{l}{相似轨迹检索用例描述}\\
+\hline
+\textbf{参与者}&\tabincell{l}{普通用户}\\
+\hline
+\textbf{目的}&\tabincell{l}{用户想找出轨迹集合中与某一特定轨迹最相近的若干其他轨迹。}\\
+\hline
+\textbf{描述}&\tabincell{l}{用户通过浏览器选定要做相似性检索的轨迹，服务进行检索，并返回检索结果。}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{用户要做轨迹相似检索。}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行，用户进入操作界面。}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{服务正确地根据索引进行检索，并将与目标轨迹最相似的若干条轨迹被返回给用户。}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.进入轨迹数据服务界面 \\ 2.用户提供目标轨迹数据，设置检索匹配数目K，并选定要搜索的目标轨迹数据集合。 \\ 3. 点击确认，进行检索。
+\\ 4.返回检索结果集合。 }\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.用户要检索的轨迹如果是目标集合中已有的轨迹，此时用户只需要提供目标轨迹的ID即可。 \\2b.用户检索的轨迹不在目标轨迹集合中，此时用户应该首先插入数据到目标集合中或者 \\ 上传轨迹数据文件，是否插入数据应该由用户决定。\\2c.用户上传的轨迹数据文件错误，服务器端校验后返回错误结果并通知用户。 \\3a. 目标轨迹数据集合不存在，服务器告知用户，重新选定。\\3b. 用户设定的K 值过大，检索结果集中数量不足，服务器应该明确告知用户，结果集比期望数目不足。\\3c.目标轨迹数据目标轨迹数据集合尚未建立轨迹索引，服务器告知用户，并询问是否新建索引。  \\4a. 由于网络，磁盘等各种可能原因导致的检索失败。服务器应明确告知用户，检索失败。}\\
+\hline
+\end{tabular}}
+\label{table:search_trajectory_use_case_description}
+\end{table}
+
+\section{瓦片数据服务需求分析}
+\subsection{瓦片数据服务的需求综述}
+在轨迹检索服务中，对于地图瓦片数据的要求有增加，删除，修改，查询，数据源配置等。其中以查询和更新这两部分功能的细分功能最多。对于查询而言，可能被用户需要的有整张地图的全量查询，局部bounding-box渲染查询，单个瓦片数据的查询。对于更新而言，可能需要局部地图的更新，bounding-box更新。
+\textbf{注意：在GTDS的功能需求中，对于瓦片的增加和删除都是以整张地图为单位的，局部的增加和删除这种需求并不存在，所以此处不列为功能需求。}
+而对于非功能需求，瓦片数据服务涉及到的计算主要是坐标转换，请求解析，缓存处理。这些操作的计算量不大，所以并不是计算密集型应用，而是IO密集型应用，高并发和快速响应是其必须满足的非功能特性。除此之外，用户的瓦片数据可能是存在于各种不同的数据库中的。因此服务还应该独立于不同的数据库，做到高可用性，高扩展性。
+\subsection{地图瓦片数据服务功能需求}
+
+\begin{table}[htb]
+\caption{ 地图瓦片数据服务功能需求列表}
+\vspace{2mm}
+\resizebox{146mm}{40mm}{
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{需求ID} & \multicolumn{1}{c|}{\textbf{需求名称}} & \multicolumn{1}{c|}{\textbf{需求描述}}                                                                \\ \hline
+R1   & 新增地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图名称和图瓦片数据，增\\ 加一个地区的完整地图瓦片数据.\end{tabular}      \\ \hline
+R2   & 删除地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，删除一个地区的全 \\ 部地图瓦片数据.\end{tabular} \\ \hline
+R3   & 局部更新地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和地图数据，更新一\\ 张大地图中某一个小地区的地图瓦片数据.\end{tabular}     \\ \hline
+R4   & bounding-box更新地图瓦片数据                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，经纬度范围，地图\\ 数据，更新一张大地图中某一个地区某一经纬度矩形范围内的地\\ 图瓦片数据.\end{tabular}     \\ \hline
+R5   & 地图瓦片数据全量查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，通过获取全量数据的JSON文件，作\\ 为输入的数据源，获取整张地图的全量数据.\end{tabular}     \\ \hline
+R6   & 单个地图瓦片数据查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和栅格坐标zxy，获取\\ 指定的瓦片.\end{tabular}     \\ \hline
+R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和经纬度矩形范围，\\ 获取这一部分的地图渲染结果.\end{tabular}     \\ \hline
+\end{tabular}}
+\label{table:tile_service_func_req}
+\end{table}
+
+\subsection{瓦片数据服务非功能需求}
+\begin{table}[htb]
+\caption{瓦片数据服务非功能需求列表}
+\vspace{2mm}
+\resizebox{146mm}{10mm}{
+\begin{tabular}{|l|l|}
+\hline
+时间特性 & 在正常负载情况下，服务的平均响应时间应在1s之内 \\ \hline
+负载特性 & 服务能稳定应对十万级别的并发访问，不会出现延迟超过10s或服务崩溃的情况            \\ \hline
+高可用性 & 服务能通过设置中间件的方式，便捷地对接到各种不同的数据库，并保证运行正常             \\ \hline
+\end{tabular}
+\label{table:tile_service_non_func_req}}
+\end{table}
+如表格\ref{table:tile_service_non_func_req}所示，瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Oracle和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地理数据服务对接起来运行。
+
+\subsection{瓦片数据服务用例图}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/tileserver_use_case.pdf}
+  \caption{瓦片数据服务用例图}\label{tileserver_use_caseCH3}
+\end{figure}
+以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。而上图中的部分功能，例如地图瓦片的全量更新，删除整张地图，都只是简单的瓦片数据库的操作，并没有什么创新性。所以本文后续章节对这些内容都予以忽略，不加介绍。
+\subsection{地图瓦片数据服务用例描述}
+本文开发的地图瓦片数据服务，主要是服务于整个地理轨迹数据服务的可视化功能的。它的某些功能直接供前端库调用，而没有与人交互的场景。比如地图瓦片全量查询功能，是在地理轨迹数据服务运行时提供地图背景的功能，普通用户并不需要单独使用这个功能。而还有一些功能是直接操作瓦片数据，面向瓦片数据库管理员的功能。因此，瓦片数据服务的功能大都操作简单明确而且重复，无需使用用例描述。本文只对操作比较复杂的，与瓦片数据库管理员直接交互的“地图瓦片bounding-box局部更新”进行了具体描述。
+\begin{table}[htb]\footnotesize
+\centering
+\caption{地图瓦片bounding-box局部更新用例描述表}
+\vspace{2mm}
+\resizebox{146mm}{52mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC1}\\
+\hline
+\textbf{名称}&\tabincell{l}{地图瓦片bounding-box局部更新}\\
+\hline
+\textbf{参与者}&\tabincell{l}{地图瓦片数据库管理员}\\
+\hline
+\textbf{目的}&\tabincell{l}{更新某张地图中一个矩形范围内的瓦片数据，以改变轨迹展示背景}\\
+\hline
+\textbf{描述}&\tabincell{l}{数据库管理员通过浏览器发送矩形参数和瓦片数据，以实现对瓦片数据库中数据的修改，进而改变业务展示的结果}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{某一地图中某一部分数据发生变更，需要更新为新数据。}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行，数据库管理员进入服务界面}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{地图瓦片数据完成更新，业务展示服务可以经过刷新可以看到地图变化}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.进入瓦片数据更新界面 \\ 2.设置north,south,west,east,4个经纬度值 \\ 3.设置zoom区间 \\ 4.设置是否进行精度模糊 \\ 5.点击浏览本地文件并上传文件数据 \\6. 点击更新瓦片数据}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.经纬度大小值错误，前端应自动检测并警告 \\ 3a.指定矩形范围太小，在较小的zoom下无法更新瓦片,服务端应发现错误并返回告知数据库管理员 \\ 5a. 数据库管理员选择的文件格式错误，则前端对数据库管理员发出警告 \\ 5b.数据库管理员选择的文件中并没有指定bounding-box中的数据，服务端应返回错误报告并提醒数据库管理员更改数据文件 \\5a. 由于网络，磁盘等各种可能原因导致的更新失败。服务器应明确告知数据库管理员，更新失败。}\\
+\hline
+\end{tabular}}
+\label{table:tileserver_use_case_description1}
+\end{table}
+\section{地理轨迹数据服务架构设计}
+\subsection{架构设计综述}
+地理轨迹数据服务是一个包括两个主要功能模块，设计到底层数据存储和逻辑计算的较复杂的数据系统。它所面向的风险承担者，包括普通用户，轨迹数据库管理员，地图瓦片数据库管理员和系统的开发者和维护者，并且由于是实际的商业软件，对系统性能，稳定性，可用性都有相应的要求。因此，出于对架构设计全面性的考虑，本文选择使用软件架构蓝图4+1模型，从逻辑视图，过程视图，物理视图和开发视图四个角度，对系统架构进行详细和全面的设计。
+
+\subsection{逻辑蓝图}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-logic-view.pdf}
+  \caption{地理轨迹数据服务逻辑蓝图}\label{logic-view}
+\end{figure}
+
+如图~\ref{logic-view}所示，此为轨迹数据服务在对象视角下的逻辑视图，也就是逻辑蓝图。其中Visualization Service是可视化服务，也就是直接与用户交互的界面。它依赖两个主要的功能模块，Trajectory Service和Tile Service。
+
+Trajectory Service是轨迹数据服务，它关联了Trajectory Store模块，也就是轨迹存储模块，Trajectory Store在存储轨迹数据的同时，还要为轨迹建立相似索引，因此Trajectory Service聚合了Trajectory Index模块。Trajectory Index模块负责轨迹数据索引的建立，更新和搜索功能，是本文设计和实现的重点。
+
+Tile Service使用了Geographical Compute模块进行地理逻辑计算，两者只是调用关系，Geographical Compute模块本身是无状态的，可配置的。除此之外，Tile Service还关联了Tile Store模块，注意，Tile Store是地图瓦片存储处理逻辑的实现模块，其本身并不存储地图瓦片数据。Tile Store模块是连接TileService与Tile DataBase的桥梁，该模块通过对Tile Service 所需接口的抽象化，实现各种不同地图瓦片数据库与Tile Service的无缝对接，从而为系统提供良好的可用性和可扩展性。
+
+整个地理轨迹数据服务，就是以Visualization Service为中心，分别调用Traj-\\ectory Service和Tile Service中的轨迹数据和地图瓦片数据，通过前端库的渲染整合，为用户提供稳定的，高可用的轨迹数据服务。
+\subsection{过程蓝图}
+如图~\ref{process-view}所示，此为地理轨迹数据服务的过程视图，也就是过程蓝图。在整个服务的运行周期内，Visualization Damon Process作为可视化服务的守护进程，时刻保持服务接口开放。Visualization Damon Process分别依赖Tile Damon Process和Trajectory Damon Process。
+
+Tile Damon Process是地图瓦片数据服务的守护进程，当它收到可视化服务守护进程的瓦片数据调用消息之后，会首先开启Geographical Compute Task这样一个单线程进行地理坐标转换计算等处理逻辑，然后再根据地理计算结果，启动一个Tile DB Task作为瓦片数据库的数据操作线程，从瓦片数据库中读取或者写入数据，从而完成用户的操作需求。
+
+Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化服务提供轨迹数据的检索和更新功能。当它收到消息之后，首先会单独启动一个轨迹索引进程Trajectory Index Process，该进程通过开启三个不同的线程任务，Search Task,Insert Task和Init Task来分别负责用户的轨迹相似检索，轨迹插入和轨迹初始建树要求。之所以单独启动轨迹索引进程，是因为除了以上三个主要的线程之外，轨迹索引运行逻辑中还包括诸多并行的子过程，例如定位单个最相似点，路径回溯等。这些子过程的运行需要并发开启多个单独的线程运行，并维护各个线程的状态，所以此处必须启动一个轨迹索引进程。但是该线程并不需要周期性运行，在请求处理之后，即可关闭，以避免进程长期占用过多系统资源。
+
+综上可知，在整个地理轨迹数据服务的运行周期内，通过守护进程产生临时进程，再由临时进程产生并发的对应线程，来实现整个服务的正常运行。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-process-view.pdf}
+  \caption{地理轨迹数据服务过程蓝图}\label{process-view}
+\end{figure}
+\subsection{开发蓝图}
+如图~\ref{develop-view}所示，此为地理轨迹数据服务的开发视图，也就是开发蓝图。本文按照各个子模块的职责和相互依赖关系，将整个服务划分为4个分层的开发组织结构。自底向上，第1层是运行于硬件和操作系统之上的基本要素，包括Trajectory Index轨迹索引和Tile DataBase瓦片数据库。第2层是基于JVM和Nodejs V8引擎实现的轨迹存储组件Trajectory Store 和瓦片存储组件Tile Store。第1 层和第2 层都是独立于用户使用域需求的职责模块，不论上层应用如何变化，都不影响这两层的设计与实现。第3层是轨迹数据服务Trajectory Service 和瓦片数据服务Tile Service，这两个组件是直接面向用户使用域需求的服务模块，它们分别依赖Trajectory Store和Tile Store实现轨迹数据和瓦片数据的存储。第1层Visualization Service 是直接与用户交互的可视化服务模块，它依赖于第2 层的Trajectory Service 和Tile Service对用户操作做出响应。
+
+综上，本文通过将地理轨迹数据服务划分成4层结构，明确和简化了各个组件之间的依赖关系，降低了开发难度。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-develop-view.pdf}
+  \caption{地理轨迹数据服务开发蓝图}\label{develop-view}
+\end{figure}
+\subsection{物理蓝图}
+如图~\ref{phsical-view}所示，此为地理轨迹数据服务的物理视图，也就是物理蓝图。它描述了软件总体结构与硬件的映射关系。本文构建的系统各组件之间关系简单清晰，因此在物理蓝图中保留了各个组件进程的映射。
+
+图中Visualization Node是可视化子服务的运行节点，其上运行了可视化守护进程。Tile Service Node是运行地图瓦片数据子服务的节点，其上运行着瓦片守护进程以及地理计算任务线程。本文出于实现简单，并没有为地图瓦片数据服务设计HA功能，所以图中没有备用节点。Tile DataBase Node是地图瓦片数据库节点，其上运行着瓦片数据处理任务线程，并直接将数据处理结果持久化到硬盘中。
+
+图中Trajectory Service Node是轨迹数据子服务的运行节点，其上运行了轨迹守护进程和轨迹索引进程。Trajectory Service Node既是逻辑处理节点，又是轨迹数据存储节点，所以并不依赖外部的数据库节点。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-phsical-view.pdf}
+  \caption{地理轨迹数据服务开发蓝图}\label{phsical-view}
+\end{figure}
+
+\subsection{场景脚本}
+
+\section{本章小结}
+本章先是通过概述说明了整个系统主要组件的职责和相互之间的关系。然后分别针对，瓦片存储服务和轨迹检索服务，这两个主要组件进行了需求分析。需求分析的过程中，使用了需求列表来展现主要的功能需求和非功能需求，还使用了用例图的形式对各项功能进行划分，并对其中操作较为复杂的功能使用用例描述进行了详细介绍。最后给出了整个系统的概要设计，明确了各个组件之间的依赖关系，为下一章按照模块进行详细设计和实现做准备。

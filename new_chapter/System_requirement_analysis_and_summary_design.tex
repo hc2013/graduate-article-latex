@@ -239,7 +239,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \end{table}
 \section{地理轨迹数据服务架构设计}
 \subsection{架构设计综述}
-地理轨迹数据服务是一个包括两个主要功能模块，设计到底层数据存储和逻辑计算的较复杂的数据系统。它所面向的风险承担者，包括普通用户，轨迹数据库管理员，地图瓦片数据库管理员和系统的开发者和维护者，并且由于是实际的商业软件，对系统性能，稳定性，可用性都有相应的要求。因此，出于对架构设计全面性的考虑，本文选择使用软件架构蓝图4+1模型，从逻辑视图，过程视图，物理视图和开发视图四个角度，对系统架构进行详细和全面的设计。
+地理轨迹数据服务是一个包括两个主要功能模块，涉及到底层数据存储和逻辑计算的较复杂的数据系统。它所面向的风险承担者，包括普通用户，轨迹数据库管理员，地图瓦片数据库管理员和系统的开发者和维护者，并且由于是实际的商业软件，对系统性能，稳定性，可用性都有相应的要求。因此，出于对架构设计全面性的考虑，本文选择使用软件架构蓝图4+1模型，从逻辑视图，过程视图，物理视图和开发视图四个角度，对系统架构进行详细和全面的设计。
 
 \subsection{逻辑蓝图}
 \begin{figure}[htb]
@@ -248,19 +248,19 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
   \caption{地理轨迹数据服务逻辑蓝图}\label{logic-view}
 \end{figure}
 
-如图~\ref{logic-view}所示为轨迹数据服务在对象视角下的逻辑视图，也就是逻辑蓝图。其中Visualization Service是可视化服务，也就是直接与用户交互的界面。它依赖两个主要的功能模块，Trajectory Service和Tile Service。
+如图~\ref{logic-view}所示，此为轨迹数据服务在对象视角下的逻辑视图，也就是逻辑蓝图。其中Visualization Service是可视化服务，也就是直接与用户交互的界面。它依赖两个主要的功能模块，Trajectory Service和Tile Service。
 
 Trajectory Service是轨迹数据服务，它关联了Trajectory Store模块，也就是轨迹存储模块，Trajectory Store在存储轨迹数据的同时，还要为轨迹建立相似索引，因此Trajectory Service聚合了Trajectory Index模块。Trajectory Index模块负责轨迹数据索引的建立，更新和搜索功能，是本文设计和实现的重点。
 
-Tile Service使用了Geographical Compute模块进行地理逻辑计算，两者只是调用关系，Geographical Compute模块本身是无状态的，可配置的。除此之外，Tile Service还关联了Tile Store模块，注意，Tile Store是地图瓦片存储处理逻辑的实现模块，其本身并不存储地图瓦片数据。Tile Store模块是连接TileService与Tile DataBase的桥梁，该模块通过对Tile Service 所需接口的抽象化，实现各种不同地图瓦片数据库与Tile Service的无缝对接，从而为系统提供良好的可用性和可扩展性。
+Tile Service使用了Geographical Compute模块进行地理逻辑计算，两者只是调用关系，Geographical Compute模块本身是无状态的，可配置的。除此之外，Tile Service还关联了Tile Store模块，注意，Tile Store是地图瓦片存储处理逻辑的实现模块，其本身并不存储地图瓦片数据。Tile Store模块是连接Tile Service与Tile DataBase的桥梁，该模块通过对Tile Service 所需接口的抽象化，实现各种不同地图瓦片数据库与Tile Service的无缝对接，从而为系统提供良好的可用性和可扩展性。
 
 整个地理轨迹数据服务，就是以Visualization Service为中心，分别调用Traj-\\ectory Service和Tile Service中的轨迹数据和地图瓦片数据，通过前端库的渲染整合，为用户提供稳定的，高可用的轨迹数据服务。
 \subsection{过程蓝图}
-如图~\ref{process-view}所示，为地理轨迹数据服务的过程视图，也就是过程蓝图。在整个服务的运行周期内，Visualization Damon Process作为可视化服务的守护进程，时刻保持服务接口开放。Visualization Damon Process分别依赖Tile Damon Process和Trajectory Damon Process。
+如图~\ref{process-view}所示，此为地理轨迹数据服务的过程视图，也就是过程蓝图。在整个服务的运行周期内，Visualization Damon Process作为可视化服务的守护进程，时刻保持服务接口开放。Visualization Damon Process分别依赖Tile Damon Process和Trajectory Damon Process。
 
-Tile Damon Process是地图瓦片数据服务的守护进程，当它收到可视化服务守护进程的瓦片数据调用消息之后，会首先开启Geographical Compute Task这样一个单线程进行地理坐标转换计算等处理逻辑，然后再根据地理计算结果，启动一个Tile DB Task作为瓦片数据库的数据操作线程，从瓦片数据库中读取或者写入数据，从而完成用户的操作需求。
+Tile Damon Process是地图瓦片数据服务的守护进程，当它收到可视化服务守护进程的瓦片数据调用消息之后，会首先开启Geographical Compute Task这样一个单线程进行地理坐标转换计算等处理逻辑，然后再根据地理计算结果，启动一个Tile DB Task作为瓦片数据库的数据操作线程。该线程从瓦片数据库中读取或者写入数据，从而完成用户的操作需求。
 
-Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化服务提供轨迹数据的检索和更新功能。当它收到消息之后，首先会单独启动一个轨迹索引进程Trajectory Index Process，该进程通过开启三个不同的线程任务，Search Task,Insert Task和Init Task来分别负责用户的轨迹相似检索，轨迹插入和轨迹初始建树要求。之所以单独启动轨迹索引进程，是因为除了以上三个主要的线程之外，轨迹索引运行逻辑中还包括诸多并行的子过程，例如定位单个最相似点，路径回溯等。这些子过程的运行需要并发开启多个单独的线程运行，并维护各个线程的状态，所以此处必须启动一个轨迹索引进程。但是该线程并不需要周期性运行，在请求处理之后，即可关闭，以避免进程长期占用过多系统资源。
+Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化服务提供轨迹数据的检索和更新功能。当它收到消息之后，首先会单独启动一个轨迹索引进程Trajectory Index Process，该进程通过开启三个不同的线程任务，Search Task,Insert Task和Init Task来分别负责用户的轨迹相似检索，轨迹插入和轨迹初始建树的功能要求。之所以单独启动轨迹索引进程，是因为除了以上三个主要的线程之外，轨迹索引运行逻辑中还包括诸多并行的子过程，例如定位单个最相似点，路径回溯等。这些子过程的运行需要并发开启多个单独的线程运行，并维护各个线程的状态，所以此处必须启动一个轨迹索引进程。但是该线程并不需要周期性运行，在请求处理之后，即可关闭，以避免进程长期占用过多系统资源。
 
 综上可知，在整个地理轨迹数据服务的运行周期内，通过守护进程产生临时进程，再由临时进程产生并发的对应线程，来实现整个服务的正常运行。
 
@@ -270,14 +270,46 @@ Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化
   \caption{地理轨迹数据服务过程蓝图}\label{process-view}
 \end{figure}
 \subsection{开发蓝图}
-如图~\ref{develop-view}所示，为地理轨迹数据服务的开发视图，也就是开发蓝图。本文按照各个子模块的职责和相互依赖关系，将整个服务划分为4个分层的开发组织结构。自底向上，第1层是运行与硬件和操作系统之上的基本要素，包括Trajectory Index轨迹索引和Tile DataBase瓦片数据库。第2层是基于JVM和Nodejs V8引擎，并依赖于第1层的轨迹存储模块和瓦片存储模块。第1 层和第2 层都是独立于用户使用域需求的职责模块，不论上层应用如何变化，都不影响这两层的设计和实现。第3层是轨迹数据服务Trajectory Service和瓦片数据服务Tile Service是直接面向用户使用域需求的服务模块，它们分别依赖Trajectory Store和Tile Store实现轨迹数据和瓦片数据的存储。第1层Visualization Service是直接与用户交互的可视化服务模块，它依赖于第2层的Trajectory Service和Tile Service对用户操作做出响应。
+如图~\ref{develop-view}所示，此为地理轨迹数据服务的开发视图，也就是开发蓝图。本文按照各个子模块的职责和相互依赖关系，将整个服务划分为4个分层的开发组织结构。自底向上，第1层是运行于硬件和操作系统之上的基本要素，包括Trajectory Index轨迹索引和Tile DataBase瓦片数据库。第2层是基于JVM和Nodejs V8引擎实现的轨迹存储组件Trajectory Store 和瓦片存储组件Tile Store。第1 层和第2 层都是独立于用户使用域需求的职责模块，不论上层应用如何变化，都不影响这两层的设计与实现。第3层是轨迹数据服务Trajectory Service 和瓦片数据服务Tile Service，这两个组件是直接面向用户使用域需求的服务模块，它们分别依赖Trajectory Store和Tile Store实现轨迹数据和瓦片数据的存储。第1层Visualization Service 是直接与用户交互的可视化服务模块，它依赖于第2 层的Trajectory Service 和Tile Service对用户操作做出响应。
 
-综上，本文通过将地理轨迹数据服务划分成4层结构，明确了各个组件之间的依赖关系，降低了开发难度。
+综上，本文通过将地理轨迹数据服务划分成4层结构，明确和简化了各个组件之间的依赖关系，降低了开发难度。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/structure-develop-view.pdf}
   \caption{地理轨迹数据服务开发蓝图}\label{develop-view}
 \end{figure}
 \subsection{物理蓝图}
+如图~\ref{phsical-view}所示，此为地理轨迹数据服务的物理视图，也就是物理蓝图。它描述了软件总体结构与硬件的映射关系。本文构建的系统各组件之间关系简单清晰，因此在物理蓝图中保留了各个组件进程的映射。
+
+图中Visualization Node是可视化子服务的运行节点，其上运行了可视化守护进程。Tile Service Node是运行地图瓦片数据子服务的节点，其上运行着瓦片守护进程以及地理计算任务线程。本文出于实现简单，并没有为地图瓦片数据服务设计HA功能，所以图中没有Tile Service Node的备用节点。Tile DataBase Node是地图瓦片数据库节点，其上运行着瓦片数据处理任务线程，并直接将数据处理结果持久化到硬盘中。
+
+图中Trajectory Service Node是轨迹数据子服务的运行节点，其上运行了轨迹守护进程和轨迹索引进程。Trajectory Service Node既是逻辑处理节点，又是轨迹数据存储节点，所以并不依赖外部的数据库节点。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-phsical-view.pdf}
+  \caption{地理轨迹数据服务物理蓝图}\label{phsical-view}
+\end{figure}
+
+\subsection{场景脚本}
+本系统面向用户的功能场景有多个，本节选取最具代表性的相似轨迹检索功能作为场景脚本，阐述各个组件之间协调合作关系。如图~\ref{structure-scenario}所示就是相似轨迹检索的场景脚本。其各个步骤细节如下。注意，由于可视化服务对瓦片数据子服务和轨迹数据子服务的数据调用是并行的，所以图中编号分别采用了阿拉伯数字和罗马数字加以区分。
+
+⑴.当用户请求到来的时候，Visualization Service首先向TileService发送地图区域参数和风格参数。\\
+⑵.Tile Service将Area参数转换为对应的瓦片坐标参数列表传递给Tile Store模块。\\
+⑶.Tile Store模块将瓦片坐标列表转换为瓦片数据库表的行主键列表，传递给瓦片数据库。\\
+⑷.Tile DataBase将查询到的瓦片数据返回给Tile Store。接着在⑸⑹处一路回传瓦片数据。\\
+(Ⅰ).Visualization Service向Trajectory Service发送目标轨迹数据Id。\\
+(Ⅱ).Trajectory Service发送目标轨迹数据Id给Trajectory Index，进行相似轨迹检索。\\
+(Ⅲ).Trajectory Index将检索结果集中的轨迹数据Id列表返回给Trajectory Service。\\
+(Ⅳ).Trajectory Service向Trajectory Store模块发送轨迹数据Id列表，以获取对应的轨迹数据列表。\\
+(Ⅴ).Trajectory Store将轨迹数据列表返回给Trajectory Service。\\
+(Ⅵ).Trajectory Service返回轨迹数据列表给Visualization Service，供可视化服务进行结果展示。\\
+
+以上即为相似轨迹检索场景下的使用脚本。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-scenario.pdf}
+  \caption{相似轨迹检索场景脚本}\label{structure-scenario}
+\end{figure}
 \section{本章小结}
-本章先是通过概述说明了整个系统主要组件的职责和相互之间的关系。然后分别针对，瓦片存储服务和轨迹检索服务，这两个主要组件进行了需求分析。需求分析的过程中，使用了需求列表来展现主要的功能需求和非功能需求，还使用了用例图的形式对各项功能进行划分，并对其中操作较为复杂的功能使用用例描述进行了详细介绍。最后给出了整个系统的概要设计，明确了各个组件之间的依赖关系，为下一章按照模块进行详细设计和实现做准备。
+本章先是通过概述说明了整个系统主要组件的职责和相互之间的关系。然后分别针对，瓦片存储服务和轨迹检索服务，这两个主要组件进行了需求分析。需求分析的过程中，使用了需求列表来展现主要的功能需求和非功能需求，还使用了用例图的形式对各项功能进行划分，并对其中操作较为复杂的功能使用用例描述进行了详细介绍。最后，使用架构4+1模型方法，设计了整个服务在各个视图下的架构，并结合相似轨迹检索场景串联了各个组件的相互协作关系，为接下来按照模块进行详细设计和实现做准备。
