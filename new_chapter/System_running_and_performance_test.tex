@@ -1,8 +1,6 @@
-\chapter{系统测试与评估}
+\chapter{系统测试}
 
-\section{系统测试}
-基于第三章功能需求和非功能需求分析，地理轨迹数据服务需要保证并发性，可用性和高性能等属性。因此，本节将对服务的基础功能进行单元测试，集成测试，功能测试和性能测试。
-\subsection{测试环境准备}
+\section{测试环境准备}
 \begin{table}[htb]
 \caption{系统测试环境准备}
 \vspace{2mm}
@@ -23,7 +21,7 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 
 表格~\ref{table:system_test_environment}中的DELL服务器的硬件规格均为32核，128G内存，3*1T SATA硬盘。安装了JVM的机器，JVM堆内存大小为32G。
 
-\subsection{测试数据准备}
+\section{测试数据准备}
 本文用于测试的地图瓦片数据选择了OpenMapTiles的开源数据osm-2017-07-03-v3.6.1-asia\_china.mbtiles，size约等于3.2G。
 
 本文用于测试的轨迹数据选择了从12306爬取的8000余条真实火车轨迹，并对每一条火车轨迹进行了站台随机模糊，衍生出约4千万条类似轨迹，示例数据如表格~\ref{table:system_test_data_example}所示。这里需要说明的是，对于轨迹数据测试，暂时只考虑了LineString类型，Polygon类型的数据暂时缺失。而前文所谓的站台随机模糊，指的是将站台列表中的任意站台，替换为10公里范围内的其他任意随机站台，从而产生了大量的相似路线，这就是站台随机模糊。
@@ -39,4 +37,130 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 \label{table:system_test_data_example}}
 \end{table}
 
-\subsection{单元测试}
+\section{单元测试}
+单元测试指的是对软件最小可测单元进行的功能检查和验证。本系统中，单元测试使用ElasticSearch自带的ESTestCase模板针对比较重要的Lucene轨迹索引类进行测试。
+
+表格~\ref{table:similar_trajectory_interface_test}为相似轨迹检索接口测试表，本文采用列表比对的方式确认轨迹结果集合与答案集合的吻合，测试结果符合预期。
+\begin{table}[htb]
+\centering
+\caption{相似轨迹检索接口测试}
+\vspace{2mm}
+\resizebox{105mm}{19mm}{
+\begin{tabular}{|l|l|}
+\hline
+测试用例编号 & TC-01 \\ \hline
+测试目标 & 验证相似轨迹检索结果的正确性 \\ \hline
+接口函数 & VPTree中的nearestNeighbourQuery方法 \\ \hline
+前置条件 & 轨迹检索子服务接收到目标轨迹的ID和相似数量K \\ \hline
+输入 & 目标轨迹的ID和相似数量K \\ \hline
+预期输出 & 与目标轨迹最相似的K条轨迹的ID列表 \\ \hline
+\end{tabular}
+\label{table:similar_trajectory_interface_test}}
+\end{table}
+
+表格~\ref{table:trajectory_index_init_test}为轨迹索引初始化接口测试表，在该测试中通过广度遍历结果优先点树节点的方式，确认生成的轨迹索引符合预期。
+\begin{table}[htb]
+\centering
+\caption{轨迹索引初始化接口测试}
+\vspace{2mm}
+\resizebox{105mm}{18mm}{
+\begin{tabular}{|l|l|}
+\hline
+测试用例编号 & TC-02 \\ \hline
+测试目标 & 验证所建立的轨迹索引的完整性和正确性 \\ \hline
+接口函数 & VPTree中的createNode方法 \\ \hline
+前置条件 & 轨迹检索子服务接收到批量轨迹数据 \\ \hline
+输入 & 批量轨迹数据\\ \hline
+预期输出 & 逻辑正确的轨迹索引 \\ \hline
+\end{tabular}
+\label{table:trajectory_index_init_test}}
+\end{table}
+
+表格~\ref{table:trajectory_index_insert_test}为插入新轨迹接口测试表，该测试同样采用广度遍历索引节点的方式进行检查，测试结果符合预期。
+\begin{table}[htb]
+\centering
+\caption{插入新轨迹接口测试}
+\vspace{2mm}
+\resizebox{105mm}{20mm}{
+\begin{tabular}{|l|l|}
+\hline
+测试用例编号 & TC-03 \\ \hline
+测试目标 & 验证插入新轨迹数据之后，轨迹索引的正确性 \\ \hline
+接口函数 & VPTree中的insert方法 \\ \hline
+前置条件 & 轨迹检索子服务接收到新的轨迹数据 \\ \hline
+输入 & 新的轨迹数据\\ \hline
+预期输出 & 更新后的，逻辑正确的轨迹索引 \\ \hline
+\end{tabular}
+\label{table:trajectory_index_insert_test}}
+\end{table}
+
+表格~\ref{table:tile_coordinate_compute_test}为地理坐标转换接口测试，本文采用结果坐标集合数字比对的方式进行检查，测试结果符合预期。
+\begin{table}[htb]
+\centering
+\caption{地理坐标转换接口测试}
+\vspace{2mm}
+\resizebox{105mm}{20mm}{
+\begin{tabular}{|l|l|}
+\hline
+测试用例编号 & TC-04 \\ \hline
+测试目标 & 验证地理坐标转换与目标区域的实际坐标相一致 \\ \hline
+接口函数 & bounding\_util的degree2xy方法 \\ \hline
+前置条件 & 地图瓦片子服务接收到目标经纬度坐标范围 \\ \hline
+输入 & 经纬度坐标范围\\ \hline
+预期输出 & 正确的瓦片坐标范围 \\ \hline
+\end{tabular}
+\label{table:tile_coordinate_compute_test}}
+\end{table}
+
+\section{功能测试}
+本文针对地理轨迹数据服务进行了功能测试。注意，由于本文所设计和实现的子服务内部高度内聚，而子服务之间采用松耦合REST风格进行接口调用，因此功能测试与集成测试的方法和结果类似，就不再赘述集成测试。
+
+\begin{table}[htb]
+\centering
+\caption{相似轨迹检索功能测试}
+\vspace{2mm}
+\resizebox{105mm}{20mm}{
+\begin{tabular}{|l|l|}
+\hline
+测试用例编号 & TC-RS-01 \\ \hline
+测试目标 & 验证相似轨迹检索功能结果和展示效果的正确性 \\ \hline
+前置条件 & 用户进入操作界面 \\ \hline
+测试步骤 & \tabincell{l}{1.用户输入要检索的目标ID。(ID不存在，报错)\\2.用户选定要检索的相似轨迹的数量。\\3.用户点击确认。 }\\ \hline
+预期结果 & 检索结果正确返回并显示在界面上。 \\ \hline
+\end{tabular}
+\label{table:trajectory_function_test}}
+\end{table}
+
+本文对核心功能相似轨迹检索进行了功能测试，如表格~\ref{table:trajectory_function_test}所示，在界面操作中，前端拦截了诸如错误文件格式，错误ID格式，目标数量过大等问题。而针对目标ID不存在，是由服务器验证并返回警告用户的。最终测试结果和预期相符。
+
+\section{性能测试}
+本文测试了单个节点下，相似查询的时间消耗和轨迹常驻内存大小。
+
+轨迹数据索引的建立以批量数据导入的方式进行，在四千万条数据的测试集合下，索引建立耗时约为30min。
+
+相似轨迹检索在四千万测试集合下，不同并发数的响应时间如图~\ref{search_time}所示。横轴表示并发数，纵轴表示相似查询的响应时间(单位是ms)。不同折线表示size 取不同值的结果。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4in]{new_FIGs/chapter7/search_time.pdf}
+  \caption{相似轨迹查询性能测试折线图}\label{search_time}
+\end{figure}
+
+如图~\ref{mem_size}所示为轨迹相关索引常驻内存统计，横轴表示数据集合的大小，纵轴表示内存大小，单位为MB。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4.5in]{new_FIGs/chapter7/mem_size.PNG}
+  \caption{轨迹索引常驻内存统计}\label{mem_size}
+\end{figure}
+\section{本章小结}
+本章针对地理轨迹数据服务的重要功能进行了单元测试，功能测试和性能测试，描述了测试环境，测试数据，并使用测试用例说明测试步骤和方法，使用折线图和条状图直观地表明测试结果。
+
+
+
+
+
+
+
+
+
+
+
