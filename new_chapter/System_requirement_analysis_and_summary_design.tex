@@ -181,7 +181,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \label{table:tile_service_func_req}
 \end{table}
 
-\subsection{瓦片数据服务非功能需求}
+\subsection{地图瓦片数据服务非功能需求}
 \begin{table}[htb]
 \caption{瓦片数据服务非功能需求列表}
 \vspace{2mm}
@@ -194,7 +194,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \end{tabular}
 \label{table:tile_service_non_func_req}}
 \end{table}
-如表格\ref{table:tile_service_non_func_req}所示，瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Oracle和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地理数据服务对接起来运行。
+如表格\ref{table:tile_service_non_func_req}所示，地图瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Oracle和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地理数据服务对接起来运行。
 
 \subsection{瓦片数据服务用例图}
 \begin{figure}[htb]

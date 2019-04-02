@@ -36,7 +36,7 @@
 \contentsline {section}{\numberline {3.3}瓦片数据服务需求分析}{18}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}瓦片数据服务的需求综述}{18}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}地图瓦片数据服务功能需求}{19}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}瓦片数据服务非功能需求}{19}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{19}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{20}{subsection.3.3.5}
 \contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{21}{section.3.4}
@@ -74,9 +74,13 @@
 \contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{52}{section.5.3}
 \contentsline {section}{\numberline {5.4}更新一致性的原理}{53}{section.5.4}
 \contentsline {section}{\numberline {5.5}本章小结}{55}{section.5.5}
-\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}总结和展望}{57}{chapter.6}
-\contentsline {section}{\numberline {6.1}总结}{57}{section.6.1}
-\contentsline {section}{\numberline {6.2}进一步工作展望}{57}{section.6.2}
-\contentsline {chapter}{参考文献}{58}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{61}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{62}{chapter*.6}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}系统测试与评估}{57}{chapter.6}
+\contentsline {section}{\numberline {6.1}系统测试}{57}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}测试环境准备}{57}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}测试数据准备}{57}{subsection.6.1.2}
+\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}总结和展望}{59}{chapter.7}
+\contentsline {section}{\numberline {7.1}总结}{59}{section.7.1}
+\contentsline {section}{\numberline {7.2}进一步工作展望}{59}{section.7.2}
+\contentsline {chapter}{参考文献}{60}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{63}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{64}{chapter*.6}

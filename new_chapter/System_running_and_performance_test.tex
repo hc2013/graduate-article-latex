@@ -1,8 +1,42 @@
-\chapter{系统运行效果展示}
-\section{轨迹检索运行效果展示}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=6in]{new_FIGs/chapter5/running.pdf}
-  \caption{轨迹检索运行效果}\label{running}
-\end{figure}
-如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
+\chapter{系统测试与评估}
+
+\section{系统测试}
+基于第三章功能需求和非功能需求分析，地理轨迹数据服务需要保证并发性，可用性和高性能等属性。因此，本节将对服务的基础功能进行单元测试，集成测试，功能测试和性能测试。
+\subsection{测试环境准备}
+\begin{table}[htb]
+\caption{系统测试环境准备}
+\vspace{2mm}
+\resizebox{146mm}{18mm}{
+\begin{tabular}{|l|l|l|}
+\hline
+设备名称 & 运行程序 & 程序版本信息\\ \hline
+用户测试计算机(Windows 10) & Firefox浏览器 & Firefox 66.02(32位)\\ \hline
+DELL服务器1（CentOS 7.3） & Nodejs 6 & Nodejs 6.4.1\\ \hline
+DELL服务器2（CentOS 7.3） & Nodejs 6,JVM 8 & Nodejs 6.4.1,JVM 1.8.0\_151\\ \hline
+DELL服务器3（CentOS 7.3） & JVM 8,Hbase & JVM 1.8.0\_151,HBase 2.0.5\\ \hline
+DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6.5\\ \hline
+\end{tabular}
+\label{table:system_test_environment}}
+\end{table}
+
+本小节将根据概要设计中所描述的物理视图，介绍服务的测试环境。如表格~\ref{table:system_test_environment}所示，4台DELL服务器分别运行了可视化子服务，地图瓦片子服务，地图瓦片数据库和轨迹数据子服务。这里需要说明的是，本文测试时使用了Hbase存储瓦片数据，所以要在服务器3上安装HBase，并在服务器2上安装JVM以运行Hbase Client。此外，本文对Lucene索引结构的扩展最终被集成到ElasticSearch 6.5中运行，由于整个服务的设计和实现都没有涉及到ElasticSearch，所以前文予以忽略。
+
+表格~\ref{table:system_test_environment}中的DELL服务器的硬件规格均为32核，128G内存，3*1T SATA硬盘。安装了JVM的机器，JVM堆内存大小为32G。
+
+\subsection{测试数据准备}
+本文用于测试的地图瓦片数据选择了OpenMapTiles的开源数据osm-2017-07-03-v3.6.1-asia\_china.mbtiles，size约等于3.2G。
+
+本文用于测试的轨迹数据选择了从12306爬取的8000余条真实火车轨迹，并对每一条火车轨迹进行了站台随机模糊，衍生出约4千万条类似轨迹，示例数据如表格~\ref{table:system_test_data_example}所示。这里需要说明的是，对于轨迹数据测试，暂时只考虑了LineString类型，Polygon类型的数据暂时缺失。而前文所谓的站台随机模糊，指的是将站台列表中的任意站台，替换为10公里范围内的其他任意随机站台，从而产生了大量的相似路线，这就是站台随机模糊。
+\begin{table}[htb]
+\caption{测试用轨迹数据示例}
+\vspace{2mm}
+\resizebox{146mm}{5mm}{
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+日期(date) & 车次(name) & 类型(type) & 始发站(from\_station) & 终点站(to\_station) & 路线(path) & 站台(stations)\\ \hline
+2019-02-02 & T297 & T & 北京 & 牡丹江 & LineString &[北京,唐山北.....,海林,牡丹江]\\ \hline
+\end{tabular}
+\label{table:system_test_data_example}}
+\end{table}
+
+\subsection{单元测试}
