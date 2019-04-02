@@ -33,11 +33,11 @@
 \contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{15}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{15}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}轨迹数据服务用例描述}{15}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}瓦片数据服务需求分析}{18}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}瓦片数据服务的需求综述}{18}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.3}地图瓦片数据服务需求分析}{18}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}地图瓦片数据服务的需求综述}{18}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}地图瓦片数据服务功能需求}{19}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{19}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}瓦片数据服务用例图}{19}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{20}{subsection.3.3.5}
 \contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{21}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}架构设计综述}{21}{subsection.3.4.1}
@@ -68,7 +68,7 @@
 \contentsline {subsection}{\numberline {4.4.4}插入算法实现}{46}{subsection.4.4.4}
 \contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{49}{section.4.5}
 \contentsline {section}{\numberline {4.6}本章小结}{49}{section.4.6}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地理轨迹数据服务地图瓦片数据子服务详细设计}{50}{chapter.5}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计}{50}{chapter.5}
 \contentsline {section}{\numberline {5.1}概述}{50}{section.5.1}
 \contentsline {section}{\numberline {5.2}地图局部更新功能概述}{51}{section.5.2}
 \contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{52}{section.5.3}
