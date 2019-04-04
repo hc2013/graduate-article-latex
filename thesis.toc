@@ -1,5 +1,9 @@
 \let \CTEX@spaceChar \relax 
+\setcounter {tocdepth}{-1}
 \contentsline {chapter}{目\CTEX@spaceChar \CTEX@spaceChar 录}{v}{chapter*.1}
+\setcounter {tocdepth}{3}
+\contentsline {chapter}{表\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 目\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 录}{ix}{chapter*.2}
+\contentsline {chapter}{图\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 目\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 录}{xi}{chapter*.3}
 \contentsline {chapter}{\numberline {第一章\hspace {0.3em}}引言}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}项目背景}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}国内外相关系统的发展概况}{2}{section.1.2}
@@ -39,14 +43,14 @@
 \contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{19}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{20}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{21}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{21}{subsection.3.4.1}
+\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{20}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{20}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}逻辑蓝图}{21}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}过程蓝图}{22}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{24}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{23}{subsection.3.4.4}
 \contentsline {subsection}{\numberline {3.4.5}物理蓝图}{24}{subsection.3.4.5}
 \contentsline {subsection}{\numberline {3.4.6}场景脚本}{25}{subsection.3.4.6}
-\contentsline {section}{\numberline {3.5}本章小结}{27}{section.3.5}
+\contentsline {section}{\numberline {3.5}本章小结}{26}{section.3.5}
 \contentsline {chapter}{\numberline {第四章\hspace {0.3em}}地理轨迹数据服务轨迹数据子服务详细设计与实现}{28}{chapter.4}
 \contentsline {section}{\numberline {4.1}概述}{28}{section.4.1}
 \contentsline {section}{\numberline {4.2}初始建树功能模块详细设计}{28}{section.4.2}

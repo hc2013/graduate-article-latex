@@ -1,211 +1,134 @@
-\begin{thebibliography}{28}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\begin{thebibliography}{10}
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
-\providecommand{\eprint}[2][]{\url{#2}}
-\providecommand{\bibinfo}[2]{#2}
-\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
-%Type = Article
-\bibitem[{霍亮 等(2012)霍亮, 杨耀东, 刘小勇, 乔文昊 和~ 朱王璋}]{TilePyramid}
-\bibinfo{author}{霍亮}, \bibinfo{author}{杨耀东}, \bibinfo{author}{刘小勇},
-  \bibinfo{author}{乔文昊}, \bibinfo{author}{朱王璋}, \bibinfo{year}{2012}.
-\newblock \bibinfo{title}{瓦片金字塔模型技术的研究与实践}.
-\newblock \bibinfo{journal}{测绘科学} \bibinfo{volume}{37},
-  \bibinfo{pages}{146--148}.
-%Type = Article
-\bibitem[{朱孔强 等(2018)朱孔强, 丁林花, 朱立顺, 聂国豪 和~
-  席永科}]{BaiduYingyanApp}
-\bibinfo{author}{朱孔强}, \bibinfo{author}{丁林花}, \bibinfo{author}{朱立顺},
-  \bibinfo{author}{聂国豪}, \bibinfo{author}{席永科}, \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{基于百度鹰眼的校园巴士app}.
-\newblock \bibinfo{journal}{数字技术与应用} \bibinfo{volume}{v.36；No.334},
-  \bibinfo{pages}{52--53+55}.
-%Type = Article
-\bibitem[{李长春 等(2012)李长春, 蔡伯根, 上官伟 和~ 王剑}]{MercatoProjection}
-\bibinfo{author}{李长春}, \bibinfo{author}{蔡伯根}, \bibinfo{author}{上官伟},
-  \bibinfo{author}{王剑}, \bibinfo{year}{2012}.
-\newblock \bibinfo{title}{基于web墨卡托投影的地图算法研究与实现}.
-\newblock \bibinfo{journal}{计算机应用研究} \bibinfo{volume}{29},
-  \bibinfo{pages}{4793--4796}.
-%Type = Article
-\bibitem[{龚俊 等(2015)龚俊, 柯胜男, 朱庆 和~ 张叶廷}]{GongJun2015}
-\bibinfo{author}{龚俊}, \bibinfo{author}{柯胜男}, \bibinfo{author}{朱庆},
-  \bibinfo{author}{张叶廷}, \bibinfo{year}{2015}.
-\newblock \bibinfo{title}{一种集成r树、哈希表和b?树的高效轨迹数据索引方法}.
-\newblock \bibinfo{journal}{测绘学报} \bibinfo{volume}{44},
-  \bibinfo{pages}{570--577}.
-%Type = Article
-\bibitem[{高强 等(2017)高强, 张凤荔, 王瑞锦 和~ 周帆}]{GaoQiang2017}
-\bibinfo{author}{高强}, \bibinfo{author}{张凤荔}, \bibinfo{author}{王瑞锦},
-  \bibinfo{author}{周帆}, \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{轨迹大数据:数据处理关键技术研究综述}.
-\newblock \bibinfo{journal}{软件学报} \bibinfo{volume}{28},
-  \bibinfo{pages}{959--992}.
-%Type = Article
-\bibitem[{陈建军 等(2001)陈建军, 于志强 和~ 朱昀}]{ChenJianjun2001}
-\bibinfo{author}{陈建军}, \bibinfo{author}{于志强}, \bibinfo{author}{朱昀},
-  \bibinfo{year}{2001}.
-\newblock \bibinfo{title}{数据可视化技术及其应用}.
-\newblock \bibinfo{journal}{红外与激光工程} \bibinfo{volume}{30},
-  \bibinfo{pages}{339--342}.
-%Type = Article
-\bibitem[{王凯 等(2017)王凯, 陈能成 和~ 陈泽强}]{WangKai2017}
-\bibinfo{author}{王凯}, \bibinfo{author}{陈能成}, \bibinfo{author}{陈泽强},
-  \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{基于mongodb的轨迹大数据时空索引构建方法}.
-\newblock \bibinfo{journal}{计算机系统应用} \bibinfo{volume}{26},
-  \bibinfo{pages}{227--231}.
-%Type = Article
-\bibitem[{胡水平 等(2018)胡水平, 岳淑英 和~ 张求喜}]{TileIntro}
-\bibinfo{author}{胡水平}, \bibinfo{author}{岳淑英}, \bibinfo{author}{张求喜},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{谷歌地图卫星影像数据获取关键技术研究}.
-\newblock \bibinfo{journal}{测绘与空间地理信息} \bibinfo{volume}{41},
-  \bibinfo{pages}{79--81}.
-%Type = Article
-\bibitem[{吉根林 和~ 赵斌(2015)}]{JiGenLin2015}
-\bibinfo{author}{吉根林}, \bibinfo{author}{赵斌}, \bibinfo{year}{2015}.
-\newblock \bibinfo{title}{时空轨迹大数据模式挖掘研究进展}.
-\newblock \bibinfo{journal}{数据采集与处理} \bibinfo{volume}{30},
-  \bibinfo{pages}{47--58}.
-%Type = Article
-\bibitem[{杨伟 和~ 艾廷华(2016)}]{YangWei2016}
-\bibinfo{author}{杨伟}, \bibinfo{author}{艾廷华}, \bibinfo{year}{2016}.
-\newblock \bibinfo{title}{基于车辆轨迹大数据的道路网更新方法研究}.
-\newblock \bibinfo{journal}{计算机研究与发展} \bibinfo{volume}{53},
-  \bibinfo{pages}{2681--2693}.
-%Type = Phdthesis
-\bibitem[{吴秀君(2008)}]{WuXiujun2008}
-\bibinfo{author}{吴秀君}, \bibinfo{year}{2008}.
-\newblock \bibinfo{title}{网络环境下地图数据可视化方法的研究及其应用}.
-\newblock Ph.D. thesis. 苏州大学.
-%Type = Phdthesis
-\bibitem[{袁冠(2012)}]{YuanGuan2012}
-\bibinfo{author}{袁冠}, \bibinfo{year}{2012}.
-\newblock \bibinfo{title}{移动对象轨迹数据挖掘方法研究}.
-\newblock Ph.D. thesis. 中国矿业大学.
-%Type = Inproceedings
-\bibitem[{Antoniou 等(2009)Antoniou, Morley 和~
-  Haklay}]{DBLP:conf/w2gis/AntoniouMH09}
-\bibinfo{author}{Antoniou, V.}, \bibinfo{author}{Morley, J.},
-  \bibinfo{author}{Haklay, M.M.}, \bibinfo{year}{2009}.
-\newblock \bibinfo{title}{Tiled vectors: {A} method for vector transmission
-  over the web}, in: \bibinfo{booktitle}{Web and Wireless Geographical
-  Information Systems, 9th International Symposium, {W2GIS} 2009, Maynooth,
-  Ireland, December 7-8, 2009. Proceedings}, pp. \bibinfo{pages}{56--71}.
-%Type = Misc
-\bibitem[{BaiduYingyan(2018)}]{BaiduYingyan}
-\bibinfo{author}{BaiduYingyan}, \bibinfo{year}{2018}.
-\newblock \bibinfo{howpublished}{\url{http://lbsyun.baidu.com/trace}}.
-%Type = Proceedings
-\bibitem[{Forsyth 等(2008)Forsyth, Torr 和~ Zisserman}]{DBLP:conf/eccv/2008-2}
-\bibinfo{editor}{Forsyth, D.A.}, \bibinfo{editor}{Torr, P.H.S.},
-  \bibinfo{editor}{Zisserman, A.} (Eds.), \bibinfo{year}{2008}.
-\newblock \bibinfo{title}{Computer Vision - {ECCV} 2008, 10th European
-  Conference on Computer Vision, Marseille, France, October 12-18, 2008,
-  Proceedings, Part {II}}. volume \bibinfo{volume}{5303} of
-  \textit{\bibinfo{series}{Lecture Notes in Computer Science}},
-  \bibinfo{publisher}{Springer}.
-%Type = Article
-\bibitem[{Fu 等(2000)Fu, Chan, Cheung 和~ Moon}]{DBLP:journals/vldb/FuCCM00}
-\bibinfo{author}{Fu, A.W.}, \bibinfo{author}{Chan, P.M.},
-  \bibinfo{author}{Cheung, Y.}, \bibinfo{author}{Moon, Y.S.},
-  \bibinfo{year}{2000}.
-\newblock \bibinfo{title}{Dynamic vp-tree indexing for n-nearest neighbor
-  search given pair-wise distances}.
-\newblock \bibinfo{journal}{{VLDB} J.} \bibinfo{volume}{9},
-  \bibinfo{pages}{154--173}.
-%Type = Article
-\bibitem[{Fukunaga 和~ Narendra(1975)}]{DBLP:journals/tc/FukunagaN75}
-\bibinfo{author}{Fukunaga, K.}, \bibinfo{author}{Narendra, P.M.},
-  \bibinfo{year}{1975}.
-\newblock \bibinfo{title}{A branch and bound algorithms for computing k-nearest
-  neighbors}.
-\newblock \bibinfo{journal}{{IEEE} Trans. Computers} \bibinfo{volume}{24},
-  \bibinfo{pages}{750--753}.
-%Type = Article
-\bibitem[{Hirsch 和~ Brunsdon(2018)}]{DBLP:journals/aai/HirschB18}
-\bibinfo{author}{Hirsch, L.}, \bibinfo{author}{Brunsdon, T.},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{A comparison of lucene search queries evolved as text
-  classifiers}.
-\newblock \bibinfo{journal}{Applied Artificial Intelligence}
-  \bibinfo{volume}{32}, \bibinfo{pages}{768--784}.
-%Type = Article
-\bibitem[{Mateos{-}Garc{\'{\i}}a 等(2019)Mateos{-}Garc{\'{\i}}a,
-  Garc{\'{\i}}a{-}Guti{\'{e}}rrez 和~
-  Santos}]{DBLP:journals/ijon/Mateos-GarciaGS19}
-\bibinfo{author}{Mateos{-}Garc{\'{\i}}a, D.},
-  \bibinfo{author}{Garc{\'{\i}}a{-}Guti{\'{e}}rrez, J.},
-  \bibinfo{author}{Santos, J.C.R.}, \bibinfo{year}{2019}.
-\newblock \bibinfo{title}{On the evolutionary weighting of neighbours and
-  features in the k-nearest neighbour rule}.
-\newblock \bibinfo{journal}{Neurocomputing} \bibinfo{volume}{326-327},
-  \bibinfo{pages}{54--60}.
-%Type = Book
-\bibitem[{McCandless 等(2010)McCandless, Hatcher 和~
-  Gospodnetic}]{LuceneInAction}
-\bibinfo{author}{McCandless, M.}, \bibinfo{author}{Hatcher, E.},
-  \bibinfo{author}{Gospodnetic, O.}, \bibinfo{year}{2010}.
-\newblock \bibinfo{title}{Lucene in Action, Second Edition: Covers Apache
-  Lucene 3.0}.
-\newblock \bibinfo{publisher}{Manning Publications}.
-%Type = Article
-\bibitem[{M·Kumar 和~ 朱慧(1994)}]{WGS84Intro}
-\bibinfo{author}{M·Kumar}, \bibinfo{author}{朱慧}, \bibinfo{year}{1994}.
-\newblock \bibinfo{title}{1984世界大地测量系统(wgs84)}.
-\newblock \bibinfo{journal}{测绘技术装备} , \bibinfo{pages}{40--42}.
-%Type = Inproceedings
-\bibitem[{Osborn(2017)}]{DBLP:conf/nbis/Osborn17}
-\bibinfo{author}{Osborn, W.}, \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{A \emph{k}-nearest neighbour query processing
-  strategy using the mqr-tree}, in: \bibinfo{booktitle}{Advances in
-  Network-Based Information Systems, The 20th International Conference on
-  Network-Based Information Systems, NBiS 2017, Ryerson University, Toronto,
-  ON, Canada, August 24-26, 2017.}, pp. \bibinfo{pages}{566--577}.
-%Type = Article
-\bibitem[{Proen{\c{c}}a 和~
-  Neves(2017)}]{DBLP:journals/classification/ProencaN17}
-\bibinfo{author}{Proen{\c{c}}a, H.}, \bibinfo{author}{Neves, J.C.},
-  \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{Fusing vantage point trees and linear discriminants
-  for fast feature classification}.
-\newblock \bibinfo{journal}{J. Classification} \bibinfo{volume}{34},
-  \bibinfo{pages}{85--107}.
-%Type = Misc
-\bibitem[{TileServerGL()}]{TileServerGL}
-\bibinfo{author}{TileServerGL}, .
-\newblock \bibinfo{title}{{tileserver System}}.
-\newblock \bibinfo{howpublished}{\url{http://tileserver.org}}.
-%Type = Article
-\bibitem[{Vargas 和~ Bogoya(2018)}]{DBLP:journals/cys/VargasB18}
-\bibinfo{author}{Vargas, A.}, \bibinfo{author}{Bogoya, J.},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{A generalization of the averaged hausdorff distance}.
-\newblock \bibinfo{journal}{Computaci{\'{o}}n y Sistemas} \bibinfo{volume}{22}.
-%Type = Article
-\bibitem[{Yang 等(2018)Yang, Fang 和~ Lin}]{DBLP:journals/jdiq/YangFL18}
-\bibinfo{author}{Yang, P.}, \bibinfo{author}{Fang, H.}, \bibinfo{author}{Lin,
-  J.}, \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{Anserini: Reproducible ranking baselines using
-  lucene}.
-\newblock \bibinfo{journal}{J. Data and Information Quality}
-  \bibinfo{volume}{10}, \bibinfo{pages}{16:1--16:20}.
-%Type = Article
-\bibitem[{Yianilos(1993)}]{DBLP:conf/soda/Yianilos93}
-\bibinfo{author}{Yianilos, P.N.}, \bibinfo{year}{1993}.
-\newblock \bibinfo{title}{Data structures and algorithms for nearest neighbor
-  search in general metric spaces} , \bibinfo{pages}{311--321}.
-%Type = Inproceedings
-\bibitem[{Zeng 等(2014)Zeng, Li, Jia, Li, Cai 和~
-  Mao}]{DBLP:conf/hucc/ZengLJLCM14}
-\bibinfo{author}{Zeng, G.}, \bibinfo{author}{Li, Q.}, \bibinfo{author}{Jia,
-  H.}, \bibinfo{author}{Li, X.}, \bibinfo{author}{Cai, Y.},
-  \bibinfo{author}{Mao, R.}, \bibinfo{year}{2014}.
-\newblock \bibinfo{title}{An inclusion rule for vantage point tree range query
-  processing}, in: \bibinfo{booktitle}{Human Centered Computing - First
+
+\bibitem{GaoQiang2017}
+高强, 张凤荔, 王瑞锦, 周帆, 轨迹大数据:数据处理关键技术研究综述, 软件学报
+  28~(4) (2017) 959--992.
+
+\bibitem{JiGenLin2015}
+吉根林, 赵斌, 时空轨迹大数据模式挖掘研究进展, 数据采集与处理 30~(1) (2015)
+  47--58.
+
+\bibitem{YangWei2016}
+杨伟, 艾廷华, 基于车辆轨迹大数据的道路网更新方法研究, 计算机研究与发展 53~(12)
+  (2016) 2681--2693.
+
+\bibitem{YuanGuan2012}
+袁冠, 移动对象轨迹数据挖掘方法研究, Ph.D. thesis, 中国矿业大学 (2012).
+
+\bibitem{WangKai2017}
+王凯, 陈能成, 陈泽强, 基于mongodb的轨迹大数据时空索引构建方法, 计算机系统应用
+  26~(6) (2017) 227--231.
+
+\bibitem{GongJun2015}
+龚俊, 柯胜男, 朱庆, 张叶廷, 一种集成r树、哈希表和b?树的高效轨迹数据索引方法,
+  测绘学报 44~(5) (2015) 570--577.
+
+\bibitem{ChenJianjun2001}
+陈建军, 于志强, 朱昀, 数据可视化技术及其应用, 红外与激光工程 30~(5) (2001)
+  339--342.
+
+\bibitem{WuXiujun2008}
+吴秀君, 网络环境下地图数据可视化方法的研究及其应用, Ph.D. thesis, 苏州大学
+  (2008).
+
+\bibitem{BaiduYingyanApp}
+朱孔强, 丁林花, 朱立顺, 聂国豪, 席永科, 基于百度鹰眼的校园巴士app,
+  数字技术与应用 v.36；No.334~(04) (2018) 52--53+55.
+
+\bibitem{BaiduYingyan}
+BaiduYingyan, \url{http://lbsyun.baidu.com/trace} (2018).
+
+\bibitem{TileServerGL}
+TileServerGL, {tileserver System}, \url{http://tileserver.org}.
+
+\bibitem{DBLP:journals/ijon/Mateos-GarciaGS19}
+D.~Mateos{-}Garc{\'{\i}}a, J.~Garc{\'{\i}}a{-}Guti{\'{e}}rrez, J.~C.~R. Santos,
+  On the evolutionary weighting of neighbours and features in the k-nearest
+  neighbour rule, Neurocomputing 326-327 (2019) 54--60.
+\newline\urlprefix\url{https://doi.org/10.1016/j.neucom.2016.08.159}
+
+\bibitem{DBLP:conf/soda/Yianilos93}
+P.~N. Yianilos, Data structures and algorithms for nearest neighbor search in
+  general metric spaces (1993) 311--321.
+\newline\urlprefix\url{http://dl.acm.org/citation.cfm?id=313559.313789}
+
+\bibitem{DBLP:journals/tc/FukunagaN75}
+K.~Fukunaga, P.~M. Narendra, A branch and bound algorithms for computing
+  k-nearest neighbors, {IEEE} Trans. Computers 24~(7) (1975) 750--753.
+\newline\urlprefix\url{https://doi.org/10.1109/T-C.1975.224297}
+
+\bibitem{DBLP:conf/eccv/2008-2}
+D.~A. Forsyth, P.~H.~S. Torr, A.~Zisserman (Eds.), Computer Vision - {ECCV}
+  2008, 10th European Conference on Computer Vision, Marseille, France, October
+  12-18, 2008, Proceedings, Part {II}, Vol. 5303 of Lecture Notes in Computer
+  Science, Springer, 2008.
+\newline\urlprefix\url{https://doi.org/10.1007/978-3-540-88688-4}
+
+\bibitem{DBLP:journals/aai/HirschB18}
+L.~Hirsch, T.~Brunsdon, A comparison of lucene search queries evolved as text
+  classifiers, Applied Artificial Intelligence 32~(7-8) (2018) 768--784.
+\newline\urlprefix\url{https://doi.org/10.1080/08839514.2018.1506972}
+
+\bibitem{DBLP:journals/jdiq/YangFL18}
+P.~Yang, H.~Fang, J.~Lin, Anserini: Reproducible ranking baselines using
+  lucene, J. Data and Information Quality 10~(4) (2018) 16:1--16:20.
+\newline\urlprefix\url{https://doi.org/10.1145/3239571}
+
+\bibitem{LuceneInAction}
+M.~McCandless, E.~Hatcher, O.~Gospodnetic, Lucene in Action, Second Edition:
+  Covers Apache Lucene 3.0, Manning Publications, 2010.
+\newline\urlprefix\url{http://www.springer.com/computer/swe/book/978-3-642-12577-5?changeHeader}
+
+\bibitem{WGS84Intro}
+M·Kumar, 朱慧, 1984世界大地测量系统(wgs84), 测绘技术装备~(2) (1994) 40--42.
+
+\bibitem{MercatoProjection}
+李长春, 蔡伯根, 上官伟, 王剑, 基于web墨卡托投影的地图算法研究与实现,
+  计算机应用研究 29~(12) (2012) 4793--4796.
+
+\bibitem{TileIntro}
+胡水平, 岳淑英, 张求喜, 谷歌地图卫星影像数据获取关键技术研究,
+  测绘与空间地理信息 41~(10) (2018) 79--81.
+
+\bibitem{DBLP:conf/w2gis/AntoniouMH09}
+V.~Antoniou, J.~Morley, M.~M. Haklay, Tiled vectors: {A} method for vector
+  transmission over the web, in: Web and Wireless Geographical Information
+  Systems, 9th International Symposium, {W2GIS} 2009, Maynooth, Ireland,
+  December 7-8, 2009. Proceedings, 2009, pp. 56--71.
+\newline\urlprefix\url{https://doi.org/10.1007/978-3-642-10601-9\_5}
+
+\bibitem{TilePyramid}
+霍亮, 杨耀东, 刘小勇, 乔文昊, 朱王璋, 瓦片金字塔模型技术的研究与实践, 测绘科学
+  37~(6) (2012) 146--148.
+
+\bibitem{DBLP:conf/nbis/Osborn17}
+W.~Osborn, A \emph{k}-nearest neighbour query processing strategy using the
+  mqr-tree, in: Advances in Network-Based Information Systems, The 20th
+  International Conference on Network-Based Information Systems, NBiS 2017,
+  Ryerson University, Toronto, ON, Canada, August 24-26, 2017., 2017, pp.
+  566--577.
+\newline\urlprefix\url{https://doi.org/10.1007/978-3-319-65521-5\_49}
+
+\bibitem{DBLP:journals/vldb/FuCCM00}
+A.~W. Fu, P.~M. Chan, Y.~Cheung, Y.~S. Moon, Dynamic vp-tree indexing for
+  n-nearest neighbor search given pair-wise distances, {VLDB} J. 9~(2) (2000)
+  154--173.
+\newline\urlprefix\url{https://doi.org/10.1007/PL00010672}
+
+\bibitem{DBLP:journals/classification/ProencaN17}
+H.~Proen{\c{c}}a, J.~C. Neves, Fusing vantage point trees and linear
+  discriminants for fast feature classification, J. Classification 34~(1)
+  (2017) 85--107.
+\newline\urlprefix\url{https://doi.org/10.1007/s00357-017-9223-0}
+
+\bibitem{DBLP:conf/hucc/ZengLJLCM14}
+G.~Zeng, Q.~Li, H.~Jia, X.~Li, Y.~Cai, R.~Mao, An inclusion rule for vantage
+  point tree range query processing, in: Human Centered Computing - First
   International Conference, {HCC} 2014, Phnom Penh, Cambodia, November 27-29,
-  2014, Revised Selected Papers}, pp. \bibinfo{pages}{777--783}.
+  2014, Revised Selected Papers, 2014, pp. 777--783.
+\newline\urlprefix\url{https://doi.org/10.1007/978-3-319-15554-8\_68}
 
 \end{thebibliography}

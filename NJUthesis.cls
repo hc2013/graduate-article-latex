@@ -84,7 +84,7 @@
   \DeclareGraphicsExtensions{.pdf,.eps,.ps}
 \fi
 %% sort and compress citations
-\RequirePackage[square]{natbib} 
+\RequirePackage[sort&compress,numbers]{natbib}
 %% Define link colors
 \RequirePackage{color}
 \definecolor{darkblue}{rgb}{0,0,0.55}
@@ -106,8 +106,8 @@
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \renewcommand{\floatpagefraction}{0.80}
 %% Bib styles and DIYed \cite commands.
-\bibliographystyle{NJUthesis}
-%%\bibliographystyle{unsrt}
+%%\bibliographystyle{NJUthesis}
+\bibliographystyle{elsart-num}
 %% Author-year mode label with numerical mode indexes.
 %% Jack (2000)
 \newcommand\citenju[1]{\protect\citeauthor{#1} (\protect\citeyear{#1})}

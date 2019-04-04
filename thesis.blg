@@ -1,10 +1,5 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-The style file: NJUthesis.bst
-Illegal, another \bibstyle command---line 262 of file thesis.aux
- : \bibstyle
- :          {plainnat}
-I'm skipping whatever remains of this command
-No `"' to end string literal---line 1159 of file NJUthesis.bst
+The style file: elsart-num.bst
 Database file #1: reference.bib
 A bad cross reference---entry "DBLP:conf/w2gis/AntoniouMH09"
 refers to entry "DBLP:conf/w2gis/2009", which doesn't exist
@@ -16,4 +11,5 @@ Warning--I didn't find a database entry for "DBLP:conf/hucc/2014"
 Warning--I didn't find a database entry for "DBLP:conf/w2gis/2009"
 Warning--I didn't find a database entry for "DBLP:conf/nbis/2017"
 Warning--empty journal in DBLP:conf/soda/Yianilos93
-(There were 5 error messages)
+Warning--there's a number but no volume in WGS84Intro
+(There were 3 error messages)

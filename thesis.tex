@@ -51,7 +51,6 @@
 \usepackage{booktabs}
 \usepackage{ccmap}
 
-\usepackage[section]{placeins}
 
 \makenomenclature
 
@@ -111,16 +110,15 @@
 
 
 
-
 % 英文封面内容字符串
-\englishtitle{The Design and Implementation of Similar Path Search and Visualization Service based on vector-tile and vp-tree}
-\englishauthor{Han Chun}
+\englishtitle{Using a Hammer to Crack a Nut}
+\englishauthor{San Zhang}
 \englishadvisor{Advisor Title}
-\englishadvisorname{Si Li}
+\englishadvisorname{~~Si Li}
 \englishinstitute{Software Institute}
 \englishdegree{Master of Engineering}
 \englishmajor{Software Engineering}
-\englishdate{May 2019}
+\englishdate{May 20xx}
 
 % 制作封面命令
 \maketitle
@@ -154,7 +152,6 @@
 
 % 英文摘要
 \begin{englishabstract}
-
 Geographic data is data that is directly or indirectly related to a certain location on the earth. It is the data of natural phenomena and social phenomena that represent geographic location and distribution characteristics. In the user business using geographic data, a novel and very practical problem scenario is based on the similarity analysis of motion trajectories. For example, criminal accomplices analysis, general criminal accomplices, have the same or similar trajectories. Through the retrieval of similar trajectories and the ranking of similarities, the suspects who are most likely to cooperate with crimes can be quickly identified, thus greatly improving the efficiency of reconnaissance. Similar problem scenarios include ship, train freight routing adjustments, travel route corrections, etc. These are high-value commercial functions based on the similarity of physical motion trajectories. At present, the relevant systems in the industry are basically concerned with the storage, display and tracking of trajectories. There is no good and stable solution for trajectory similarity retrieval.
 
 In response to the above problems, this thesis designs and implements a high-performance geographic trajectory data service. The main idea is to construct the trajectory data storage index service and the map data service respectively, and then extract relevant data from the trajectory data service and the map data service respectively, and then use the front-end library to integrate two pieces of data and display them on the browser, thereby making the user convenient and quick to see the track search results.
@@ -169,14 +166,21 @@ Geographic trajectory data service (GTDS), by constructing an independent index 
 \englishkeywords{Geographic data, trajectory data, tile data, vantage point tree, vector tile, trajectory index structure, trajectory similarity retrieval, visualization}
 \end{englishabstract}
 
-% 生成目录命令
+% 生成目录命令（目录中不包含目录本身）
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
 
-% 以下两个目录可根据具体情况注释掉
+
+% 以下两个目录可根据具体情况注释掉（将表格目录和图形目录重命名后加入目录）
 % 生成表格目录命令
+\renewcommand*{\listtablename}{表~~目~~录}
 \listoftables
+\addcontentsline{toc}{chapter}{表~~目~~录}
 % 生成插图目录命令
+\renewcommand*{\listtablename}{图~~目~~录}
 \listoffigures
+\addcontentsline{toc}{chapter}{图~~目~~录}
 
 %生成术语表命令
 %\include{chapter/Nomenclatures}
@@ -202,7 +206,6 @@ Geographic trajectory data service (GTDS), by constructing an independent index 
 \input{new_chapter/Summary_and_outlook.tex}
 % 参考文献
 
-\bibliographystyle{plainnat}
 \bibliography{reference}
 
 
@@ -226,6 +229,7 @@ Geographic trajectory data service (GTDS), by constructing an independent index 
 \begin{enumerate}[label=\arabic*., labelindent=0em, leftmargin=*]
 	\item 刘海涛，\textbf{韩淳}，``基于矢量瓦片和优先点树的相似路径检索和可视化服务的设计和实现''，申请号：20xx1018xywz.a，已受理。
 \end{enumerate}
+
 
 
 \backmatter
