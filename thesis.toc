@@ -51,7 +51,7 @@
 \contentsline {subsection}{\numberline {3.4.5}物理蓝图}{24}{subsection.3.4.5}
 \contentsline {subsection}{\numberline {3.4.6}场景脚本}{25}{subsection.3.4.6}
 \contentsline {section}{\numberline {3.5}本章小结}{26}{section.3.5}
-\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}地理轨迹数据服务轨迹数据子服务详细设计与实现}{28}{chapter.4}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}轨迹数据子服务详细设计与实现}{28}{chapter.4}
 \contentsline {section}{\numberline {4.1}概述}{28}{section.4.1}
 \contentsline {section}{\numberline {4.2}初始建树功能模块详细设计}{28}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}优先点树索引类图}{28}{subsection.4.2.1}
@@ -72,7 +72,7 @@
 \contentsline {subsection}{\numberline {4.4.4}插入算法实现}{46}{subsection.4.4.4}
 \contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{49}{section.4.5}
 \contentsline {section}{\numberline {4.6}本章小结}{49}{section.4.6}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计}{50}{chapter.5}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{50}{chapter.5}
 \contentsline {section}{\numberline {5.1}概述}{50}{section.5.1}
 \contentsline {section}{\numberline {5.2}地图局部更新功能概述}{51}{section.5.2}
 \contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{52}{section.5.3}
