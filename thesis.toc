@@ -12,82 +12,82 @@
 \contentsline {section}{\numberline {1.3}本文的主要工作}{3}{section.1.3}
 \contentsline {section}{\numberline {1.4}本文的组织结构}{4}{section.1.4}
 \contentsline {section}{\numberline {1.5}本章小结}{4}{section.1.5}
-\contentsline {chapter}{\numberline {第二章\hspace {0.3em}}相关技术概念综述}{6}{chapter.2}
-\contentsline {section}{\numberline {2.1}优先点树}{6}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}NN问题}{6}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}优先点树概述}{6}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}优先点树基本原理与节点结构}{6}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}两路优先点树的搜索过程}{8}{subsection.2.1.4}
-\contentsline {section}{\numberline {2.2}Lucene}{9}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}简介}{9}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Lucene运行原理}{9}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Lucene核心数据结构}{10}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}为什么选择lucene}{10}{subsection.2.2.4}
-\contentsline {section}{\numberline {2.3}地理相关技术概念介绍}{10}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}地理坐标系}{10}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}地图投影法}{10}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}地图瓦片}{11}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}瓦片金字塔}{12}{subsection.2.3.4}
-\contentsline {section}{\numberline {2.4}Nodejs Express框架}{13}{section.2.4}
-\contentsline {section}{\numberline {2.5}本章小结}{13}{section.2.5}
-\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}系统需求分析与概要设计}{14}{chapter.3}
-\contentsline {section}{\numberline {3.1}GTDS系统概述}{14}{section.3.1}
-\contentsline {section}{\numberline {3.2}轨迹数据服务需求分析}{14}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}轨迹数据服务的功能需求}{14}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{15}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{15}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}轨迹数据服务用例描述}{15}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}地图瓦片数据服务需求分析}{18}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}地图瓦片数据服务的需求综述}{18}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}地图瓦片数据服务功能需求}{19}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{19}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{19}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{20}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{20}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{20}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}逻辑蓝图}{21}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}过程蓝图}{22}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{23}{subsection.3.4.4}
-\contentsline {subsection}{\numberline {3.4.5}物理蓝图}{24}{subsection.3.4.5}
-\contentsline {subsection}{\numberline {3.4.6}场景脚本}{25}{subsection.3.4.6}
-\contentsline {section}{\numberline {3.5}本章小结}{26}{section.3.5}
-\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}轨迹数据子服务详细设计与实现}{28}{chapter.4}
-\contentsline {section}{\numberline {4.1}概述}{28}{section.4.1}
-\contentsline {section}{\numberline {4.2}初始建树功能模块详细设计}{28}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}优先点树索引类图}{28}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}优先点树节点结构}{30}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}初始建树的流程}{31}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}初始建树算法实现}{32}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}设计要点：优先点的选择算法}{33}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计}{35}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}KNN问题的定义和解决思路}{35}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}设计焦点与思路概述}{35}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}相似检索功能实现要点：避免重复访问}{36}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}检索算法流程图}{36}{subsection.4.3.4}
-\contentsline {subsection}{\numberline {4.3.5}相似检索功能各子流程代码实现}{37}{subsection.4.3.5}
-\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计}{39}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Insert操作算法概述}{39}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Insert操作算法设计细节}{42}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}插入算法流程图}{45}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}插入算法实现}{46}{subsection.4.4.4}
-\contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{49}{section.4.5}
-\contentsline {section}{\numberline {4.6}本章小结}{49}{section.4.6}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{50}{chapter.5}
-\contentsline {section}{\numberline {5.1}概述}{50}{section.5.1}
-\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{51}{section.5.2}
-\contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{52}{section.5.3}
-\contentsline {section}{\numberline {5.4}更新一致性的原理}{53}{section.5.4}
-\contentsline {section}{\numberline {5.5}本章小结}{55}{section.5.5}
-\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}系统测试}{57}{chapter.6}
-\contentsline {section}{\numberline {6.1}测试环境准备}{57}{section.6.1}
-\contentsline {section}{\numberline {6.2}测试数据准备}{57}{section.6.2}
-\contentsline {section}{\numberline {6.3}单元测试}{58}{section.6.3}
-\contentsline {section}{\numberline {6.4}功能测试}{59}{section.6.4}
-\contentsline {section}{\numberline {6.5}性能测试}{60}{section.6.5}
-\contentsline {section}{\numberline {6.6}本章小结}{61}{section.6.6}
-\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}总结和展望}{62}{chapter.7}
-\contentsline {section}{\numberline {7.1}总结}{62}{section.7.1}
-\contentsline {section}{\numberline {7.2}进一步工作展望}{62}{section.7.2}
-\contentsline {chapter}{参考文献}{63}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{66}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{67}{chapter*.6}
+\contentsline {chapter}{\numberline {第二章\hspace {0.3em}}相关技术概念综述}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}优先点树}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}NN问题}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}优先点树概述}{5}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}优先点树基本原理与节点结构}{5}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}两路优先点树的搜索过程}{7}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Lucene}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}简介}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Lucene运行原理}{8}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Lucene核心数据结构}{9}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}为什么选择lucene}{9}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}地理相关技术概念介绍}{9}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}地理坐标系}{9}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}地图投影法}{9}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}地图瓦片}{10}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}瓦片金字塔}{11}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Nodejs Express框架}{12}{section.2.4}
+\contentsline {section}{\numberline {2.5}本章小结}{12}{section.2.5}
+\contentsline {chapter}{\numberline {第三章\hspace {0.3em}}系统需求分析与概要设计}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}GTDS系统概述}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}轨迹数据服务需求分析}{13}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}轨迹数据服务的功能需求}{13}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{14}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{14}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}轨迹数据服务用例描述}{14}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}地图瓦片数据服务需求分析}{17}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}地图瓦片数据服务的需求综述}{17}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}地图瓦片数据服务功能需求}{18}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{18}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{18}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{19}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{19}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{19}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}逻辑蓝图}{20}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}过程蓝图}{21}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{22}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}物理蓝图}{23}{subsection.3.4.5}
+\contentsline {subsection}{\numberline {3.4.6}场景脚本}{24}{subsection.3.4.6}
+\contentsline {section}{\numberline {3.5}本章小结}{25}{section.3.5}
+\contentsline {chapter}{\numberline {第四章\hspace {0.3em}}轨迹数据子服务详细设计与实现}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}概述}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}初始建树功能模块详细设计}{27}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}优先点树索引类图}{27}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}优先点树节点结构}{29}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}初始建树的流程}{30}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}初始建树算法实现}{31}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}设计要点：优先点的选择算法}{32}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计}{34}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}KNN问题的定义和解决思路}{34}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}设计焦点与思路概述}{34}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}相似检索功能实现要点：避免重复访问}{35}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}检索算法流程图}{35}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.5}相似检索功能各子流程代码实现}{36}{subsection.4.3.5}
+\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计}{38}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Insert操作算法概述}{38}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Insert操作算法设计细节}{41}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}插入算法流程图}{44}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}插入算法实现}{45}{subsection.4.4.4}
+\contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{48}{section.4.5}
+\contentsline {section}{\numberline {4.6}本章小结}{48}{section.4.6}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{49}{chapter.5}
+\contentsline {section}{\numberline {5.1}概述}{49}{section.5.1}
+\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{50}{section.5.2}
+\contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{51}{section.5.3}
+\contentsline {section}{\numberline {5.4}更新一致性的原理}{52}{section.5.4}
+\contentsline {section}{\numberline {5.5}本章小结}{54}{section.5.5}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}系统测试}{56}{chapter.6}
+\contentsline {section}{\numberline {6.1}测试环境准备}{56}{section.6.1}
+\contentsline {section}{\numberline {6.2}测试数据准备}{56}{section.6.2}
+\contentsline {section}{\numberline {6.3}单元测试}{57}{section.6.3}
+\contentsline {section}{\numberline {6.4}功能测试}{58}{section.6.4}
+\contentsline {section}{\numberline {6.5}性能测试}{59}{section.6.5}
+\contentsline {section}{\numberline {6.6}本章小结}{60}{section.6.6}
+\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}总结和展望}{61}{chapter.7}
+\contentsline {section}{\numberline {7.1}总结}{61}{section.7.1}
+\contentsline {section}{\numberline {7.2}进一步工作展望}{61}{section.7.2}
+\contentsline {chapter}{参考文献}{62}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{65}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{66}{chapter*.6}

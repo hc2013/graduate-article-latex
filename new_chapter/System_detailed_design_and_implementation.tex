@@ -107,7 +107,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \end{figure}
 这是距离范围剪枝的基本依据。如图\ref{thredhold}所示，某一数据空间基于优先点VP被分为S1,S2,S3三个子空间，目标轨迹target落在子空间s2中，T为容忍距离。在①情况下，容忍距离T的半径范围覆盖了S1,S2,S3,无法剪枝，使得检索必须遍历全部三个分支，而实际上S1,S3很可能没有匹配的结果。而对于②而言，T半径仅仅只在S2子空间内，所以可以认定，S1和S3 中不可能包括与target 距离小于T 的点，从而排除S1,S3，实现剪枝。由以上两种情况可见，容忍距离越小，成功剪枝的概率越高，检索性能越好。但是因为数据点与VP点距离集合本身是离散的，容忍距离也不能太小，否则过度剪枝造成检索不到结果。所以容忍距离的初始值设置和收敛速度是直接影响检索性能的关键。\cite{DBLP:conf/hucc/ZengLJLCM14}
 
-在上文所述的单纯用最小堆动态更新检索结果的算法中，其最大问题在于，容忍距离是从\textbf{正无穷}开始更新的。这使得检索从一开始完全不可能做到剪枝，大量的分支都被搜索了。容忍距离的收敛速度会非常慢，导致剪枝的效率很低，性能也比较差。
+在上文所述的单纯用最小堆动态更新检索结果的算法中，其最大问题在于，容忍距离是从\textbf{正无穷}开始更新的。这使得检索从一开始完全不可能做到剪枝，大量的分支都被搜索了。容忍距离的收敛速度会非常慢，导致剪枝的效率很低，性能也比较差。\cite{Liu2015Fast}
 
 基于上面所提到的容忍距离收敛较慢问题，本文采用了结果堆预填+分支回溯的方式进行优化处理。即通过vp-tree原生搜索算法，先找到single nearest neighbour，也就是单个最相似数据点，并且在这个过程中预填结果堆，并保存从root到single nearest neighbour的整条路径的所有节点。然后以结果堆中最大距离作为容忍距离的收敛起点，回溯整条路径中的节点，完成检索。这样通过预填结果堆，使得容忍距离以更低的起点收敛，很多分支在检索开始阶段就被剪掉，容忍距离收敛的速度更快，性能更好。
 
@@ -118,7 +118,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 如图\ref{search-flow}所示为检索算法的运行流程图。图中显示了检索过程中最关键的三个子流程，即检索最相似点，预填结果堆和回溯更新结果堆。其中检索最相似点是通过递归实现的，节点栈在其过程中的作用是保存搜索路径。而另外两个子流程都是使用栈+循环的方式实现的。详细说明，见后文代码实现。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
+  \includegraphics[width=6.2in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
   \caption{检索算法流程图}\label{search-flow}
 \end{figure}
 
@@ -225,7 +225,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 \subsection{插入算法流程图}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4.5in,height=5.9in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
+  \includegraphics[width=5.5in,height=5.9in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{插入算法实现}

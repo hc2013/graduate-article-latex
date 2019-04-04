@@ -30,7 +30,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4in,height=5.3in]{new_FIGs/chapter4/update_tile_1.pdf}
+  \includegraphics[width=5in,height=5.3in]{new_FIGs/chapter4/update_tile_1.pdf}
   \caption{地图局部更新功能流程图}\label{update_tile_1}
 \end{figure}
 如图\ref{update_tile_1}所示，这里值得注意的是，在流程中第二次检查，是对栅格坐标结果的检查。因为对于不同zoom，zoom值越大，地图的精度越高，更新设计的完整瓦片越多，反之则越少。那么对于那些zoom值较低的更新，其所计算出来的栅格坐标值可能不是完整的的瓦片，而只是某一瓦片中一个位置，由于本文对瓦片更新的粒度不涉及到单个瓦片内部的结构，而只是单个瓦片的整体更新。因此对于这种情况，要根据用户对精度的要求进行取舍，而取舍的前提要保证更新行为的一致性。具体可见后文。

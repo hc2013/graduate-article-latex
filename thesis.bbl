@@ -100,9 +100,17 @@ V.~Antoniou, J.~Morley, M.~M. Haklay, Tiled vectors: {A} method for vector
   December 7-8, 2009. Proceedings, 2009, pp. 56--71.
 \newline\urlprefix\url{https://doi.org/10.1007/978-3-642-10601-9\_5}
 
+\bibitem{LuoZhiyong2013}
+罗智勇, 黎小东, 基于数据库存储方案的高性能瓦片地图服务研究, 地理与地理信息科学
+  29~(3) (2013) 52--55+112.
+
 \bibitem{TilePyramid}
 霍亮, 杨耀东, 刘小勇, 乔文昊, 朱王璋, 瓦片金字塔模型技术的研究与实践, 测绘科学
   37~(6) (2012) 146--148.
+
+\bibitem{Ludonglin2013}
+路东林, 智广玉, 地图发布平台下瓦片金字塔技术研究, 数字技术与应用~(3) (2013)
+  99--99.
 
 \bibitem{DBLP:conf/nbis/Osborn17}
 W.~Osborn, A \emph{k}-nearest neighbour query processing strategy using the
@@ -130,5 +138,9 @@ G.~Zeng, Q.~Li, H.~Jia, X.~Li, Y.~Cai, R.~Mao, An inclusion rule for vantage
   International Conference, {HCC} 2014, Phnom Penh, Cambodia, November 27-29,
   2014, Revised Selected Papers, 2014, pp. 777--783.
 \newline\urlprefix\url{https://doi.org/10.1007/978-3-319-15554-8\_68}
+
+\bibitem{Liu2015Fast}
+S.~G. Liu, Y.~W. Wei, Fast nearest neighbor searching based on improved
+  vp-tree, Pattern Recognition Letters 60-61~(C) (2015) 8--15.
 
 \end{thebibliography}
