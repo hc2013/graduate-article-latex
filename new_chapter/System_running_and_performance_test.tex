@@ -136,21 +136,24 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 \section{性能测试}
 本文测试了单个节点下，相似查询的时间消耗和轨迹常驻内存大小。
 
-轨迹数据索引的建立以批量数据导入的方式进行，在四千万条数据的测试集合下，索引建立耗时约为30min。
-
-相似轨迹检索在四千万测试集合下，不同并发数的响应时间如图~\ref{search_time}所示。横轴表示并发数，纵轴表示相似查询的响应时间(单位是ms)。不同折线表示size 取不同值的结果。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4in]{new_FIGs/chapter7/search_time.pdf}
+  \includegraphics[width=4.5in]{new_FIGs/chapter7/search_time_2.png}
   \caption{相似轨迹查询性能测试折线图}\label{search_time}
 \end{figure}
 
-如图~\ref{mem_size}所示为轨迹相关索引常驻内存统计，横轴表示数据集合的大小，纵轴表示内存大小，单位为MB。
+相似轨迹检索在四千万测试集合下，不同并发数的响应时间如图~\ref{search_time}所示。横轴表示并发数，纵轴表示相似查询的响应时间(单位是ms)。不同折线表示size 取不同值的结果。
+
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4.5in]{new_FIGs/chapter7/mem_size.PNG}
+  \includegraphics[width=5in]{new_FIGs/chapter7/mem_size.PNG}
   \caption{轨迹索引常驻内存统计}\label{mem_size}
 \end{figure}
+
+如图~\ref{mem_size}所示为轨迹相关索引常驻内存统计，横轴表示数据集合的大小，纵轴表示内存大小，单位为MB。
+
+轨迹数据索引的建立以批量数据导入的方式进行，在四千万条数据的测试集合下，索引建立耗时约为30min。
+
 \section{本章小结}
 本章针对地理轨迹数据服务的重要功能进行了单元测试，功能测试和性能测试，描述了测试环境，测试数据，并使用测试用例说明测试步骤和方法，使用折线图和条状图直观地表明测试结果。
 
