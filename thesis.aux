@@ -158,7 +158,7 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}概述}{27}{section.4.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}初始建树功能模块详细设计}{27}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}初始建树功能模块详细设计与实现}{27}{section.4.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}优先点树索引类图}{27}{subsection.4.2.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{28}{figure.4.1}}
 \newlabel{vp-tree-general-structure}{{4.1}{28}{优先点树索引类图\relax }{figure.4.1}{}}
@@ -179,9 +179,9 @@
 \citation{DBLP:journals/vldb/FuCCM00}
 \citation{DBLP:journals/classification/ProencaN17}
 \citation{DBLP:conf/hucc/ZengLJLCM14}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计}{34}{section.4.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}KNN问题的定义和解决思路}{34}{subsection.4.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}设计焦点与思路概述}{34}{subsection.4.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计与实现}{34}{section.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}KNN问题的常规方法}{34}{subsection.4.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}设计焦点与解决办法}{34}{subsection.4.3.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 容忍距离对剪枝的作用示意图}}{34}{figure.4.7}}
 \newlabel{thredhold}{{4.7}{34}{容忍距离对剪枝的作用示意图\relax }{figure.4.7}{}}
 \citation{Liu2015Fast}
@@ -194,8 +194,8 @@
 \newlabel{findnn-code}{{4.9}{37}{检索单个最相似轨迹代码实现\relax }{figure.4.9}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces 预填结果集代码}}{38}{figure.4.10}}
 \newlabel{trytoFillQueue-code}{{4.10}{38}{预填结果集代码\relax }{figure.4.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计}{38}{section.4.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Insert操作算法概述}{38}{subsection.4.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计与实现}{38}{section.4.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Insert算法概述}{38}{subsection.4.4.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 直接插入对应叶节点算法示意图}}{39}{figure.4.11}}
 \newlabel{insert-show0}{{4.11}{39}{直接插入对应叶节点算法示意图\relax }{figure.4.11}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 叶节点分裂算法示意图}}{39}{figure.4.12}}
@@ -204,13 +204,13 @@
 \newlabel{insert-show2}{{4.13}{40}{叶节点数据重分布算法示意图\relax }{figure.4.13}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces 分支分裂算法示意图}}{41}{figure.4.14}}
 \newlabel{insert-show3}{{4.14}{41}{分支分裂算法示意图\relax }{figure.4.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Insert操作算法设计细节}{41}{subsection.4.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Insert算法设计细节}{41}{subsection.4.4.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces 分支重分布算法示意图}}{42}{figure.4.15}}
 \newlabel{insert-show4}{{4.15}{42}{分支重分布算法示意图\relax }{figure.4.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}插入算法流程图}{44}{subsection.4.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Insert算法流程图}{44}{subsection.4.4.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Insert算法流程图}}{44}{figure.4.16}}
 \newlabel{vp-tree-insert-flow}{{4.16}{44}{Insert算法流程图\relax }{figure.4.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}插入算法实现}{45}{subsection.4.4.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Insert算法实现}{45}{subsection.4.4.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces 已满叶节点的分裂代码实现}}{45}{figure.4.17}}
 \newlabel{fullleafnode-split}{{4.17}{45}{已满叶节点的分裂代码实现\relax }{figure.4.17}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces 叶节点数据重分布代码实现}}{46}{figure.4.18}}
@@ -229,12 +229,12 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{50}{figure.5.1}}
 \newlabel{tile-server-structure}{{5.1}{50}{tile-server整体结构图\relax }{figure.5.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{50}{section.5.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}地图局部更新功能流程图与代码实现}{51}{section.5.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}地图局部更新功能详细设计与实现}{51}{section.5.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{51}{figure.5.2}}
 \newlabel{update_tile_1}{{5.2}{51}{地图局部更新功能流程图\relax }{figure.5.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{52}{figure.5.3}}
 \newlabel{tile_degree_compute}{{5.3}{52}{地图局部更新功能核心代码实现\relax }{figure.5.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}更新一致性的原理}{52}{section.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}局部更新一致性方法}{52}{section.5.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{53}{figure.5.4}}
 \newlabel{tile_consistency0}{{5.4}{53}{瓦片更新前提情况\relax }{figure.5.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{53}{figure.5.5}}
@@ -271,13 +271,12 @@
 \newlabel{mem_size}{{6.2}{59}{轨迹索引常驻内存统计\relax }{figure.6.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{60}{section.6.6}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\bibdata{reference}
 \@writefile{toc}{\contentsline {chapter}{\numberline {第七章\hspace  {0.3em}}总结和展望}{61}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {7.1}总结}{61}{section.7.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {7.2}进一步工作展望}{61}{section.7.2}}
-\@writefile{loa}{\addvspace {10\p@ }}
+\bibdata{reference}
 \bibcite{GaoQiang2017}{{1}{}{{}}{{}}}
 \bibcite{JiGenLin2015}{{2}{}{{}}{{}}}
 \bibcite{YangWei2016}{{3}{}{{}}{{}}}
@@ -291,6 +290,7 @@
 \bibcite{TileServerGL}{{11}{}{{}}{{}}}
 \bibcite{DBLP:journals/ijon/Mateos-GarciaGS19}{{12}{}{{}}{{}}}
 \bibcite{DBLP:conf/soda/Yianilos93}{{13}{}{{}}{{}}}
+\@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {chapter}{参考文献}{62}{chapter*.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
