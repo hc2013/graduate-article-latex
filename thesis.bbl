@@ -3,41 +3,6 @@
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
 
-\bibitem{GaoQiang2017}
-高强, 张凤荔, 王瑞锦, 周帆, 轨迹大数据:数据处理关键技术研究综述, 软件学报
-  28~(4) (2017) 959--992.
-
-\bibitem{JiGenLin2015}
-吉根林, 赵斌, 时空轨迹大数据模式挖掘研究进展, 数据采集与处理 30~(1) (2015)
-  47--58.
-
-\bibitem{YangWei2016}
-杨伟, 艾廷华, 基于车辆轨迹大数据的道路网更新方法研究, 计算机研究与发展 53~(12)
-  (2016) 2681--2693.
-
-\bibitem{YuanGuan2012}
-袁冠, 移动对象轨迹数据挖掘方法研究, Ph.D. thesis, 中国矿业大学 (2012).
-
-\bibitem{WangKai2017}
-王凯, 陈能成, 陈泽强, 基于mongodb的轨迹大数据时空索引构建方法, 计算机系统应用
-  26~(6) (2017) 227--231.
-
-\bibitem{GongJun2015}
-龚俊, 柯胜男, 朱庆, 张叶廷, 一种集成r树、哈希表和b?树的高效轨迹数据索引方法,
-  测绘学报 44~(5) (2015) 570--577.
-
-\bibitem{ChenJianjun2001}
-陈建军, 于志强, 朱昀, 数据可视化技术及其应用, 红外与激光工程 30~(5) (2001)
-  339--342.
-
-\bibitem{WuXiujun2008}
-吴秀君, 网络环境下地图数据可视化方法的研究及其应用, Ph.D. thesis, 苏州大学
-  (2008).
-
-\bibitem{BaiduYingyanApp}
-朱孔强, 丁林花, 朱立顺, 聂国豪, 席永科, 基于百度鹰眼的校园巴士app,
-  数字技术与应用 v.36；No.334~(04) (2018) 52--53+55.
-
 \bibitem{BaiduYingyan}
 BaiduYingyan, \url{http://lbsyun.baidu.com/trace} (2018).
 
@@ -82,35 +47,12 @@ M.~McCandless, E.~Hatcher, O.~Gospodnetic, Lucene in Action, Second Edition:
   Covers Apache Lucene 3.0, Manning Publications, 2010.
 \newline\urlprefix\url{http://www.springer.com/computer/swe/book/978-3-642-12577-5?changeHeader}
 
-\bibitem{WGS84Intro}
-M·Kumar, 朱慧, 1984世界大地测量系统(wgs84), 测绘技术装备~(2) (1994) 40--42.
-
-\bibitem{MercatoProjection}
-李长春, 蔡伯根, 上官伟, 王剑, 基于web墨卡托投影的地图算法研究与实现,
-  计算机应用研究 29~(12) (2012) 4793--4796.
-
-\bibitem{TileIntro}
-胡水平, 岳淑英, 张求喜, 谷歌地图卫星影像数据获取关键技术研究,
-  测绘与空间地理信息 41~(10) (2018) 79--81.
-
 \bibitem{DBLP:conf/w2gis/AntoniouMH09}
 V.~Antoniou, J.~Morley, M.~M. Haklay, Tiled vectors: {A} method for vector
   transmission over the web, in: Web and Wireless Geographical Information
   Systems, 9th International Symposium, {W2GIS} 2009, Maynooth, Ireland,
   December 7-8, 2009. Proceedings, 2009, pp. 56--71.
 \newline\urlprefix\url{https://doi.org/10.1007/978-3-642-10601-9\_5}
-
-\bibitem{LuoZhiyong2013}
-罗智勇, 黎小东, 基于数据库存储方案的高性能瓦片地图服务研究, 地理与地理信息科学
-  29~(3) (2013) 52--55+112.
-
-\bibitem{TilePyramid}
-霍亮, 杨耀东, 刘小勇, 乔文昊, 朱王璋, 瓦片金字塔模型技术的研究与实践, 测绘科学
-  37~(6) (2012) 146--148.
-
-\bibitem{Ludonglin2013}
-路东林, 智广玉, 地图发布平台下瓦片金字塔技术研究, 数字技术与应用~(3) (2013)
-  99--99.
 
 \bibitem{DBLP:conf/nbis/Osborn17}
 W.~Osborn, A \emph{k}-nearest neighbour query processing strategy using the
@@ -142,5 +84,63 @@ G.~Zeng, Q.~Li, H.~Jia, X.~Li, Y.~Cai, R.~Mao, An inclusion rule for vantage
 \bibitem{Liu2015Fast}
 S.~G. Liu, Y.~W. Wei, Fast nearest neighbor searching based on improved
   vp-tree, Pattern Recognition Letters 60-61~(C) (2015) 8--15.
+
+\bibitem{GaoQiang2017}
+高强, 张凤荔, 王瑞锦, 周帆, 轨迹大数据:数据处理关键技术研究综述, 软件学报
+  28~(4) (2017) 959--992.
+
+\bibitem{JiGenLin2015}
+吉根林, 赵斌, 时空轨迹大数据模式挖掘研究进展, 数据采集与处理 30~(1) (2015)
+  47--58.
+
+\bibitem{YangWei2016}
+杨伟, 艾廷华, 基于车辆轨迹大数据的道路网更新方法研究, 计算机研究与发展 53~(12)
+  (2016) 2681--2693.
+
+\bibitem{YuanGuan2012}
+袁冠, 移动对象轨迹数据挖掘方法研究, Ph.D. thesis, 中国矿业大学 (2012).
+
+\bibitem{WangKai2017}
+王凯, 陈能成, 陈泽强, 基于mongodb的轨迹大数据时空索引构建方法, 计算机系统应用
+  26~(6) (2017) 227--231.
+
+\bibitem{GongJun2015}
+龚俊, 柯胜男, 朱庆, 张叶廷, 一种集成r树、哈希表和b?树的高效轨迹数据索引方法,
+  测绘学报 44~(5) (2015) 570--577.
+
+\bibitem{ChenJianjun2001}
+陈建军, 于志强, 朱昀, 数据可视化技术及其应用, 红外与激光工程 30~(5) (2001)
+  339--342.
+
+\bibitem{WuXiujun2008}
+吴秀君, 网络环境下地图数据可视化方法的研究及其应用, Ph.D. thesis, 苏州大学
+  (2008).
+
+\bibitem{BaiduYingyanApp}
+朱孔强, 丁林花, 朱立顺, 聂国豪, 席永科, 基于百度鹰眼的校园巴士app,
+  数字技术与应用 v.36；No.334~(04) (2018) 52--53+55.
+
+\bibitem{LuoZhiyong2013}
+罗智勇, 黎小东, 基于数据库存储方案的高性能瓦片地图服务研究, 地理与地理信息科学
+  29~(3) (2013) 52--55+112.
+
+\bibitem{TilePyramid}
+霍亮, 杨耀东, 刘小勇, 乔文昊, 朱王璋, 瓦片金字塔模型技术的研究与实践, 测绘科学
+  37~(6) (2012) 146--148.
+
+\bibitem{Ludonglin2013}
+路东林, 智广玉, 地图发布平台下瓦片金字塔技术研究, 数字技术与应用~(3) (2013)
+  99--99.
+
+\bibitem{WGS84Intro}
+M·Kumar, 朱慧, 1984世界大地测量系统(wgs84), 测绘技术装备~(2) (1994) 40--42.
+
+\bibitem{MercatoProjection}
+李长春, 蔡伯根, 上官伟, 王剑, 基于web墨卡托投影的地图算法研究与实现,
+  计算机应用研究 29~(12) (2012) 4793--4796.
+
+\bibitem{TileIntro}
+胡水平, 岳淑英, 张求喜, 谷歌地图卫星影像数据获取关键技术研究,
+  测绘与空间地理信息 41~(10) (2018) 79--81.
 
 \end{thebibliography}
