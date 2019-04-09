@@ -63,7 +63,7 @@
 \contentsline {subsection}{\numberline {4.3.1}KNN问题的常规方法}{34}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}设计焦点与解决办法}{34}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}相似检索功能实现要点：避免重复访问}{35}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}检索算法流程图}{35}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.4}相似检索算法流程图}{35}{subsection.4.3.4}
 \contentsline {subsection}{\numberline {4.3.5}相似检索功能各子流程代码实现}{36}{subsection.4.3.5}
 \contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计与实现}{38}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Insert算法概述}{38}{subsection.4.4.1}

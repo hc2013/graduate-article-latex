@@ -43,7 +43,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 本文所设计实现的优先点树的结构是对最简单vp-tree结构的改良，将原生vp-tree的两路结构改为多路结构。相应地，就需要把按中值进行二分修改为以边界值进行多分，并且为了提高检索的速度，减少检索时的距离运算量，改良后的vp-tree的非叶节点不仅存储了Vantage Point ID和每棵子树的指针，还存储了每个子树的距离值的上界和下界以及最大距离值。具体结构见图~\ref{vp-tree-structure1}所示为一个4路vp-tree的内部结构示意图。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=3.7in,height=2.3in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
+  \includegraphics[width=4.7in,height=2.4in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
   \caption{4路vp-tree的内部结构示意图}\label{vp-tree-structure1}
 \end{figure}
 \subsection{初始建树的流程}
@@ -74,7 +74,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \end{figure}
 
 \subsection{设计要点：优先点的选择算法}
-在初始建树的过程中，优先点选取是非常关键的一步。选取的好坏取决于一个优先点能否让切分出来的各路子树的边界值相差足够大，因为各路子树的边界值相差越大，在检索的时候，距离值落入某一子树的边界内的可能性越大，剪枝成功的可能性越高，性能就越好。反之，如果优先点选择很差，导致多个子树的上下界非常接近，就很容易出现一个距离值横跨多个子树的情况，这种情况下无法进行有效剪枝，造成性能下降。因此，如何选择尽可能优的优先点，是算法实现的重点。
+在初始建树的过程中，优先点选取是非常关键的一步。选取的好坏取决于一个优先点能否让切分出来的各路子树的边界值相差足够大，因为各路子树的边界值相差越大，在检索的时候，与优先点的距离值和容忍距离构成的检索区间完全落入某一单个子树的边界内的可能性越大，剪枝成功的可能性越高，性能就越好。反之，如果优先点选择很差，导致多个子树的上下界非常接近，就很容易出现一个检索区间横跨多个子树的情况，这种情况下无法进行有效剪枝，多棵子树必须都被检索，导致性能下降。因此，如何选择尽可能优的优先点，是初始建树算法设计和实现的重点。
 \begin{figure}[htb]
 \setlength{\abovecaptionskip}{0.cm}
 \setlength{\belowcaptionskip}{0.cm}
@@ -84,7 +84,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \end{figure}
 本文针对优先点选择的实现是基于随记取样和标准差结果的。本文认为，一个点与其他所有数据点距离的标准差越大，越能将数据点空间均匀切分，作为优先点的性能越好。而由于数据全量很大，不可能都计算，就采用随机抽样的方式进行部分计算。其设计思路是，在数据点全集中随机取样K 个点，作为候选的优先点。针对这K 个候选的优先点进行循环遍历，每个候选优先点再随机取K 个点作为参照点，然后计算每个候选优先点和参考点之间距离的标准差，最后取标准差最大的那个候选点作为真正的优先点。这样的选举过程涉及到取样，距离和标准差的计算，相当于用一部分初始建树性能的降低来换取了检索性能的提高。
 
-如代码~\ref{select-vp-code}所示。③处是根据用户配置的取样率计算取样数量，②处设置一内一外两个取样结果对象以及使用取样器外取样，③处是使用取样器进行内取样，④处是遍历内取样每一数据点，计算与外取样对应数据点的标准差。最后判断新的标准差是否大于原有最大标准差，并更新最大标准差数据点的记录。
+如代码~\ref{select-vp-code}所示。①处是根据用户配置的取样率计算取样数量，②处设置一内一外两个取样结果对象以及使用取样器外取样，③处是使用取样器进行内取样，④处是遍历内取样每一数据点，计算与外取样对应数据点的标准差。最后在⑤处判断新的标准差是否大于原有最大标准差，并更新最大标准差数据点的记录。
 
 \section{相似轨迹检索功能模块详细设计与实现}
 
@@ -100,7 +100,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \cite{DBLP:journals/classification/ProencaN17}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/thredhold.pdf}
+  \includegraphics[width=5.7in]{new_FIGs/chapter4/thredhold.pdf}
   \caption{容忍距离对剪枝的作用示意图}\label{thredhold}
 \end{figure}
 这是距离范围剪枝的基本依据。如图\ref{thredhold}所示，某一数据空间基于优先点VP被分为S1,S2,S3三个子空间，目标轨迹target落在子空间s2中，T为容忍距离。在①情况下，容忍距离T的半径范围覆盖了S1,S2,S3,无法剪枝，使得检索必须遍历全部三个分支，而实际上S1,S3很可能没有匹配的结果。而对于②而言，T半径仅仅只在S2子空间内，所以可以认定，S1和S3 中不可能包括与target 距离小于T 的点，从而排除S1,S3，实现剪枝。由以上两种情况可见，容忍距离越小，成功剪枝的概率越高，检索性能越好。但是因为数据点与VP点距离集合本身是离散的，容忍距离也不能太小，否则过度剪枝造成检索不到结果。所以容忍距离的初始值设置和收敛速度是直接影响检索性能的关键。\cite{DBLP:conf/hucc/ZengLJLCM14}
@@ -112,12 +112,12 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 \subsection{相似检索功能实现要点：避免重复访问}
 由上文所述，通过预填结果集的方式加快容忍距离的收敛速度，这种做法带来部分分支重复访问的问题。这是因为某些节点的一部分分支在预填过程中就已经被搜索过了。如果不对搜索进行标记，重复的搜索不会贡献新的结果，从而浪费了搜索时间。关于这一点，本文使用了BitSet 栈的方式来实现，在预填结果集的过程中，与节点栈同步保存一个Bitset 栈，两者的顺序一致。每个bitset 的大小与vp-tree 的扇出数一致，用于保存若干分支中，哪些已经被访问过了。这样，在回溯发生的时候，首先检查对应的bitset，对于那些已经被置位的分支直接跳过，只访问尚未遍历过的分支，避免重复的检索和距离计算。
 
-\subsection{检索算法流程图}
+\subsection{相似检索算法流程图}
 如图\ref{search-flow}所示为检索算法的运行流程图。图中显示了检索过程中最关键的三个子流程，即检索最相似点，预填结果堆和回溯更新结果堆。其中检索最相似点是通过递归实现的，节点栈在其过程中的作用是保存搜索路径。而另外两个子流程都是使用栈+循环的方式实现的。详细说明，见后文代码实现。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6.2in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
-  \caption{检索算法流程图}\label{search-flow}
+  \includegraphics[width=5.8in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
+  \caption{相似检索算法流程图}\label{search-flow}
 \end{figure}
 
 \subsection{相似检索功能各子流程代码实现}
@@ -149,7 +149,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter4/insert-show0.pdf}
+  \includegraphics[width=5.7in]{new_FIGs/chapter4/insert-show0.pdf}
   \caption{直接插入对应叶节点算法示意图}\label{insert-show0}
 
 \end{figure}
@@ -165,21 +165,21 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=1in]{new_FIGs/chapter4/insert-show2.pdf}
+  \includegraphics[width=5.7in,height=1in]{new_FIGs/chapter4/insert-show2.pdf}
   \caption{叶节点数据重分布算法示意图}\label{insert-show2}
 \end{figure}
 
 第四，新插入的数据点所匹配的叶节点，父节点以及所有的兄弟节点都已经满了，则向上回溯，找到第一个未满的祖先节点，如祖先节点的分支数未满，则优先进行目标分支的分裂,形成新的分支。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=4in]{new_FIGs/chapter4/insert-show3.pdf}
+  \includegraphics[width=5.7in,height=4in]{new_FIGs/chapter4/insert-show3.pdf}
   \caption{分支分裂算法示意图}\label{insert-show3}
 \end{figure}
 \textbf{注意，在这种情况下，不能像叶节点数据进行简单的移动就解决问题，由于产生新分支意味着必须重新建立子树，才能将原分支的数据点和新数据均匀分开，以降低接下来插入操作的负载。}如图\ref{insert-show3}所示,当插入数据点u的时候，分裂节点lowerAncestor,产生节点newBranch，并将均分的数据集合分别建立新的叶节点。而新子树的建立过程中必然需要选取新的VP点并且进行相应的距离计算。这种情况下的性能消耗，只比相同数据子空间的初始建树操作少了一轮VP点选取和距离计算而已。
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in,height=4.6in]{new_FIGs/chapter4/insert-show4.pdf}
+  \includegraphics[width=5.7in,height=4.6in]{new_FIGs/chapter4/insert-show4.pdf}
   \caption{分支重分布算法示意图}\label{insert-show4}
 \end{figure}
 第五，如果祖先分支数已经满了，则寻找到\textbf{分支数据}未满的子树的祖先节点,注意这里是分支数据未满，不是分支数未满。所谓分支数据未满，是指一个分支所能覆盖的最多的数据点的数量，这里也就包括了分支数不满和分支数满但是叶节点槽位不满两种情况。如果是后一种情况，分支之间的数据只需要进行数据重分布而并不涉及新的数结构的生成，与叶节点的数据重分布类似，只是数据节点和分支元信息的移动，但是多了一个深度搜索匹配叶节点的过程。如图\ref{insert-show4} 所示，当要插入节点Ψ 时，发现upperAncesor 的分支notFullBranch 的数据点数量不满，也就是说notFullBranch 的叶节点有空槽位。此时将lowerAncestor 和notFullBranch进行数据重分布，以
@@ -252,7 +252,7 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1 \end{align}
 如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=6in]{new_FIGs/chapter7/running.pdf}
+  \includegraphics[width=5.7in]{new_FIGs/chapter7/running.pdf}
   \caption{轨迹检索运行效果}\label{running}
 \end{figure}
 \section{本章小结}
