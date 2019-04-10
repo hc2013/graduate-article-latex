@@ -59,18 +59,18 @@
 \contentsline {subsection}{\numberline {4.2.3}初始建树的流程}{30}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}初始建树算法实现}{31}{subsection.4.2.4}
 \contentsline {subsection}{\numberline {4.2.5}设计要点：优先点的选择算法}{32}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计与实现}{34}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}KNN问题的常规方法}{34}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计与实现}{33}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}KNN问题的常规方法}{33}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}设计焦点与解决办法}{34}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}相似检索功能实现要点：避免重复访问}{35}{subsection.4.3.3}
 \contentsline {subsection}{\numberline {4.3.4}相似检索算法流程图}{35}{subsection.4.3.4}
 \contentsline {subsection}{\numberline {4.3.5}相似检索功能各子流程代码实现}{36}{subsection.4.3.5}
 \contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计与实现}{38}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Insert算法概述}{38}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Insert算法设计细节}{41}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.2}Insert算法设计细节}{42}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}Insert算法流程图}{44}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Insert算法实现}{45}{subsection.4.4.4}
-\contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{48}{section.4.5}
+\contentsline {subsection}{\numberline {4.4.4}Insert算法实现}{44}{subsection.4.4.4}
+\contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{47}{section.4.5}
 \contentsline {section}{\numberline {4.6}本章小结}{48}{section.4.6}
 \contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{49}{chapter.5}
 \contentsline {section}{\numberline {5.1}概述}{49}{section.5.1}
