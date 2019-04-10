@@ -50,7 +50,7 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 \hline
 测试用例编号 & TC-01 \\ \hline
 测试目标 & 验证相似轨迹检索结果的正确性 \\ \hline
-接口函数 & VPTree中的nearestNeighbourQuery方法 \\ \hline
+接口函数 & VpTree中的nearestNeighbourQuery方法 \\ \hline
 前置条件 & 轨迹检索子服务接收到目标轨迹的ID和相似数量K \\ \hline
 输入 & 目标轨迹的ID和相似数量K \\ \hline
 预期输出 & 与目标轨迹最相似的K条轨迹的ID列表 \\ \hline
@@ -67,8 +67,8 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 \begin{tabular}{|l|l|}
 \hline
 测试用例编号 & TC-02 \\ \hline
-测试目标 & 验证所建立的轨迹索引的完整性和正确性 \\ \hline
-接口函数 & VPTree中的createNode方法 \\ \hline
+测试目标 & 验证所建立的轨迹索引的完整性和逻辑正确性 \\ \hline
+接口函数 & VpTree中的createNode方法 \\ \hline
 前置条件 & 轨迹检索子服务接收到批量轨迹数据 \\ \hline
 输入 & 批量轨迹数据\\ \hline
 预期输出 & 逻辑正确的轨迹索引 \\ \hline
@@ -86,7 +86,7 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 \hline
 测试用例编号 & TC-03 \\ \hline
 测试目标 & 验证插入新轨迹数据之后，轨迹索引的正确性 \\ \hline
-接口函数 & VPTree中的insert方法 \\ \hline
+接口函数 & VpTree中的insert方法 \\ \hline
 前置条件 & 轨迹检索子服务接收到新的轨迹数据 \\ \hline
 输入 & 新的轨迹数据\\ \hline
 预期输出 & 更新后的，逻辑正确的轨迹索引 \\ \hline
@@ -134,7 +134,7 @@ DELL服务器4（CentOS 7.3） & JVM 8,ElasticSearch & JVM 1.8.0\_151,ElasticSearch 6
 本文对核心功能相似轨迹检索进行了功能测试，如表格~\ref{table:trajectory_function_test}所示，在界面操作中，前端拦截了诸如错误文件格式，错误ID格式，目标数量过大等问题。而针对目标ID不存在，是由服务器验证并返回警告用户的。最终测试结果和预期相符。
 
 \section{性能测试}
-本文测试了单个节点下，相似查询的时间消耗和轨迹常驻内存大小。
+本文测试了单个节点下，相似轨迹检索的时间消耗和轨迹索引常驻内存大小。
 
 \begin{figure}[htb]
   \centering

@@ -2,8 +2,8 @@
 \setcounter {tocdepth}{-1}
 \contentsline {chapter}{目\CTEX@spaceChar \CTEX@spaceChar 录}{v}{chapter*.1}
 \setcounter {tocdepth}{3}
-\contentsline {chapter}{表\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 目\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 录}{ix}{chapter*.2}
-\contentsline {chapter}{图\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 目\hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces \hspace {0.25em plus 0.125em minus 0.08em}\ignorespaces 录}{xi}{chapter*.3}
+\contentsline {chapter}{表\CTEX@spaceChar \CTEX@spaceChar 目\CTEX@spaceChar \CTEX@spaceChar 录}{ix}{chapter*.2}
+\contentsline {chapter}{图\CTEX@spaceChar \CTEX@spaceChar 目\CTEX@spaceChar \CTEX@spaceChar 录}{xi}{chapter*.3}
 \contentsline {chapter}{\numberline {第一章\hspace {0.3em}}引言}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}项目背景}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}国内外相关系统的发展概况}{2}{section.1.2}
@@ -31,23 +31,23 @@
 \contentsline {section}{\numberline {2.4}Nodejs Express框架}{12}{section.2.4}
 \contentsline {section}{\numberline {2.5}本章小结}{12}{section.2.5}
 \contentsline {chapter}{\numberline {第三章\hspace {0.3em}}系统需求分析与概要设计}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}GTDS系统概述}{13}{section.3.1}
+\contentsline {section}{\numberline {3.1}地理轨迹数据服务整体概述}{13}{section.3.1}
 \contentsline {section}{\numberline {3.2}轨迹数据服务需求分析}{13}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}轨迹数据服务的功能需求}{13}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}轨迹数据服务的非功能需求}{14}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}轨迹数据服务用例图}{14}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}轨迹数据服务用例描述}{14}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.4}轨迹数据服务用例描述}{15}{subsection.3.2.4}
 \contentsline {section}{\numberline {3.3}地图瓦片数据服务需求分析}{17}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}地图瓦片数据服务的需求综述}{17}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}地图瓦片数据服务功能需求}{18}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}地图瓦片数据服务非功能需求}{18}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{18}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.4}地图瓦片数据服务用例图}{19}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}地图瓦片数据服务用例描述}{19}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{19}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{19}{subsection.3.4.1}
+\contentsline {section}{\numberline {3.4}地理轨迹数据服务架构设计}{20}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}架构设计综述}{20}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}逻辑蓝图}{20}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}过程蓝图}{21}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{22}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.4}开发蓝图}{23}{subsection.3.4.4}
 \contentsline {subsection}{\numberline {3.4.5}物理蓝图}{23}{subsection.3.4.5}
 \contentsline {subsection}{\numberline {3.4.6}场景脚本}{24}{subsection.3.4.6}
 \contentsline {section}{\numberline {3.5}本章小结}{25}{section.3.5}
@@ -71,23 +71,25 @@
 \contentsline {subsection}{\numberline {4.4.3}Insert算法流程图}{44}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}Insert算法实现}{44}{subsection.4.4.4}
 \contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{47}{section.4.5}
-\contentsline {section}{\numberline {4.6}本章小结}{48}{section.4.6}
-\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{49}{chapter.5}
-\contentsline {section}{\numberline {5.1}概述}{49}{section.5.1}
-\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{50}{section.5.2}
-\contentsline {section}{\numberline {5.3}地图局部更新功能详细设计与实现}{51}{section.5.3}
-\contentsline {section}{\numberline {5.4}局部更新一致性方法}{52}{section.5.4}
-\contentsline {section}{\numberline {5.5}本章小结}{54}{section.5.5}
-\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}系统测试}{56}{chapter.6}
-\contentsline {section}{\numberline {6.1}测试环境准备}{56}{section.6.1}
-\contentsline {section}{\numberline {6.2}测试数据准备}{56}{section.6.2}
-\contentsline {section}{\numberline {6.3}单元测试}{57}{section.6.3}
-\contentsline {section}{\numberline {6.4}功能测试}{58}{section.6.4}
-\contentsline {section}{\numberline {6.5}性能测试}{59}{section.6.5}
-\contentsline {section}{\numberline {6.6}本章小结}{60}{section.6.6}
-\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}总结和展望}{61}{chapter.7}
-\contentsline {section}{\numberline {7.1}总结}{61}{section.7.1}
-\contentsline {section}{\numberline {7.2}进一步工作展望}{61}{section.7.2}
-\contentsline {chapter}{参考文献}{62}{chapter*.4}
-\contentsline {chapter}{简历与科研成果}{65}{chapter*.5}
-\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{66}{chapter*.6}
+\contentsline {section}{\numberline {4.6}轨迹数据子服务Rest调用示例}{48}{section.4.6}
+\contentsline {section}{\numberline {4.7}本章小结}{48}{section.4.7}
+\contentsline {chapter}{\numberline {第五章\hspace {0.3em}}地图瓦片数据子服务详细设计与实现}{50}{chapter.5}
+\contentsline {section}{\numberline {5.1}服务架构概述}{50}{section.5.1}
+\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{51}{section.5.2}
+\contentsline {section}{\numberline {5.3}地图局部更新功能详细设计与实现}{52}{section.5.3}
+\contentsline {section}{\numberline {5.4}局部更新一致性方法}{53}{section.5.4}
+\contentsline {section}{\numberline {5.5}地图瓦片数据子服务Rest调用示例}{55}{section.5.5}
+\contentsline {section}{\numberline {5.6}本章小结}{56}{section.5.6}
+\contentsline {chapter}{\numberline {第六章\hspace {0.3em}}系统测试}{57}{chapter.6}
+\contentsline {section}{\numberline {6.1}测试环境准备}{57}{section.6.1}
+\contentsline {section}{\numberline {6.2}测试数据准备}{57}{section.6.2}
+\contentsline {section}{\numberline {6.3}单元测试}{58}{section.6.3}
+\contentsline {section}{\numberline {6.4}功能测试}{59}{section.6.4}
+\contentsline {section}{\numberline {6.5}性能测试}{60}{section.6.5}
+\contentsline {section}{\numberline {6.6}本章小结}{61}{section.6.6}
+\contentsline {chapter}{\numberline {第七章\hspace {0.3em}}总结和展望}{62}{chapter.7}
+\contentsline {section}{\numberline {7.1}总结}{62}{section.7.1}
+\contentsline {section}{\numberline {7.2}进一步工作展望}{62}{section.7.2}
+\contentsline {chapter}{参考文献}{64}{chapter*.4}
+\contentsline {chapter}{简历与科研成果}{67}{chapter*.5}
+\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{68}{chapter*.6}

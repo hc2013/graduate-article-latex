@@ -7,13 +7,14 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces lucene检索组件图}}{8}{figure.2.4}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces 地图瓦片层级示意图}}{11}{figure.2.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces 轨迹数据服务用例图}}{14}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 瓦片数据服务用例图}}{19}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces 地理轨迹数据服务逻辑蓝图}}{21}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces 地理轨迹数据服务过程蓝图}}{22}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces 地理轨迹数据服务开发蓝图}}{23}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces 地理轨迹数据服务物理蓝图}}{24}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces 相似轨迹检索场景脚本}}{25}{figure.3.7}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces GTDS总体结构概览}}{13}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 轨迹数据服务用例图}}{15}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 瓦片数据服务用例图}}{19}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 地理轨迹数据服务逻辑蓝图}}{21}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 地理轨迹数据服务过程蓝图}}{22}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 地理轨迹数据服务开发蓝图}}{23}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces 地理轨迹数据服务物理蓝图}}{24}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 相似轨迹检索场景脚本}}{25}{figure.3.8}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{28}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{29}{figure.4.2}
@@ -35,16 +36,18 @@
 \contentsline {figure}{\numberline {4.18}{\ignorespaces 叶节点数据重分布代码实现}}{46}{figure.4.18}
 \contentsline {figure}{\numberline {4.19}{\ignorespaces 分支分裂代码实现}}{47}{figure.4.19}
 \contentsline {figure}{\numberline {4.20}{\ignorespaces 轨迹检索运行效果}}{48}{figure.4.20}
+\contentsline {figure}{\numberline {4.21}{\ignorespaces 相似轨迹检索Rest调用示例}}{48}{figure.4.21}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{50}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{51}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{52}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{53}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{53}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{54}{figure.5.6}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{51}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{52}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{53}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{54}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{54}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{55}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 地图瓦片数据子服务Rest调用示例}}{56}{figure.5.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces 相似轨迹查询性能测试折线图}}{59}{figure.6.1}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces 轨迹索引常驻内存统计}}{59}{figure.6.2}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces 相似轨迹查询性能测试折线图}}{60}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 轨迹索引常驻内存统计}}{60}{figure.6.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

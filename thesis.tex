@@ -1,5 +1,5 @@
 %%]dvipdfm
-\documentclass[oneside, master,openany]{NJUthesis}
+\documentclass[oneside, master,openany,review]{NJUthesis}
 %\documentclass[twoside, master]{NJUthesis}
 
 % 可选参数：
@@ -175,13 +175,13 @@ Geographic trajectory data service (GTDS), by constructing independent trajector
 
 % 以下两个目录可根据具体情况注释掉（将表格目录和图形目录重命名后加入目录）
 % 生成表格目录命令
-\renewcommand*{\listtablename}{表~~目~~录}
+\renewcommand*{\listtablename}{表\NJUTspace 目\NJUTspace 录}
 \listoftables
-\addcontentsline{toc}{chapter}{表~~目~~录}
+\addcontentsline{toc}{chapter}{表\NJUTspace 目\NJUTspace 录}
 % 生成插图目录命令
-\renewcommand*{\listtablename}{图~~目~~录}
+\renewcommand*{\listtablename}{图\NJUTspace 目\NJUTspace 录}
 \listoffigures
-\addcontentsline{toc}{chapter}{图~~目~~录}
+\addcontentsline{toc}{chapter}{图\NJUTspace 目\NJUTspace 录}
 
 %生成术语表命令
 %\include{chapter/Nomenclatures}
@@ -205,7 +205,6 @@ Geographic trajectory data service (GTDS), by constructing independent trajector
 \input{new_chapter/System_running_and_performance_test.tex}
 
 \input{new_chapter/Summary_and_outlook.tex}
-% 参考文献
 
 \backmatter
 \bibliography{reference}
