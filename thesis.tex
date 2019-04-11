@@ -164,12 +164,12 @@ Through the retrieval of similar trajectories and the ranking of similarities, t
 thus greatly improving the efficiency of reconnaissance. However, the current industry-related systems are basically concerned with the storage, display and tracking
 of trajectories. There is no good and stable solution for trajectory similarity retrieval.
 
-In response to the above problems, this thesis designs and implements a high-performance geographic trajectory similar service. The service includes two main data
+In response to the above problems, this thesis designs and implements a high-performance geographic trajectory similarity analysis service. The service includes two main data
 sub-services, trajectory data sub-service and map tile data sub-service. The specific implementation method is based on the vantage point tree structure extension
 to realize the full-text search library Lucene's VpTree index, which is used as trajectory data retrieval. And the function of trajectory
 data insertion and initial indexing is developed around this core data structure. The map tile data sub-service is based on Mapbox universal map tile standard, and the
 geo-mathematics knowledge such as WGS-84 coordinate system and Web Mercator projection method realizes the functions of reading and partial updating of map tiles.
-The geographic trajectory similar service obtains the trajectory data and the map tile data from the above two sub-services respectively, and then realizes the
+The geographic trajectory similarity analysis service obtains the trajectory data and the map tile data from the above two sub-services respectively, and then realizes the
 visualization on the browser side through the integration of the front-end library, thereby enabling the user to conveniently and quickly achieve the target of
 similar trajectory retrieval.
 
