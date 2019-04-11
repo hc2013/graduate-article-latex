@@ -13,13 +13,13 @@
 \subsection{轨迹数据服务的需求分析}
 \textbf{轨迹数据服务功能需求}
 
-整个地理轨迹相似性分析服务的核心功能有三个。第一个是对批量轨迹数据导入建立索引的功能。第二个是相似轨迹KNN检索功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。第三个功能是对已有索引新加入数据点，即插入功能。注意，在本文所实现的轨迹数据服务中，只提供了增，查，初始化等功能，并没有提供删除功能。这样做是因为在大数据量的应用场景下，用户往往只需要动态地增加和查询轨迹数据，轨迹数据总体量一般都达到百万级，每次做KNN 检索的K值也能达到几百，用户并不在意索引中存在某一些冗余的轨迹，相关的删除操作优先级很低。所以本文放弃了删除轨迹功能的实现。
+整个地理轨迹相似性分析服务的核心功能有三个。第一个是对批量轨迹数据初始建立索引的功能。第二个是相似轨迹KNN检索功能，即根据目标轨迹的ID，执行检索算法，找出与目标轨迹最相近的K 条轨迹。第三个功能是对已有索引新加入数据点，即插入功能。注意，在本文所实现的轨迹数据服务中，只提供了增，查，初始化等功能，并没有提供删除功能。这样做是因为在大数据量的应用场景下，用户往往只需要动态地增加和查询轨迹数据，轨迹数据总体量一般都达到百万级，每次做KNN 检索的K值也能达到几百，用户并不在意索引中存在某一些冗余的轨迹，相关的删除操作优先级很低。所以本文放弃了删除轨迹功能的实现。
 
 \begin{table}[htb]
 \large
 \caption{轨迹数据服务功能需求列表}
 \vspace{2mm}
-\resizebox{146mm}{22mm}{
+\resizebox{146mm}{18mm}{
 \begin{tabular}{|c|l|l|}
 \hline
 \textbf{需求ID} & \multicolumn{1}{c|}{\textbf{需求名称}} & \multicolumn{1}{c|}{\textbf{需求描述}}                                                                \\ \hline
@@ -35,7 +35,6 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 轨迹数据服务的三个主要功能都涉及到用户的直接操作。由于索引本身的只是距离对比关系的存储，而并不直接存储轨迹数据，所以磁盘空间的消耗不是主要问题。而索引的建立，更新和检索，都需要大量的距离计算和区间比对，因此这显然是一个计算密集型的应用。因此用户的非功能需求主要体现在时间和准确率上。如表格\ref{table:trajectory_service_non_func_req}所示，时间特性和负载特性都是运行时保证的属性，而精度特性其实是在测试阶段保证的。因为在用户实际使用中，无法比对结果是否准确，只能在测试阶段通过比对结果集合和答案集合来确认准确率。
 
 \begin{table}[htb]
-\tiny
 \caption{轨迹数据服务非功能需求列表}
 \vspace{2mm}
 \resizebox{146mm}{11mm}{
@@ -89,7 +88,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \hline
 \textbf{正常流程}&\tabincell{l}{1.打开命令行工具。 \\ 2.在命令行中输入轨迹数据表格ID、目标区间和优先点树的元数据，包括扇出度、节点数据量等。 \\ 3. 回车确认建立索引。}\\
 \hline
-\textbf{异常流程}&\tabincell{l}{2a.表格ID不存在，服务端发现错误并告知用户。 \\2b.筛选条件存在逻辑错误，比如以字符串值筛选整形列。服务器发现错误，要求重新输入。 \\2c.目标区间的前后界大小矛盾，前端发现错误，告知数据库管理员重新输入。\\4a. 由于网络，磁盘等各种可能原因导致的初始化失败,服务器应明确告知数据库管理员。 }\\
+\textbf{异常流程}&\tabincell{l}{2a.表格ID不存在，服务端发现错误并告知用户。 \\2b.筛选条件存在逻辑错误，比如以字符串值筛选整形列。服务器发现错误，要求重新输入。 \\2c.目标区间的前后界大小矛盾，前端发现错误，告知数据库管理员重新输入。\\3a. 由于网络，磁盘等各种可能原因导致的初始化失败,服务器应明确告知数据库管理员。 }\\
 \hline
 \end{tabular}}
 \label{table:initVpTree_use_case_description}
@@ -99,7 +98,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 
 \begin{table}[htb]\footnotesize
 \centering
-\caption{插入新数据用例描述}
+\caption{插入新轨迹数据用例描述表}
 \vspace{2mm}
 \resizebox{146mm}{55mm}{
 \begin{tabular}{|l|l|}
@@ -202,7 +201,7 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \textbf{地图瓦片数据服务非功能需求}
 
 \begin{table}[htb]
-\caption{瓦片数据服务非功能需求列表}
+\caption{地图瓦片数据服务非功能需求列表}
 \vspace{2mm}
 \resizebox{146mm}{10mm}{
 \begin{tabular}{|l|l|}
@@ -273,13 +272,13 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
   \caption{地理轨迹相似性分析服务逻辑蓝图}\label{logic-view}
 \end{figure}
 
-如图~\ref{logic-view}所示，此为轨迹数据服务在对象视角下的逻辑视图，也就是逻辑蓝图。其中Visualization Service是可视化服务，也就是直接与用户交互的界面。它依赖两个主要的功能模块，Trajectory Service和Tile Service。
+如图~\ref{logic-view}所示，此为地理轨迹相似性分析服务在对象视角下的逻辑视图，也就是逻辑蓝图。其中Visualization Service是可视化服务，也就是直接与用户交互的界面。它依赖两个主要的功能模块，Trajectory Service和Tile Service。
 
 Trajectory Service是轨迹数据服务，它关联了Trajectory Store模块，也就是轨迹存储模块，Trajectory Store在存储轨迹数据的同时，还要为轨迹建立相似索引，因此Trajectory Service聚合了Trajectory Index模块。Trajectory Index模块负责轨迹数据索引的建立，更新和搜索功能，是本文设计和实现的重点。
 
 Tile Service使用了Geographical Compute模块进行地理逻辑计算，两者只是调用关系，Geographical Compute模块本身是无状态的，可配置的。除此之外，Tile Service还关联了Tile Store模块，注意，Tile Store是地图瓦片存储处理逻辑的实现模块，其本身并不存储地图瓦片数据。Tile Store模块是连接Tile Service与Tile DataBase的桥梁，该模块通过对Tile Service 所需接口的抽象化，实现各种不同地图瓦片数据库与Tile Service的无缝对接，从而为系统提供良好的可用性和可扩展性。
 
-整个地理轨迹相似性分析服务，就是以Visualization Service为中心，分别调用Traj-\\ectory Service和Tile Service中的轨迹数据和地图瓦片数据，通过前端库的渲染整合，为用户提供稳定的，高可用的轨迹数据服务。
+整个地理轨迹相似性分析服务，就是以Visualization Service为中心，分别调用Trajectory Service和Tile Service中的轨迹数据和地图瓦片数据，通过前端库的渲染整合，为用户提供稳定的，高可用的轨迹数据服务。
 \subsection{过程蓝图}
 如图~\ref{process-view}所示，此为地理轨迹相似性分析服务的过程视图，也就是过程蓝图。在整个服务的运行周期内，Visualization Damon Process作为可视化服务的守护进程，时刻保持服务接口开放。Visualization Damon Process分别依赖Tile Damon Process和Trajectory Damon Process。
 
