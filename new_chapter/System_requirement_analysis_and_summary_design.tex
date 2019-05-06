@@ -173,8 +173,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 
 \textbf{地图瓦片数据服务的需求综述}
 
-在轨迹检索服务中，对于地图瓦片数据的要求有增加，删除，修改，查询，数据源配置等。其中以更新功能的操作细节较多。而读取功能一般是直接被前端库调用的，不与真实用户直接交互，其逻辑也比较简单，所以本文予以省略，只用用例图详细介绍操作比较复杂的，与瓦片数据库管理员直接交互的地图瓦片更新功能的用例。
-注意：在GTDS的功能需求中，对于瓦片的增加和删除都是以整张地图为单位的，局部的增加和删除这种需求并不存在，所以此处不列为功能需求。
+在轨迹检索服务中，对于地图瓦片数据的要求有增加，修改，查询等。其中以更新功能的操作比较复杂，细节较多，并且直接与数据库管理员交互。而读取功能一般是直接被前端库调用的，不与真实用户直接交互。
 
 对于非功能需求，瓦片数据服务涉及到的计算主要是坐标转换，请求解析，缓存处理。这些操作的计算量不大，所以并不是计算密集型应用，而是IO密集型应用，高并发和快速响应是其必须满足的非功能特性。除此之外，用户的瓦片数据可能是存在于各种不同的数据库中的。因此服务还应该独立于不同的数据库，做到高可用性，高扩展性。
 
@@ -183,17 +182,14 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 \begin{table}[htb]
 \caption{ 地图瓦片数据服务功能需求列表}
 \vspace{2mm}
-\resizebox{146mm}{40mm}{
+\resizebox{146mm}{25mm}{
 \begin{tabular}{|c|l|l|}
 \hline
 \textbf{需求ID} & \multicolumn{1}{c|}{\textbf{需求名称}} & \multicolumn{1}{c|}{\textbf{需求描述}}                                                                \\ \hline
 R1   & 新增地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图名称和地图瓦片数据，\\ 增加一个地区的完整地图瓦片数据.\end{tabular}      \\ \hline
-R2   & 删除地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，删除一个地区的全 \\ 部地图瓦片数据.\end{tabular} \\ \hline
-R3   & 局部更新地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和地图数据，更新一\\ 张大地图中某一个小地区的地图瓦片数据.\end{tabular}     \\ \hline
-R4   & bounding-box更新地图瓦片数据                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，经纬度范围，地图\\ 数据，更新一张大地图中某一个地区某一经纬度矩形范围内的地\\ 图瓦片数据.\end{tabular}     \\ \hline
-R5   & 地图瓦片数据全量查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，通过获取全量数据的JSON文件，作\\ 为输入的数据源，获取整张地图的全量数据.\end{tabular}     \\ \hline
-R6   & 单个地图瓦片数据查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和栅格坐标zxy，获取\\ 指定的瓦片.\end{tabular}     \\ \hline
-R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和经纬度矩形范围，\\ 获取这一部分的地图渲染结果.\end{tabular}     \\ \hline
+R2   & bounding-box局部更新地图瓦片数据                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，经纬度范围，地图\\ 数据，更新一张大地图中某一个地区某一经纬度矩形范围内的地\\ 图瓦片数据.\end{tabular}     \\ \hline
+R3   & 地图瓦片数据全量查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，通过地图ID，获取整张地图的全量 \\ 瓦片数据.\end{tabular}     \\ \hline
+R4   & 单个地图瓦片数据查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和栅格坐标zxy，获取\\ 指定的瓦片数据.\end{tabular}     \\ \hline
 \end{tabular}}
 \label{table:tile_service_func_req}
 \end{table}
@@ -213,23 +209,21 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \label{table:tile_service_non_func_req}}
 \end{table}
 
-如表格\ref{table:tile_service_non_func_req}所示，地图瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Sqlite和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地理数据服务对接起来运行。
+如表格\ref{table:tile_service_non_func_req}所示，地图瓦片数据服务本身是服务于业务展示层，是面向地理相关用户的，也就是专用用户的。因此其负载只需能满足十万级别即可。而其时间特性，指的是业务展示服务调用瓦片数据的时间，即读取操作的响应时间。对于瓦片数据更新操作，其运行时间与数据量，网络传输，数据库写性能有关，无法明确定义。对于高可用性，目前用户的地理数据库包括Sqlite和Hbase,这两种数据库都应该能够通过配置中间件的方式，与地图瓦片数据服务对接起来运行。
 
 \textbf{地图瓦片数据服务用例图}
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=5in,height=2.8in]{new_FIGs/chapter3/tileserver_use_case.pdf}
+  \includegraphics[width=5in,height=2.3in]{new_FIGs/chapter3/tileserver_use_case.pdf}
   \caption{瓦片数据服务用例图}\label{tileserver_use_caseCH3}
 \end{figure}
 
-以上用例中的功能并不是逻辑完备的，某些逻辑功能，比如局部地图瓦片非渲染查询，这种需求在实际应用中没有使用场景，这里就没有列举。而上图中的部分功能，例如地图瓦片的全量更新，删除整张地图，都是直接的瓦片数据库的操作，逻辑比较简单，所以本文后续章节对这些内容都予以忽略，不加介绍。
-
 \textbf{地图瓦片数据服务用例描述}
 
-本文开发的地图瓦片数据服务，主要是服务于整个地理轨迹相似性分析服务的可视化功能的。\begin{table}[htb]\footnotesize
+\begin{table}[htb]\footnotesize
 \centering
-\caption{地图瓦片bounding-box局部更新用例描述表}
+\caption{bounding-box局部更新功能用例描述表}
 \vspace{2mm}
 \resizebox{140mm}{39mm}{
 \begin{tabular}{|l|l|}
@@ -248,18 +242,123 @@ R7   & 局部bounding-box的渲染查询                  & \begin{tabular}[c]{@{}l@{}}
 \hline
 \textbf{触发条件}&\tabincell{l}{某一地图中某一部分数据发生变更，需要更新为新数据。}\\
 \hline
-\textbf{前置条件}&\tabincell{l}{服务正常运行，数据库管理员进入服务界面}\\
+\textbf{前置条件}&\tabincell{l}{服务正常运行}\\
 \hline
 \textbf{后置条件}&\tabincell{l}{地图瓦片数据完成更新，业务展示服务可以经过刷新可以看到地图变化}\\
 \hline
-\textbf{正常流程}&\tabincell{l}{1.进入瓦片数据更新界面 \\ 2.设置north,south,west,east,4个经纬度值 \\ 3.点击浏览本地文件并上传文件数据 \\4. 点击更新瓦片数据}\\
+\textbf{正常流程}&\tabincell{l}{1.打开浏览器 \\ 2.输入服务地址、端口号、north、south、west、east、4个经纬度值 \\ 3.指定目标文件路径 \\4. 确认}\\
 \hline
-\textbf{异常流程}&\tabincell{l}{2a.经纬度大小值错误，前端应自动检测并警告 \\ 3a. 数据库管理员选择的文件格式错误，则前端对数据库管理员发出警告  \\4a. 由于网络，磁盘等各种可能原因导致的更新失败。服务器应明确告知数据库管理员，更新失败。}\\
+\textbf{异常流程}&\tabincell{l}{2a.经纬度大小值错误，服务器返回错误，要求用户重新输入 \\ 3a.数据库管理员指定的文件格式错误，服务器返回错误  \\4a.由于网络，磁盘等各种可能原因导致的更新失败。服务器应明确告知数据库管理员，更新失败。}\\
 \hline
 \end{tabular}}
 \label{table:tileserver_use_case_description1}
-\end{table}它的某些功能直接供前端库调用，而没有与人交互的场景。比如地图瓦片全量查询功能，是在地理轨迹相似性分析服务运行时提供地图背景的功能，普通用户并不需要单独使用这个功能。而还有一些功能是直接操作瓦片数据，面向瓦片数据库管理员的功能。因此，瓦片数据服务的功能大都操作简单明确而且重复，无需使用用例描述。本文只对操作比较复杂的，与瓦片数据库管理员直接交互的“地图瓦片bounding-box局部更新”进行了具体描述。如表格
-\ref{table:tileserver_use_case_description1}所示。
+\end{table}
+
+bounding-box局部更新功能是地图瓦片子数据服务相比于其他开源数据服务的独有功能，其交互的关键点在于经纬度坐标的设置，这里不能出现地理逻辑错误。除此之外，地图文件格式的检查也是需要的。
+
+\begin{table}[htb]\footnotesize
+\centering
+\caption{地图瓦片数据全量查询功能用例描述表}
+\vspace{2mm}
+\resizebox{140mm}{36mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC2}\\
+\hline
+\textbf{名称}&\tabincell{l}{地图瓦片数据全量查询}\\
+\hline
+\textbf{参与者}&\tabincell{l}{普通用户}\\
+\hline
+\textbf{目的}&\tabincell{l}{获取某一张地图所有的瓦片数据}\\
+\hline
+\textbf{描述}&\tabincell{l}{用户调用服务，获取到某一张地图全部的瓦片数据}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{用户需要获取某一张地图的全部瓦片作为应用背景图}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{用户成功获得某一张地图的全部瓦片数据}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.用户打开浏览器 \\ 2.输入正确的服务地址、端口号、目标地图名称（以原始地图文件名为ID的地图编号） \\3. 确认发送请求}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.服务地址输入错误 \\ 2b.目标地图ID不存在，服务器告知用户重新输入  \\3a. 由于网络原因导致获取失败。服务器应明确告知用户，获取失败。}\\
+\hline
+\end{tabular}}
+\label{table:tileserver_use_case_description2}
+\end{table}
+
+在本文所设计和实现的地理轨迹相似性分析服务中，地图瓦片服务主要面向前端库的调用，人为通过rest方式调用的情况比较少见，不过两种调用方式是相同的。
+
+\begin{table}[htb]\footnotesize
+\centering
+\caption{单个地图瓦片数据查询功能用例描述表}
+\vspace{2mm}
+\resizebox{140mm}{38mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC3}\\
+\hline
+\textbf{名称}&\tabincell{l}{单个地图瓦片数据查询}\\
+\hline
+\textbf{参与者}&\tabincell{l}{普通用户}\\
+\hline
+\textbf{目的}&\tabincell{l}{获取某一张地图中某一片瓦片数据}\\
+\hline
+\textbf{描述}&\tabincell{l}{用户调用服务，获取到某一张地图中特定一片瓦片数据}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{用户需要获取某一张地图的特定一片瓦片数据}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{用户成功获得某一张地图的特定一片瓦片数据}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.用户打开浏览器 \\ 2.输入正确的服务地址、端口号、目标地图名称（以原始地图文件名为ID的地图编号）、\\ zoom值，x值，y值 \\3. 确认发送请求}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.服务地址输入错误 \\ 2b.目标地图ID不存在，服务器告知用户重新输入 \\ 2c.x,y值的范围超过zoom所指定的精度级别，服务器告知用户重新输入  \\3a. 由于网络原因导致获取失败。服务器应明确告知用户，获取失败。}\\
+\hline
+\end{tabular}}
+\label{table:tileserver_use_case_description3}
+\end{table}
+
+单个地图瓦片的查询功能与地图瓦片全量查询功能的调用情况是相同的，其最可能出现异常的操作就在于zoom值与x,y值的设定上。如果zoom超出服务范围或者x,y超出zoom范围，都不能正常获得瓦片数据。
+
+\begin{table}[htb]\footnotesize
+\centering
+\caption{新增地图瓦片数据功能用例描述}
+\vspace{2mm}
+\resizebox{140mm}{38mm}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{ID}&\tabincell{l}{UC4}\\
+\hline
+\textbf{名称}&\tabincell{l}{新增地图瓦片数据}\\
+\hline
+\textbf{参与者}&\tabincell{l}{普通用户}\\
+\hline
+\textbf{目的}&\tabincell{l}{新增加一张地图的瓦片数据}\\
+\hline
+\textbf{描述}&\tabincell{l}{用户调用服务，向瓦片数据库中加入一张新的地图数据}\\
+\hline
+\textbf{优先级}&\tabincell{l}{高}\\
+\hline
+\textbf{触发条件}&\tabincell{l}{用户需要增加一张新地图的瓦片数据}\\
+\hline
+\textbf{前置条件}&\tabincell{l}{服务正常运行}\\
+\hline
+\textbf{后置条件}&\tabincell{l}{用户成功增加一张新地图的瓦片数据}\\
+\hline
+\textbf{正常流程}&\tabincell{l}{1.用户打开浏览器 \\ 2.输入正确的服务地址、端口号、文件路径 \\3. 确认发送请求}\\
+\hline
+\textbf{异常流程}&\tabincell{l}{2a.服务地址输入错误 \\ 2b.目标路径文件错误或是文件不存在、服务器返回错误（必须事先将目标文件上传到服务器上）  \\3a. 由于网络原因导致新增失败。服务器应明确告知用户，新增失败。}\\
+\hline
+\end{tabular}}
+\label{table:tileserver_use_case_description3}
+\end{table}
+
 
 \section{地理轨迹相似性分析服务架构设计}
 \subsection{架构设计综述}
@@ -282,40 +381,51 @@ Tile Service使用了Geographical Compute模块进行地理逻辑计算，两者只是调用关系，Ge
 \subsection{过程蓝图}
 如图~\ref{process-view}所示，此为地理轨迹相似性分析服务的过程视图，也就是过程蓝图。在整个服务的运行周期内，Visualization Damon Process作为可视化服务的守护进程，时刻保持服务接口开放。Visualization Damon Process分别依赖Tile Damon Process和Trajectory Damon Process。
 
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-process-view.pdf}
+  \caption{地理轨迹相似性分析服务过程蓝图}\label{process-view}
+\end{figure}
+
 Tile Damon Process是地图瓦片数据服务的守护进程，当它收到可视化服务守护进程的瓦片数据调用消息之后，会首先开启Geographical Compute Task这样一个单线程进行地理坐标转换计算等处理逻辑，然后再根据地理计算结果，启动一个Tile DB Task作为瓦片数据库的数据操作线程。该线程从瓦片数据库中读取或者写入数据，从而完成用户的操作需求。
 
 Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化服务提供轨迹数据的检索和更新功能。当它收到消息之后，首先会单独启动一个轨迹索引进程Trajectory Index Process，该进程通过开启三个不同的线程任务，Search Task,Insert Task和Init Task来分别负责用户的轨迹相似检索，轨迹插入和轨迹初始建树的功能要求。之所以单独启动轨迹索引进程，是因为除了以上三个主要的线程之外，轨迹索引运行逻辑中还包括诸多并行的子过程，例如定位单个最相似点，路径回溯等。这些子过程的运行需要并发开启多个单独的线程运行，并维护各个线程的状态，所以此处必须启动一个轨迹索引进程。但是该线程并不需要周期性运行，在请求处理之后，即可关闭，以避免进程长期占用过多系统资源。
 
 综上可知，在整个地理轨迹相似性分析服务的运行周期内，通过守护进程产生临时进程，再由临时进程产生并发的对应线程，来实现整个服务的正常运行。
 
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=5in]{new_FIGs/chapter3/structure-process-view.pdf}
-  \caption{地理轨迹相似性分析服务过程蓝图}\label{process-view}
-\end{figure}
 \subsection{开发蓝图}
-如图~\ref{develop-view}所示，此为地理轨迹相似性分析服务的开发视图，也就是开发蓝图。本文按照各个子模块的职责和相互依赖关系，将整个服务划分为4个分层的开发组织结构。自底向上，第1层是运行于硬件和操作系统之上的基本要素，包括Trajectory Index轨迹索引和Tile DataBase瓦片数据库。第2层是基于JVM和Nodejs V8引擎实现的轨迹存储组件Trajectory Store 和瓦片存储组件Tile Store。第1 层和第2 层都是独立于用户使用域需求的职责模块，不论上层应用如何变化，都不影响这两层的设计与实现。第3层是轨迹数据服务Trajectory Service 和瓦片数据服务Tile Service，这两个组件是直接面向用户使用域需求的服务模块，它们分别依赖Trajectory Store和Tile Store实现轨迹数据和瓦片数据的存储。第1层Visualization Service 是直接与用户交互的可视化服务模块，它依赖于第2 层的Trajectory Service 和Tile Service对用户操作做出响应。
 
-综上，本文通过将地理轨迹相似性分析服务划分成4层结构，明确和简化了各个组件之间的依赖关系，降低了开发复杂度。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/structure-develop-view.pdf}
   \caption{地理轨迹相似性分析服务开发蓝图}\label{develop-view}
 \end{figure}
+
+如图~\ref{develop-view}所示，此为地理轨迹相似性分析服务的开发视图，也就是开发蓝图。本文按照各个子模块的职责和相互依赖关系，将整个服务划分为4个分层的开发组织结构。自底向上，第1层是运行于硬件和操作系统之上的基本要素，包括Trajectory Index轨迹索引和Tile DataBase瓦片数据库。第2层是基于JVM和Nodejs V8引擎实现的轨迹存储组件Trajectory Store 和瓦片存储组件Tile Store。第1 层和第2 层都是独立于用户使用域需求的职责模块，不论上层应用如何变化，都不影响这两层的设计与实现。第3层是轨迹数据服务Trajectory Service 和瓦片数据服务Tile Service，这两个组件是直接面向用户使用域需求的服务模块，它们分别依赖Trajectory Store和Tile Store实现轨迹数据和瓦片数据的存储。第1层Visualization Service 是直接与用户交互的可视化服务模块，它依赖于第2 层的Trajectory Service 和Tile Service对用户操作做出响应。
+
+综上，本文通过将地理轨迹相似性分析服务划分成4层结构，明确和简化了各个组件之间的依赖关系，降低了开发复杂度。
+
 \subsection{物理蓝图}
-如图~\ref{phsical-view}所示，此为地理轨迹相似性分析服务的物理视图，也就是物理蓝图。它描述了软件总体结构与硬件的映射关系。本文构建的系统各组件之间关系简单清晰，因此在物理蓝图中保留了各个组件进程的映射。
 
-图中Visualization Node是可视化子服务的运行节点，其上运行了可视化守护进程。Tile Service Node是运行地图瓦片数据子服务的节点，其上运行着瓦片守护进程以及地理计算任务线程。本文出于实现简单，并没有为地图瓦片数据服务设计HA功能，所以图中没有Tile Service Node的备用节点。Tile DataBase Node是地图瓦片数据库节点，其上运行着瓦片数据处理任务线程，并直接将数据处理结果持久化到硬盘中。
-
-图中Trajectory Service Node是轨迹数据子服务的运行节点，其上运行了轨迹守护进程和轨迹索引进程。Trajectory Service Node既是逻辑处理节点，又是轨迹数据存储节点，所以并不依赖外部的数据库节点。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5in]{new_FIGs/chapter3/structure-phsical-view.pdf}
   \caption{地理轨迹相似性分析服务物理蓝图}\label{phsical-view}
 \end{figure}
 
+如图~\ref{phsical-view}所示，此为地理轨迹相似性分析服务的物理视图，也就是物理蓝图。它描述了软件总体结构与硬件的映射关系。本文构建的系统各组件之间关系简单清晰，因此在物理蓝图中保留了各个组件进程的映射。
+
+图中Visualization Node是可视化子服务的运行节点，其上运行了可视化守护进程。Tile Service Node是运行地图瓦片数据子服务的节点，其上运行着瓦片守护进程以及地理计算任务线程。本文出于实现简单，并没有为地图瓦片数据服务设计HA功能，所以图中没有Tile Service Node的备用节点。Tile DataBase Node是地图瓦片数据库节点，其上运行着瓦片数据处理任务线程，并直接将数据处理结果持久化到硬盘中。
+
+图中Trajectory Service Node是轨迹数据子服务的运行节点，其上运行了轨迹守护进程和轨迹索引进程。Trajectory Service Node既是逻辑处理节点，又是轨迹数据存储节点，所以并不依赖外部的数据库节点。
+
 \subsection{场景}
 本服务面向用户的功能场景有多个，本节选取最具代表性的相似轨迹检索功能使用场景，阐述各个组件之间协调合作关系。如图~\ref{structure-scenario}所示就是相似轨迹检索场景图解，其各个步骤细节如下。注意，由于可视化服务对瓦片数据子服务和轨迹数据子服务的数据调用是并行的，所以图中编号分别采用了阿拉伯数字和罗马数字加以区分。\\
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter3/structure-scenario.pdf}
+  \caption{相似轨迹检索场景}\label{structure-scenario}
+\end{figure}
 ⑴.当用户请求到来的时候，Visualization Service首先向TileService发送地图区域参数和风格参数。\\
 ⑵.Tile Service将Area参数转换为对应的瓦片坐标参数列表传递给Tile Store模块。\\
 ⑶.Tile Store模块将瓦片坐标列表转换为瓦片数据库表的行主键列表，传递给瓦片数据库。\\
@@ -327,12 +437,7 @@ Trajectory Damon Process是轨迹数据服务的守护进程，在整个服务运行周期内，为可视化
 (Ⅴ).Trajectory Store将轨迹数据列表返回给Trajectory Service。\\
 (Ⅵ).Trajectory Service返回轨迹数据列表给Visualization Service，供可视化服务进行结果展示。\\
 
-以上即为相似轨迹检索场景下的使用脚本。
+以上即为相似轨迹检索场景下的使用场景。
 
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=5in]{new_FIGs/chapter3/structure-scenario.pdf}
-  \caption{相似轨迹检索场景脚本}\label{structure-scenario}
-\end{figure}
 \section{本章小结}
 本章先是通过概述说明了整个系统主要组件的职责和相互之间的关系。然后分别针对轨迹数据服务和地图瓦片数据服务这两个主要组件进行了需求分析。需求分析的过程中，使用了需求列表来展现主要的功能需求和非功能需求，还使用了用例图的形式对各项功能进行划分，并对其中操作较为复杂的功能使用用例描述进行了详细介绍。最后，使用架构4+1模型方法，设计了整个服务在各个视图下的架构，并结合相似轨迹检索场景串联了各个组件的相互协作关系，为接下来按照模块进行详细设计和实现做准备。
