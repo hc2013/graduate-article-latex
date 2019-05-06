@@ -121,10 +121,10 @@
 \newlabel{table:tileserver_use_case_description1}{{3.8}{20}{bounding-box局部更新功能用例描述表\relax }{table.3.8}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.9}{\ignorespaces 地图瓦片数据全量查询功能用例描述表}}{20}{table.3.9}}
 \newlabel{table:tileserver_use_case_description2}{{3.9}{20}{地图瓦片数据全量查询功能用例描述表\relax }{table.3.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.10}{\ignorespaces 单个地图瓦片数据查询功能用例描述表}}{21}{table.3.10}}
-\newlabel{table:tileserver_use_case_description3}{{3.10}{21}{单个地图瓦片数据查询功能用例描述表\relax }{table.3.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.10}{\ignorespaces 地图瓦片数据单片查询功能用例描述表}}{21}{table.3.10}}
+\newlabel{table:tileserver_use_case_description3}{{3.10}{21}{地图瓦片数据单片查询功能用例描述表\relax }{table.3.10}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.11}{\ignorespaces 新增地图瓦片数据功能用例描述}}{21}{table.3.11}}
-\newlabel{table:tileserver_use_case_description3}{{3.11}{21}{新增地图瓦片数据功能用例描述\relax }{table.3.11}{}}
+\newlabel{table:tileserver_use_case_description4}{{3.11}{21}{新增地图瓦片数据功能用例描述\relax }{table.3.11}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}地理轨迹相似性分析服务架构设计}{21}{section.3.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}架构设计综述}{21}{subsection.3.3.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}逻辑蓝图}{22}{subsection.3.3.2}}
@@ -145,49 +145,50 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}本章小结}{27}{section.3.4}}
 \@writefile{loa}{\addvspace {10\p@ }}
 \citation{DBLP:conf/nbis/Osborn17}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第四章\hspace  {0.3em}}轨迹数据子服务详细设计与实现}{28}{chapter.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第四章\hspace  {0.3em}}地理轨迹相似性分析服务详细设计与实现}{28}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}概述}{28}{section.4.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}初始建树功能模块详细设计与实现}{28}{section.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}优先点树索引类图}{28}{subsection.4.2.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}轨迹数据子服务的详细设计综述}{28}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}初始建树功能模块详细设计与实现}{28}{section.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}优先点树索引类图}{28}{subsection.4.3.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces 优先点树索引类图}}{29}{figure.4.1}}
 \newlabel{vp-tree-general-structure}{{4.1}{29}{优先点树索引类图\relax }{figure.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}优先点树节点结构}{30}{subsection.4.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}优先点树节点结构}{30}{subsection.4.3.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces 4路vp-tree的内部结构示意图}}{30}{figure.4.2}}
 \newlabel{vp-tree-structure1}{{4.2}{30}{4路vp-tree的内部结构示意图\relax }{figure.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}初始建树的流程}{31}{subsection.4.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}初始建树的流程}{31}{subsection.4.3.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces 初始建树流程图}}{31}{figure.4.3}}
 \newlabel{create-node-flow}{{4.3}{31}{初始建树流程图\relax }{figure.4.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}初始建树算法实现}{32}{subsection.4.2.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}初始建树算法实现}{32}{subsection.4.3.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces 初始建树代码}}{32}{figure.4.4}}
 \newlabel{create-node-code}{{4.4}{32}{初始建树代码\relax }{figure.4.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces 节点分裂配置栈示意图}}{33}{figure.4.5}}
 \newlabel{create-node-explain}{{4.5}{33}{节点分裂配置栈示意图\relax }{figure.4.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}设计要点：优先点的选择算法}{33}{subsection.4.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}设计要点：优先点的选择算法}{33}{subsection.4.3.5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces 优先点选取代码}}{34}{figure.4.6}}
 \newlabel{select-vp-code}{{4.6}{34}{优先点选取代码\relax }{figure.4.6}{}}
 \citation{DBLP:journals/vldb/FuCCM00}
 \citation{DBLP:journals/classification/ProencaN17}
 \citation{DBLP:conf/hucc/ZengLJLCM14}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}相似轨迹检索功能模块详细设计与实现}{35}{section.4.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}算法设计}{35}{subsection.4.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}相似轨迹检索功能模块详细设计与实现}{35}{section.4.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}算法设计}{35}{subsection.4.4.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces 容忍距离对剪枝的作用示意图}}{35}{figure.4.7}}
 \newlabel{thredhold}{{4.7}{35}{容忍距离对剪枝的作用示意图\relax }{figure.4.7}{}}
 \citation{Liu2015Fast}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 容忍距离T收敛速度}}{36}{figure.4.8}}
 \newlabel{thred-change}{{4.8}{36}{容忍距离T收敛速度\relax }{figure.4.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}相似检索功能实现要点：避免重复访问}{36}{subsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}相似检索算法流程图}{37}{subsection.4.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}相似检索功能实现要点：避免重复访问}{36}{subsection.4.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}相似检索算法流程图}{37}{subsection.4.4.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces 相似检索算法流程图}}{37}{figure.4.9}}
 \newlabel{search-flow}{{4.9}{37}{相似检索算法流程图\relax }{figure.4.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}相似检索功能各子流程代码实现}{38}{subsection.4.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}相似检索功能各子流程代码实现}{38}{subsection.4.4.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces 检索单个最相似轨迹代码实现}}{38}{figure.4.10}}
 \newlabel{findnn-code}{{4.10}{38}{检索单个最相似轨迹代码实现\relax }{figure.4.10}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces 预填结果集代码}}{39}{figure.4.11}}
 \newlabel{trytoFillQueue-code}{{4.11}{39}{预填结果集代码\relax }{figure.4.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}插入新轨迹功能模块详细设计与实现}{40}{section.4.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Insert算法设计}{40}{subsection.4.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}插入新轨迹功能模块详细设计与实现}{40}{section.4.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Insert算法设计}{40}{subsection.4.5.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces 直接插入对应叶节点算法示意图}}{40}{figure.4.12}}
 \newlabel{insert-show0}{{4.12}{40}{直接插入对应叶节点算法示意图\relax }{figure.4.12}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces 叶节点分裂算法示意图}}{41}{figure.4.13}}
@@ -198,83 +199,88 @@
 \newlabel{insert-show3}{{4.15}{42}{分支分裂算法示意图\relax }{figure.4.15}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces 分支重分布算法示意图}}{43}{figure.4.16}}
 \newlabel{insert-show4}{{4.16}{43}{分支重分布算法示意图\relax }{figure.4.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Insert算法设计细节}{43}{subsection.4.4.2}}
-\newlabel{elementJudge}{{4.1}{44}{Insert算法设计细节\relax }{equation.4.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Insert算法流程图}{45}{subsection.4.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Insert算法设计细节}{43}{subsection.4.5.2}}
+\newlabel{elementJudge}{{4.1}{45}{Insert算法设计细节\relax }{equation.4.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Insert算法流程图}{45}{subsection.4.5.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Insert算法流程图}}{45}{figure.4.17}}
 \newlabel{vp-tree-insert-flow}{{4.17}{45}{Insert算法流程图\relax }{figure.4.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Insert算法实现}{46}{subsection.4.4.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Insert算法实现}{46}{subsection.4.5.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces 已满叶节点的分裂代码实现}}{46}{figure.4.18}}
 \newlabel{fullleafnode-split}{{4.18}{46}{已满叶节点的分裂代码实现\relax }{figure.4.18}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces 叶节点数据重分布代码实现}}{47}{figure.4.19}}
 \newlabel{leafnode-redistribute}{{4.19}{47}{叶节点数据重分布代码实现\relax }{figure.4.19}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.20}{\ignorespaces 分支分裂代码实现}}{48}{figure.4.20}}
 \newlabel{branch-split}{{4.20}{48}{分支分裂代码实现\relax }{figure.4.20}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}轨迹数据子服务运行效果展示}{49}{section.4.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.21}{\ignorespaces 轨迹检索运行效果}}{49}{figure.4.21}}
-\newlabel{running}{{4.21}{49}{轨迹检索运行效果\relax }{figure.4.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}轨迹数据子服务Rest调用示例}{49}{section.4.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}轨迹数据子服务运行效果展示}{49}{section.4.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.21}{\ignorespaces 相似轨迹检索运行效果}}{49}{figure.4.21}}
+\newlabel{running}{{4.21}{49}{相似轨迹检索运行效果\relax }{figure.4.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}轨迹数据子服务Rest调用示例}{49}{section.4.7}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.22}{\ignorespaces 相似轨迹检索Rest调用示例}}{49}{figure.4.22}}
 \newlabel{rest_trajectory}{{4.22}{49}{相似轨迹检索Rest调用示例\relax }{figure.4.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}本章小结}{50}{section.4.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}地图瓦片数据子服务详细设计综述}{50}{section.4.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}地图瓦片数据子服务架构概述}{50}{section.4.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.23}{\ignorespaces tile-server整体结构图}}{51}{figure.4.23}}
+\newlabel{tile-server-structure}{{4.23}{51}{tile-server整体结构图\relax }{figure.4.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}地图瓦片数据单片查询功能详细设计与实现}{51}{section.4.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.24}{\ignorespaces 单片查询功能前端调用示例}}{51}{figure.4.24}}
+\newlabel{getTile_use}{{4.24}{51}{单片查询功能前端调用示例\relax }{figure.4.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.25}{\ignorespaces 单片查询功能流程图}}{52}{figure.4.25}}
+\newlabel{getTile_flow}{{4.25}{52}{单片查询功能流程图\relax }{figure.4.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.26}{\ignorespaces 单片查询功能代码实现}}{53}{figure.4.26}}
+\newlabel{getTile_code}{{4.26}{53}{单片查询功能代码实现\relax }{figure.4.26}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.11}地图局部更新功能详细设计与实现}{53}{section.4.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.27}{\ignorespaces 地图局部更新功能流程图}}{54}{figure.4.27}}
+\newlabel{update_tile_1}{{4.27}{54}{地图局部更新功能流程图\relax }{figure.4.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.28}{\ignorespaces 地图局部更新功能核心代码实现}}{55}{figure.4.28}}
+\newlabel{tile_degree_compute}{{4.28}{55}{地图局部更新功能核心代码实现\relax }{figure.4.28}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.12}局部更新一致性方法}{55}{section.4.12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.29}{\ignorespaces 瓦片更新前提情况}}{56}{figure.4.29}}
+\newlabel{tile_consistency0}{{4.29}{56}{瓦片更新前提情况\relax }{figure.4.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.30}{\ignorespaces 瓦片更新条件}}{56}{figure.4.30}}
+\newlabel{tile_consistency2}{{4.30}{56}{瓦片更新条件\relax }{figure.4.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.31}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{57}{figure.4.31}}
+\newlabel{consistancy-code}{{4.31}{57}{判断是否覆盖当前瓦片的代码\relax }{figure.4.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.13}Hbase瓦片数据库驱动实现}{57}{section.4.13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.32}{\ignorespaces Hbase驱动对象初始化代码实现}}{58}{figure.4.32}}
+\newlabel{hbase-driver-init-code}{{4.32}{58}{Hbase驱动对象初始化代码实现\relax }{figure.4.32}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.14}地图瓦片数据子服务Rest调用示例}{58}{section.4.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.33}{\ignorespaces 地图瓦片数据子服务Rest调用示例}}{59}{figure.4.33}}
+\newlabel{rest_tile}{{4.33}{59}{地图瓦片数据子服务Rest调用示例\relax }{figure.4.33}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.15}本章小结}{59}{section.4.15}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}地图瓦片数据子服务详细设计与实现}{51}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第五章\hspace  {0.3em}}系统测试}{60}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}服务架构概述}{51}{section.5.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces tile-server整体结构图}}{52}{figure.5.1}}
-\newlabel{tile-server-structure}{{5.1}{52}{tile-server整体结构图\relax }{figure.5.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}地图局部更新功能概述}{52}{section.5.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}地图局部更新功能详细设计与实现}{52}{section.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 地图局部更新功能流程图}}{53}{figure.5.2}}
-\newlabel{update_tile_1}{{5.2}{53}{地图局部更新功能流程图\relax }{figure.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 地图局部更新功能核心代码实现}}{54}{figure.5.3}}
-\newlabel{tile_degree_compute}{{5.3}{54}{地图局部更新功能核心代码实现\relax }{figure.5.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}局部更新一致性方法}{54}{section.5.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 瓦片更新前提情况}}{55}{figure.5.4}}
-\newlabel{tile_consistency0}{{5.4}{55}{瓦片更新前提情况\relax }{figure.5.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 瓦片更新条件}}{55}{figure.5.5}}
-\newlabel{tile_consistency2}{{5.5}{55}{瓦片更新条件\relax }{figure.5.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 判断是否覆盖当前瓦片的代码}}{56}{figure.5.6}}
-\newlabel{consistancy-code}{{5.6}{56}{判断是否覆盖当前瓦片的代码\relax }{figure.5.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}地图瓦片数据子服务Rest调用示例}{56}{section.5.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces 地图瓦片数据子服务Rest调用示例}}{57}{figure.5.7}}
-\newlabel{rest_tile}{{5.7}{57}{地图瓦片数据子服务Rest调用示例\relax }{figure.5.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}本章小结}{57}{section.5.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}测试环境准备}{60}{section.5.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces 系统测试环境准备}}{60}{table.5.1}}
+\newlabel{table:system_test_environment}{{5.1}{60}{系统测试环境准备\relax }{table.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}测试数据准备}{60}{section.5.2}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces 测试用轨迹数据示例}}{61}{table.5.2}}
+\newlabel{table:system_test_data_example}{{5.2}{61}{测试用轨迹数据示例\relax }{table.5.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}单元测试}{61}{section.5.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces 相似轨迹检索接口测试}}{61}{table.5.3}}
+\newlabel{table:similar_trajectory_interface_test}{{5.3}{61}{相似轨迹检索接口测试\relax }{table.5.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces 轨迹索引初始化接口测试}}{61}{table.5.4}}
+\newlabel{table:trajectory_index_init_test}{{5.4}{61}{轨迹索引初始化接口测试\relax }{table.5.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces 插入新轨迹数据接口测试}}{62}{table.5.5}}
+\newlabel{table:trajectory_index_insert_test}{{5.5}{62}{插入新轨迹数据接口测试\relax }{table.5.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces 地理坐标转换接口测试}}{62}{table.5.6}}
+\newlabel{table:tile_coordinate_compute_test}{{5.6}{62}{地理坐标转换接口测试\relax }{table.5.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}功能测试}{62}{section.5.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces 相似轨迹检索功能测试}}{62}{table.5.7}}
+\newlabel{table:trajectory_function_test}{{5.7}{62}{相似轨迹检索功能测试\relax }{table.5.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}性能测试}{63}{section.5.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 相似轨迹查询性能测试折线图}}{63}{figure.5.1}}
+\newlabel{search_time}{{5.1}{63}{相似轨迹查询性能测试折线图\relax }{figure.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 轨迹索引常驻内存统计}}{63}{figure.5.2}}
+\newlabel{mem_size}{{5.2}{63}{轨迹索引常驻内存统计\relax }{figure.5.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}本章小结}{64}{section.5.6}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第六章\hspace  {0.3em}}系统测试}{58}{chapter.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第六章\hspace  {0.3em}}总结和展望}{65}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}测试环境准备}{58}{section.6.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces 系统测试环境准备}}{58}{table.6.1}}
-\newlabel{table:system_test_environment}{{6.1}{58}{系统测试环境准备\relax }{table.6.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}测试数据准备}{58}{section.6.2}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces 测试用轨迹数据示例}}{59}{table.6.2}}
-\newlabel{table:system_test_data_example}{{6.2}{59}{测试用轨迹数据示例\relax }{table.6.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}单元测试}{59}{section.6.3}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces 相似轨迹检索接口测试}}{59}{table.6.3}}
-\newlabel{table:similar_trajectory_interface_test}{{6.3}{59}{相似轨迹检索接口测试\relax }{table.6.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces 轨迹索引初始化接口测试}}{59}{table.6.4}}
-\newlabel{table:trajectory_index_init_test}{{6.4}{59}{轨迹索引初始化接口测试\relax }{table.6.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.5}{\ignorespaces 插入新轨迹数据接口测试}}{60}{table.6.5}}
-\newlabel{table:trajectory_index_insert_test}{{6.5}{60}{插入新轨迹数据接口测试\relax }{table.6.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.6}{\ignorespaces 地理坐标转换接口测试}}{60}{table.6.6}}
-\newlabel{table:tile_coordinate_compute_test}{{6.6}{60}{地理坐标转换接口测试\relax }{table.6.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}功能测试}{60}{section.6.4}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.7}{\ignorespaces 相似轨迹检索功能测试}}{60}{table.6.7}}
-\newlabel{table:trajectory_function_test}{{6.7}{60}{相似轨迹检索功能测试\relax }{table.6.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}性能测试}{61}{section.6.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces 相似轨迹查询性能测试折线图}}{61}{figure.6.1}}
-\newlabel{search_time}{{6.1}{61}{相似轨迹查询性能测试折线图\relax }{figure.6.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 轨迹索引常驻内存统计}}{61}{figure.6.2}}
-\newlabel{mem_size}{{6.2}{61}{轨迹索引常驻内存统计\relax }{figure.6.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{62}{section.6.6}}
-\@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第七章\hspace  {0.3em}}总结和展望}{63}{chapter.7}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}总结}{63}{section.7.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}进一步工作展望}{63}{section.7.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}总结}{65}{section.6.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}进一步工作展望}{65}{section.6.2}}
 \bibdata{reference}
 \bibcite{BaiduYingyan}{{1}{}{{}}{{}}}
 \bibcite{TileServerGL}{{2}{}{{}}{{}}}
@@ -287,7 +293,7 @@
 \bibcite{LuceneInAction}{{9}{}{{}}{{}}}
 \bibcite{DBLP:conf/w2gis/AntoniouMH09}{{10}{}{{}}{{}}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{参考文献}{65}{chapter*.4}}
+\@writefile{toc}{\contentsline {chapter}{参考文献}{67}{chapter*.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{DBLP:conf/nbis/Osborn17}{{11}{}{{}}{{}}}
@@ -311,11 +317,11 @@
 \bibcite{MercatoProjection}{{29}{}{{}}{{}}}
 \bibcite{TileIntro}{{30}{}{{}}{{}}}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{68}{chapter*.5}}
+\@writefile{toc}{\contentsline {chapter}{简历与科研成果}{70}{chapter*.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{69}{chapter*.6}}
+\@writefile{toc}{\contentsline {chapter}{致\CTEX@spaceChar \CTEX@spaceChar 谢}{71}{chapter*.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers

@@ -1,7 +1,9 @@
-\chapter{轨迹数据子服务详细设计与实现}
-
+\chapter{地理轨迹相似性分析服务详细设计与实现}
 \section{概述}
-轨迹数据服务是在全文检索引擎Lucene的基础上，扩展实现了单独的优先点树索引结构来实现的。因此，部署轨迹数据服务的方法，是通过将扩展后的Lucene库集成到ElasticSearch 中，再基于ElasticSearch的服务节点运行的。
+在地理轨迹相似性分析服务中，最重要的两个组件就是轨迹数据子服务和地图瓦片数据子服务。本章节将分别针对这两个组件进行详细设计和实现的介绍。
+
+\section{轨迹数据子服务的详细设计综述}
+轨迹数据子服务是在全文检索引擎Lucene的基础上，扩展实现了单独的优先点树索引结构来实现的。因此，部署轨迹数据服务的方法，是通过将扩展后的Lucene库集成到ElasticSearch 中，再基于ElasticSearch的服务节点运行的。
 
 在轨迹数据服务中，选择以JTS-Geometry作为轨迹的存储结构。只考虑轨迹的几何属性，舍弃轨迹的方向性，也就是说轨迹线段AB和轨迹线段BA被认定是完全相同的路径。这种牺牲轨迹方向属性的做法可能会造成一定的精度损失，但是却能极大地简化设计和实现。
 
@@ -42,7 +44,7 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4.5in,height=2.2in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
+  \includegraphics[width=4.0in,height=2.1in]{new_FIGs/chapter4/vp-tree-structure1.pdf}
   \caption{4路vp-tree的内部结构示意图}\label{vp-tree-structure1}
 \end{figure}
 
@@ -120,18 +122,19 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 由上文所述，通过预填结果集的方式加快容忍距离的收敛速度，这种做法带来部分分支重复访问的问题。这是因为某些节点的一部分分支在预填过程中就已经被搜索过了。如果不对搜索进行标记，重复的搜索不会贡献新的结果，从而浪费了搜索时间。关于这一点，本文使用了BitSet 栈的方式来实现，在预填结果集的过程中，与节点栈同步保存一个Bitset 栈，两者的顺序一致。每个bitset 的大小与vp-tree 的扇出数一致，用于保存若干分支中，哪些已经被访问过了。这样，在回溯发生的时候，首先检查对应的bitset，对于那些已经被置位的分支直接跳过，只访问尚未遍历过的分支，避免重复的检索和距离计算。
 
 \subsection{相似检索算法流程图}
-如图\ref{search-flow}所示为检索算法的运行流程图。图中显示了检索过程中最关键的三个子流程，即检索最相似点，预填结果堆和回溯更新结果堆。其中检索最相似点是通过递归实现的，节点栈在其过程中的作用是保存搜索路径。而另外两个子流程都是使用栈+循环的方式实现的。详细说明，见后文代码实现。
+
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.8in,height=5.6in]{new_FIGs/chapter4/search-flow.pdf}
   \caption{相似检索算法流程图}\label{search-flow}
 \end{figure}
 
+如图\ref{search-flow}所示为检索算法的运行流程图。图中显示了检索过程中最关键的三个子流程，即检索最相似点，预填结果堆和回溯更新结果堆。其中检索最相似点是通过递归实现的，节点栈在其过程中的作用是保存搜索路径。而另外两个子流程都是使用栈+循环的方式实现的。详细说明，见后文代码实现。
+
 \subsection{相似检索功能各子流程代码实现}
 本节将会依次展示\ref{search-flow}中所示的各个子流程的代码实现。
 
 \textbf{检索单个最相似轨迹代码实现：}
-如代码\ref{findnn-code}所示，①处是当节点为叶节点遍历所有数据点，如果有距离比当前最小值更小的数据点，则在②处更新当前最相似数据点搜索路径上所有点的序列。注意，此时nodestack 中的点序列即为当前路径下所有节点，因此清空nearest neighbour中原来的最近点路径，全部更新为nodestack中的节点序列。③处为判断被选定的优先点是否符合最近点条件，如果符合也要予以更新。④处为获取非叶节点的子树配置信息，包括距离上下界，作为剪枝的条件。⑤处为计算每棵子树的上界和下界，注意，此处要用nearest neighbour当前最小距离为容忍距离，使其成为是否剪枝的标准条件。⑥处为递归搜索下一分支。
 
 \begin{figure}[htb]
   \centering
@@ -139,13 +142,18 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
   \caption{检索单个最相似轨迹代码实现}\label{findnn-code}
 \end{figure}
 
+如代码\ref{findnn-code}所示，①处是当节点为叶节点遍历所有数据点，如果有距离比当前最小值更小的数据点，则在②处更新当前最相似数据点搜索路径上所有点的序列。注意，此时nodestack 中的点序列即为当前路径下所有节点，因此清空nearest neighbour中原来的最近点路径，全部更新为nodestack中的节点序列。③处为判断被选定的优先点是否符合最近点条件，如果符合也要予以更新。④处为获取非叶节点的子树配置信息，包括距离上下界，作为剪枝的条件。⑤处为计算每棵子树的上界和下界，注意，此处要用nearest neighbour当前最小距离为容忍距离，使其成为是否剪枝的标准条件。⑥处为递归搜索下一分支。
+
 \textbf{预填结果集代码实现：}
-如代码\ref{trytoFillQueue-code}所示，①处首先要判断结果堆是否已经满了，然后在②处，从之前搜索的最相似单个数据点过程中保留的路径节点栈中，取出最后一个节点last及其父节点parent。如果last是叶子节点，③处就尝试用该叶子节点的所有数据点填满结果堆。如果该叶子节点填不满，则⑥处尝试用该叶子节点的兄弟节点填结果堆，直到填满为止。如果节点last 不是叶子节点，则使用fillQueueIfNonLeaf方法填满结果堆。此处要使用tmpNodeStack和tmpBitSetStack两个栈记录深度搜索路径上经过的节点以及每个非叶节点的分支访问情况。当fillQueueIfNonLeaf方法返回之后，要将tmpNodeStack中的节点和tmpBitSetStack中BitSet对应压进节点栈和访问记录栈。这里要注意的是⑥处，节点栈要把最后一个节点先弹出，因为最后一个节点一定是叶节点，它没有对应的bitset。如果不将其弹出，之前的节点与对应bitset将会错1位。
+
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/trytoFillQueue-code.pdf}
   \caption{预填结果集代码}\label{trytoFillQueue-code}
 \end{figure}
+
+如代码\ref{trytoFillQueue-code}所示，①处首先要判断结果堆是否已经满了，然后在②处，从之前搜索的最相似单个数据点过程中保留的路径节点栈中，取出最后一个节点last及其父节点parent。如果last是叶子节点，③处就尝试用该叶子节点的所有数据点填满结果堆。如果该叶子节点填不满，则⑥处尝试用该叶子节点的兄弟节点填结果堆，直到填满为止。如果节点last 不是叶子节点，则使用fillQueueIfNonLeaf方法填满结果堆。此处要使用tmpNodeStack和tmpBitSetStac-k两个栈记录深度搜索路径上经过的节点以及每个非叶节点的分支访问情况。当fillQueueIfNonLeaf方法返回之后，要将tmpNodeStack中的节点和tmpBitSetStac-k中BitSet对应压进节点栈和访问记录栈。这里要注意的是⑥处，节点栈要把最后一个节点先弹出，因为最后一个节点一定是叶节点，它没有对应的bitset。如果不将其弹出，之前的节点与对应bitset将会错1位。
+
 \section{插入新轨迹功能模块详细设计与实现}
 \subsection{Insert算法设计}
 在系统运行过程中，经常出现新的轨迹数据被插入已有索引的情况。这种情况下，如果每次都是将整个数据点集合重新进行初始建树，消耗会非常大。因此，有必要实现优先点树插入新数据点的相关算法。由于现有的vp-tree插入算法大多是针对最简单的2路vp-tree的，不能适用于n路vp-tree，所以本文独立设计并实现了针对n路vp-tree的插入算法，其适用范围包括2路vp-tree。
@@ -224,15 +232,13 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1
 \end{align}
 
-由以上几点细节可知，由于优先点树是基于不同优先点的轨迹距离索引，其各个数据点之间相对于优先点是偏序关系，而不存在整个数据集合上的全序关系。所以，不能像一般数据库的B-Tree 索引结构那样简单地比较索引的关键值就行了。对于分支分裂和子树重建，高成本的距离计算无法避免，导致其插入操作本身消耗很大，很难找到轻量级的办法来实现。而在较高位置的分支分裂，其计算消耗几乎可以等同于重新建树。
+由于优先点树是基于不同优先点的轨迹距离索引，其各个数据点之间相对于优先点是偏序关系，而不存在整个数据集合上的全序关系。所以，不能像一般数据库的B-Tree 索引结构那样简单地比较索引的关键值就行了。对于分支分裂和子树重建，高成本的距离计算无法避免，导致其插入操作本身消耗很大，很难找到轻量级的办法来实现。而在较高位置的分支分裂，其计算消耗几乎可以等同于重新建树。
 
-除此之外，为了保护检索性能，必须维持优先点树的天然平衡属性，不能简单地增长某棵子树的高度而破坏平衡，那样将会使搜索向一侧剧烈倾斜甚至在极端情况下等同于线性遍历，这将极大地破坏检索性能。
-
-基于以上几点，本文所采用的分裂优先重分布，存储额外元数据，延长建树分支等策略，都是以空间换取时间的做法。而这些静态策略的实际运行效果和具体的数据集合的情况有关，所以在某些情况下可能并不是最佳的性能策略。
+以上这几点细节，都是以空间换取时间的做法。而这些静态策略的实际运行效果和具体的数据集合的情况有关，所以在某些情况下可能并不是最佳的性能策略。
 \subsection{Insert算法流程图}
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=5.5in,height=4.3in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
+  \includegraphics[width=5.2in,height=4.0in]{new_FIGs/chapter4/vp-tree-insert-flow.pdf}
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{Insert算法实现}
@@ -262,8 +268,9 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.4in]{new_FIGs/chapter7/running.pdf}
-  \caption{轨迹检索运行效果}\label{running}
+  \caption{相似轨迹检索运行效果}\label{running}
 \end{figure}
+
 \section{轨迹数据子服务Rest调用示例}
 \begin{figure}[htb]
   \centering
@@ -271,5 +278,143 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1
   \caption{相似轨迹检索Rest调用示例}\label{rest_trajectory}
 \end{figure}
 如图\ref{rest_trajectory}所示为相似轨迹检索功能的HTTP curl命令的Rest调用示例，图中的ip是本文实验所用IP，trajectory\_nearest\_neighbour\_query是对应的LuceneQuery名称，其参数中有目标结果集合尺寸size、目标轨迹ID和目标索引id。轨迹数据服务的另两个功能与此接口的调用方式相似，只是参数略有不同，此处不再赘述。
+
+
+\section{地图瓦片数据子服务详细设计综述}
+地图瓦片数据子服务的功能是为整个系统提供可视化地图数据。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。MapBox是业内通用标准，符合Mapbox标准是为了确保通用性。它的所有数据服务都通过Rest接口暴露给调用方，主要包括读、写两个方面的功能。
+
+\section{地图瓦片数据子服务架构概述}
+地图瓦片数据子服务的功能是为整个系统提供可视化地图数据。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。MapBox是业内通用标准，符合Mapbox 标准是为了确保通用性。它的所有数据服务都通过Rest接口暴露给调用方。
+
+如图~\ref{tile-server-structure} 所示，地图瓦片服务主要分为data、style、cache、logic和db这5个模块，以及对接db的各种数据库驱动组成，其各部分功能如下。
+
+data\_service模块是直接决定数据操作和数据状态的模块，主要负责提供瓦片数据的读取，更新功能。这一模块是整个服务的核心逻辑，它依赖logic模块进行地理坐标计算，依赖db 模块对接各种外部瓦片数据库，依赖cache模块进行缓存。data模块通过Express Route接口直接对外提供Rest访问服务。
+
+style\_service模块是提供风格数据的模块，负责向调用方提供指定的风格数据，用于页面渲染。style是地理瓦片服务的特有标准，其作用类似于CSS，是决定地图数据以何种样式渲染在浏览器上。style模块作用于MapBox的style文件，直接与文件系统交互，并不涉及数据库操作，本质上只是静态文件的读取。
+
+logic\_service是支持与地理相关的运算逻辑模块，例如坐标转换，bounding-box换算等。这一部分的实现是无状态的，与data模块完全解耦，可以通过插件的形式，随时增加或者变换逻辑计算的功能。
+
+cache\_service是与瓦片数据缓存相关的功能模块，可以为瓦片数据配置不同的缓存策略。与一般的缓存系统不同的是，瓦片数据访问的局部性除了有水平局部之外，还存在垂直局部，也就是用户在连续滑动鼠标滚轮时，同一个水平区域的不同zoom级别的瓦片会被连续加载。正是基于这种缓存策略可变的情况，cache模块也被设置为无状态，可替换的模块。目前的实现是对水平局部瓦片的缓存。
+
+db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图瓦片数据库交互的媒介。db\_service的接口是固定的，所有要对接到瓦片数据服务上的数据库驱动必须实现db\_service要求的接口，才能正常运行。目前实现的数据库驱动有sqlite和hbase两种。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4in]{new_FIGs/chapter4/tile-server-structure.pdf}
+  \caption{tile-server整体结构图}\label{tile-server-structure}
+\end{figure}
+
+\section{地图瓦片数据单片查询功能详细设计与实现}
+对于地图瓦片数据子服务的读功能，本文重点介绍地图瓦片数据单片查询功能的设计和实现。所谓单片查询，指的是针对特定一张地图，获取指定zoom、x、y的某一张瓦片。这一功能中主要涉及了瓦片数据格式的检查、坐标范围的检查以及为了提升性能的缓存管理等。
+
+\textbf{单片查询功能前端调用示例}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4in]{new_FIGs/chapter4/getTile-use.pdf}
+  \caption{单片查询功能前端调用示例}\label{getTile_use}
+\end{figure}
+
+如图\ref{getTile_use}所示，为单片查询功能被前端库openlayer调用的示例。图中所见url即为地图瓦片单片查询功能的接口URL,tileSize为瓦片固定尺寸。整个业务展示层实现地图背景展示的方式就是通过对单片查询接口URL的配置来完成的。
+
+\textbf{单片查询功能流程图}
+
+如图\ref{getTile_flow}所示即为单片查询功能的流程图。在此流程中缓存由cache\_service \\ 模块支持，目前实现为nodejs的hashmap。Gzip压缩功能由nodejs zlib库完成。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4.5in]{new_FIGs/chapter4/getTile-flow.pdf}
+  \caption{单片查询功能流程图}\label{getTile_flow}
+\end{figure}
+
+\textbf{单片查询功能代码实现}
+
+如图\ref{getTile_code}所示，为单片查询功能的代码实现。图中①处为获取z,x,y三个坐标，②处为获取请求的文件格式。在③处，对坐标范围进行判断，判断的依据是x,y两坐标的值是否超过了2的z次方以及是否都为非负值。④处为获取地图名称。⑤处为如果缓存命中了目标瓦片，则直接返回瓦片数据，以提升响应性能。⑥处为数据库调用，此处source是数据库对象，如果数据库调用过程中发生异常错误，则进行错误处理。而如果没有报错，返回data为null，就说明这片数据并不存在，则在⑦处返回404。注意，在地图瓦片数据文件中，由于只有文件所指定的部分有数据，所以部分坐标对应位置没有数据是很正常的。⑧处对瓦片数据进行Gzip压缩，并保存到缓存tile\_map中。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter4/getTile-code.pdf}
+  \caption{单片查询功能代码实现}\label{getTile_code}
+\end{figure}
+
+\section{地图局部更新功能详细设计与实现}
+所谓地图局部更新，指的是一张完整地图，只更新全部地图的一小部分。比如中国地图中，只更新北京市地图。本文根据Web莫卡托投影法的计算原理，实现了这一功能。
+
+由于用户在浏览器界面上框选出来的，一定是经纬度坐标的范围。因此，该功能的输入参数应该是一个north,south,west,east四个数值组成的矩形框和对应的zoom，也就是bounding-box。所以，要想更新对应的瓦片数据，就必须首先要根据像素精度和显示比例尺，将经纬度坐标转换为瓦片坐标，也就是对应级别的x,y，再将对应地图瓦片数据替换掉。这一过程中，除了坐标转换之外，为了避免歧义和出现地图更新空隙，还需要做边界、精度和一致性的检查。
+
+\textbf{地图局部更新功能流程图}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=4.5in,height=5.3in]{new_FIGs/chapter4/update_tile_1.pdf}
+  \caption{地图局部更新功能流程图}\label{update_tile_1}
+\end{figure}
+如图\ref{update_tile_1}所示，这里值得注意的是，在流程中第二次检查，是对栅格坐标结果的检查。因为对于不同zoom，zoom值越大，地图的精度越高，更新涉及的完整瓦片越多，反之则越少。那么对于那些zoom值较低的更新，其所计算出来的栅格坐标值可能不是完整的的瓦片，而只是某一瓦片中一个位置，由于本文对瓦片更新的粒度不涉及到单个瓦片内部的结构，而只是单个瓦片的整体更新。因此对于这种情况，要根据用户对精度的要求进行取舍，而取舍的前提要保证更新行为的一致性。具体可见后文。
+
+\textbf{地图局部更新功能代码实现}：
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5in]{new_FIGs/chapter4/tile_degree_compute.pdf}
+  \caption{地图局部更新功能核心代码实现}\label{tile_degree_compute}
+\end{figure}
+如代码\ref{tile_degree_compute}中所示的degree2xy方法，是局部更新功能的核心逻辑，其作用是在一个由north,south,west,east四个经纬度值划定的矩形框内，计算某一个经纬度点的瓦片坐标。如代码中注释可知，该degree2xy方法的主要逻辑是对Web莫卡托坐标转换原理的实现。另外，mercator2y方法是将纬度值转换为莫卡托纬度，convert2redians是将经纬度角度值转为弧度值，这些是地理坐标转换的数学必备部分。
+
+\section{局部更新一致性方法}
+所谓的局部更新一致性，指的是确保整体更新和各个部分分别更新的结果是一致的。之所以可能出现不一致的现象，主要是因为单纯的瓦片坐标模糊取整很可能遗漏部分瓦片，导致某些瓦片由于取整被舍弃，而没有被任何一个部分更新，进而导致更新空隙的问题。对于这个问题的解决办法，基于以下原则进行处理。
+
+1.首先判断用户bbox更新中设置的经纬度的差值在其所设定的zoom下，是否大于等于一个Tile的边长。如果用户划定的范围太小，要求的精度太高，则直接告知用户，在当前zoom下不能更新这个bbox。如图\ref{tile_consistency0}所示，用户选定的更新范围s1的宽度小于Tile1的边长，而更新范围s2的长和宽都小于Tile2的边长。这两种情况下，都不对Tile进行更新。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.7in,height=2.7in]{new_FIGs/chapter4/tile_consistency0.pdf}
+  \caption{瓦片更新前提情况}\label{tile_consistency0}
+\end{figure}
+
+2.如果bbox的长度和宽度都大于等于Tile的边长。那么在这种情况下，对于一个Tile的bbox划分。如果划分本身是严密的，没有缝隙的。那么，1 个Tile 能且只能被划分为4个bbox.而1 个Tile的4个bbox划分中，至少有一个，其面积超过了1/4。以此作为是否更新的标准，能够保证每一个TIle至少被更新了一次，从而避免了局部更新漏掉某些Tile产生更新缝隙的问题。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.7in,height=2.3in]{new_FIGs/chapter4/tile_consistency2.pdf}
+  \caption{瓦片更新条件}\label{tile_consistency2}
+\end{figure}
+
+如图\ref{tile_consistency2}所示，图①所示，s1-s4，4块划分中，s1的面积显然大于总面积的1/4, 此时触发瓦片更新。而图②所示，s1-s4四块划分的面积都不足1/4，造成这种局面的原因是用户选定的bbox范围本身就存在间隙，没有填满整个Tile，这种情况下空隙是用户逻辑不完备造成的，瓦片数据服务不予更新。
+
+综上所述，本文实现的瓦片数据服务更新一致性的功能是瓦片级别的弱一致性，其依据的是用户操作本身bbox划分的逻辑一致性。
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.7in,height=4.3in]{new_FIGs/chapter4/consistancy-code.pdf}
+  \caption{判断是否覆盖当前瓦片的代码}\label{consistancy-code}
+\end{figure}
+
+计算重合部分面积，首先要确定实际精确坐标点与部分重合瓦片中心坐标点的相对位置关系。根据左上，右下，左下，右上四个不同方向结果，对精确坐标采用相同方向的取整操作。然后根据精确坐标与模糊坐标的横纵差值计算重合部分的面积。最后比较重合坐标面积是否超过了65536像素平方的四分之一，也就是一整个瓦片面积的四分之一，来判定是否要覆盖该瓦片，如代码\ref{consistancy-code}所示。
+
+\section{Hbase瓦片数据库驱动实现}
+地图瓦片数据子服务对各种不同瓦片数据库是通用的，不同的数据库只要配置了对象的驱动，实现了限定的getTile和putSingleTile接口就能够对接到地图瓦片数据子服务中正常运行（Nodejs的原型保证）。本文在生产环境中实现了HBase版本瓦片数据库驱动，部分实现代码如下。
+
+\textbf{Hbase驱动对象初始化代码实现}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/hbase-driver-init-code.pdf}
+  \caption{Hbase驱动对象初始化代码实现}\label{hbase-driver-init-code}
+\end{figure}
+
+如图\ref{hbase-driver-init-code}所示为Hbase驱动初始化代码实现。由于Nodejs天然的IO异步属性，在对象初始化时为了避免异步IO导致引用undefined的问题。本文在②处采用了Nodejs Promise机制来确保callback回调函数一定在Istore.store对象已经初始化之后运行。并且在③处Istore.store对象采用java的同步初始化方法进行创建，从而保证了整个初始化流程的顺序一致性。在⑤处和⑥处则分别对应了初始化成功和失败的回调函数。
+
+在本文的Hbase驱动实现中，最终于Hbase交互的是由Java Hbase Client实现的，因此会有初始化Java对象的操作。相关Java代码都是简单的增删改查代码，本文不再赘述。
+\section{地图瓦片数据子服务Rest调用示例}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.5in]{new_FIGs/chapter4/rest_tile.pdf}
+  \caption{地图瓦片数据子服务Rest调用示例}\label{rest_tile}
+\end{figure}
+如图\ref{rest_tile}所示为地图瓦片局部更新的HTTP curl命令Rest接口调用示例。localhost:9202是本文测试所用的IP端口，图中①可见POST请求的参数包括了north,south,west,east 四个bbox的范围参数，file参数指定的是服务端文件路径，这就要求首先要通过②命令上传地图瓦片数据文件。图中③为读取单个瓦片数据集合的Rest接口，china.json是数据集合的json描述文件，该文件符合Mapbox标准。
+
+地图瓦片服务的其他Rest接口类似，此处不再赘述。
+
 \section{本章小结}
-本章描述了轨迹数据子服务的详细设计和实现，主要介绍了VpTree初始建树，相似轨迹检索以及新轨迹数据插入这三个功能模块的设计要点和实现原理。通过流程图，类图来说明设计的思路，然后通过具体代码展示关键的实现细节。最后展示了轨迹数据子服务的相似轨迹检索功能的运行效果图。
+本章介绍了地理轨迹相似性分析服务的详细设计与实现，分别针对轨迹数据子服务和地图瓦片数据子服务这两个主要组件进行了详细设计描述，通过流程图、类图、原理示意图和具体代码展示等方式说明了设计和实现的细节，涵盖了优先点树初始建树、相似轨迹检索、新轨迹数据插入、地图瓦片读取和局部更新等重要功能，并介绍了Hbase瓦片数据库驱动的实现。还展示了相似轨迹检索功能运行效果图。最后，给出了两个子服务的Rest调用方法。
+

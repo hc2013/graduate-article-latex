@@ -189,7 +189,7 @@ R3   & 新轨迹数据的插入                  & \begin{tabular}[c]{@{}l@{}}服务调用方
 R1   & 新增地图瓦片数据                 & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图名称和地图瓦片数据，\\ 增加一个地区的完整地图瓦片数据.\end{tabular}      \\ \hline
 R2   & bounding-box局部更新地图瓦片数据                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID，经纬度范围，地图\\ 数据，更新一张大地图中某一个地区某一经纬度矩形范围内的地\\ 图瓦片数据.\end{tabular}     \\ \hline
 R3   & 地图瓦片数据全量查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，通过地图ID，获取整张地图的全量 \\ 瓦片数据.\end{tabular}     \\ \hline
-R4   & 单个地图瓦片数据查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和栅格坐标zxy，获取\\ 指定的瓦片数据.\end{tabular}     \\ \hline
+R4   & 地图瓦片数据单片查询                  & \begin{tabular}[c]{@{}l@{}}服务调用方能够通过瓦片服务，参数为地图ID和栅格坐标zxy，获取\\ 指定一片瓦片数据.\end{tabular}     \\ \hline
 \end{tabular}}
 \label{table:tile_service_func_req}
 \end{table}
@@ -293,14 +293,14 @@ bounding-box局部更新功能是地图瓦片子数据服务相比于其他开源数据服务的独有功能，其
 
 \begin{table}[htb]\footnotesize
 \centering
-\caption{单个地图瓦片数据查询功能用例描述表}
+\caption{地图瓦片数据单片查询功能用例描述表}
 \vspace{2mm}
 \resizebox{140mm}{38mm}{
 \begin{tabular}{|l|l|}
 \hline
 \textbf{ID}&\tabincell{l}{UC3}\\
 \hline
-\textbf{名称}&\tabincell{l}{单个地图瓦片数据查询}\\
+\textbf{名称}&\tabincell{l}{地图瓦片数据单片查询}\\
 \hline
 \textbf{参与者}&\tabincell{l}{普通用户}\\
 \hline
@@ -324,7 +324,7 @@ bounding-box局部更新功能是地图瓦片子数据服务相比于其他开源数据服务的独有功能，其
 \label{table:tileserver_use_case_description3}
 \end{table}
 
-单个地图瓦片的查询功能与地图瓦片全量查询功能的调用情况是相同的，其最可能出现异常的操作就在于zoom值与x,y值的设定上。如果zoom超出服务范围或者x,y超出zoom范围，都不能正常获得瓦片数据。
+地图瓦片数据单片查询与地图瓦片数据全量查询功能的调用情况是相同的，其最可能出现异常的操作就在于zoom值与x,y值的设定上。如果zoom超出服务范围或者x,y超出zoom范围，都不能正常获得瓦片数据。
 
 \begin{table}[htb]\footnotesize
 \centering
@@ -356,7 +356,7 @@ bounding-box局部更新功能是地图瓦片子数据服务相比于其他开源数据服务的独有功能，其
 \textbf{异常流程}&\tabincell{l}{2a.服务地址输入错误 \\ 2b.目标路径文件错误或是文件不存在、服务器返回错误（必须事先将目标文件上传到服务器上）  \\3a. 由于网络原因导致新增失败。服务器应明确告知用户，新增失败。}\\
 \hline
 \end{tabular}}
-\label{table:tileserver_use_case_description3}
+\label{table:tileserver_use_case_description4}
 \end{table}
 
 

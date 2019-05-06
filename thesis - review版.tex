@@ -1,0 +1,270 @@
+%%]dvipdfm
+\documentclass[oneside, master,openany,review]{NJUthesis}
+%\documentclass[twoside, master]{NJUthesis}
+
+% 可选参数：
+%   review 审阅模式，激活后个人、导师与学校信息均被隐去
+%   oneside/twoside 单面/双面打印
+%   phd/master 博士/硕士论文
+% 下面三个选一个：
+% dvi2pdf 使用 dvi2pdf(x) 生成最终的 PDF 文档 (缺省设置，不建议修改）
+% dvips 使用 dvips 生成最终的 PS 文档
+% pdftex 使用 pdfLaTeX 生成最终的 PDF 文档
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 导言区
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 小节标题靠左对齐
+\CTEXsetup[format+={\flushleft}]{section}
+
+% 设置链接颜色
+\hypersetup{
+% pdf 属性
+             pdftitle={LaTeX Thesis Template of Nanjing University}, %
+            pdfauthor={San Zhang}
+}
+
+% 表格
+\usepackage{longtable, multirow}
+% 英文使用 Times 字体
+\usepackage{times}
+% 源代码
+\usepackage{fancyvrb}
+% 自定义列表样式
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{moreverb}
+\usepackage{txfonts}
+\usepackage{mathcomp}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[linesnumbered,boxed,ruled,vlined]{algorithm2e}
+\usepackage{array}
+\usepackage{multirow}
+
+%%	added by Jiang
+\usepackage{extarrows}	%使用长箭头
+\usepackage{nomencl}	%与术语表有关的包
+\usepackage{booktabs}
+\usepackage{ccmap}
+
+
+\makenomenclature
+
+\setcounter{topnumber}{5}
+
+\theoremstyle{plain}
+\newtheorem{definition}{\hspace{2em}定义}[chapter]
+\newtheorem{lemma}{\hspace{2em}引理}[chapter]
+\newtheorem{theorem}{\hspace{2em}定理}[chapter]
+\newtheorem{property}{\hspace{2em}性质}[chapter]
+\newtheorem{example}{\hspace{2em}例}[chapter]
+\newtheorem{myrule}{\hspace{2em}规则}[chapter]
+
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}% 表格内换行
+\renewcommand{\footnoterule}{%脚注线
+  \kern -3pt
+  \hrule width 2.3in height 0.4pt
+  \kern 2pt
+}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 国家图书馆封面内容字符串
+% 仅博士需要填写并保证模板参数选择了 phd
+\classification{}
+\confidential{}
+\UDC{}
+\titlelinea{南京大学学位论文}
+\titlelineb{~\LaTeX{}~模板}
+\titlelinec{}
+\advisorinfo{南京大学~软件学院}
+\chairman{XXX 教授}
+\reviewera{某某某某　副研究员}
+\reviewerb{XXX 教授}
+\reviewerc{XXX 教授}
+\reviewerd{XXX 教授}
+\nlcfootdate{~年~~月~~日}
+
+% 南大中文封面内容字符串
+\title{地理轨迹相似性分析服务的设计和实现}
+\author{\kaishu 韩淳}
+\studentnum{}
+\grade{2017}
+\advisor{\kaishu 刘海涛~~讲师}
+
+\major{\kaishu 软件工程}
+\researchfield{\kaishu 软件工程}
+\footdate{\kaishu 2019年3月}
+\submitdate{\kaishu 2019年4月10日}
+\defenddate{\kaishu~年~~月~~日}
+
+
+
+% 英文封面内容字符串
+\englishtitle{Design and Implementation of Geographic Trajectory Similarity Analysis Service}
+\englishauthor{Chun Han}
+\englishadvisor{Lecturer}
+\englishadvisorname{~~Haitao Liu}
+\englishinstitute{Software Institute}
+\englishdegree{Master of Engineering}
+\englishmajor{Software Engineering}
+\englishdate{May 2019}
+
+% 制作封面命令
+\maketitle
+
+%\makechinesetitle
+
+% 制作英文封面命令
+\makeenglishtitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+
+\begin{abstract}
+
+地理数据，是直接或间接关联着地球上某个地点的数据，也是表示地理位置、分布特点的自然现象和社会现象的诸要素数据。在使用地理数据的用户业务中，一个新颖而有实用价值的研究方向是针对地理轨迹的相似性分析。
+在进行犯罪同伙分析时，一般的犯罪同伙，都有着相同或者类似的轨迹。通过对相似轨迹的检索和相似度的排序，可以迅速找出最有可能协同犯罪的嫌疑人，从而极大提高侦察的效率。
+但是目前业界相关系统基本上都是关注轨迹的存储、展示和跟踪，对于轨迹相似性检索，并没有良好而稳定的解决方案。
+
+针对以上问题，本文设计和实现了一个高性能的地理轨迹相似性分析服务。该服务包括两个主要的数据子服务，轨迹数据子服务和地图瓦片数据子服务，具体的实现方法是基于优先点树结构扩展实现全文检索库Lucene的VpTree索引，
+    以此作为轨迹数据检索的核心数据结构，并围绕该数据结构开发了轨迹数据插入和初始建立索引的功能。而地图瓦片数据子服务则是基于Mapbox通用地图瓦片标准，WGS-84坐标系和Web墨卡托投影法等地理数学知识实现了地图瓦片的读取和局部更新等功能。
+    地理轨迹相似性分析服务正是从以上这两个子服务中分别获取轨迹数据和地图瓦片数据，然后通过前端库的整合，实现在浏览器端的可视化，从而使用户方便快捷地达成相似轨迹检索的目标。
+
+
+本文的主要工作就是介绍以上两个子服务的设计和实现。首先，本文介绍了目前在地理轨迹相似性分析服务中涉及到的，主要的技术概念和相关标准。然后对整个系统进行了需求分析，并使用软件架构4+1视图模型进行整体架构的设计。
+接着分别介绍了轨迹数据子服务和地图瓦片数据子服务这两个主要功能模块的详细设计和实现。在该过程中还讨论并分析了系统中出现的一些性能以及模型上的问题，提供了更好的解决方案。
+在这之后介绍了整个服务的测试情况，包括单元测试和功能测试的流程细节，并通过折线图和条形图展示了服务性能测试的结果。
+最后，本文详细分析了整个服务在地理轨迹相似分析方面的效果提升以及当前版本的局限性，并对服务未来的发展前景进行了分析和展望。
+
+\keywords{地理数据，轨迹数据，地图瓦片数据，优先点树，轨迹相似性}
+
+\end{abstract}
+
+% 英文摘要
+\begin{englishabstract}
+
+Geographic data is data that directly or indirectly relates to a certain place on the earth. It is also the data of the natural phenomena and social phenomena that
+represent the geographical location and distribution characteristics. In the user business using geographic data, a novel and practical research direction is to
+analyze the similarity of geographic trajectories. In the analysis of criminal accomplices, the general criminal accomplices have the same or similar trajectories.
+Through the retrieval of similar trajectories and the ranking of similarities, the suspects who are most likely to cooperate with crimes can be quickly identified,
+thus greatly improving the efficiency of reconnaissance. However, the current industry-related systems are basically concerned with the storage, display and tracking
+of trajectories. There is no good and stable solution for trajectory similarity retrieval.
+
+In response to the above problems, this thesis designs and implements a high-performance geographic trajectory similarity analysis service. The service includes two main data
+sub-services, trajectory data sub-service and map tile data sub-service. The specific implementation method is based on the vantage point tree structure extension
+to realize the full-text search library Lucene's VpTree index, which is used as trajectory data retrieval. And the function of trajectory
+data insertion and initial indexing is developed around this core data structure. The map tile data sub-service is based on Mapbox universal map tile standard, and the
+geo-mathematics knowledge such as WGS-84 coordinate system and Web Mercator projection method realizes the functions of reading and partial updating of map tiles.
+The geographic trajectory similarity analysis service obtains the trajectory data and the map tile data from the above two sub-services respectively, and then realizes the
+visualization on the browser side through the integration of the front-end library, thereby enabling the user to conveniently and quickly achieve the target of
+similar trajectory retrieval.
+
+The main work of this thesis is to introduce the design and implementation of the above two sub-services. First of all, this thesis introduces the main technical
+concepts and related standards currently involved in geographic trajectories similar services. Then the requirements analysis of the entire system was carried
+out, and the overall architecture design was carried out using the software architecture 4+1 view model. Then the detailed design and implementation of the two main
+functional modules of the trajectory data subservice and the map tile data subservice are introduced respectively. In the process, some performance and model
+problems appearing in the system are also discussed and analyzed, providing a better solution. After that, the test of the entire service is introduced, including
+the process details of unit test and functional test, and the results of the service performance test are shown by a line chart and a bar chart. Finally, this thesis
+analyzes in detail the improvement of the geographic service trajectory similarity analysis and the limitations of the current version, and analyzes and prospects
+the future development of the service.
+
+
+\englishkeywords{Geographic data, trajectory data, map tile data, vantage point tree,trajectory similarity}
+\end{englishabstract}
+
+% 生成目录命令（目录中不包含目录本身）
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
+
+
+% 以下两个目录可根据具体情况注释掉（将表格目录和图形目录重命名后加入目录）
+% 生成表格目录命令
+\renewcommand*{\listtablename}{表\NJUTspace 目\NJUTspace 录}
+\listoftables
+\addcontentsline{toc}{chapter}{表\NJUTspace 目\NJUTspace 录}
+% 生成插图目录命令
+\renewcommand*{\listtablename}{图\NJUTspace 目\NJUTspace 录}
+\listoffigures
+\addcontentsline{toc}{chapter}{图\NJUTspace 目\NJUTspace 录}
+
+%生成术语表命令
+%\include{chapter/Nomenclatures}
+%\def\nomname{缩略语对照表}
+%\printnomenclature[5em]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+\input{new_chapter/Introduction.tex}
+
+\input{new_chapter/Technical_review.tex}
+
+\input{new_chapter/System_requirement_analysis_and_summary_design.tex}
+
+\input{new_chapter/System_detailed_design_and_implementation.tex}
+%\input{new_chapter/System_detailed_design_and_implementation2.tex}
+
+\input{new_chapter/System_running_and_performance_test.tex}
+
+\input{new_chapter/Summary_and_outlook.tex}
+
+\backmatter
+\bibliography{reference}
+
+
+
+%个人简介
+\Nchapter{简历与科研成果}
+\noindent {\heiti 基本情况}
+\vspace{1ex}
+%\noindent 韩淳，男，汉族，1994~年~8~月出生，吉林省松原市人。
+\vspace{2ex}
+
+\noindent {\heiti 教育背景}
+
+%\begin{description}[labelindent=0em, leftmargin=8em, style=sameline]
+%\item[2017.9～2019.6] 南京大学软件学院 \hfill 硕士
+%\item[2013.9～2017.6] 南京大学软件学院 \hfill 本科
+%\end{description}
+% 发表文章目录
+
+\noindent {\heiti 这里是读研期间的成果（实例为受理的专利）}
+
+%\begin{enumerate}[label=\arabic*., labelindent=0em, leftmargin=*]
+%	\item 刘海涛，\textbf{韩淳}，``地理轨迹相似性分析服务的设计和实现''，申请号：20xx1018xywz.a，已受理。
+%\end{enumerate}
+
+
+
+
+
+
+\begin{thanks}
+
+\vskip 18pt
+
+
+
+\end{thanks}
+
+
+\end{document}
+
+
