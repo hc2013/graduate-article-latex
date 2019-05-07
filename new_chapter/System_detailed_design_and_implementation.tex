@@ -1,8 +1,9 @@
 \chapter{地理轨迹相似性分析服务详细设计与实现}
-\section{概述}
+
 在地理轨迹相似性分析服务中，最重要的两个组件就是轨迹数据子服务和地图瓦片数据子服务。本章节将分别针对这两个组件进行详细设计和实现的介绍。
 
-\section{轨迹数据子服务的详细设计综述}
+\section{初始建树功能模块详细设计与实现}
+
 轨迹数据子服务是在全文检索引擎Lucene的基础上，扩展实现了单独的优先点树索引结构来实现的。因此，部署轨迹数据服务的方法，是通过将扩展后的Lucene库集成到ElasticSearch 中，再基于ElasticSearch的服务节点运行的。
 
 在轨迹数据服务中，选择以JTS-Geometry作为轨迹的存储结构。只考虑轨迹的几何属性，舍弃轨迹的方向性，也就是说轨迹线段AB和轨迹线段BA被认定是完全相同的路径。这种牺牲轨迹方向属性的做法可能会造成一定的精度损失，但是却能极大地简化设计和实现。
@@ -11,7 +12,6 @@
 
 优先点树结构的功能模块主要分三个，分别是初始建树功能，相似轨迹检索功能和插入新轨迹功能。本章节将通过算法流程图、算法示意图和代码实现等方式详细阐述以上三个功能的设计和实现。
 
-\section{初始建树功能模块详细设计与实现}
 \subsection{优先点树索引类图}
 
 如图\ref{vp-tree-general-structure}所示，整个优先点树结构以VpTree为核心。其中VpTree直接实现了GeometryNNIndex这个接口。之所以要这样设计，是因为解决NN问题的索引结构并不是只有vpTree，另外还有Kd-Tree，R-Tree，mqr-tree等等\cite{DBLP:conf/nbis/Osborn17}，本文所设计的VpTree只是其中一种。未来可能会有其他结构的实现对接到Lucene 的索引逻辑，因此出于扩展性的考虑，必须预留接口。
@@ -154,6 +154,23 @@ SelectVpStrategy是VpTree用于选择优先点的策略接口，本文目前只支持最大标准差的选取
 
 如代码\ref{trytoFillQueue-code}所示，①处首先要判断结果堆是否已经满了，然后在②处，从之前搜索的最相似单个数据点过程中保留的路径节点栈中，取出最后一个节点last及其父节点parent。如果last是叶子节点，③处就尝试用该叶子节点的所有数据点填满结果堆。如果该叶子节点填不满，则⑥处尝试用该叶子节点的兄弟节点填结果堆，直到填满为止。如果节点last 不是叶子节点，则使用fillQueueIfNonLeaf方法填满结果堆。此处要使用tmpNodeStack和tmpBitSetStac-k两个栈记录深度搜索路径上经过的节点以及每个非叶节点的分支访问情况。当fillQueueIfNonLeaf方法返回之后，要将tmpNodeStack中的节点和tmpBitSetStac-k中BitSet对应压进节点栈和访问记录栈。这里要注意的是⑥处，节点栈要把最后一个节点先弹出，因为最后一个节点一定是叶节点，它没有对应的bitset。如果不将其弹出，之前的节点与对应bitset将会错1位。
 
+\subsection{相似轨迹检索功能运行效果展示}
+
+如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.4in]{new_FIGs/chapter7/running.pdf}
+  \caption{相似轨迹检索运行效果}\label{running}
+\end{figure}
+
+\subsection{相似轨迹检索功能Rest调用示例}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5.3in]{new_FIGs/chapter4/rest_trajectory.pdf}
+  \caption{相似轨迹检索Rest调用示例}\label{rest_trajectory}
+\end{figure}
+如图\ref{rest_trajectory}所示为相似轨迹检索功能的HTTP curl命令的Rest调用示例，图中的ip是本文实验所用IP，trajectory\_nearest\_neighbour\_query是对应的LuceneQuery名称，其参数中有目标结果集合尺寸size、目标轨迹ID和目标索引id。轨迹数据服务的另两个功能与此接口的调用方式相似，只是参数略有不同，本文不再赘述。
+
 \section{插入新轨迹功能模块详细设计与实现}
 \subsection{Insert算法设计}
 在系统运行过程中，经常出现新的轨迹数据被插入已有索引的情况。这种情况下，如果每次都是将整个数据点集合重新进行初始建树，消耗会非常大。因此，有必要实现优先点树插入新数据点的相关算法。由于现有的vp-tree插入算法大多是针对最简单的2路vp-tree的，不能适用于n路vp-tree，所以本文独立设计并实现了针对n路vp-tree的插入算法，其适用范围包括2路vp-tree。
@@ -242,49 +259,41 @@ MAXDPCOUNT_{e}=(FANOUT)^{HEIGHT}\times({ENTRYSIZE + 1}) - 1
   \caption{Insert算法流程图}\label{vp-tree-insert-flow}
 \end{figure}
 \subsection{Insert算法实现}
-\textbf{已满叶节点的分裂代码实现}:如代码\ref{fullleafnode-split}所示，已满叶节点分裂在获取正确的叶节点之后，首先在①处更新了distances数组。随后将新轨迹数据id插入到childIds列表中，此时childIds列表的长度比用户配置的叶节点尺寸多一个数据点，紧接着在②处计算新的左右子节点的数据点数目，即数据点总数除以2，再做上取整，这样使得数据点数左多右少。然后在③处初始化新的右侧叶子节点，并将childIds中超出左叶子节点新尺寸的数据点id移除，然后将这些数据点赋值到右叶子节点的childIds中。完成数据点转移之后，在④ 处对parent节点的分支信息进行更新，并且移动后续所有分支的槽位。 parent节点的各种配置信息列表也要进行更新，包括分支距离上下界列表branchbounds，分支最大距离列表branchDistance,子节点列表childNodes等，最后在⑥处将新的右侧叶子节点加入到节点池中。
+\textbf{已满叶节点的分裂代码实现}
+
+如代码\ref{fullleafnode-split}所示，已满叶节点分裂在获取正确的叶节点之后，首先在①处更新了distances数组。随后将新轨迹数据id插入到childIds列表中，此时childIds列表的长度比用户配置的叶节点尺寸多一个数据点，紧接着在②处计算新的左右子节点的数据点数目，即数据点总数除以2，再做上取整，这样使得数据点数左多右少。然后在③处初始化新的右侧叶子节点，并将childIds中超出左叶子节点新尺寸的数据点id移除，然后将这些数据点赋值到右叶子节点的childIds中。完成数据点转移之后，在④ 处对parent节点的分支信息进行更新，并且移动后续所有分支的槽位。 parent节点的各种配置信息列表也要进行更新，包括分支距离上下界列表branchbounds，分支最大距离列表branchDistance,子节点列表childNodes等，最后在⑥处将新的右侧叶子节点加入到节点池中。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code1.pdf}
   \caption{已满叶节点的分裂代码实现}\label{fullleafnode-split}
 \end{figure}
 
-\textbf{叶节点数据重分布代码实现}：如代码\ref{leafnode-redistribute}所示，①处为记录最佳分支位置和拥有最大未满值的叶节点，我们寻找重分布分支的依据以距离最近优先，在距离相同的情况下，以空槽位较多的分支为优，这里的largestDis记录的就是最大的未满值，也就是最多的空槽位值。②处left和right两个变量分别是分支搜索的位置坐标，由于是中心扩散搜索，因此是从当前分支的左右两侧的第一个位置开始，向两边扩散进行分支遍历。③处两个变量leftDPCount和rightDPCount分别记录了向左数据重分布涉及的数据点数量和向右涉及的数据点数量。④ 处为中心扩散的循环中，持续跟踪更新leftDPCount和rightDPCount,当找到bestBranch的时候，基于距离优先原则，尽快跳出循环。⑤处是计算重分布后，所有涉及到的分支，应该持有的平均数据点量，注意，此处展示了向左数据重分布的伪代码，实际还有向右的对称情况，并且平均数量要有取整操作。基于⑤处计算出来数据点量，在⑥处依次挪动所有涉及分支中包含的多于dpCount 的数据点，实现数据重分布。在⑦处，更新parent节点对应的分支元信息，包括界标数组和距离数组。
+\textbf{叶节点数据重分布代码实现}
+
+如代码\ref{leafnode-redistribute}所示，①处为记录最佳分支位置和拥有最大未满值的叶节点，我们寻找重分布分支的依据以距离最近优先，在距离相同的情况下，以空槽位较多的分支为优，这里的largestDis记录的就是最大的未满值，也就是最多的空槽位值。②处left和right两个变量分别是分支搜索的位置坐标，由于是中心扩散搜索，因此是从当前分支的左右两侧的第一个位置开始，向两边扩散进行分支遍历。③处两个变量leftDPCount和rightDPCount分别记录了向左数据重分布涉及的数据点数量和向右涉及的数据点数量。④ 处为中心扩散的循环中，持续跟踪更新leftDPCount和rightDPCount,当找到bestBranch的时候，基于距离优先原则，尽快跳出循环。⑤处是计算重分布后，所有涉及到的分支，应该持有的平均数据点量，注意，此处展示了向左数据重分布的伪代码，实际还有向右的对称情况，并且平均数量要有取整操作。基于⑤处计算出来数据点量，在⑥处依次挪动所有涉及分支中包含的多于dpCount 的数据点，实现数据重分布。在⑦处，更新parent节点对应的分支元信息，包括界标数组和距离数组。
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code2.pdf}
   \caption{叶节点数据重分布代码实现}\label{leafnode-redistribute}
 \end{figure}
 
-\textbf{分支分裂代码实现}：
+\textbf{分支分裂代码实现}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=5.5in]{new_FIGs/chapter4/insert-code3.pdf}
   \caption{分支分裂代码实现}\label{branch-split}
 \end{figure}
 如代码\ref{branch-split}所示，在①处计算左右分支的数据点量，与前文类似。②处是将左右分支的数据点重新分配，也就是把左分支，也就是把旧分支多出来的数据点挪给右分支，也就是新分支。③处为设置左节点，并以左节点为根节点进行子树创建的过程，这里也是分支分裂与叶节点分裂最大的不同，就是必须对分支所拥有的数据点子集合进行重新建树，也就是说，针对子集合的选举优先点和基于优先点的距离计算要重新进行，因此③ 处的makeVpTree方法其实是createNode方法的封装实现，其目的都是以某一节点为根节点建立子树。④处为设置右节点的代码，与设置左节点代码类似。⑤ 处为确定当前分支节点与祖先分支节点的相对位置关系，因为在新建一个新的分支之后，必须要把原来分支后面的所有分支的配置信息向后移动，如⑥ 处shiftBranchInfo 方法。而对应的祖先分支节点的其他元数据，包括分支上下界数组和距离数组都要对应更新和移动。
-\section{轨迹数据子服务运行效果展示}
-如图\ref{running}所示，图中的地图背景为中国东海岸，两个红色群集和以浅蓝色群集构成了3个船舶轨迹的数据集合。右侧框中显示了相似检索结果，轨迹的ID 是数据采集的日期。
+
+\section{地图瓦片数据子服务详细设计与实现}
+\subsection{地图瓦片数据子服务架构概述}
+地图瓦片数据子服务的功能是为整个系统提供可视化地图数据。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。MapBox是业内通用标准，符合Mapbox 标准是为了确保通用性。它的所有数据服务都通过Rest接口暴露给调用方，主要包括读、写两个方面的功能。
+
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=5.4in]{new_FIGs/chapter7/running.pdf}
-  \caption{相似轨迹检索运行效果}\label{running}
+  \includegraphics[width=4in]{new_FIGs/chapter4/tile-server-structure.pdf}
+  \caption{tile-server整体结构图}\label{tile-server-structure}
 \end{figure}
-
-\section{轨迹数据子服务Rest调用示例}
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=5.3in]{new_FIGs/chapter4/rest_trajectory.pdf}
-  \caption{相似轨迹检索Rest调用示例}\label{rest_trajectory}
-\end{figure}
-如图\ref{rest_trajectory}所示为相似轨迹检索功能的HTTP curl命令的Rest调用示例，图中的ip是本文实验所用IP，trajectory\_nearest\_neighbour\_query是对应的LuceneQuery名称，其参数中有目标结果集合尺寸size、目标轨迹ID和目标索引id。轨迹数据服务的另两个功能与此接口的调用方式相似，只是参数略有不同，此处不再赘述。
-
-
-\section{地图瓦片数据子服务详细设计综述}
-地图瓦片数据子服务的功能是为整个系统提供可视化地图数据。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。MapBox是业内通用标准，符合Mapbox标准是为了确保通用性。它的所有数据服务都通过Rest接口暴露给调用方，主要包括读、写两个方面的功能。
-
-\section{地图瓦片数据子服务架构概述}
-地图瓦片数据子服务的功能是为整个系统提供可视化地图数据。它是基于Nodejs Express框架实现的，符合MapBox数据标准的数据微服务。MapBox是业内通用标准，符合Mapbox 标准是为了确保通用性。它的所有数据服务都通过Rest接口暴露给调用方。
 
 如图~\ref{tile-server-structure} 所示，地图瓦片服务主要分为data、style、cache、logic和db这5个模块，以及对接db的各种数据库驱动组成，其各部分功能如下。
 
@@ -298,20 +307,16 @@ cache\_service是与瓦片数据缓存相关的功能模块，可以为瓦片数据配置不同的缓存策略。
 
 db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图瓦片数据库交互的媒介。db\_service的接口是固定的，所有要对接到瓦片数据服务上的数据库驱动必须实现db\_service要求的接口，才能正常运行。目前实现的数据库驱动有sqlite和hbase两种。
 
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=4in]{new_FIGs/chapter4/tile-server-structure.pdf}
-  \caption{tile-server整体结构图}\label{tile-server-structure}
-\end{figure}
 
-\section{地图瓦片数据单片查询功能详细设计与实现}
+
+\subsection{地图瓦片数据单片查询功能详细设计与实现}
 对于地图瓦片数据子服务的读功能，本文重点介绍地图瓦片数据单片查询功能的设计和实现。所谓单片查询，指的是针对特定一张地图，获取指定zoom、x、y的某一张瓦片。这一功能中主要涉及了瓦片数据格式的检查、坐标范围的检查以及为了提升性能的缓存管理等。
 
 \textbf{单片查询功能前端调用示例}
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4in]{new_FIGs/chapter4/getTile-use.pdf}
+  \includegraphics[width=5in]{new_FIGs/chapter4/getTile-use.pdf}
   \caption{单片查询功能前端调用示例}\label{getTile_use}
 \end{figure}
 
@@ -337,7 +342,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
   \caption{单片查询功能代码实现}\label{getTile_code}
 \end{figure}
 
-\section{地图局部更新功能详细设计与实现}
+\subsection{地图局部更新功能详细设计与实现}
 所谓地图局部更新，指的是一张完整地图，只更新全部地图的一小部分。比如中国地图中，只更新北京市地图。本文根据Web莫卡托投影法的计算原理，实现了这一功能。
 
 由于用户在浏览器界面上框选出来的，一定是经纬度坐标的范围。因此，该功能的输入参数应该是一个north,south,west,east四个数值组成的矩形框和对应的zoom，也就是bounding-box。所以，要想更新对应的瓦片数据，就必须首先要根据像素精度和显示比例尺，将经纬度坐标转换为瓦片坐标，也就是对应级别的x,y，再将对应地图瓦片数据替换掉。这一过程中，除了坐标转换之外，为了避免歧义和出现地图更新空隙，还需要做边界、精度和一致性的检查。
@@ -346,7 +351,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=4.5in,height=5.3in]{new_FIGs/chapter4/update_tile_1.pdf}
+  \includegraphics[width=4.5in]{new_FIGs/chapter4/update_tile_1.pdf}
   \caption{地图局部更新功能流程图}\label{update_tile_1}
 \end{figure}
 如图\ref{update_tile_1}所示，这里值得注意的是，在流程中第二次检查，是对栅格坐标结果的检查。因为对于不同zoom，zoom值越大，地图的精度越高，更新涉及的完整瓦片越多，反之则越少。那么对于那些zoom值较低的更新，其所计算出来的栅格坐标值可能不是完整的的瓦片，而只是某一瓦片中一个位置，由于本文对瓦片更新的粒度不涉及到单个瓦片内部的结构，而只是单个瓦片的整体更新。因此对于这种情况，要根据用户对精度的要求进行取舍，而取舍的前提要保证更新行为的一致性。具体可见后文。
@@ -359,7 +364,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 \end{figure}
 如代码\ref{tile_degree_compute}中所示的degree2xy方法，是局部更新功能的核心逻辑，其作用是在一个由north,south,west,east四个经纬度值划定的矩形框内，计算某一个经纬度点的瓦片坐标。如代码中注释可知，该degree2xy方法的主要逻辑是对Web莫卡托坐标转换原理的实现。另外，mercator2y方法是将纬度值转换为莫卡托纬度，convert2redians是将经纬度角度值转为弧度值，这些是地理坐标转换的数学必备部分。
 
-\section{局部更新一致性方法}
+\subsection{局部更新一致性方法}
 所谓的局部更新一致性，指的是确保整体更新和各个部分分别更新的结果是一致的。之所以可能出现不一致的现象，主要是因为单纯的瓦片坐标模糊取整很可能遗漏部分瓦片，导致某些瓦片由于取整被舍弃，而没有被任何一个部分更新，进而导致更新空隙的问题。对于这个问题的解决办法，基于以下原则进行处理。
 
 1.首先判断用户bbox更新中设置的经纬度的差值在其所设定的zoom下，是否大于等于一个Tile的边长。如果用户划定的范围太小，要求的精度太高，则直接告知用户，在当前zoom下不能更新这个bbox。如图\ref{tile_consistency0}所示，用户选定的更新范围s1的宽度小于Tile1的边长，而更新范围s2的长和宽都小于Tile2的边长。这两种情况下，都不对Tile进行更新。
@@ -390,7 +395,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 
 计算重合部分面积，首先要确定实际精确坐标点与部分重合瓦片中心坐标点的相对位置关系。根据左上，右下，左下，右上四个不同方向结果，对精确坐标采用相同方向的取整操作。然后根据精确坐标与模糊坐标的横纵差值计算重合部分的面积。最后比较重合坐标面积是否超过了65536像素平方的四分之一，也就是一整个瓦片面积的四分之一，来判定是否要覆盖该瓦片，如代码\ref{consistancy-code}所示。
 
-\section{Hbase瓦片数据库驱动实现}
+\subsection{Hbase瓦片数据库驱动实现}
 地图瓦片数据子服务对各种不同瓦片数据库是通用的，不同的数据库只要配置了对象的驱动，实现了限定的getTile和putSingleTile接口就能够对接到地图瓦片数据子服务中正常运行（Nodejs的原型保证）。本文在生产环境中实现了HBase版本瓦片数据库驱动，部分实现代码如下。
 
 \textbf{Hbase驱动对象初始化代码实现}
@@ -404,7 +409,7 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 如图\ref{hbase-driver-init-code}所示为Hbase驱动初始化代码实现。由于Nodejs天然的IO异步属性，在对象初始化时为了避免异步IO导致引用undefined的问题。本文在②处采用了Nodejs Promise机制来确保callback回调函数一定在Istore.store对象已经初始化之后运行。并且在③处Istore.store对象采用java的同步初始化方法进行创建，从而保证了整个初始化流程的顺序一致性。在⑤处和⑥处则分别对应了初始化成功和失败的回调函数。
 
 在本文的Hbase驱动实现中，最终于Hbase交互的是由Java Hbase Client实现的，因此会有初始化Java对象的操作。相关Java代码都是简单的增删改查代码，本文不再赘述。
-\section{地图瓦片数据子服务Rest调用示例}
+\subsection{地图瓦片数据子服务Rest调用示例}
 
 \begin{figure}[htb]
   \centering
@@ -416,5 +421,5 @@ db\_service是面向各种不同数据库的通用访问接口层，其是data\_service与其他各种地图
 地图瓦片服务的其他Rest接口类似，此处不再赘述。
 
 \section{本章小结}
-本章介绍了地理轨迹相似性分析服务的详细设计与实现，分别针对轨迹数据子服务和地图瓦片数据子服务这两个主要组件进行了详细设计描述，通过流程图、类图、原理示意图和具体代码展示等方式说明了设计和实现的细节，涵盖了优先点树初始建树、相似轨迹检索、新轨迹数据插入、地图瓦片读取和局部更新等重要功能，并介绍了Hbase瓦片数据库驱动的实现。还展示了相似轨迹检索功能运行效果图。最后，给出了两个子服务的Rest调用方法。
+本章介绍了地理轨迹相似性分析服务的详细设计与实现，分别针对轨迹数据子服务和地图瓦片数据子服务这两个主要组件进行了详细设计描述，通过流程图、类图、原理示意图和具体代码展示等方式说明了设计和实现的细节，涵盖了优先点树初始建树、相似轨迹检索、新轨迹数据插入、地图瓦片读取和局部更新等重要功能，并介绍了Hbase瓦片数据库驱动的实现。最后还展示了相似轨迹检索功能运行效果图以及两个子服务各自的Rest调用示例。
 
